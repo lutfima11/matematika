@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ujian Online — Konsep Pecahan · SMA IT Insan Sejahtera</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --surface2: #f0efe9;
+  --border: #e2e0d8;
+  --border2: #c9c7bc;
+  --text: #1a1916;
+  --text2: #6b6962;
+  --text3: #9e9b94;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-border: #bfdbfe;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --green-border: #bbf7d0;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --red-border: #fecaca;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-border: #fde68a;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --purple-border: #ddd6fe;
+  --teal: #0d9488;
+  --teal-bg: #f0fdfa;
+  --teal-border: #99f6e4;
+  --hots: #be185d;
+  --hots-bg: #fdf2f8;
+  --hots-border: #fbcfe8;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ===== IDENTITY SCREEN ===== */
+#identityScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+#identityScreen::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+  pointer-events: none;
+}
+#identityScreen::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #bbf7d0 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.identity-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.5s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.school-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.school-logo {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+.school-info h1 { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.school-info p { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+.form-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.form-subtitle {
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.form-group { margin-bottom: 18px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface2);
+  transition: all 0.15s;
+  outline: none;
+}
+.form-input:focus { border-color: var(--blue); background: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.form-input::placeholder { color: var(--text3); }
+
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface2);
+  transition: all 0.15s;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6962' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+.form-select:focus { border-color: var(--blue); background-color: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.exam-info-box {
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.exam-info-box .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.exam-info-box p { font-size: 12px; color: var(--blue); line-height: 1.6; }
+.exam-info-box strong { font-weight: 700; }
+
+.warn-box {
+  background: var(--red-bg);
+  border: 1px solid var(--red-border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 24px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.warn-box p { font-size: 12px; color: var(--red); line-height: 1.6; }
+
+.btn-start {
+  width: 100%;
+  padding: 14px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.2px;
+}
+.btn-start:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); }
+.btn-start:active { transform: translateY(0); }
+
+.form-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
+
+/* ===== INVALID SCREEN ===== */
+#invalidScreen {
+  display: none;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+}
+.invalid-card {
+  background: var(--surface);
+  border: 1px solid var(--red-border);
+  border-radius: 24px;
+  padding: 56px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 40px rgba(220,38,38,0.1);
+  animation: slideUp 0.4s ease;
+}
+.invalid-icon { font-size: 56px; margin-bottom: 16px; }
+.invalid-title { font-size: 22px; font-weight: 800; color: var(--red); margin-bottom: 10px; }
+.invalid-msg { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ===== TIME-UP MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px 36px;
+  max-width: 380px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  animation: slideUp .35s ease;
+}
+.modal-icon { font-size: 48px; margin-bottom: 14px; }
+.modal-title { font-size: 22px; font-weight: 800; color: var(--red); margin-bottom: 8px; }
+.modal-msg { font-size: 13px; color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
+.btn-modal {
+  padding: 12px 28px; background: var(--blue); color: #fff;
+  border: none; border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700;
+  cursor: pointer; transition: all 0.15s;
+}
+.btn-modal:hover { background: #1d4ed8; }
+
+/* ===== EXAM SCREEN ===== */
+#examScreen { display: none; }
+
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: 16px;
+}
+.site-logo { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.2; }
+.logo-sub { font-size: 11px; color: var(--text2); }
+
+.header-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+/* Timer */
+.timer-wrap {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 14px;
+}
+.timer-icon { font-size: 14px; }
+.timer-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 15px; font-weight: 500;
+  color: var(--text);
+  min-width: 48px; text-align: center;
+  transition: color .3s;
+}
+.timer-val.warn   { color: var(--amber); }
+.timer-val.danger { color: var(--red); animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.student-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue-bg);
+  border: 1px solid var(--blue-border);
+  border-radius: 999px;
+  padding: 4px 12px 4px 6px;
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 600;
+}
+.student-chip-avatar {
+  width: 24px; height: 24px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.header-stats { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.hstat { display: flex; align-items: center; gap: 4px; }
+.hstat-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hstat-val { font-weight: 600; }
+
+.progress-wrap {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px 10px;
+  position: sticky;
+  top: 56px;
+  z-index: 99;
+}
+.progress-inner { max-width: 900px; margin: 0 auto; }
+.progress-meta {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: var(--text2);
+  margin-bottom: 6px;
+  margin-top: 8px;
+}
+.progress-track {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.progress-fill {
+  height: 100%; background: var(--blue);
+  border-radius: 999px;
+  transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+.main { max-width: 900px; margin: 0 auto; padding: 24px 24px 100px; }
+
+.section-header {
+  display: flex; align-items: center; gap: 10px;
+  margin: 32px 0 16px;
+}
+.section-header:first-child { margin-top: 0; }
+.section-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700; flex-shrink: 0;
+}
+.section-info h2 { font-size: 16px; font-weight: 700; }
+.section-info p { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+.q-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.15s;
+}
+.q-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.q-card.hots-card { border-color: var(--hots-border); }
+.q-card.hots-card:hover { box-shadow: 0 2px 12px rgba(190,24,93,0.08); }
+
+.q-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
+.q-num {
+  min-width: 28px; height: 28px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--text2);
+  flex-shrink: 0; margin-top: 1px;
+  transition: all 0.2s;
+}
+.q-num.answered-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+.q-num.answered-wrong   { background: var(--red-bg);   border-color: var(--red-border);   color: var(--red);   }
+
+.q-text { font-size: 14px; line-height: 1.65; color: var(--text); flex: 1; }
+.q-formula {
+  display: inline-block;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: var(--blue);
+  margin: 0 2px;
+}
+
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 480px) { .options { grid-template-columns: 1fr; } }
+
+.option {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--surface2);
+  transition: all 0.12s;
+  font-size: 13px;
+  user-select: none;
+}
+.option:hover { background: var(--blue-bg); border-color: var(--blue-border); }
+.option.selected     { background: var(--blue-bg);  border-color: var(--blue); }
+.option.correct      { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.option.wrong        { background: var(--red-bg);   border-color: var(--red);   color: var(--red);   }
+.option.show-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+
+.opt-label {
+  width: 24px; height: 24px; border-radius: 6px;
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700;
+  flex-shrink: 0;
+  background: var(--surface);
+  color: var(--text2);
+  transition: all 0.12s;
+}
+.option.selected .opt-label     { background: var(--blue);  border-color: var(--blue);  color: #fff; }
+.option.correct .opt-label      { background: var(--green); border-color: var(--green); color: #fff; }
+.option.wrong .opt-label        { background: var(--red);   border-color: var(--red);   color: #fff; }
+.option.show-correct .opt-label { background: var(--green); border-color: var(--green); color: #fff; }
+
+.opt-text { font-family: 'DM Mono', monospace; font-size: 13px; }
+
+.explanation {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  display: none;
+}
+.explanation.show { display: block; }
+.explanation.correct { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+.explanation.wrong   { background: var(--red-bg);   border: 1px solid var(--red-border);   color: var(--red);   }
+.exp-label { font-weight: 700; margin-right: 4px; }
+
+.topic-tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* HOTS badge */
+.hots-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px; font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--hots-bg);
+  border: 1px solid var(--hots-border);
+  color: var(--hots);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* RESULT */
+.result-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 44px 32px;
+  text-align: center;
+  margin-top: 32px;
+  display: none;
+}
+.result-panel.show { display: block; animation: slideUp 0.5s ease; }
+.result-emoji { font-size: 60px; margin-bottom: 16px; }
+.result-score { font-size: 56px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.result-label { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+
+.student-result-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: var(--text2);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+.duration-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--amber-bg);
+  border: 1px solid var(--amber-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.result-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-bottom: 28px;
+}
+.r-stat { background: var(--surface2); border-radius: 12px; padding: 16px 12px; }
+.r-stat-val { font-size: 28px; font-weight: 800; }
+.r-stat-lbl { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.green-val { color: var(--green); }
+.red-val   { color: var(--red);   }
+.blue-val  { color: var(--blue);  }
+
+.wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+  margin-bottom: 12px;
+}
+.wa-btn:hover { background: #1ebe5c; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+.wa-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+.btn-secondary {
+  padding: 10px 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.15s;
+  display: inline-block;
+}
+.btn-secondary:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+
+.result-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+.sent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+  padding: 12px 24px;
+  z-index: 200;
+}
+.bottom-nav-inner {
+  max-width: 900px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.nav-info { font-size: 12px; color: var(--text2); }
+.nav-info strong { color: var(--text); }
+.btn-row { display: flex; gap: 10px; align-items: center; }
+.btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text);
+  transition: all 0.15s;
+}
+.btn:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-primary:hover { background: #1d4ed8; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+
+/* SECTION THEMES */
+.s1 .section-icon { background: var(--blue-bg);   color: var(--blue);   }
+.s2 .section-icon { background: var(--green-bg);  color: var(--green);  }
+.s3 .section-icon { background: var(--amber-bg);  color: var(--amber);  }
+.s4 .section-icon { background: var(--red-bg);    color: var(--red);    }
+.s5 .section-icon { background: var(--purple-bg); color: var(--purple); }
+.s6 .section-icon { background: var(--teal-bg);   color: var(--teal);   }
+.s7 .section-icon { background: var(--hots-bg);   color: var(--hots);   }
+
+.tag-s1 { background: var(--blue-bg);   color: var(--blue);   }
+.tag-s2 { background: var(--green-bg);  color: var(--green);  }
+.tag-s3 { background: var(--amber-bg);  color: var(--amber);  }
+.tag-s4 { background: var(--red-bg);    color: var(--red);    }
+.tag-s5 { background: var(--purple-bg); color: var(--purple); }
+.tag-s6 { background: var(--teal-bg);   color: var(--teal);   }
+.tag-hots { background: var(--hots-bg); color: var(--hots);   }
+</style>
+</head>
+<body>
+
+<!-- ===== IDENTITY SCREEN ===== -->
+<div id="identityScreen">
+  <div class="identity-card">
+    <div class="school-badge">
+      <div class="school-logo">🎓</div>
+      <div class="school-info">
+        <h1>SMA IT Insan Sejahtera</h1>
+        <p>Program Matrikulasi Matematika</p>
+      </div>
+    </div>
+
+    <h2 class="form-title">Ujian Online<br>Konsep Pecahan</h2>
+    <p class="form-subtitle">Isi identitasmu terlebih dahulu. Pastikan nama dan kelas sudah benar sebelum memulai.</p>
+
+    <div class="exam-info-box">
+      <span class="icon">📋</span>
+      <p><strong>35 soal</strong> pilihan ganda · 6 bagian + 5 soal HOTS · Topik: Konsep Dasar, Pecahan Senilai, Desimal, Persen, Operasi, Membandingkan · <strong>Waktu: 45 menit</strong> · Hasil dikirim ke guru via WhatsApp.</p>
+    </div>
+
+    <div class="warn-box">
+      <span class="icon">⚠️</span>
+      <p>Jika kamu me-<strong>refresh</strong> atau menutup halaman setelah ujian dimulai, ujianmu akan dinyatakan <strong>TIDAK VALID</strong> dan tidak bisa dilanjutkan.</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="inputNama">Nama Lengkap</label>
+      <input type="text" id="inputNama" class="form-input" placeholder="Contoh: Ahmad Fauzan" autocomplete="off">
+      <div class="form-error" id="errNama">Nama tidak boleh kosong.</div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="inputKelas">Kelas</label>
+      <select id="inputKelas" class="form-select">
+        <option value="">— Pilih Kelas —</option>
+        <option value="10.1">10.1</option>
+        <option value="10.2">10.2</option>
+        <option value="10.3">10.3</option>
+        <option value="11.1">11.1</option>
+        <option value="11.2">11.2</option>
+        <option value="11.3">11.3</option>
+      </select>
+      <div class="form-error" id="errKelas">Kelas harus dipilih.</div>
+    </div>
+
+    <button class="btn-start" onclick="startExam()">Mulai Ujian →</button>
+  </div>
+</div>
+
+<!-- ===== INVALID SCREEN ===== -->
+<div id="invalidScreen">
+  <div class="invalid-card">
+    <div class="invalid-icon">🚫</div>
+    <div class="invalid-title">Ujian Tidak Valid</div>
+    <p class="invalid-msg">Halaman di-refresh atau dibuka ulang setelah ujian dimulai.<br><br>Ujianmu <strong style="color:var(--red)">dinyatakan tidak valid</strong> dan tidak dapat dilanjutkan.<br><br>Hubungi gurumu untuk mendapatkan sesi ujian baru.</p>
+  </div>
+</div>
+
+<!-- ===== TIME-UP MODAL ===== -->
+<div class="modal-overlay" id="timeModal">
+  <div class="modal-box">
+    <div class="modal-icon">⏰</div>
+    <div class="modal-title">Waktu Habis!</div>
+    <p class="modal-msg">Waktu 45 menit telah habis. Hasil ujianmu akan dihitung otomatis dari jawaban yang sudah masuk.</p>
+    <button class="btn-modal" onclick="forceSubmit()">Lihat Hasil Saya →</button>
+  </div>
+</div>
+
+<!-- ===== EXAM SCREEN ===== -->
+<div id="examScreen">
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">
+        <div>
+          <div class="logo-text">SMA IT Insan Sejahtera</div>
+          <div class="logo-sub">Ujian Matrikulasi — Konsep Pecahan (35 Soal)</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="timer-wrap">
+          <span class="timer-icon">⏱</span>
+          <span class="timer-val" id="timerVal">45:00</span>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-dot" style="background:var(--green)"></div>
+            <span class="hstat-val" id="hCorrect">0</span>
+          </div>
+          <span style="color:var(--border2)">|</span>
+          <div class="hstat">
+            <div class="hstat-dot" style="background:var(--red)"></div>
+            <span class="hstat-val" id="hWrong">0</span>
+          </div>
+        </div>
+        <div class="student-chip">
+          <div class="student-chip-avatar" id="avatarInitial">?</div>
+          <span id="chipName">Siswa</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-meta">
+        <span id="progLabel">0 dari 35 soal dijawab</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <main class="main" id="mainContent">
+
+    <!-- SECTION A: Konsep Dasar -->
+    <div class="section-header s1">
+      <div class="section-icon">½</div>
+      <div class="section-info">
+        <h2>Bagian A — Konsep Dasar Pecahan</h2>
+        <p>Soal 1–5 · Pembilang, penyebut, jenis pecahan, dan representasi</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc1"><div class="q-top"><div class="q-num" id="qn1">1</div><div class="q-text"><span class="topic-tag tag-s1">Konsep Dasar</span><br>Pada pecahan <span class="q-formula">5/12</span>, angka 12 disebut...</div></div><div class="options"><div class="option" onclick="answer(1,'A')"><span class="opt-label">A</span><span class="opt-text">Pembilang</span></div><div class="option" onclick="answer(1,'B')"><span class="opt-label">B</span><span class="opt-text">Penyebut</span></div><div class="option" onclick="answer(1,'C')"><span class="opt-label">C</span><span class="opt-text">Pecahan desimal</span></div><div class="option" onclick="answer(1,'D')"><span class="opt-label">D</span><span class="opt-text">Bilangan campuran</span></div></div><div class="explanation" id="exp1"></div></div>
+
+    <div class="q-card" id="qc2"><div class="q-top"><div class="q-num" id="qn2">2</div><div class="q-text"><span class="topic-tag tag-s1">Konsep Dasar</span><br>Sebuah kue dipotong menjadi 8 bagian sama besar. Ani memakan 3 potong. Sisa kue yang belum dimakan adalah...</div></div><div class="options"><div class="option" onclick="answer(2,'A')"><span class="opt-label">A</span><span class="opt-text">3/8</span></div><div class="option" onclick="answer(2,'B')"><span class="opt-label">B</span><span class="opt-text">5/8</span></div><div class="option" onclick="answer(2,'C')"><span class="opt-label">C</span><span class="opt-text">3/5</span></div><div class="option" onclick="answer(2,'D')"><span class="opt-label">D</span><span class="opt-text">8/3</span></div></div><div class="explanation" id="exp2"></div></div>
+
+    <div class="q-card" id="qc3"><div class="q-top"><div class="q-num" id="qn3">3</div><div class="q-text"><span class="topic-tag tag-s1">Konsep Dasar</span><br>Bilangan campuran <span class="q-formula">3 2/5</span> jika diubah ke pecahan biasa menjadi...</div></div><div class="options"><div class="option" onclick="answer(3,'A')"><span class="opt-label">A</span><span class="opt-text">15/5</span></div><div class="option" onclick="answer(3,'B')"><span class="opt-label">B</span><span class="opt-text">17/5</span></div><div class="option" onclick="answer(3,'C')"><span class="opt-label">C</span><span class="opt-text">32/5</span></div><div class="option" onclick="answer(3,'D')"><span class="opt-label">D</span><span class="opt-text">7/5</span></div></div><div class="explanation" id="exp3"></div></div>
+
+    <div class="q-card" id="qc4"><div class="q-top"><div class="q-num" id="qn4">4</div><div class="q-text"><span class="topic-tag tag-s1">Konsep Dasar</span><br>Pecahan <span class="q-formula">22/7</span> diubah ke bilangan campuran menjadi...</div></div><div class="options"><div class="option" onclick="answer(4,'A')"><span class="opt-label">A</span><span class="opt-text">3 1/7</span></div><div class="option" onclick="answer(4,'B')"><span class="opt-label">B</span><span class="opt-text">2 8/7</span></div><div class="option" onclick="answer(4,'C')"><span class="opt-label">C</span><span class="opt-text">3 2/7</span></div><div class="option" onclick="answer(4,'D')"><span class="opt-label">D</span><span class="opt-text">4 1/7</span></div></div><div class="explanation" id="exp4"></div></div>
+
+    <div class="q-card" id="qc5"><div class="q-top"><div class="q-num" id="qn5">5</div><div class="q-text"><span class="topic-tag tag-s1">Konsep Dasar</span><br>Di kelas terdapat 36 siswa. 15 di antaranya laki-laki. Pecahan yang menunjukkan proporsi siswa perempuan adalah...</div></div><div class="options"><div class="option" onclick="answer(5,'A')"><span class="opt-label">A</span><span class="opt-text">15/36</span></div><div class="option" onclick="answer(5,'B')"><span class="opt-label">B</span><span class="opt-text">21/15</span></div><div class="option" onclick="answer(5,'C')"><span class="opt-label">C</span><span class="opt-text">21/36</span></div><div class="option" onclick="answer(5,'D')"><span class="opt-label">D</span><span class="opt-text">15/21</span></div></div><div class="explanation" id="exp5"></div></div>
+
+    <!-- SECTION B: Pecahan Senilai -->
+    <div class="section-header s2">
+      <div class="section-icon">=</div>
+      <div class="section-info">
+        <h2>Bagian B — Pecahan Senilai & Menyederhanakan</h2>
+        <p>Soal 6–10 · Mencari, melengkapi, dan menyederhanakan pecahan</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc6"><div class="q-top"><div class="q-num" id="qn6">6</div><div class="q-text"><span class="topic-tag tag-s2">Pecahan Senilai</span><br>Manakah yang senilai dengan <span class="q-formula">2/3</span>?</div></div><div class="options"><div class="option" onclick="answer(6,'A')"><span class="opt-label">A</span><span class="opt-text">3/4</span></div><div class="option" onclick="answer(6,'B')"><span class="opt-label">B</span><span class="opt-text">8/12</span></div><div class="option" onclick="answer(6,'C')"><span class="opt-label">C</span><span class="opt-text">6/8</span></div><div class="option" onclick="answer(6,'D')"><span class="opt-label">D</span><span class="opt-text">4/9</span></div></div><div class="explanation" id="exp6"></div></div>
+
+    <div class="q-card" id="qc7"><div class="q-top"><div class="q-num" id="qn7">7</div><div class="q-text"><span class="topic-tag tag-s2">Pecahan Senilai</span><br>Lengkapi: <span class="q-formula">4/9 = 28/?</span></div></div><div class="options"><div class="option" onclick="answer(7,'A')"><span class="opt-label">A</span><span class="opt-text">56</span></div><div class="option" onclick="answer(7,'B')"><span class="opt-label">B</span><span class="opt-text">63</span></div><div class="option" onclick="answer(7,'C')"><span class="opt-label">C</span><span class="opt-text">72</span></div><div class="option" onclick="answer(7,'D')"><span class="opt-label">D</span><span class="opt-text">36</span></div></div><div class="explanation" id="exp7"></div></div>
+
+    <div class="q-card" id="qc8"><div class="q-top"><div class="q-num" id="qn8">8</div><div class="q-text"><span class="topic-tag tag-s2">Pecahan Senilai</span><br>Bentuk paling sederhana dari <span class="q-formula">30/45</span> adalah...</div></div><div class="options"><div class="option" onclick="answer(8,'A')"><span class="opt-label">A</span><span class="opt-text">6/9</span></div><div class="option" onclick="answer(8,'B')"><span class="opt-label">B</span><span class="opt-text">10/15</span></div><div class="option" onclick="answer(8,'C')"><span class="opt-label">C</span><span class="opt-text">2/3</span></div><div class="option" onclick="answer(8,'D')"><span class="opt-label">D</span><span class="opt-text">3/4</span></div></div><div class="explanation" id="exp8"></div></div>
+
+    <div class="q-card" id="qc9"><div class="q-top"><div class="q-num" id="qn9">9</div><div class="q-text"><span class="topic-tag tag-s2">Pecahan Senilai</span><br>Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">3/4</span>?</div></div><div class="options"><div class="option" onclick="answer(9,'A')"><span class="opt-label">A</span><span class="opt-text">6/8</span></div><div class="option" onclick="answer(9,'B')"><span class="opt-label">B</span><span class="opt-text">9/12</span></div><div class="option" onclick="answer(9,'C')"><span class="opt-label">C</span><span class="opt-text">12/15</span></div><div class="option" onclick="answer(9,'D')"><span class="opt-label">D</span><span class="opt-text">15/20</span></div></div><div class="explanation" id="exp9"></div></div>
+
+    <div class="q-card" id="qc10"><div class="q-top"><div class="q-num" id="qn10">10</div><div class="q-text"><span class="topic-tag tag-s2">Pecahan Senilai</span><br>Lengkapi: <span class="q-formula">?/6 = 40/48</span></div></div><div class="options"><div class="option" onclick="answer(10,'A')"><span class="opt-label">A</span><span class="opt-text">4</span></div><div class="option" onclick="answer(10,'B')"><span class="opt-label">B</span><span class="opt-text">5</span></div><div class="option" onclick="answer(10,'C')"><span class="opt-label">C</span><span class="opt-text">8</span></div><div class="option" onclick="answer(10,'D')"><span class="opt-label">D</span><span class="opt-text">6</span></div></div><div class="explanation" id="exp10"></div></div>
+
+    <!-- SECTION C: Desimal -->
+    <div class="section-header s3">
+      <div class="section-icon">0,</div>
+      <div class="section-info">
+        <h2>Bagian C — Pecahan &amp; Desimal</h2>
+        <p>Soal 11–16 · Konversi antara pecahan dan bilangan desimal</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc11"><div class="q-top"><div class="q-num" id="qn11">11</div><div class="q-text"><span class="topic-tag tag-s3">Desimal</span><br>Pecahan <span class="q-formula">9/20</span> dalam bentuk desimal adalah...</div></div><div class="options"><div class="option" onclick="answer(11,'A')"><span class="opt-label">A</span><span class="opt-text">0,29</span></div><div class="option" onclick="answer(11,'B')"><span class="opt-label">B</span><span class="opt-text">0,92</span></div><div class="option" onclick="answer(11,'C')"><span class="opt-label">C</span><span class="opt-text">0,45</span></div><div class="option" onclick="answer(11,'D')"><span class="opt-label">D</span><span class="opt-text">0,49</span></div></div><div class="explanation" id="exp11"></div></div>
+
+    <div class="q-card" id="qc12"><div class="q-top"><div class="q-num" id="qn12">12</div><div class="q-text"><span class="topic-tag tag-s3">Desimal</span><br>0,625 diubah ke pecahan paling sederhana adalah...</div></div><div class="options"><div class="option" onclick="answer(12,'A')"><span class="opt-label">A</span><span class="opt-text">5/8</span></div><div class="option" onclick="answer(12,'B')"><span class="opt-label">B</span><span class="opt-text">6/10</span></div><div class="option" onclick="answer(12,'C')"><span class="opt-label">C</span><span class="opt-text">3/5</span></div><div class="option" onclick="answer(12,'D')"><span class="opt-label">D</span><span class="opt-text">7/11</span></div></div><div class="explanation" id="exp12"></div></div>
+
+    <div class="q-card" id="qc13"><div class="q-top"><div class="q-num" id="qn13">13</div><div class="q-text"><span class="topic-tag tag-s3">Desimal</span><br>Nilai <span class="q-formula">5/6</span> dalam desimal (2 angka di belakang koma) adalah...</div></div><div class="options"><div class="option" onclick="answer(13,'A')"><span class="opt-label">A</span><span class="opt-text">0,56</span></div><div class="option" onclick="answer(13,'B')"><span class="opt-label">B</span><span class="opt-text">0,83</span></div><div class="option" onclick="answer(13,'C')"><span class="opt-label">C</span><span class="opt-text">0,85</span></div><div class="option" onclick="answer(13,'D')"><span class="opt-label">D</span><span class="opt-text">0,65</span></div></div><div class="explanation" id="exp13"></div></div>
+
+    <div class="q-card" id="qc14"><div class="q-top"><div class="q-num" id="qn14">14</div><div class="q-text"><span class="topic-tag tag-s3">Desimal</span><br>Desimal 2,4 diubah ke pecahan campuran paling sederhana adalah...</div></div><div class="options"><div class="option" onclick="answer(14,'A')"><span class="opt-label">A</span><span class="opt-text">2 2/5</span></div><div class="option" onclick="answer(14,'B')"><span class="opt-label">B</span><span class="opt-text">2 4/10</span></div><div class="option" onclick="answer(14,'C')"><span class="opt-label">C</span><span class="opt-text">24/5</span></div><div class="option" onclick="answer(14,'D')"><span class="opt-label">D</span><span class="opt-text">2 1/2</span></div></div><div class="explanation" id="exp14"></div></div>
+
+    <div class="q-card" id="qc15"><div class="q-top"><div class="q-num" id="qn15">15</div><div class="q-text"><span class="topic-tag tag-s3">Desimal</span><br>Urutkan dari terkecil: <span class="q-formula">0,3</span> ; <span class="q-formula">0,33</span> ; <span class="q-formula">0,303</span> ; <span class="q-formula">0,033</span></div></div><div class="options"><div class="option" onclick="answer(15,'A')"><span class="opt-label">A</span><span class="opt-text">0,033 ; 0,3 ; 0,303 ; 0,33</span></div><div class="option" onclick="answer(15,'B')"><span class="opt-label">B</span><span class="opt-text">0,3 ; 0,033 ; 0,303 ; 0,33</span></div><div class="option" onclick="answer(15,'C')"><span class="opt-label">C</span><span class="opt-text">0,033 ; 0,303 ; 0,3 ; 0,33</span></div><div class="option" onclick="answer(15,'D')"><span class="opt-label">D</span><span class="opt-text">0,33 ; 0,303 ; 0,3 ; 0,033</span></div></div><div class="explanation" id="exp15"></div></div>
+
+    <div class="q-card" id="qc16"><div class="q-top"><div class="q-num" id="qn16">16</div><div class="q-text"><span class="topic-tag tag-s3">Desimal</span><br>Pecahan <span class="q-formula">11/8</span> dalam bentuk desimal adalah...</div></div><div class="options"><div class="option" onclick="answer(16,'A')"><span class="opt-label">A</span><span class="opt-text">1,25</span></div><div class="option" onclick="answer(16,'B')"><span class="opt-label">B</span><span class="opt-text">1,375</span></div><div class="option" onclick="answer(16,'C')"><span class="opt-label">C</span><span class="opt-text">1,18</span></div><div class="option" onclick="answer(16,'D')"><span class="opt-label">D</span><span class="opt-text">1,875</span></div></div><div class="explanation" id="exp16"></div></div>
+
+    <!-- SECTION D: Persen -->
+    <div class="section-header s4">
+      <div class="section-icon">%</div>
+      <div class="section-info">
+        <h2>Bagian D — Persen</h2>
+        <p>Soal 17–21 · Konversi dan aplikasi persen dalam kehidupan nyata</p>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc17"><div class="q-top"><div class="q-num" id="qn17">17</div><div class="q-text"><span class="topic-tag tag-s4">Persen</span><br>Pecahan <span class="q-formula">7/25</span> jika diubah ke persen adalah...</div></div><div class="options"><div class="option" onclick="answer(17,'A')"><span class="opt-label">A</span><span class="opt-text">14%</span></div><div class="option" onclick="answer(17,'B')"><span class="opt-label">B</span><span class="opt-text">28%</span></div><div class="option" onclick="answer(17,'C')"><span class="opt-label">C</span><span class="opt-text">35%</span></div><div class="option" onclick="answer(17,'D')"><span class="opt-label">D</span><span class="opt-text">72%</span></div></div><div class="explanation" id="exp17"></div></div>
+
+    <div class="q-card" id="qc18"><div class="q-top"><div class="q-num" id="qn18">18</div><div class="q-text"><span class="topic-tag tag-s4">Persen</span><br>60% dalam bentuk pecahan paling sederhana adalah...</div></div><div class="options"><div class="option" onclick="answer(18,'A')"><span class="opt-label">A</span><span class="opt-text">60/100</span></div><div class="option" onclick="answer(18,'B')"><span class="opt-label">B</span><span class="opt-text">6/10</span></div><div class="option" onclick="answer(18,'C')"><span class="opt-label">C</span><span class="opt-text">3/5</span></div><div class="option" onclick="answer(18,'D')"><span class="opt-label">D</span><span class="opt-text">2/3</span></div></div><div class="explanation" id="exp18"></div></div>
+
+    <div class="q-card" id="qc19"><div class="q-top"><div class="q-num" id="qn19">19</div><div class="q-text"><span class="topic-tag tag-s4">Persen</span><br>Reza membeli sepatu seharga Rp120.000. Toko memberi diskon 15%. Berapa yang harus dibayar Reza?</div></div><div class="options"><div class="option" onclick="answer(19,'A')"><span class="opt-label">A</span><span class="opt-text">Rp18.000</span></div><div class="option" onclick="answer(19,'B')"><span class="opt-label">B</span><span class="opt-text">Rp100.000</span></div><div class="option" onclick="answer(19,'C')"><span class="opt-label">C</span><span class="opt-text">Rp102.000</span></div><div class="option" onclick="answer(19,'D')"><span class="opt-label">D</span><span class="opt-text">Rp105.000</span></div></div><div class="explanation" id="exp19"></div></div>
+
+    <div class="q-card" id="qc20"><div class="q-top"><div class="q-num" id="qn20">20</div><div class="q-text"><span class="topic-tag tag-s4">Persen</span><br>Nilai 18 dari 72 dalam bentuk persen adalah...</div></div><div class="options"><div class="option" onclick="answer(20,'A')"><span class="opt-label">A</span><span class="opt-text">18%</span></div><div class="option" onclick="answer(20,'B')"><span class="opt-label">B</span><span class="opt-text">20%</span></div><div class="option" onclick="answer(20,'C')"><span class="opt-label">C</span><span class="opt-text">25%</span></div><div class="option" onclick="answer(20,'D')"><span class="opt-label">D</span><span class="opt-text">30%</span></div></div><div class="explanation" id="exp20"></div></div>
+
+    <div class="q-card" id="qc21"><div class="q-top"><div class="q-num" id="qn21">21</div><div class="q-text"><span class="topic-tag tag-s4">Persen</span><br>0,045 diubah ke persen adalah...</div></div><div class="options"><div class="option" onclick="answer(21,'A')"><span class="opt-label">A</span><span class="opt-text">0,45%</span></div><div class="option" onclick="answer(21,'B')"><span class="opt-label">B</span><span class="opt-text">4,5%</span></div><div class="option" onclick="answer(21,'C')"><span class="opt-label">C</span><span class="opt-text">45%</span></div><div class="option" onclick="answer(21,'D')"><span class="opt-label">D</span><span class="opt-text">450%</span></div></div><div class="explanation" id="exp21"></div></div>
+
+    <!-- SECTION E: Operasi Pecahan + 3 soal HOTS -->
+    <div class="section-header s5">
+      <div class="section-icon">±×</div>
+      <div class="section-info">
+        <h2>Bagian E — Operasi Pecahan</h2>
+        <p>Soal 22–30 · Penjumlahan, pengurangan, perkalian, pembagian &amp; <strong style="color:var(--hots)">3 soal HOTS</strong></p>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc22"><div class="q-top"><div class="q-num" id="qn22">22</div><div class="q-text"><span class="topic-tag tag-s5">Operasi Pecahan</span><br><span class="q-formula">3/5 + 1/4 = ...</span></div></div><div class="options"><div class="option" onclick="answer(22,'A')"><span class="opt-label">A</span><span class="opt-text">4/9</span></div><div class="option" onclick="answer(22,'B')"><span class="opt-label">B</span><span class="opt-text">17/20</span></div><div class="option" onclick="answer(22,'C')"><span class="opt-label">C</span><span class="opt-text">4/20</span></div><div class="option" onclick="answer(22,'D')"><span class="opt-label">D</span><span class="opt-text">7/9</span></div></div><div class="explanation" id="exp22"></div></div>
+
+    <div class="q-card" id="qc23"><div class="q-top"><div class="q-num" id="qn23">23</div><div class="q-text"><span class="topic-tag tag-s5">Operasi Pecahan</span><br><span class="q-formula">7/8 − 1/4 = ...</span></div></div><div class="options"><div class="option" onclick="answer(23,'A')"><span class="opt-label">A</span><span class="opt-text">6/4</span></div><div class="option" onclick="answer(23,'B')"><span class="opt-label">B</span><span class="opt-text">1/2</span></div><div class="option" onclick="answer(23,'C')"><span class="opt-label">C</span><span class="opt-text">5/8</span></div><div class="option" onclick="answer(23,'D')"><span class="opt-label">D</span><span class="opt-text">3/4</span></div></div><div class="explanation" id="exp23"></div></div>
+
+    <div class="q-card" id="qc24"><div class="q-top"><div class="q-num" id="qn24">24</div><div class="q-text"><span class="topic-tag tag-s5">Operasi Pecahan</span><br><span class="q-formula">4/5 × 5/6 = ...</span></div></div><div class="options"><div class="option" onclick="answer(24,'A')"><span class="opt-label">A</span><span class="opt-text">9/11</span></div><div class="option" onclick="answer(24,'B')"><span class="opt-label">B</span><span class="opt-text">2/3</span></div><div class="option" onclick="answer(24,'C')"><span class="opt-label">C</span><span class="opt-text">20/30</span></div><div class="option" onclick="answer(24,'D')"><span class="opt-label">D</span><span class="opt-text">4/6</span></div></div><div class="explanation" id="exp24"></div></div>
+
+    <div class="q-card" id="qc25"><div class="q-top"><div class="q-num" id="qn25">25</div><div class="q-text"><span class="topic-tag tag-s5">Operasi Pecahan</span><br><span class="q-formula">3/8 ÷ 9/16 = ...</span></div></div><div class="options"><div class="option" onclick="answer(25,'A')"><span class="opt-label">A</span><span class="opt-text">27/128</span></div><div class="option" onclick="answer(25,'B')"><span class="opt-label">B</span><span class="opt-text">2/3</span></div><div class="option" onclick="answer(25,'C')"><span class="opt-label">C</span><span class="opt-text">3/4</span></div><div class="option" onclick="answer(25,'D')"><span class="opt-label">D</span><span class="opt-text">1/2</span></div></div><div class="explanation" id="exp25"></div></div>
+
+    <div class="q-card" id="qc26"><div class="q-top"><div class="q-num" id="qn26">26</div><div class="q-text"><span class="topic-tag tag-s5">Operasi Pecahan</span><br>Seorang tukang kayu memiliki papan sepanjang <span class="q-formula">4 1/2</span> meter, lalu memotong <span class="q-formula">1 3/4</span> meter. Sisa papan adalah...</div></div><div class="options"><div class="option" onclick="answer(26,'A')"><span class="opt-label">A</span><span class="opt-text">2 1/4 m</span></div><div class="option" onclick="answer(26,'B')"><span class="opt-label">B</span><span class="opt-text">2 3/4 m</span></div><div class="option" onclick="answer(26,'C')"><span class="opt-label">C</span><span class="opt-text">3 1/4 m</span></div><div class="option" onclick="answer(26,'D')"><span class="opt-label">D</span><span class="opt-text">3 3/4 m</span></div></div><div class="explanation" id="exp26"></div></div>
+
+    <!-- HOTS 1 -->
+    <div class="q-card hots-card" id="qc27"><div class="q-top"><div class="q-num" id="qn27">27</div><div class="q-text"><span class="topic-tag tag-hots">HOTS 🔥</span><br>Sebuah tangki berisi <span class="q-formula">3/4</span> penuh air. Setelah diambil <span class="q-formula">1/3</span> bagian dari isi tangki saat ini, berapa bagian air yang tersisa dalam tangki?</div></div><div class="options"><div class="option" onclick="answer(27,'A')"><span class="opt-label">A</span><span class="opt-text">5/12</span></div><div class="option" onclick="answer(27,'B')"><span class="opt-label">B</span><span class="opt-text">1/2</span></div><div class="option" onclick="answer(27,'C')"><span class="opt-label">C</span><span class="opt-text">7/12</span></div><div class="option" onclick="answer(27,'D')"><span class="opt-label">D</span><span class="opt-text">2/3</span></div></div><div class="explanation" id="exp27"></div></div>
+
+    <!-- HOTS 2 -->
+    <div class="q-card hots-card" id="qc28"><div class="q-top"><div class="q-num" id="qn28">28</div><div class="q-text"><span class="topic-tag tag-hots">HOTS 🔥</span><br>Sebuah proyek dikerjakan oleh Adi dan Budi. Adi dapat menyelesaikan <span class="q-formula">1/4</span> pekerjaan per hari, Budi dapat menyelesaikan <span class="q-formula">1/6</span> pekerjaan per hari. Jika mereka bekerja bersama, berapa hari proyek selesai?</div></div><div class="options"><div class="option" onclick="answer(28,'A')"><span class="opt-label">A</span><span class="opt-text">2 hari</span></div><div class="option" onclick="answer(28,'B')"><span class="opt-label">B</span><span class="opt-text">2 2/5 hari</span></div><div class="option" onclick="answer(28,'C')"><span class="opt-label">C</span><span class="opt-text">3 hari</span></div><div class="option" onclick="answer(28,'D')"><span class="opt-label">D</span><span class="opt-text">4 hari</span></div></div><div class="explanation" id="exp28"></div></div>
+
+    <!-- HOTS 3 -->
+    <div class="q-card hots-card" id="qc29"><div class="q-top"><div class="q-num" id="qn29">29</div><div class="q-text"><span class="topic-tag tag-hots">HOTS 🔥</span><br>Ibu membeli <span class="q-formula">2 1/2</span> kg gula. Digunakan untuk membuat kue <span class="q-formula">3/4</span> kg, dan untuk minuman <span class="q-formula">1/3</span> kg. Sisa gula ibu adalah...</div></div><div class="options"><div class="option" onclick="answer(29,'A')"><span class="opt-label">A</span><span class="opt-text">1 5/12 kg</span></div><div class="option" onclick="answer(29,'B')"><span class="opt-label">B</span><span class="opt-text">1 1/2 kg</span></div><div class="option" onclick="answer(29,'C')"><span class="opt-label">C</span><span class="opt-text">1 7/12 kg</span></div><div class="option" onclick="answer(29,'D')"><span class="opt-label">D</span><span class="opt-text">2 kg</span></div></div><div class="explanation" id="exp29"></div></div>
+
+    <!-- SECTION F: Membandingkan & Mengurutkan + 2 soal HOTS -->
+    <div class="section-header s6">
+      <div class="section-icon">&lt;&gt;</div>
+      <div class="section-info">
+        <h2>Bagian F — Membandingkan &amp; Mengurutkan</h2>
+        <p>Soal 30–35 · Perbandingan pecahan, desimal, persen &amp; <strong style="color:var(--hots)">2 soal HOTS</strong></p>
+      </div>
+    </div>
+
+    <div class="q-card" id="qc30"><div class="q-top"><div class="q-num" id="qn30">30</div><div class="q-text"><span class="topic-tag tag-s6">Membandingkan</span><br>Di antara <span class="q-formula">5/9</span>, <span class="q-formula">0,56</span>, dan <span class="q-formula">57%</span>, urutan dari terbesar ke terkecil adalah...</div></div><div class="options"><div class="option" onclick="answer(30,'A')"><span class="opt-label">A</span><span class="opt-text">5/9 ; 0,56 ; 57%</span></div><div class="option" onclick="answer(30,'B')"><span class="opt-label">B</span><span class="opt-text">57% ; 0,56 ; 5/9</span></div><div class="option" onclick="answer(30,'C')"><span class="opt-label">C</span><span class="opt-text">0,56 ; 57% ; 5/9</span></div><div class="option" onclick="answer(30,'D')"><span class="opt-label">D</span><span class="opt-text">5/9 ; 57% ; 0,56</span></div></div><div class="explanation" id="exp30"></div></div>
+
+    <div class="q-card" id="qc31"><div class="q-top"><div class="q-num" id="qn31">31</div><div class="q-text"><span class="topic-tag tag-s6">Mengurutkan</span><br>Urutkan dari terkecil ke terbesar: <span class="q-formula">5/6</span> , <span class="q-formula">4/5</span> , <span class="q-formula">7/8</span> , <span class="q-formula">11/12</span></div></div><div class="options"><div class="option" onclick="answer(31,'A')"><span class="opt-label">A</span><span class="opt-text">4/5, 5/6, 7/8, 11/12</span></div><div class="option" onclick="answer(31,'B')"><span class="opt-label">B</span><span class="opt-text">5/6, 4/5, 7/8, 11/12</span></div><div class="option" onclick="answer(31,'C')"><span class="opt-label">C</span><span class="opt-text">11/12, 7/8, 5/6, 4/5</span></div><div class="option" onclick="answer(31,'D')"><span class="opt-label">D</span><span class="opt-text">4/5, 7/8, 5/6, 11/12</span></div></div><div class="explanation" id="exp31"></div></div>
+
+    <div class="q-card" id="qc32"><div class="q-top"><div class="q-num" id="qn32">32</div><div class="q-text"><span class="topic-tag tag-s6">Membandingkan</span><br>Empat siswa mendapat nilai: Aldi <span class="q-formula">3/4</span>, Bela <span class="q-formula">78%</span>, Candra <span class="q-formula">0,77</span>, Dita <span class="q-formula">19/25</span>. Urutan nilai dari tertinggi ke terendah adalah...</div></div><div class="options"><div class="option" onclick="answer(32,'A')"><span class="opt-label">A</span><span class="opt-text">Dita, Bela, Candra, Aldi</span></div><div class="option" onclick="answer(32,'B')"><span class="opt-label">B</span><span class="opt-text">Bela, Dita, Candra, Aldi</span></div><div class="option" onclick="answer(32,'C')"><span class="opt-label">C</span><span class="opt-text">Dita, Candra, Bela, Aldi</span></div><div class="option" onclick="answer(32,'D')"><span class="opt-label">D</span><span class="opt-text">Bela, Dita, Aldi, Candra</span></div></div><div class="explanation" id="exp32"></div></div>
+
+    <!-- HOTS 4 -->
+    <div class="q-card hots-card" id="qc33"><div class="q-top"><div class="q-num" id="qn33">33</div><div class="q-text"><span class="topic-tag tag-hots">HOTS 🔥</span><br>Tiga toko menjual jus dengan harga berbeda: Toko A menjual 3 botol seharga Rp36.000, Toko B menjual 5 botol seharga Rp55.000, Toko C menjual 4 botol seharga Rp44.800. Jika kamu ingin membeli jus paling murah per botol, toko mana yang sebaiknya dipilih?</div></div><div class="options"><div class="option" onclick="answer(33,'A')"><span class="opt-label">A</span><span class="opt-text">Toko A (Rp12.000/botol)</span></div><div class="option" onclick="answer(33,'B')"><span class="opt-label">B</span><span class="opt-text">Toko B (Rp11.000/botol)</span></div><div class="option" onclick="answer(33,'C')"><span class="opt-label">C</span><span class="opt-text">Toko C (Rp11.200/botol)</span></div><div class="option" onclick="answer(33,'D')"><span class="opt-label">D</span><span class="opt-text">Toko A dan B sama murahnya</span></div></div><div class="explanation" id="exp33"></div></div>
+
+    <!-- HOTS 5 -->
+    <div class="q-card hots-card" id="qc34"><div class="q-top"><div class="q-num" id="qn34">34</div><div class="q-text"><span class="topic-tag tag-hots">HOTS 🔥</span><br>Pada ujian matematika, skor Putri adalah <span class="q-formula">4/5</span> dari skor Raka. Skor Raka adalah <span class="q-formula">5/6</span> dari skor Sari. Jika skor Sari adalah 90, maka skor Putri adalah...</div></div><div class="options"><div class="option" onclick="answer(34,'A')"><span class="opt-label">A</span><span class="opt-text">54</span></div><div class="option" onclick="answer(34,'B')"><span class="opt-label">B</span><span class="opt-text">60</span></div><div class="option" onclick="answer(34,'C')"><span class="opt-label">C</span><span class="opt-text">72</span></div><div class="option" onclick="answer(34,'D')"><span class="opt-label">D</span><span class="opt-text">75</span></div></div><div class="explanation" id="exp34"></div></div>
+
+    <!-- Soal 35 biasa -->
+    <div class="q-card" id="qc35"><div class="q-top"><div class="q-num" id="qn35">35</div><div class="q-text"><span class="topic-tag tag-s6">Mengurutkan</span><br>Lima siswa mendapat nilai: Andi <span class="q-formula">4/5</span>, Budi <span class="q-formula">85%</span>, Cici <span class="q-formula">0,78</span>, Dini <span class="q-formula">7/9</span>, Eva <span class="q-formula">17/20</span>. Urutan dari nilai tertinggi adalah...</div></div><div class="options"><div class="option" onclick="answer(35,'A')"><span class="opt-label">A</span><span class="opt-text">Eva, Budi, Andi, Dini, Cici</span></div><div class="option" onclick="answer(35,'B')"><span class="opt-label">B</span><span class="opt-text">Budi, Eva, Andi, Dini, Cici</span></div><div class="option" onclick="answer(35,'C')"><span class="opt-label">C</span><span class="opt-text">Budi, Eva, Dini, Andi, Cici</span></div><div class="option" onclick="answer(35,'D')"><span class="opt-label">D</span><span class="opt-text">Eva, Andi, Budi, Dini, Cici</span></div></div><div class="explanation" id="exp35"></div></div>
+
+    <!-- RESULT PANEL -->
+    <div class="result-panel" id="resultPanel">
+      <div class="result-emoji" id="resultEmoji">🎉</div>
+      <div class="result-score" id="resultScore">0/35</div>
+      <div class="result-label" id="resultLabel">Ujian selesai!</div>
+      <div class="student-result-info" id="studentResultInfo">👤 Nama · Kelas</div>
+      <div class="duration-badge" id="durationBadge">⏱ Durasi: — menit</div>
+      <div class="result-grid">
+        <div class="r-stat"><div class="r-stat-val green-val" id="rCorrect">0</div><div class="r-stat-lbl">✓ Benar</div></div>
+        <div class="r-stat"><div class="r-stat-val red-val" id="rWrong">0</div><div class="r-stat-lbl">✗ Salah</div></div>
+        <div class="r-stat"><div class="r-stat-val blue-val" id="rPct">0%</div><div class="r-stat-lbl">Nilai</div></div>
+      </div>
+      <div class="result-actions">
+        <a id="waBtn" href="#" class="wa-btn" target="_blank" onclick="markSent()">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.084 1.504 5.806L.058 23.5a.5.5 0 0 0 .615.611l5.796-1.517A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.158-1.422l-.369-.222-3.838 1.005 1.023-3.74-.242-.384A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Kirim Hasil ke Guru via WhatsApp
+        </a>
+        <div id="sentBadge" style="display:none">
+          <span class="sent-badge">✅ Hasil sudah dikirim ke guru!</span>
+        </div>
+        <button class="btn-secondary" onclick="location.reload()">Ulangi Ujian dari Awal</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <div class="nav-info">Dijawab: <strong id="navAnswered">0</strong>/35</div>
+      <div class="btn-row">
+        <button class="btn" onclick="scrollToNext()">Soal berikutnya ↓</button>
+        <button class="btn btn-primary" onclick="showResult()" id="finishBtn" style="display:none">Lihat Hasil &amp; Kirim →</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end examScreen -->
+
+<script>
+// ============================================================
+const GURU_WA   = '6281770618414';
+const TOTAL_Q   = 35;
+const DURATION  = 45 * 60; // detik
+// ============================================================
+
+const ANSWERS = {
+  1:'B', 2:'B', 3:'B', 4:'A', 5:'C',
+  6:'B', 7:'B', 8:'C', 9:'C', 10:'B',
+  11:'C',12:'A',13:'B',14:'A',15:'A',16:'B',
+  17:'B',18:'C',19:'C',20:'C',21:'B',
+  22:'B',23:'C',24:'B',25:'B',26:'B',
+  27:'B',28:'B',29:'A',
+  30:'B',31:'A',32:'B',33:'B',34:'B',35:'B'
+};
+
+const EXPLANATIONS = {
+  1:'Pada pecahan 5/12, angka 12 adalah penyebut (jumlah bagian keseluruhan), sedangkan 5 adalah pembilang.',
+  2:'Sisa kue = 8 − 3 = 5 bagian dari 8, sehingga pecahannya adalah 5/8.',
+  3:'3 2/5 = (3×5 + 2)/5 = (15+2)/5 = 17/5.',
+  4:'22 ÷ 7 = 3 sisa 1. Maka 22/7 = 3 1/7.',
+  5:'Jumlah perempuan = 36 − 15 = 21 siswa. Proporsinya = 21/36.',
+  6:'2/3 × 4/4 = 8/12 ✓. Pilihan lain: 3/4 ≠ 2/3, 6/8 = 3/4 ≠ 2/3, 4/9 ≠ 2/3.',
+  7:'4/9 = 28/? → pembilang dikali 7 (28÷4=7), maka penyebut juga dikali 7: 9×7 = 63.',
+  8:'FPB(30, 45) = 15. Maka 30/45 = 30÷15 / 45÷15 = 2/3.',
+  9:'3/4 senilai: 6/8 ✓, 9/12 ✓, 15/20 ✓. Cek 12/15: disederhanakan = 4/5 ≠ 3/4. Jadi 12/15 bukan senilai 3/4.',
+  10:'40/48 disederhanakan: FPB(40,48)=8 → 5/6. Maka ?/6 = 5/6, jadi ? = 5.',
+  11:'9/20 = 9÷20 = 0,45.',
+  12:'0,625 = 625/1000. FPB(625,1000) = 125. → 625÷125 / 1000÷125 = 5/8.',
+  13:'5/6 = 5÷6 = 0,8333... ≈ 0,83 (dibulatkan 2 desimal).',
+  14:'2,4 = 2 + 0,4 = 2 + 4/10 = 2 + 2/5 = 2 2/5.',
+  15:'Bandingkan: 0,033 < 0,3 < 0,303 < 0,33. Urutan yang benar adalah pilihan A.',
+  16:'11/8 = 11÷8 = 1,375.',
+  17:'7/25 × 100% = 700/25 = 28%.',
+  18:'60% = 60/100. FPB(60,100) = 20. → 60÷20 / 100÷20 = 3/5.',
+  19:'Diskon = 15% × Rp120.000 = Rp18.000. Yang dibayar = Rp120.000 − Rp18.000 = Rp102.000.',
+  20:'18/72 × 100% = 1800/72 = 25%.',
+  21:'0,045 × 100% = 4,5%.',
+  22:'KPK(5,4) = 20. 3/5 = 12/20, 1/4 = 5/20. 12/20 + 5/20 = 17/20.',
+  23:'1/4 = 2/8. 7/8 − 2/8 = 5/8.',
+  24:'4/5 × 5/6 = 20/30 = 2/3 (sederhanakan dengan FPB 10).',
+  25:'3/8 ÷ 9/16 = 3/8 × 16/9 = 48/72 = 2/3.',
+  26:'4 1/2 − 1 3/4 = 9/2 − 7/4 = 18/4 − 7/4 = 11/4 = 2 3/4 meter.',
+  27:'Air diambil = 1/3 × 3/4 = 1/4 tangki. Sisa = 3/4 − 1/4 = 2/4 = 1/2 tangki.',
+  28:'Bersama per hari = 1/4 + 1/6 = 3/12 + 2/12 = 5/12 pekerjaan. Lama selesai = 1 ÷ 5/12 = 12/5 = 2 2/5 hari.',
+  29:'Digunakan = 3/4 + 1/3 = 9/12 + 4/12 = 13/12 = 1 1/12 kg. Sisa = 2 1/2 − 1 1/12 = 30/12 − 13/12 = 17/12 = 1 5/12 kg.',
+  30:'5/9 ≈ 0,556, 0,56, 57% = 0,57. Urutan terbesar: 0,57 > 0,56 > 0,556 → 57% ; 0,56 ; 5/9.',
+  31:'Ubah ke desimal: 4/5=0,8, 5/6≈0,833, 7/8=0,875, 11/12≈0,917. Urutan terkecil: 4/5, 5/6, 7/8, 11/12.',
+  32:'Aldi=0,75, Bela=0,78, Candra=0,77, Dita=19/25=0,76. Urutan: Bela(0,78) > Candra(0,77) > Dita(0,76) > Aldi(0,75).',
+  33:'Harga per botol: Toko A = 36.000÷3 = Rp12.000, Toko B = 55.000÷5 = Rp11.000, Toko C = 44.800÷4 = Rp11.200. Termurah: Toko B.',
+  34:'Skor Raka = 5/6 × 90 = 75. Skor Putri = 4/5 × 75 = 60.',
+  35:'Andi=0,80, Budi=0,85, Cici=0,78, Dini≈0,778, Eva=17/20=0,85. Budi=Eva=0,85, maka Budi dan Eva tertinggi. Urutan: Budi=Eva, Andi, Dini, Cici → Budi, Eva, Andi, Dini, Cici.'
+};
+
+// ─── STATE ──────────────────────────────────────
+const state = { answered:0, correct:0, wrong:0, map:{} };
+let studentName='', studentKelas='';
+let startTime=null, timerInterval=null, secondsLeft=DURATION;
+let examDone=false;
+
+// ─── ANTI-REFRESH ────────────────────────────────
+const SS_STARTED = 'exam_v2_started';
+const SS_DONE    = 'exam_v2_done';
+
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem(SS_STARTED)==='1' && sessionStorage.getItem(SS_DONE)!=='1') {
+    document.getElementById('identityScreen').style.display = 'none';
+    document.getElementById('invalidScreen').style.display  = 'flex';
+  }
+});
+
+window.addEventListener('beforeunload', e => {
+  if (startTime && !examDone) { e.preventDefault(); e.returnValue=''; }
+});
+
+// ─── START ───────────────────────────────────────
+function startExam() {
+  const nama  = document.getElementById('inputNama').value.trim();
+  const kelas = document.getElementById('inputKelas').value;
+  let valid = true;
+  if (!nama)  { document.getElementById('errNama').style.display='block'; valid=false; }
+  else          document.getElementById('errNama').style.display='none';
+  if (!kelas) { document.getElementById('errKelas').style.display='block'; valid=false; }
+  else          document.getElementById('errKelas').style.display='none';
+  if (!valid) return;
+
+  studentName  = nama;
+  studentKelas = kelas;
+  startTime    = new Date();
+
+  sessionStorage.setItem(SS_STARTED, '1');
+  sessionStorage.removeItem(SS_DONE);
+
+  document.getElementById('chipName').textContent     = nama.split(' ')[0] + ' · ' + kelas;
+  document.getElementById('avatarInitial').textContent = nama.charAt(0).toUpperCase();
+  document.getElementById('identityScreen').style.display = 'none';
+  document.getElementById('examScreen').style.display    = 'block';
+  window.scrollTo(0,0);
+  startTimer();
+}
+
+// ─── TIMER ───────────────────────────────────────
+function startTimer() {
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    const m = String(Math.floor(secondsLeft/60)).padStart(2,'0');
+    const s = String(secondsLeft%60).padStart(2,'0');
+    const el = document.getElementById('timerVal');
+    el.textContent = m + ':' + s;
+    if      (secondsLeft <= 60)  el.className = 'timer-val danger';
+    else if (secondsLeft <= 300) el.className = 'timer-val warn';
+    else                          el.className = 'timer-val';
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      if (!examDone) document.getElementById('timeModal').classList.add('show');
+    }
+  }, 1000);
+}
+
+function forceSubmit() {
+  document.getElementById('timeModal').classList.remove('show');
+  showResult();
+}
+
+// ─── ANSWER ──────────────────────────────────────
+function answer(qNum, opt) {
+  if (state.map[qNum]) return;
+  state.map[qNum] = opt;
+  const correct   = ANSWERS[qNum];
+  const isCorrect = opt === correct;
+
+  if (isCorrect) state.correct++; else state.wrong++;
+  state.answered++;
+
+  const numEl = document.getElementById('qn' + qNum);
+  numEl.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  numEl.textContent = isCorrect ? '✓' : '✗';
+
+  const card   = document.getElementById('qc' + qNum);
+  const opts   = card.querySelectorAll('.option');
+  const labels = ['A','B','C','D'];
+  opts.forEach((el, i) => {
+    el.onclick = null;
+    if (labels[i] === opt && !isCorrect) el.classList.add('wrong');
+    if (labels[i] === correct)           el.classList.add(isCorrect ? 'correct' : 'show-correct');
+  });
+
+  const exp = document.getElementById('exp' + qNum);
+  exp.className = 'explanation show ' + (isCorrect ? 'correct' : 'wrong');
+  exp.innerHTML = '<span class="exp-label">' + (isCorrect ? '✓ Benar!' : '✗ Kurang tepat.') + '</span>' + EXPLANATIONS[qNum];
+
+  updateStats();
+  if (state.answered === TOTAL_Q) document.getElementById('finishBtn').style.display = 'inline-block';
+}
+
+function updateStats() {
+  document.getElementById('hCorrect').textContent    = state.correct;
+  document.getElementById('hWrong').textContent      = state.wrong;
+  document.getElementById('navAnswered').textContent = state.answered;
+  const pct = Math.round(state.answered / TOTAL_Q * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent    = state.answered + ' dari ' + TOTAL_Q + ' soal dijawab';
+  document.getElementById('progPct').textContent      = pct + '%';
+}
+
+function scrollToNext() {
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) {
+      document.getElementById('qc' + i).scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+  }
+}
+
+// ─── RESULT ──────────────────────────────────────
+function showResult() {
+  if (examDone) return;
+  examDone = true;
+  clearInterval(timerInterval);
+  sessionStorage.setItem(SS_DONE, '1');
+
+  const endTime  = new Date();
+  const duration = Math.round((endTime - startTime) / 60000);
+  const pct      = Math.round(state.correct / TOTAL_Q * 100);
+
+  document.getElementById('rCorrect').textContent      = state.correct;
+  document.getElementById('rWrong').textContent        = state.wrong;
+  document.getElementById('rPct').textContent          = pct + '%';
+  document.getElementById('resultScore').textContent   = state.correct + '/' + TOTAL_Q;
+  document.getElementById('studentResultInfo').textContent = '👤 ' + studentName + ' · Kelas ' + studentKelas;
+  document.getElementById('durationBadge').textContent = '⏱ Durasi: ' + duration + ' menit';
+  document.getElementById('finishBtn').style.display   = 'none';
+
+  let emoji='😊', label='';
+  if (pct>=90)      { emoji='🏆'; label='Luar biasa! Nilai sempurna!'; }
+  else if (pct>=75) { emoji='🎉'; label='Bagus sekali! Pertahankan prestasimu!'; }
+  else if (pct>=60) { emoji='👍'; label='Cukup baik, terus berlatih!'; }
+  else              { emoji='💪'; label='Jangan menyerah! Yuk pelajari lagi!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultLabel').textContent  = label;
+
+  // Build wrong list
+  let wrongList = '', wrongCount = 0;
+  const hotsNums = [27,28,29,33,34];
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (state.map[i] && state.map[i] !== ANSWERS[i]) {
+      wrongCount++;
+      if (wrongCount <= 10) {
+        const isHots = hotsNums.includes(i);
+        wrongList += `\n  Soal ${i}${isHots?' [HOTS]':''}: Jawab ${state.map[i]}, Kunci ${ANSWERS[i]}`;
+      }
+    }
+  }
+  if (wrongCount > 10) wrongList += `\n  ...dan ${wrongCount-10} soal lainnya`;
+
+  const tanggal = endTime.toLocaleDateString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  const jam     = endTime.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+
+  let msg = `📊 *HASIL UJIAN MATRIKULASI*\n`;
+  msg += `🏫 SMA IT Insan Sejahtera\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Nama:* ${studentName}\n`;
+  msg += `🏫 *Kelas:* ${studentKelas}\n`;
+  msg += `📅 *Tanggal:* ${tanggal}\n`;
+  msg += `⏰ *Jam:* ${jam} (durasi ${duration} menit)\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `✅ *Benar:* ${state.correct} soal\n`;
+  msg += `❌ *Salah:* ${state.wrong} soal\n`;
+  msg += `📝 *Dijawab:* ${state.answered}/${TOTAL_Q} soal\n`;
+  msg += `🎯 *Nilai:* *${pct}%* ${emoji}\n`;
+  if (wrongList) {
+    msg += `━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `❌ *Soal yang salah:*${wrongList}\n`;
+  }
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Dikirim otomatis dari Ujian Online Pecahan (35 Soal + 5 HOTS)_`;
+
+  document.getElementById('waBtn').href = 'https://wa.me/' + GURU_WA + '?text=' + encodeURIComponent(msg);
+
+  const panel = document.getElementById('resultPanel');
+  panel.classList.add('show');
+  setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'start' }), 200);
+}
+
+function markSent() {
+  setTimeout(() => { document.getElementById('sentBadge').style.display = 'block'; }, 1000);
+}
+</script>
+</body>
+</html>
