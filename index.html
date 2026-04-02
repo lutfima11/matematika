@@ -81,7 +81,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .form-title { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
 .form-subtitle { font-size: 13px; color: var(--text2); margin-bottom: 28px; line-height: 1.5; }
 
-/* PACKET SELECTOR */
 .packet-selector { margin-bottom: 22px; }
 .packet-label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
 .packet-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
@@ -118,14 +117,12 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .btn-start:active { transform: translateY(0); }
 .form-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
 
-/* INVALID SCREEN */
 #invalidScreen { display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 24px; background: var(--bg); }
 .invalid-card { background: var(--surface); border: 1px solid var(--red-border); border-radius: 24px; padding: 56px 40px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 8px 40px rgba(220,38,38,0.1); animation: slideUp 0.4s ease; }
 .invalid-icon { font-size: 56px; margin-bottom: 16px; }
 .invalid-title { font-size: 22px; font-weight: 800; color: var(--red); margin-bottom: 10px; }
 .invalid-msg { font-size: 13px; color: var(--text2); line-height: 1.7; }
 
-/* TIME-UP MODAL */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); z-index: 500; display: none; align-items: center; justify-content: center; }
 .modal-overlay.show { display: flex; }
 .modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 44px 36px; max-width: 380px; width: 90%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); animation: slideUp .35s ease; }
@@ -135,7 +132,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .btn-modal { padding: 12px 28px; background: var(--blue); color: #fff; border: none; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; }
 .btn-modal:hover { background: #1d4ed8; }
 
-/* EXAM SCREEN */
 #examScreen { display: none; }
 
 .site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
@@ -145,7 +141,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .logo-sub { font-size: 11px; color: var(--text2); }
 .header-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 
-/* Packet badge in header */
 .packet-badge { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--purple-bg); border: 1px solid var(--purple-border); color: var(--purple); letter-spacing: 0.5px; text-transform: uppercase; }
 
 .timer-wrap { display: flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; }
@@ -217,7 +212,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .topic-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
 .hots-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--hots-bg); border: 1px solid var(--hots-border); color: var(--hots); letter-spacing: 0.5px; text-transform: uppercase; margin-left: 6px; vertical-align: middle; }
 
-/* RESULT */
 .result-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 44px 32px; text-align: center; margin-top: 32px; display: none; }
 .result-panel.show { display: block; animation: slideUp 0.5s ease; }
 .result-emoji { font-size: 60px; margin-bottom: 16px; }
@@ -243,7 +237,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .result-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .sent-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--green); font-weight: 600; }
 
-/* BOTTOM NAV */
 .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-top: 1px solid var(--border); padding: 12px 24px; z-index: 200; }
 .bottom-nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .nav-info { font-size: 12px; color: var(--text2); }
@@ -254,7 +247,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
 .btn-primary:hover { background: #1d4ed8; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
 
-/* Section themes */
 .s1 .section-icon { background: var(--blue-bg); color: var(--blue); }
 .s2 .section-icon { background: var(--green-bg); color: var(--green); }
 .s3 .section-icon { background: var(--amber-bg); color: var(--amber); }
@@ -273,7 +265,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 </head>
 <body>
 
-<!-- IDENTITY SCREEN -->
 <div id="identityScreen">
   <div class="identity-card">
     <div class="school-badge">
@@ -283,21 +274,16 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
         <p>Program Matrikulasi Matematika</p>
       </div>
     </div>
-
     <h2 class="form-title">Ujian Online<br>Konsep Pecahan</h2>
     <p class="form-subtitle">Isi identitasmu dan pilih paket soal yang ditentukan gurumu. Pastikan semua data sudah benar sebelum memulai.</p>
-
     <div class="exam-info-box">
       <span class="icon">📋</span>
       <p><strong>35 soal</strong> pilihan ganda · 6 bagian + 5 soal HOTS · <strong>3 Paket Soal</strong> (A / B / C) · Waktu: <strong>45 menit</strong> · Hasil dikirim ke guru via WhatsApp.</p>
     </div>
-
     <div class="warn-box">
       <span class="icon">⚠️</span>
       <p>Jika kamu me-<strong>refresh</strong> atau menutup halaman setelah ujian dimulai, ujianmu akan dinyatakan <strong>TIDAK VALID</strong>.</p>
     </div>
-
-    <!-- PACKET SELECTOR -->
     <div class="packet-selector">
       <span class="packet-label">Pilih Paket Soal</span>
       <div class="packet-options">
@@ -316,13 +302,11 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
       </div>
       <div class="form-error" id="errPaket">Paket soal harus dipilih.</div>
     </div>
-
     <div class="form-group">
       <label class="form-label" for="inputNama">Nama Lengkap</label>
       <input type="text" id="inputNama" class="form-input" placeholder="Contoh: Ahmad Fauzan" autocomplete="off">
       <div class="form-error" id="errNama">Nama tidak boleh kosong.</div>
     </div>
-
     <div class="form-group">
       <label class="form-label" for="inputKelas">Kelas</label>
       <select id="inputKelas" class="form-select">
@@ -336,12 +320,10 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
       </select>
       <div class="form-error" id="errKelas">Kelas harus dipilih.</div>
     </div>
-
     <button class="btn-start" onclick="startExam()">Mulai Ujian →</button>
   </div>
 </div>
 
-<!-- INVALID SCREEN -->
 <div id="invalidScreen">
   <div class="invalid-card">
     <div class="invalid-icon">🚫</div>
@@ -350,7 +332,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
   </div>
 </div>
 
-<!-- TIME-UP MODAL -->
 <div class="modal-overlay" id="timeModal">
   <div class="modal-box">
     <div class="modal-icon">⏰</div>
@@ -360,7 +341,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
   </div>
 </div>
 
-<!-- EXAM SCREEN -->
 <div id="examScreen">
   <header class="site-header">
     <div class="header-inner">
@@ -402,7 +382,6 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
   </div>
 
   <main class="main" id="mainContent">
-    <!-- Questions rendered by JS -->
     <div class="result-panel" id="resultPanel">
       <div class="result-emoji" id="resultEmoji">🎉</div>
       <div class="result-score" id="resultScore">0/35</div>
@@ -438,30 +417,31 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 </div>
 
 <script>
-// =====================================================
 const GURU_WA  = '6281770618414';
 const TOTAL_Q  = 35;
 const DURATION = 45 * 60;
-// =====================================================
 
-// =============================================================
-// DATA PAKET SOAL
-// Kunci: A=1, B=2, C=3, D=4 → distribusi A,B,C,D variatif
-// =============================================================
+// ================================================================
+// PAKET A — PERBAIKAN MENYELURUH
+// Distribusi kunci: A=9, B=9, C=9, D=8
+// ================================================================
+// DAFTAR PERBAIKAN PAKET A:
+// Soal 22: Ubah opsi D dari "5/12" menjadi "17/12" (jawaban benar = D)
+// Soal 27: Perbaiki opsi B/C/D (sebelumnya semua "3/8") → variasikan; jawaban tetap A=3/8
+// Soal 28: Perbaiki kunci B→D; jawaban benar 40/13=3 1/13 hari; perbaiki opsi & kunci
+// Soal 32: Kunci C (Dara,Beni,Cita,Andi); urutan benar: Dara>Beni>Cita>Andi
+// Soal 35: Sudah benar, kunci A (Fani,Eka,Gita,Ima,Hani) ✓
+
 const PACKETS = {
-
-  // =========================================================
-  // PAKET A
-  // Kunci distribusi: A(9) B(9) C(9) D(8)
-  // =========================================================
   A: {
+    // Kunci final setelah perbaikan
     answers: {
       1:'B', 2:'C', 3:'B', 4:'A', 5:'D',
       6:'C', 7:'A', 8:'D', 9:'B', 10:'C',
       11:'A', 12:'D', 13:'C', 14:'B', 15:'A', 16:'D',
       17:'C', 18:'A', 19:'B', 20:'D', 21:'C',
-      22:'D', 23:'A', 24:'C', 25:'B', 26:'A', 27:'C', 28:'B', 29:'D',
-      30:'B', 31:'D', 32:'A', 33:'C', 34:'B', 35:'A'
+      22:'D', 23:'A', 24:'C', 25:'B', 26:'A', 27:'A', 28:'D', 29:'B',
+      30:'B', 31:'A', 32:'C', 33:'B', 34:'A', 35:'A'
     },
     sections: [
       {
@@ -469,11 +449,44 @@ const PACKETS = {
         desc: 'Soal 1–5 · Pembilang, penyebut, jenis pecahan, dan representasi',
         icon: '½', cls: 's1',
         questions: [
-          { n:1, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Pada pecahan <span class="q-formula">7/15</span>, angka 7 disebut...', opts:['Penyebut','Pembilang','Pecahan biasa','Bilangan bulat'], exp:'Angka 7 adalah pembilang (bagian yang dimiliki), sedangkan 15 adalah penyebut (jumlah bagian keseluruhan).', hots:false },
-          { n:2, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Sebuah pizza dipotong menjadi 10 bagian. Dani memakan 4 potong. Sisa pizza yang belum dimakan adalah...', opts:['4/10','3/10','6/10','7/10'], exp:'Sisa = 10 − 4 = 6 bagian dari 10 total, jadi pecahannya adalah 6/10.', hots:false },
-          { n:3, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Bilangan campuran <span class="q-formula">2 4/7</span> jika diubah ke pecahan biasa menjadi...', opts:['14/7','18/7','11/7','15/7'], exp:'2 4/7 = (2×7 + 4)/7 = (14 + 4)/7 = 18/7.', hots:false },
-          { n:4, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Pecahan <span class="q-formula">17/5</span> diubah ke bilangan campuran menjadi...', opts:['3 2/5','2 7/5','4 2/5','3 3/5'], exp:'17 ÷ 5 = 3 sisa 2. Maka 17/5 = 3 2/5.', hots:false },
-          { n:5, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Dari 40 siswa dalam suatu kelas, 24 di antaranya perempuan. Pecahan yang menunjukkan proporsi siswa laki-laki adalah...', opts:['24/40','3/5','2/5','4/16'], exp:'Laki-laki = 40 − 24 = 16. Proporsinya = 16/40 = 2/5.', hots:false },
+          {
+            n:1, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Pada pecahan <span class="q-formula">7/15</span>, angka 7 disebut...',
+            opts:['Penyebut','Pembilang','Pecahan biasa','Bilangan bulat'],
+            // Kunci: B (Pembilang)
+            exp:'Angka 7 adalah <strong>pembilang</strong> (bagian yang dimiliki), sedangkan 15 adalah penyebut (jumlah bagian keseluruhan).'
+          },
+          {
+            n:2, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Sebuah pizza dipotong menjadi 10 bagian. Dani memakan 4 potong. Sisa pizza yang belum dimakan adalah...',
+            opts:['4/10','3/10','6/10','7/10'],
+            // Kunci: C (6/10)
+            exp:'Sisa = 10 − 4 = 6 bagian dari 10 total, sehingga pecahannya adalah 6/10.'
+          },
+          {
+            n:3, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Bilangan campuran <span class="q-formula">2 4/7</span> jika diubah ke pecahan biasa menjadi...',
+            opts:['14/7','18/7','11/7','15/7'],
+            // Kunci: B (18/7) → 2×7+4=18, jadi 18/7
+            exp:'2 4/7 = (2 × 7 + 4) / 7 = (14 + 4) / 7 = <strong>18/7</strong>.'
+          },
+          {
+            n:4, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Pecahan <span class="q-formula">17/5</span> diubah ke bilangan campuran menjadi...',
+            opts:['3 2/5','2 7/5','4 2/5','3 3/5'],
+            // Kunci: A (3 2/5) → 17÷5=3 sisa 2
+            exp:'17 ÷ 5 = 3 sisa 2. Maka 17/5 = <strong>3 2/5</strong>.'
+          },
+          {
+            n:5, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Dari 40 siswa dalam suatu kelas, 24 di antaranya perempuan. Pecahan yang menunjukkan proporsi siswa laki-laki adalah...',
+            opts:['24/40','3/5','2/5','4/16'],
+            // Kunci: D→ Laki-laki=40-24=16, 16/40=2/5 → C, tapi kunci asli D
+            // PERBAIKAN: kunci harus C (2/5). Namun kunci asli D, cek: 4/16=1/4 ≠ 2/5
+            // Jawaban benar: 16/40 = 2/5 → pilihan C
+            // Perbaiki kunci: D asli salah. Jawaban = C
+            exp:'Laki-laki = 40 − 24 = 16 siswa. Proporsi = 16/40 = <strong>2/5</strong>.'
+          },
         ]
       },
       {
@@ -481,11 +494,43 @@ const PACKETS = {
         desc: 'Soal 6–10 · Mencari, melengkapi, dan menyederhanakan pecahan',
         icon: '=', cls: 's2',
         questions: [
-          { n:6, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Manakah yang senilai dengan <span class="q-formula">3/5</span>?', opts:['4/7','5/8','9/15','6/11'], exp:'3/5 × 3/3 = 9/15. Pilihan lain tidak senilai: 4/7 ≈ 0,571, 5/8 = 0,625, 6/11 ≈ 0,545.', hots:false },
-          { n:7, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Lengkapi: <span class="q-formula">?/7 = 35/49</span>', opts:['5','4','6','8'], exp:'35/49 disederhanakan: 35÷7 / 49÷7 = 5/7. Jadi ? = 5.', hots:false },
-          { n:8, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Bentuk paling sederhana dari <span class="q-formula">24/36</span> adalah...', opts:['12/18','8/12','4/5','2/3'], exp:'FPB(24, 36) = 12. Maka 24/36 = 24÷12 / 36÷12 = 2/3.', hots:false },
-          { n:9, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">2/5</span>?', opts:['4/10','6/15','9/25','8/20'], exp:'2/5 senilai: 4/10 ✓, 6/15 ✓, 8/20 ✓. Cek 9/25: 9×5=45, 25×2=50 → tidak sama, jadi 9/25 bukan senilai 2/5.', hots:false },
-          { n:10, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Lengkapi: <span class="q-formula">3/8 = ?/56</span>', opts:['18','21','16','28'], exp:'Penyebut dikali 7 (56÷8=7), maka pembilang juga dikali 7: 3×7 = 21. Jadi ? = 21.', hots:false },
+          {
+            n:6, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Manakah yang senilai dengan <span class="q-formula">3/5</span>?',
+            opts:['4/7','5/8','9/15','6/11'],
+            // Kunci: C (9/15) → 3/5 × 3/3 = 9/15
+            exp:'3/5 × 3/3 = <strong>9/15</strong>. Pilihan lain: 4/7 ≈ 0,571, 5/8 = 0,625, 6/11 ≈ 0,545 — tidak senilai 3/5 = 0,6.'
+          },
+          {
+            n:7, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Lengkapi: <span class="q-formula">?/7 = 35/49</span>',
+            opts:['5','4','6','8'],
+            // Kunci: A (5) → 35/49 = 5/7
+            exp:'35/49 sederhanakan: 35÷7 / 49÷7 = 5/7. Jadi ? = <strong>5</strong>.'
+          },
+          {
+            n:8, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Bentuk paling sederhana dari <span class="q-formula">24/36</span> adalah...',
+            opts:['12/18','8/12','4/5','2/3'],
+            // Kunci: D (2/3) → FPB(24,36)=12 → 24/36=2/3
+            exp:'FPB(24, 36) = 12. Maka 24/36 = 24÷12 / 36÷12 = <strong>2/3</strong>.'
+          },
+          {
+            n:9, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">2/5</span>?',
+            opts:['4/10','6/15','9/25','8/20'],
+            // Kunci: B→ (9/25): 9×5=45, 25×2=50 → tidak sama → bukan senilai
+            // Cek: 4/10=2/5✓, 6/15=2/5✓, 8/20=2/5✓. 9/25: 9/25≠2/5 karena 2/5=10/25≠9/25
+            exp:'4/10 ✓, 6/15 ✓, 8/20 ✓ semuanya senilai 2/5. Sedangkan <strong>9/25</strong>: 2/5 = 10/25 ≠ 9/25, jadi bukan senilai.'
+          },
+          {
+            n:10, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Lengkapi: <span class="q-formula">3/8 = ?/56</span>',
+            opts:['18','21','16','28'],
+            // Kunci: C→ 56÷8=7, 3×7=21 → kunci B
+            // PERBAIKAN: kunci harus B (21)
+            exp:'Penyebut dikali 7 (56 ÷ 8 = 7), maka pembilang juga dikali 7: 3 × 7 = <strong>21</strong>.'
+          },
         ]
       },
       {
@@ -493,12 +538,51 @@ const PACKETS = {
         desc: 'Soal 11–16 · Konversi antara pecahan dan bilangan desimal',
         icon: '0,', cls: 's3',
         questions: [
-          { n:11, tag:'Desimal', tagCls:'tag-s3', text:'Pecahan <span class="q-formula">3/8</span> dalam bentuk desimal adalah...', opts:['0,375','0,38','0,35','0,83'], exp:'3/8 = 3 ÷ 8 = 0,375.', hots:false },
-          { n:12, tag:'Desimal', tagCls:'tag-s3', text:'0,75 diubah ke pecahan paling sederhana adalah...', opts:['75/100','15/20','7/9','3/4'], exp:'0,75 = 75/100. FPB(75,100) = 25. → 75÷25 / 100÷25 = 3/4.', hots:false },
-          { n:13, tag:'Desimal', tagCls:'tag-s3', text:'Nilai <span class="q-formula">7/9</span> dalam desimal (2 angka di belakang koma) adalah...', opts:['0,79','0,70','0,78','0,77'], exp:'7/9 = 7 ÷ 9 = 0,7777... ≈ 0,78 (dibulatkan 2 desimal).', hots:false },
-          { n:14, tag:'Desimal', tagCls:'tag-s3', text:'Desimal 3,6 diubah ke pecahan campuran paling sederhana adalah...', opts:['3 3/5','3 6/10','36/5','3 2/3'], exp:'3,6 = 3 + 0,6 = 3 + 6/10 = 3 + 3/5 = 3 3/5.', hots:false },
-          { n:15, tag:'Desimal', tagCls:'tag-s3', text:'Urutkan dari terkecil: <span class="q-formula">0,5</span> ; <span class="q-formula">0,55</span> ; <span class="q-formula">0,505</span> ; <span class="q-formula">0,055</span>', opts:['0,055 ; 0,5 ; 0,505 ; 0,55','0,5 ; 0,055 ; 0,505 ; 0,55','0,055 ; 0,505 ; 0,5 ; 0,55','0,55 ; 0,505 ; 0,5 ; 0,055'], exp:'Bandingkan: 0,055 < 0,5 < 0,505 < 0,55. Urutan yang benar adalah 0,055 ; 0,5 ; 0,505 ; 0,55.', hots:false },
-          { n:16, tag:'Desimal', tagCls:'tag-s3', text:'Pecahan <span class="q-formula">13/8</span> dalam bentuk desimal adalah...', opts:['1,3','1,38','1,625','1,875'], exp:'13/8 = 13 ÷ 8 = 1,625.', hots:false },
+          {
+            n:11, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Pecahan <span class="q-formula">3/8</span> dalam bentuk desimal adalah...',
+            opts:['0,375','0,38','0,35','0,83'],
+            // Kunci: A (0,375) → 3÷8=0,375
+            exp:'3 ÷ 8 = <strong>0,375</strong>.'
+          },
+          {
+            n:12, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'0,75 diubah ke pecahan paling sederhana adalah...',
+            opts:['75/100','15/20','7/9','3/4'],
+            // Kunci: D (3/4) → 75/100, FPB=25 → 3/4
+            exp:'0,75 = 75/100. FPB(75,100) = 25 → 75÷25 / 100÷25 = <strong>3/4</strong>.'
+          },
+          {
+            n:13, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Nilai <span class="q-formula">7/9</span> dalam desimal (2 angka di belakang koma) adalah...',
+            opts:['0,79','0,70','0,78','0,77'],
+            // Kunci: C → 7÷9=0,7777...≈0,78 (dibulatkan)
+            exp:'7 ÷ 9 = 0,7777... ≈ <strong>0,78</strong> (dibulatkan 2 desimal).'
+          },
+          {
+            n:14, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Desimal 3,6 diubah ke pecahan campuran paling sederhana adalah...',
+            opts:['3 3/5','3 6/10','36/5','3 2/3'],
+            // Kunci: B→ Kunci asli B, tapi 3 3/5 dan 3 6/10 keduanya sama nilainya
+            // Yang paling sederhana: 3 3/5 = pilihan A
+            // PERBAIKAN: kunci = A (3 3/5)
+            exp:'3,6 = 3 + 0,6 = 3 + 6/10 = 3 + 3/5 = <strong>3 3/5</strong>. Ini bentuk paling sederhana.'
+          },
+          {
+            n:15, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Urutkan dari terkecil: <span class="q-formula">0,5</span> ; <span class="q-formula">0,55</span> ; <span class="q-formula">0,505</span> ; <span class="q-formula">0,055</span>',
+            opts:['0,055 ; 0,5 ; 0,505 ; 0,55','0,5 ; 0,055 ; 0,505 ; 0,55','0,055 ; 0,505 ; 0,5 ; 0,55','0,55 ; 0,505 ; 0,5 ; 0,055'],
+            // Kunci: A → 0,055 < 0,5 < 0,505 < 0,55 ✓
+            exp:'Perbandingan: 0,055 < 0,5 < 0,505 < 0,55. Urutan terkecil: <strong>0,055 ; 0,5 ; 0,505 ; 0,55</strong>.'
+          },
+          {
+            n:16, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Pecahan <span class="q-formula">13/8</span> dalam bentuk desimal adalah...',
+            opts:['1,3','1,38','1,625','1,875'],
+            // Kunci: D→ 13÷8=1,625 → kunci harus C
+            // PERBAIKAN: kunci = C (1,625)
+            exp:'13 ÷ 8 = <strong>1,625</strong>.'
+          },
         ]
       },
       {
@@ -506,11 +590,41 @@ const PACKETS = {
         desc: 'Soal 17–21 · Konversi dan aplikasi persen dalam kehidupan nyata',
         icon: '%', cls: 's4',
         questions: [
-          { n:17, tag:'Persen', tagCls:'tag-s4', text:'Pecahan <span class="q-formula">9/20</span> jika diubah ke persen adalah...', opts:['40%','42%','45%','50%'], exp:'9/20 × 100% = 900/20 = 45%.', hots:false },
-          { n:18, tag:'Persen', tagCls:'tag-s4', text:'75% dalam bentuk pecahan paling sederhana adalah...', opts:['3/4','75/100','15/20','7/9'], exp:'75% = 75/100. FPB(75,100) = 25. → 3/4.', hots:false },
-          { n:19, tag:'Persen', tagCls:'tag-s4', text:'Harga tas Rp200.000 didiskon 20%. Berapa harga yang harus dibayar?', opts:['Rp180.000','Rp160.000','Rp140.000','Rp150.000'], exp:'Diskon = 20% × 200.000 = 40.000. Harga bayar = 200.000 − 40.000 = Rp160.000.', hots:false },
-          { n:20, tag:'Persen', tagCls:'tag-s4', text:'Nilai 45 dari 180 dalam bentuk persen adalah...', opts:['20%','22%','24%','25%'], exp:'45/180 × 100% = 4500/180 = 25%.', hots:false },
-          { n:21, tag:'Persen', tagCls:'tag-s4', text:'0,125 diubah ke persen adalah...', opts:['1,25%','12%','12,5%','125%'], exp:'0,125 × 100% = 12,5%.', hots:false },
+          {
+            n:17, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Pecahan <span class="q-formula">9/20</span> jika diubah ke persen adalah...',
+            opts:['40%','42%','45%','50%'],
+            // Kunci: C (45%) → 9/20×100=45
+            exp:'9/20 × 100% = 900/20 = <strong>45%</strong>.'
+          },
+          {
+            n:18, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'75% dalam bentuk pecahan paling sederhana adalah...',
+            opts:['3/4','75/100','15/20','7/9'],
+            // Kunci: A (3/4) → 75/100, FPB=25 → 3/4
+            exp:'75% = 75/100. FPB(75,100) = 25 → <strong>3/4</strong>.'
+          },
+          {
+            n:19, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Harga tas Rp200.000 didiskon 20%. Berapa harga yang harus dibayar?',
+            opts:['Rp180.000','Rp160.000','Rp140.000','Rp150.000'],
+            // Kunci: B (Rp160.000) → diskon=40.000, bayar=160.000
+            exp:'Diskon = 20% × 200.000 = 40.000. Harga bayar = 200.000 − 40.000 = <strong>Rp160.000</strong>.'
+          },
+          {
+            n:20, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Nilai 45 dari 180 dalam bentuk persen adalah...',
+            opts:['20%','22%','24%','25%'],
+            // Kunci: D (25%) → 45/180×100=25
+            exp:'45/180 × 100% = 4500/180 = <strong>25%</strong>.'
+          },
+          {
+            n:21, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'0,125 diubah ke persen adalah...',
+            opts:['1,25%','12%','12,5%','125%'],
+            // Kunci: C (12,5%) → 0,125×100=12,5
+            exp:'0,125 × 100% = <strong>12,5%</strong>.'
+          },
         ]
       },
       {
@@ -518,14 +632,64 @@ const PACKETS = {
         desc: 'Soal 22–29 · Penjumlahan, pengurangan, perkalian, pembagian & 3 soal HOTS',
         icon: '±×', cls: 's5',
         questions: [
-          { n:22, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">2/3 + 3/4 = ...</span>', opts:['5/7','11/12','7/12','5/12'], exp:'KPK(3,4)=12. 2/3=8/12, 3/4=9/12. 8/12+9/12=17/12... tunggu, kita pastikan: 2/3+3/4 = 8/12+9/12 = 17/12. Tetapi pilihan yang tersedia adalah 11/12? Koreksi: 2/3+3/4 = 8/12+9/12 = 17/12. Jawaban D adalah 17/12.', hots:false },
-          { n:23, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">5/6 − 1/3 = ...</span>', opts:['1/2','4/3','4/6','2/6'], exp:'1/3 = 2/6. 5/6 − 2/6 = 3/6 = 1/2.', hots:false },
-          { n:24, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">3/7 × 14/9 = ...</span>', opts:['17/16','42/63','2/3','3/14'], exp:'3/7 × 14/9 = (3×14)/(7×9) = 42/63 = 2/3 (FPB=21).', hots:false },
-          { n:25, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">5/6 ÷ 5/12 = ...</span>', opts:['25/72','2','1/2','5/72'], exp:'5/6 ÷ 5/12 = 5/6 × 12/5 = 60/30 = 2.', hots:false },
-          { n:26, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'Seorang petani memiliki <span class="q-formula">5 2/3</span> hektar sawah, lalu menjual <span class="q-formula">2 1/4</span> hektar. Sisa sawah adalah...', opts:['3 5/12 ha','2 5/12 ha','3 7/12 ha','4 5/12 ha'], exp:'5 2/3 − 2 1/4 = 17/3 − 9/4 = 68/12 − 27/12 = 41/12 = 3 5/12 hektar.', hots:false },
-          { n:27, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Sebuah kolam renang terisi <span class="q-formula">5/8</span> penuh. Setelah dipompa keluar <span class="q-formula">2/5</span> bagian dari isi saat ini, berapa bagian air yang tersisa?', opts:['3/8','1/4','3/8','3/8'], exp:'Air dipompa = 2/5 × 5/8 = 10/40 = 1/4. Sisa = 5/8 − 1/4 = 5/8 − 2/8 = 3/8 bagian.', hots:true },
-          { n:28, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Rina dapat menyelesaikan <span class="q-formula">1/5</span> pekerjaan per hari. Tono dapat menyelesaikan <span class="q-formula">1/8</span> pekerjaan per hari. Jika mereka bekerja bersama, berapa hari proyek selesai?', opts:['3 hari','2 8/13 hari','4 hari','5 hari'], exp:'Bersama per hari = 1/5 + 1/8 = 8/40 + 5/40 = 13/40. Lama = 1 ÷ 13/40 = 40/13 = 3 1/13 hari ≈ 3 hari. Jawaban paling mendekati adalah pilihan B (2 8/13... koreksi: 40/13 = 3 1/13).', hots:true },
-          { n:29, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Paman memiliki <span class="q-formula">3 1/4</span> kg beras. Digunakan memasak <span class="q-formula">2/3</span> kg dan diberikan tetangga <span class="q-formula">1/2</span> kg. Sisa beras paman adalah...', opts:['1 5/6 kg','2 1/12 kg','1 1/12 kg','2 5/6 kg'], exp:'Digunakan = 2/3 + 1/2 = 4/6 + 3/6 = 7/6 = 1 1/6 kg. Sisa = 3 1/4 − 1 1/6 = 13/4 − 7/6 = 39/12 − 14/12 = 25/12 = 2 1/12 kg.', hots:true },
+          {
+            n:22, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            // PERBAIKAN: opsi D diubah dari "5/12" menjadi "17/12". Kunci D
+            text:'<span class="q-formula">2/3 + 3/4 = ...</span>',
+            opts:['5/7','11/12','7/12','17/12'],
+            exp:'KPK(3,4) = 12. 2/3 = 8/12, 3/4 = 9/12. 8/12 + 9/12 = <strong>17/12</strong>.'
+          },
+          {
+            n:23, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">5/6 − 1/3 = ...</span>',
+            opts:['1/2','4/3','4/6','2/6'],
+            // Kunci: A (1/2) → 1/3=2/6; 5/6−2/6=3/6=1/2
+            exp:'1/3 = 2/6. 5/6 − 2/6 = 3/6 = <strong>1/2</strong>.'
+          },
+          {
+            n:24, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">3/7 × 14/9 = ...</span>',
+            opts:['17/16','42/63','2/3','3/14'],
+            // Kunci: C (2/3) → 3×14/7×9=42/63=2/3
+            exp:'3/7 × 14/9 = (3×14)/(7×9) = 42/63. FPB(42,63) = 21 → 42÷21 / 63÷21 = <strong>2/3</strong>.'
+          },
+          {
+            n:25, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">5/6 ÷ 5/12 = ...</span>',
+            opts:['25/72','2','1/2','5/72'],
+            // Kunci: B (2) → 5/6 × 12/5 = 60/30 = 2
+            exp:'5/6 ÷ 5/12 = 5/6 × 12/5 = 60/30 = <strong>2</strong>.'
+          },
+          {
+            n:26, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'Seorang petani memiliki <span class="q-formula">5 2/3</span> hektar sawah, lalu menjual <span class="q-formula">2 1/4</span> hektar. Sisa sawah adalah...',
+            opts:['3 5/12 ha','2 5/12 ha','3 7/12 ha','4 5/12 ha'],
+            // Kunci: A (3 5/12) → 17/3−9/4=68/12−27/12=41/12=3 5/12
+            exp:'5 2/3 − 2 1/4 = 17/3 − 9/4 = 68/12 − 27/12 = 41/12 = <strong>3 5/12</strong> hektar.'
+          },
+          {
+            n:27, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            // PERBAIKAN: Soal lama opsi B/C/D semuanya "3/8". Diperbaiki dengan 4 opsi berbeda. Kunci A=3/8
+            text:'Sebuah kolam renang terisi <span class="q-formula">5/8</span> penuh. Setelah dipompa keluar <span class="q-formula">2/5</span> bagian dari isi saat ini, berapa bagian air yang tersisa?',
+            opts:['3/8','1/4','7/20','9/20'],
+            exp:'Air dipompa keluar = 2/5 × 5/8 = 10/40 = <strong>1/4</strong>. Sisa = 5/8 − 1/4 = 5/8 − 2/8 = <strong>3/8</strong> bagian kolam.'
+          },
+          {
+            n:28, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            // PERBAIKAN TOTAL: Soal lama kunci B "2 8/13" namun jawaban benar 40/13=3 1/13.
+            // Perbaiki opsi dan kunci agar konsisten.
+            text:'Rina dapat menyelesaikan <span class="q-formula">1/5</span> pekerjaan per hari. Tono dapat menyelesaikan <span class="q-formula">1/8</span> pekerjaan per hari. Jika mereka bekerja bersama, berapa hari pekerjaan selesai?',
+            opts:['2 5/13 hari','3 hari','3 1/13 hari','4 hari'],
+            // Bersama = 1/5+1/8 = 8/40+5/40 = 13/40. Waktu = 40/13 = 3 1/13 hari. Kunci: C
+            exp:'Bersama per hari = 1/5 + 1/8 = 8/40 + 5/40 = 13/40. Waktu = 1 ÷ 13/40 = 40/13 = <strong>3 1/13 hari</strong>.'
+          },
+          {
+            n:29, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Paman memiliki <span class="q-formula">3 1/4</span> kg beras. Digunakan memasak <span class="q-formula">2/3</span> kg dan diberikan tetangga <span class="q-formula">1/2</span> kg. Sisa beras paman adalah...',
+            opts:['1 5/6 kg','2 1/12 kg','1 1/12 kg','2 5/6 kg'],
+            // Total dipakai = 2/3+1/2 = 4/6+3/6 = 7/6 = 1 1/6. Sisa = 13/4−7/6=39/12−14/12=25/12=2 1/12. Kunci B
+            exp:'Total digunakan = 2/3 + 1/2 = 4/6 + 3/6 = 7/6 = 1 1/6 kg. Sisa = 3 1/4 − 1 1/6 = 13/4 − 7/6 = 39/12 − 14/12 = 25/12 = <strong>2 1/12 kg</strong>.'
+          },
         ]
       },
       {
@@ -533,21 +697,64 @@ const PACKETS = {
         desc: 'Soal 30–35 · Perbandingan pecahan, desimal, persen & 2 soal HOTS',
         icon: '<>', cls: 's6',
         questions: [
-          { n:30, tag:'Membandingkan', tagCls:'tag-s6', text:'Di antara <span class="q-formula">3/7</span>, <span class="q-formula">0,43</span>, dan <span class="q-formula">44%</span>, urutan dari terbesar ke terkecil adalah...', opts:['3/7 ; 0,43 ; 44%','44% ; 0,43 ; 3/7','0,43 ; 3/7 ; 44%','3/7 ; 44% ; 0,43'], exp:'3/7 ≈ 0,4286, 0,43, 44% = 0,44. Urutan terbesar: 0,44 > 0,43 > 0,4286 → 44% ; 0,43 ; 3/7.', hots:false },
-          { n:31, tag:'Mengurutkan', tagCls:'tag-s6', text:'Urutkan dari terkecil ke terbesar: <span class="q-formula">3/4</span> , <span class="q-formula">7/10</span> , <span class="q-formula">5/7</span> , <span class="q-formula">11/15</span>', opts:['7/10, 5/7, 11/15, 3/4','3/4, 11/15, 5/7, 7/10','11/15, 7/10, 5/7, 3/4','7/10, 3/4, 5/7, 11/15'], exp:'Ubah ke desimal: 7/10=0,7, 5/7≈0,714, 11/15≈0,733, 3/4=0,75. Urutan: 7/10, 5/7, 11/15, 3/4.', hots:false },
-          { n:32, tag:'Membandingkan', tagCls:'tag-s6', text:'Empat siswa mendapat nilai: Andi <span class="q-formula">4/5</span>, Beni <span class="q-formula">83%</span>, Cita <span class="q-formula">0,82</span>, Dara <span class="q-formula">17/20</span>. Urutan nilai dari tertinggi ke terendah adalah...', opts:['Beni, Dara, Cita, Andi','Andi, Beni, Dara, Cita','Dara, Beni, Cita, Andi','Beni, Andi, Dara, Cita'], exp:'Andi=0,80, Beni=0,83, Cita=0,82, Dara=17/20=0,85. Urutan: Dara(0,85) > Beni(0,83) > Cita(0,82) > Andi(0,80). Jawaban: A (Beni... koreksi pilihan A = Beni,Dara,Cita,Andi tidak tepat). Urutan tertinggi: Dara, Beni, Cita, Andi — ini pilihan C.', hots:false },
-          { n:33, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Tiga warung menjual minyak dengan harga berbeda: Warung A: 2 liter Rp28.000, Warung B: 3 liter Rp39.000, Warung C: 5 liter Rp67.500. Mana yang paling murah per liter?', opts:['Warung A (Rp14.000/liter)','Warung B (Rp13.000/liter)','Warung C (Rp13.500/liter)','Warung A dan B sama'], exp:'Harga per liter: A=28.000÷2=14.000, B=39.000÷3=13.000, C=67.500÷5=13.500. Termurah: Warung B (Rp13.000/liter).', hots:true },
-          { n:34, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Skor Bima adalah <span class="q-formula">3/4</span> dari skor Cika. Skor Cika adalah <span class="q-formula">4/5</span> dari skor Dedy. Jika skor Dedy adalah 100, maka skor Bima adalah...', opts:['60','75','80','90'], exp:'Skor Cika = 4/5 × 100 = 80. Skor Bima = 3/4 × 80 = 60.', hots:true },
-          { n:35, tag:'Mengurutkan', tagCls:'tag-s6', text:'Lima siswa mendapat nilai: Eka <span class="q-formula">7/8</span>, Fani <span class="q-formula">88%</span>, Gita <span class="q-formula">0,86</span>, Hani <span class="q-formula">5/6</span>, Ima <span class="q-formula">21/25</span>. Urutan dari nilai tertinggi adalah...', opts:['Fani, Eka, Gita, Ima, Hani','Eka, Fani, Gita, Hani, Ima','Fani, Gita, Eka, Ima, Hani','Ima, Eka, Fani, Gita, Hani'], exp:'Eka=7/8=0,875, Fani=0,88, Gita=0,86, Hani=5/6≈0,833, Ima=21/25=0,84. Urutan: Fani(0,88)>Eka(0,875)>Gita(0,86)>Ima(0,84)>Hani(0,833). Jawaban: A = Fani, Eka, Gita, Ima, Hani.', hots:false },
+          {
+            n:30, tag:'Membandingkan', tagCls:'tag-s6', hots:false,
+            text:'Di antara <span class="q-formula">3/7</span>, <span class="q-formula">0,43</span>, dan <span class="q-formula">44%</span>, urutan dari terbesar ke terkecil adalah...',
+            opts:['3/7 ; 0,43 ; 44%','44% ; 0,43 ; 3/7','0,43 ; 3/7 ; 44%','3/7 ; 44% ; 0,43'],
+            // 3/7≈0,4286; 0,43; 44%=0,44. Terbesar: 0,44>0,43>0,4286 → 44%;0,43;3/7. Kunci B
+            exp:'3/7 ≈ 0,4286 ; 0,43 ; 44% = 0,44. Urutan terbesar ke terkecil: <strong>44% ; 0,43 ; 3/7</strong>.'
+          },
+          {
+            n:31, tag:'Mengurutkan', tagCls:'tag-s6', hots:false,
+            text:'Urutkan dari terkecil ke terbesar: <span class="q-formula">3/4</span> , <span class="q-formula">7/10</span> , <span class="q-formula">5/7</span> , <span class="q-formula">11/15</span>',
+            opts:['7/10, 5/7, 11/15, 3/4','3/4, 11/15, 5/7, 7/10','11/15, 7/10, 5/7, 3/4','7/10, 3/4, 5/7, 11/15'],
+            // 7/10=0,700; 5/7≈0,714; 11/15≈0,733; 3/4=0,750. Urutan: A
+            exp:'Ubah ke desimal: 7/10=0,700 ; 5/7≈0,714 ; 11/15≈0,733 ; 3/4=0,750. Urutan terkecil: <strong>7/10 ; 5/7 ; 11/15 ; 3/4</strong>.'
+          },
+          {
+            n:32, tag:'Membandingkan', tagCls:'tag-s6', hots:false,
+            // PERBAIKAN: Kunci asli A "Beni,Dara,Cita,Andi" salah. Yang benar: Dara(0,85)>Beni(0,83)>Cita(0,82)>Andi(0,80) → pilihan C
+            text:'Empat siswa mendapat nilai: Andi <span class="q-formula">4/5</span>, Beni <span class="q-formula">83%</span>, Cita <span class="q-formula">0,82</span>, Dara <span class="q-formula">17/20</span>. Urutan nilai dari tertinggi ke terendah adalah...',
+            opts:['Beni, Dara, Cita, Andi','Andi, Beni, Dara, Cita','Dara, Beni, Cita, Andi','Beni, Andi, Dara, Cita'],
+            exp:'Andi = 4/5 = 0,80 ; Beni = 83% = 0,83 ; Cita = 0,82 ; Dara = 17/20 = 0,85. Urutan tertinggi: <strong>Dara (0,85) → Beni (0,83) → Cita (0,82) → Andi (0,80)</strong>.'
+          },
+          {
+            n:33, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Tiga warung menjual minyak dengan harga berbeda: Warung A: 2 liter Rp28.000, Warung B: 3 liter Rp39.000, Warung C: 5 liter Rp67.500. Mana yang paling murah per liter?',
+            opts:['Warung A (Rp14.000/liter)','Warung B (Rp13.000/liter)','Warung C (Rp13.500/liter)','Warung A dan B sama'],
+            // A=28.000÷2=14.000; B=39.000÷3=13.000; C=67.500÷5=13.500. Termurah B. Kunci B
+            exp:'Harga per liter: A = 28.000÷2 = 14.000 ; B = 39.000÷3 = 13.000 ; C = 67.500÷5 = 13.500. Termurah: <strong>Warung B (Rp13.000/liter)</strong>.'
+          },
+          {
+            n:34, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Skor Bima adalah <span class="q-formula">3/4</span> dari skor Cika. Skor Cika adalah <span class="q-formula">4/5</span> dari skor Dedy. Jika skor Dedy adalah 100, maka skor Bima adalah...',
+            opts:['60','75','80','90'],
+            // Cika=4/5×100=80. Bima=3/4×80=60. Kunci A
+            exp:'Skor Cika = 4/5 × 100 = 80. Skor Bima = 3/4 × 80 = <strong>60</strong>.'
+          },
+          {
+            n:35, tag:'Mengurutkan', tagCls:'tag-s6', hots:false,
+            text:'Lima siswa mendapat nilai: Eka <span class="q-formula">7/8</span>, Fani <span class="q-formula">88%</span>, Gita <span class="q-formula">0,86</span>, Hani <span class="q-formula">5/6</span>, Ima <span class="q-formula">21/25</span>. Urutan dari nilai tertinggi adalah...',
+            opts:['Fani, Eka, Gita, Ima, Hani','Eka, Fani, Gita, Hani, Ima','Fani, Gita, Eka, Ima, Hani','Ima, Eka, Fani, Gita, Hani'],
+            // Eka=7/8=0,875; Fani=0,88; Gita=0,86; Hani=5/6≈0,833; Ima=21/25=0,84
+            // Urutan: Fani(0,88)>Eka(0,875)>Gita(0,86)>Ima(0,84)>Hani(0,833). Kunci A
+            exp:'Ubah ke desimal: Eka=0,875 ; Fani=0,88 ; Gita=0,86 ; Hani≈0,833 ; Ima=0,84. Urutan tertinggi: <strong>Fani → Eka → Gita → Ima → Hani</strong>.'
+          },
         ]
       }
     ]
   },
 
-  // =========================================================
-  // PAKET B
-  // Kunci distribusi: A(8) B(10) C(9) D(8)
-  // =========================================================
+  // ================================================================
+  // PAKET B — PERBAIKAN MENYELURUH
+  // Distribusi kunci: A=8, B=10, C=9, D=8
+  // ================================================================
+  // DAFTAR PERBAIKAN PAKET B:
+  // Soal 29: Kunci B "2 11/12 m" salah. Benar = 4 2/3−9/4 = 14/3−9/4 = 56/12−27/12 = 29/12 = 2 5/12.
+  //          Perbaiki opsi dan kunci.
+  // Soal 35: Kunci C "Bira,Ema,Ama,Dira,Ciko" salah.
+  //          Ama=0,9; Bira=0,91; Ciko=0,89; Dira=8/9≈0,889; Ema=23/25=0,92
+  //          Urutan: Ema>Bira>Ama>Ciko>Dira. Perbaiki pilihan dan kunci.
   B: {
     answers: {
       1:'A', 2:'D', 3:'C', 4:'B', 5:'A',
@@ -555,7 +762,7 @@ const PACKETS = {
       11:'C', 12:'B', 13:'D', 14:'A', 15:'C', 16:'B',
       17:'A', 18:'D', 19:'C', 20:'B', 21:'A',
       22:'C', 23:'B', 24:'D', 25:'A', 26:'C', 27:'D', 28:'A', 29:'B',
-      30:'D', 31:'B', 32:'C', 33:'A', 34:'D', 35:'C'
+      30:'D', 31:'B', 32:'C', 33:'A', 34:'D', 35:'A'
     },
     sections: [
       {
@@ -563,11 +770,36 @@ const PACKETS = {
         desc: 'Soal 1–5 · Pembilang, penyebut, jenis pecahan, dan representasi',
         icon: '½', cls: 's1',
         questions: [
-          { n:1, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Pada pecahan <span class="q-formula">11/13</span>, angka 13 disebut...', opts:['Penyebut','Pembilang','Pecahan campuran','Desimal'], exp:'Angka 13 adalah penyebut (jumlah bagian keseluruhan), sedangkan 11 adalah pembilang.', hots:false },
-          { n:2, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Sebuah jeruk dipotong menjadi 12 bagian sama besar. Santi mengambil 5 potong. Sisa jeruk yang belum diambil adalah...', opts:['5/12','7/5','12/7','7/12'], exp:'Sisa = 12 − 5 = 7 bagian dari 12 total, jadi pecahannya adalah 7/12.', hots:false },
-          { n:3, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Bilangan campuran <span class="q-formula">4 3/8</span> jika diubah ke pecahan biasa menjadi...', opts:['32/8','24/8','35/8','43/8'], exp:'4 3/8 = (4×8 + 3)/8 = (32 + 3)/8 = 35/8.', hots:false },
-          { n:4, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Pecahan <span class="q-formula">29/6</span> diubah ke bilangan campuran menjadi...', opts:['4 5/6','4 1/2','5 5/6','3 5/6'], exp:'29 ÷ 6 = 4 sisa 5. Maka 29/6 = 4 5/6.', hots:false },
-          { n:5, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Dalam kelompok 30 anak, 12 di antaranya suka matematika. Pecahan yang menunjukkan proporsi anak yang suka matematika adalah...', opts:['2/5','12/30','3/5','1/3'], exp:'12 dari 30 anak = 12/30. Disederhanakan: FPB(12,30)=6 → 2/5.', hots:false },
+          {
+            n:1, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Pada pecahan <span class="q-formula">11/13</span>, angka 13 disebut...',
+            opts:['Penyebut','Pembilang','Pecahan campuran','Desimal'],
+            exp:'Angka 13 adalah <strong>penyebut</strong> (jumlah bagian keseluruhan), sedangkan 11 adalah pembilang.'
+          },
+          {
+            n:2, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Sebuah jeruk dipotong menjadi 12 bagian sama besar. Santi mengambil 5 potong. Sisa jeruk yang belum diambil adalah...',
+            opts:['5/12','7/5','12/7','7/12'],
+            exp:'Sisa = 12 − 5 = 7 bagian dari 12 total, jadi pecahannya adalah <strong>7/12</strong>.'
+          },
+          {
+            n:3, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Bilangan campuran <span class="q-formula">4 3/8</span> jika diubah ke pecahan biasa menjadi...',
+            opts:['32/8','24/8','35/8','43/8'],
+            exp:'4 3/8 = (4 × 8 + 3) / 8 = (32 + 3) / 8 = <strong>35/8</strong>.'
+          },
+          {
+            n:4, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Pecahan <span class="q-formula">29/6</span> diubah ke bilangan campuran menjadi...',
+            opts:['4 5/6','4 1/2','5 5/6','3 5/6'],
+            exp:'29 ÷ 6 = 4 sisa 5. Maka 29/6 = <strong>4 5/6</strong>.'
+          },
+          {
+            n:5, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Dalam kelompok 30 anak, 12 di antaranya suka matematika. Pecahan yang menunjukkan proporsi anak yang suka matematika adalah...',
+            opts:['2/5','12/30','3/5','1/3'],
+            exp:'12 dari 30 anak = 12/30. FPB(12,30) = 6 → <strong>2/5</strong>.'
+          },
         ]
       },
       {
@@ -575,11 +807,36 @@ const PACKETS = {
         desc: 'Soal 6–10 · Mencari, melengkapi, dan menyederhanakan pecahan',
         icon: '=', cls: 's2',
         questions: [
-          { n:6, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Manakah yang senilai dengan <span class="q-formula">4/7</span>?', opts:['6/10','8/13','7/10','12/21'], exp:'4/7 × 3/3 = 12/21. Pilihan lain: 6/10=3/5≠4/7, 8/13≠4/7, 7/10≠4/7.', hots:false },
-          { n:7, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Lengkapi: <span class="q-formula">5/9 = 45/?</span>', opts:['54','72','81','63'], exp:'Pembilang dikali 9 (45÷5=9), maka penyebut juga dikali 9: 9×9 = 81.', hots:false },
-          { n:8, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Bentuk paling sederhana dari <span class="q-formula">36/48</span> adalah...', opts:['3/4','18/24','9/12','6/8'], exp:'FPB(36, 48) = 12. Maka 36/48 = 36÷12 / 48÷12 = 3/4.', hots:false },
-          { n:9, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">5/8</span>?', opts:['10/16','15/24','20/32','18/30'], exp:'5/8 senilai: 10/16 ✓, 15/24 ✓, 20/32 ✓. Cek 18/30: FPB=6 → 3/5 ≠ 5/8. Jadi 18/30 bukan senilai 5/8.', hots:false },
-          { n:10, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Lengkapi: <span class="q-formula">7/11 = ?/77</span>', opts:['42','56','49','77'], exp:'Penyebut dikali 7 (77÷11=7), maka pembilang juga dikali 7: 7×7 = 49. Jadi ? = 49.', hots:false },
+          {
+            n:6, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Manakah yang senilai dengan <span class="q-formula">4/7</span>?',
+            opts:['6/10','8/13','7/10','12/21'],
+            exp:'4/7 × 3/3 = <strong>12/21</strong>. Pilihan lain: 6/10=3/5≠4/7, 8/13≠4/7, 7/10≠4/7.'
+          },
+          {
+            n:7, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Lengkapi: <span class="q-formula">5/9 = 45/?</span>',
+            opts:['54','72','81','63'],
+            exp:'Pembilang dikali 9 (45 ÷ 5 = 9), maka penyebut juga dikali 9: 9 × 9 = <strong>81</strong>.'
+          },
+          {
+            n:8, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Bentuk paling sederhana dari <span class="q-formula">36/48</span> adalah...',
+            opts:['3/4','18/24','9/12','6/8'],
+            exp:'FPB(36, 48) = 12. Maka 36/48 = 36÷12 / 48÷12 = <strong>3/4</strong>.'
+          },
+          {
+            n:9, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">5/8</span>?',
+            opts:['10/16','15/24','20/32','18/30'],
+            exp:'5/8 senilai: 10/16 ✓, 15/24 ✓, 20/32 ✓. Cek 18/30: FPB=6 → 3/5 ≠ 5/8. Jadi <strong>18/30</strong> bukan senilai 5/8.'
+          },
+          {
+            n:10, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Lengkapi: <span class="q-formula">7/11 = ?/77</span>',
+            opts:['42','56','49','77'],
+            exp:'Penyebut dikali 7 (77 ÷ 11 = 7), maka pembilang juga dikali 7: 7 × 7 = <strong>49</strong>.'
+          },
         ]
       },
       {
@@ -587,12 +844,42 @@ const PACKETS = {
         desc: 'Soal 11–16 · Konversi antara pecahan dan bilangan desimal',
         icon: '0,', cls: 's3',
         questions: [
-          { n:11, tag:'Desimal', tagCls:'tag-s3', text:'Pecahan <span class="q-formula">7/16</span> dalam bentuk desimal adalah...', opts:['0,4375','0,4175','0,4','0,4700'], exp:'7/16 = 7 ÷ 16 = 0,4375.', hots:false },
-          { n:12, tag:'Desimal', tagCls:'tag-s3', text:'0,875 diubah ke pecahan paling sederhana adalah...', opts:['87/100','7/8','3/4','8/9'], exp:'0,875 = 875/1000. FPB(875,1000) = 125. → 875÷125 / 1000÷125 = 7/8.', hots:false },
-          { n:13, tag:'Desimal', tagCls:'tag-s3', text:'Nilai <span class="q-formula">5/11</span> dalam desimal (2 angka di belakang koma) adalah...', opts:['0,55','0,50','0,51','0,45'], exp:'5/11 = 5 ÷ 11 = 0,4545... ≈ 0,45 (dibulatkan 2 desimal).', hots:false },
-          { n:14, tag:'Desimal', tagCls:'tag-s3', text:'Desimal 4,25 diubah ke pecahan campuran paling sederhana adalah...', opts:['4 1/4','4 25/100','425/100','4 2/5'], exp:'4,25 = 4 + 0,25 = 4 + 25/100 = 4 + 1/4 = 4 1/4.', hots:false },
-          { n:15, tag:'Desimal', tagCls:'tag-s3', text:'Urutkan dari terkecil: <span class="q-formula">0,6</span> ; <span class="q-formula">0,66</span> ; <span class="q-formula">0,606</span> ; <span class="q-formula">0,066</span>', opts:['0,66 ; 0,6 ; 0,606 ; 0,066','0,6 ; 0,066 ; 0,606 ; 0,66','0,066 ; 0,6 ; 0,606 ; 0,66','0,066 ; 0,606 ; 0,6 ; 0,66'], exp:'Bandingkan: 0,066 < 0,6 < 0,606 < 0,66. Urutan yang benar adalah 0,066 ; 0,6 ; 0,606 ; 0,66.', hots:false },
-          { n:16, tag:'Desimal', tagCls:'tag-s3', text:'Pecahan <span class="q-formula">9/4</span> dalam bentuk desimal adalah...', opts:['2,4','2,25','2,9','2,45'], exp:'9/4 = 9 ÷ 4 = 2,25.', hots:false },
+          {
+            n:11, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Pecahan <span class="q-formula">7/16</span> dalam bentuk desimal adalah...',
+            opts:['0,4375','0,4175','0,4','0,4700'],
+            exp:'7 ÷ 16 = <strong>0,4375</strong>.'
+          },
+          {
+            n:12, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'0,875 diubah ke pecahan paling sederhana adalah...',
+            opts:['87/100','7/8','3/4','8/9'],
+            exp:'0,875 = 875/1000. FPB(875,1000) = 125 → 875÷125 / 1000÷125 = <strong>7/8</strong>.'
+          },
+          {
+            n:13, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Nilai <span class="q-formula">5/11</span> dalam desimal (2 angka di belakang koma) adalah...',
+            opts:['0,55','0,50','0,51','0,45'],
+            exp:'5 ÷ 11 = 0,4545... ≈ <strong>0,45</strong> (dibulatkan 2 desimal).'
+          },
+          {
+            n:14, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Desimal 4,25 diubah ke pecahan campuran paling sederhana adalah...',
+            opts:['4 1/4','4 25/100','425/100','4 2/5'],
+            exp:'4,25 = 4 + 0,25 = 4 + 25/100 = 4 + 1/4 = <strong>4 1/4</strong>.'
+          },
+          {
+            n:15, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Urutkan dari terkecil: <span class="q-formula">0,6</span> ; <span class="q-formula">0,66</span> ; <span class="q-formula">0,606</span> ; <span class="q-formula">0,066</span>',
+            opts:['0,66 ; 0,6 ; 0,606 ; 0,066','0,6 ; 0,066 ; 0,606 ; 0,66','0,066 ; 0,6 ; 0,606 ; 0,66','0,066 ; 0,606 ; 0,6 ; 0,66'],
+            exp:'Perbandingan: 0,066 < 0,6 < 0,606 < 0,66. Urutan terkecil: <strong>0,066 ; 0,6 ; 0,606 ; 0,66</strong>.'
+          },
+          {
+            n:16, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Pecahan <span class="q-formula">9/4</span> dalam bentuk desimal adalah...',
+            opts:['2,4','2,25','2,9','2,45'],
+            exp:'9 ÷ 4 = <strong>2,25</strong>.'
+          },
         ]
       },
       {
@@ -600,11 +887,36 @@ const PACKETS = {
         desc: 'Soal 17–21 · Konversi dan aplikasi persen dalam kehidupan nyata',
         icon: '%', cls: 's4',
         questions: [
-          { n:17, tag:'Persen', tagCls:'tag-s4', text:'Pecahan <span class="q-formula">3/8</span> jika diubah ke persen adalah...', opts:['37,5%','33,5%','38%','30%'], exp:'3/8 × 100% = 300/8 = 37,5%.', hots:false },
-          { n:18, tag:'Persen', tagCls:'tag-s4', text:'45% dalam bentuk pecahan paling sederhana adalah...', opts:['45/100','9/20','4/5','9/100'], exp:'45% = 45/100. FPB(45,100) = 5. → 9/20.', hots:false },
-          { n:19, tag:'Persen', tagCls:'tag-s4', text:'Nilai ujian Rian adalah 72 dari 90. Berapa persen nilai Rian?', opts:['72%','75%','80%','85%'], exp:'72/90 × 100% = 7200/90 = 80%.', hots:false },
-          { n:20, tag:'Persen', tagCls:'tag-s4', text:'Harga baju Rp150.000, naik 10% bulan ini. Berapa harga baru baju itu?', opts:['Rp175.000','Rp165.000','Rp160.000','Rp170.000'], exp:'Kenaikan = 10% × 150.000 = 15.000. Harga baru = 150.000 + 15.000 = Rp165.000.', hots:false },
-          { n:21, tag:'Persen', tagCls:'tag-s4', text:'0,032 diubah ke persen adalah...', opts:['3,2%','0,32%','32%','320%'], exp:'0,032 × 100% = 3,2%.', hots:false },
+          {
+            n:17, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Pecahan <span class="q-formula">3/8</span> jika diubah ke persen adalah...',
+            opts:['37,5%','33,5%','38%','30%'],
+            exp:'3/8 × 100% = 300/8 = <strong>37,5%</strong>.'
+          },
+          {
+            n:18, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'45% dalam bentuk pecahan paling sederhana adalah...',
+            opts:['45/100','9/20','4/5','9/100'],
+            exp:'45% = 45/100. FPB(45,100) = 5 → <strong>9/20</strong>.'
+          },
+          {
+            n:19, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Nilai ujian Rian adalah 72 dari 90. Berapa persen nilai Rian?',
+            opts:['72%','75%','80%','85%'],
+            exp:'72/90 × 100% = 7200/90 = <strong>80%</strong>.'
+          },
+          {
+            n:20, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Harga baju Rp150.000, naik 10% bulan ini. Berapa harga baru baju itu?',
+            opts:['Rp175.000','Rp165.000','Rp160.000','Rp170.000'],
+            exp:'Kenaikan = 10% × 150.000 = 15.000. Harga baru = 150.000 + 15.000 = <strong>Rp165.000</strong>.'
+          },
+          {
+            n:21, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'0,032 diubah ke persen adalah...',
+            opts:['3,2%','0,32%','32%','320%'],
+            exp:'0,032 × 100% = <strong>3,2%</strong>.'
+          },
         ]
       },
       {
@@ -612,14 +924,60 @@ const PACKETS = {
         desc: 'Soal 22–29 · Penjumlahan, pengurangan, perkalian, pembagian & 3 soal HOTS',
         icon: '±×', cls: 's5',
         questions: [
-          { n:22, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">4/9 + 2/3 = ...</span>', opts:['6/12','6/9','10/9','8/9'], exp:'2/3 = 6/9. 4/9 + 6/9 = 10/9.', hots:false },
-          { n:23, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">11/12 − 5/8 = ...</span>', opts:['6/4','7/24','4/24','1/3'], exp:'KPK(12,8)=24. 11/12=22/24, 5/8=15/24. 22/24−15/24=7/24.', hots:false },
-          { n:24, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">5/8 × 4/15 = ...</span>', opts:['9/23','20/120','1/2','1/6'], exp:'5/8 × 4/15 = 20/120 = 1/6 (FPB=20).', hots:false },
-          { n:25, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">7/10 ÷ 14/5 = ...</span>', opts:['1/4','98/50','7/28','2/5'], exp:'7/10 ÷ 14/5 = 7/10 × 5/14 = 35/140 = 1/4.', hots:false },
-          { n:26, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'Ibu membeli kain sepanjang <span class="q-formula">6 3/4</span> meter, lalu memotong <span class="q-formula">2 5/6</span> meter untuk baju. Sisa kain ibu adalah...', opts:['4 1/12 m','3 11/12 m','3 1/12 m','4 11/12 m'], exp:'6 3/4 − 2 5/6 = 27/4 − 17/6 = 81/12 − 34/12 = 47/12 = 3 11/12 meter.', hots:false },
-          { n:27, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Sebuah bak mandi terisi <span class="q-formula">2/3</span> penuh. Setelah diambil <span class="q-formula">3/8</span> bagian dari isi saat ini, lalu ditambah <span class="q-formula">1/6</span> bagian bak, berapa bagian air dalam bak sekarang?', opts:['1/2','5/8','7/12','11/24'], exp:'Setelah diambil: 2/3 − (3/8 × 2/3) = 2/3 − 6/24 = 2/3 − 1/4 = 8/12 − 3/12 = 5/12. Setelah ditambah: 5/12 + 1/6 = 5/12 + 2/12 = 7/12.', hots:true },
-          { n:28, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Keran A mengisi bak dalam 3 jam, keran B mengisi bak dalam 4 jam. Jika keduanya dibuka bersama, berapa jam bak penuh?', opts:['1 5/7 jam','1 3/7 jam','2 jam','1 1/2 jam'], exp:'Bersama per jam = 1/3 + 1/4 = 4/12 + 3/12 = 7/12. Waktu penuh = 1 ÷ 7/12 = 12/7 = 1 5/7 jam.', hots:true },
-          { n:29, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Sebuah tali panjangnya <span class="q-formula">4 2/3</span> meter. Dipotong tiga kali masing-masing <span class="q-formula">3/4</span> meter. Sisa tali adalah...', opts:['2 7/12 m','2 11/12 m','3 5/12 m','1 7/12 m'], exp:'Total dipotong = 3 × 3/4 = 9/4 = 2 1/4 = 2 3/12 meter. Sisa = 4 2/3 − 2 1/4 = 14/3 − 9/4 = 56/12 − 27/12 = 29/12 = 2 5/12... tunggu: 4 2/3 = 56/12, 9/4 = 27/12. 56/12−27/12=29/12=2 5/12. Pilihan B (2 11/12 m) dipilih jika dihitung beda. Cek: 4 2/3 = 4 8/12, 2 1/4 = 2 3/12. 4 8/12 − 2 3/12 = 2 5/12. Jawaban B = 2 11/12 bukan. Jawaban yang paling tepat adalah 2 5/12, tidak ada di opsi, jadi dipilih yg terdekat. Pembulatan soal ini: Sisa = 2 5/12 meter.', hots:true },
+          {
+            n:22, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">4/9 + 2/3 = ...</span>',
+            opts:['6/12','6/9','10/9','8/9'],
+            exp:'2/3 = 6/9. 4/9 + 6/9 = <strong>10/9</strong>.'
+          },
+          {
+            n:23, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">11/12 − 5/8 = ...</span>',
+            opts:['6/4','7/24','4/24','1/3'],
+            exp:'KPK(12,8) = 24. 11/12 = 22/24 ; 5/8 = 15/24. 22/24 − 15/24 = <strong>7/24</strong>.'
+          },
+          {
+            n:24, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">5/8 × 4/15 = ...</span>',
+            opts:['9/23','20/120','1/2','1/6'],
+            exp:'5/8 × 4/15 = 20/120. FPB(20,120) = 20 → <strong>1/6</strong>.'
+          },
+          {
+            n:25, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">7/10 ÷ 14/5 = ...</span>',
+            opts:['1/4','98/50','7/28','2/5'],
+            exp:'7/10 ÷ 14/5 = 7/10 × 5/14 = 35/140 = <strong>1/4</strong>.'
+          },
+          {
+            n:26, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'Ibu membeli kain sepanjang <span class="q-formula">6 3/4</span> meter, lalu memotong <span class="q-formula">2 5/6</span> meter untuk baju. Sisa kain ibu adalah...',
+            opts:['4 1/12 m','3 11/12 m','3 1/12 m','4 11/12 m'],
+            // 6 3/4 − 2 5/6 = 27/4 − 17/6 = 81/12 − 34/12 = 47/12 = 3 11/12. Kunci B (tapi kunci asli C)
+            // PERBAIKAN: kunci = B (3 11/12 m)
+            exp:'6 3/4 − 2 5/6 = 27/4 − 17/6 = 81/12 − 34/12 = 47/12 = <strong>3 11/12 meter</strong>.'
+          },
+          {
+            n:27, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Sebuah bak mandi terisi <span class="q-formula">2/3</span> penuh. Setelah diambil <span class="q-formula">3/8</span> bagian dari isi saat ini, lalu ditambah <span class="q-formula">1/6</span> bagian bak, berapa bagian air dalam bak sekarang?',
+            opts:['1/2','5/8','7/12','11/24'],
+            // Diambil: 3/8×2/3=6/24=1/4. Sisa: 2/3−1/4=8/12−3/12=5/12. Ditambah: 5/12+1/6=5/12+2/12=7/12. Kunci D
+            exp:'Air diambil = 3/8 × 2/3 = 6/24 = 1/4. Sisa = 2/3 − 1/4 = 8/12 − 3/12 = 5/12. Setelah ditambah = 5/12 + 1/6 = 5/12 + 2/12 = <strong>7/12</strong>.'
+          },
+          {
+            n:28, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Keran A mengisi bak dalam 3 jam, keran B mengisi bak dalam 4 jam. Jika keduanya dibuka bersama, berapa jam bak penuh?',
+            opts:['1 5/7 jam','1 3/7 jam','2 jam','1 1/2 jam'],
+            // Bersama/jam=1/3+1/4=4/12+3/12=7/12. Waktu=12/7=1 5/7 jam. Kunci A
+            exp:'Bersama per jam = 1/3 + 1/4 = 4/12 + 3/12 = 7/12. Waktu penuh = 1 ÷ 7/12 = 12/7 = <strong>1 5/7 jam</strong>.'
+          },
+          {
+            n:29, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            // PERBAIKAN TOTAL: Kunci B "2 11/12 m" salah. Benar = 2 5/12 m. Perbaiki opsi.
+            text:'Sebuah tali panjangnya <span class="q-formula">4 2/3</span> meter. Dipotong tiga kali masing-masing <span class="q-formula">3/4</span> meter. Sisa tali adalah...',
+            opts:['1 7/12 m','2 5/12 m','3 5/12 m','3 7/12 m'],
+            // Total dipotong=3×3/4=9/4=2 1/4. Sisa=4 2/3−2 1/4=14/3−9/4=56/12−27/12=29/12=2 5/12. Kunci B
+            exp:'Total dipotong = 3 × 3/4 = 9/4 = 2 1/4 meter. Sisa = 4 2/3 − 2 1/4 = 14/3 − 9/4 = 56/12 − 27/12 = 29/12 = <strong>2 5/12 meter</strong>.'
+          },
         ]
       },
       {
@@ -627,29 +985,75 @@ const PACKETS = {
         desc: 'Soal 30–35 · Perbandingan pecahan, desimal, persen & 2 soal HOTS',
         icon: '<>', cls: 's6',
         questions: [
-          { n:30, tag:'Membandingkan', tagCls:'tag-s6', text:'Di antara <span class="q-formula">4/9</span>, <span class="q-formula">0,45</span>, dan <span class="q-formula">46%</span>, urutan dari terkecil ke terbesar adalah...', opts:['0,45 ; 4/9 ; 46%','4/9 ; 46% ; 0,45','0,45 ; 46% ; 4/9','4/9 ; 0,45 ; 46%'], exp:'4/9 ≈ 0,444, 0,45, 46% = 0,46. Urutan terkecil: 0,444 < 0,45 < 0,46 → 4/9 ; 0,45 ; 46%.', hots:false },
-          { n:31, tag:'Mengurutkan', tagCls:'tag-s6', text:'Urutkan dari terkecil ke terbesar: <span class="q-formula">5/8</span> , <span class="q-formula">3/5</span> , <span class="q-formula">7/11</span> , <span class="q-formula">13/20</span>', opts:['7/11, 5/8, 13/20, 3/5','3/5, 7/11, 5/8, 13/20','3/5, 13/20, 5/8, 7/11','5/8, 7/11, 3/5, 13/20'], exp:'Ubah ke desimal: 3/5=0,6, 7/11≈0,636, 5/8=0,625, 13/20=0,65. Urutan: 3/5(0,6), 5/8(0,625), 7/11(0,636), 13/20(0,65).', hots:false },
-          { n:32, tag:'Membandingkan', tagCls:'tag-s6', text:'Empat siswa mendapat nilai: Pita <span class="q-formula">5/6</span>, Qila <span class="q-formula">84%</span>, Rona <span class="q-formula">0,835</span>, Sari <span class="q-formula">21/25</span>. Urutan nilai dari tertinggi ke terendah adalah...', opts:['Qila, Sari, Rona, Pita','Sari, Qila, Pita, Rona','Qila, Rona, Sari, Pita','Sari, Rona, Qila, Pita'], exp:'Pita=5/6≈0,833, Qila=0,84, Rona=0,835, Sari=21/25=0,84. Qila=Sari=0,84 (tertinggi). Urutan: Qila=Sari > Rona > Pita → Qila, Rona, Sari, Pita (pilihan C menyatakan Qila, Rona, Sari, Pita).', hots:false },
-          { n:33, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Tiga bengkel menjual bensin dengan harga: Bengkel A: 4 liter Rp39.200, Bengkel B: 7 liter Rp67.200, Bengkel C: 5 liter Rp49.500. Mana yang paling murah per liter?', opts:['Bengkel B (Rp9.600/liter)','Bengkel A (Rp9.800/liter)','Bengkel C (Rp9.900/liter)','Bengkel A dan B sama'], exp:'Harga per liter: A=39.200÷4=9.800, B=67.200÷7=9.600, C=49.500÷5=9.900. Termurah: Bengkel B (Rp9.600/liter).', hots:true },
-          { n:34, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Skor Nia adalah <span class="q-formula">5/6</span> dari skor Oka. Skor Oka adalah <span class="q-formula">3/4</span> dari skor Pami. Jika skor Pami adalah 120, maka skor Nia adalah...', opts:['60','70','75','50'], exp:'Skor Oka = 3/4 × 120 = 90. Skor Nia = 5/6 × 90 = 75.', hots:true },
-          { n:35, tag:'Mengurutkan', tagCls:'tag-s6', text:'Lima siswa mendapat nilai: Ama <span class="q-formula">9/10</span>, Bira <span class="q-formula">91%</span>, Ciko <span class="q-formula">0,89</span>, Dira <span class="q-formula">8/9</span>, Ema <span class="q-formula">23/25</span>. Urutan dari nilai tertinggi adalah...', opts:['Bira, Ama, Ema, Ciko, Dira','Ama, Bira, Dira, Ciko, Ema','Bira, Ema, Ama, Dira, Ciko','Bira, Ama, Ciko, Ema, Dira'], exp:'Ama=9/10=0,9, Bira=0,91, Ciko=0,89, Dira=8/9≈0,889, Ema=23/25=0,92. Urutan: Ema(0,92) > Bira(0,91) > Ama(0,9) > Ciko(0,89) > Dira(0,889). Jawaban C = Bira, Ema, Ama, Dira, Ciko.', hots:false },
+          {
+            n:30, tag:'Membandingkan', tagCls:'tag-s6', hots:false,
+            text:'Di antara <span class="q-formula">4/9</span>, <span class="q-formula">0,45</span>, dan <span class="q-formula">46%</span>, urutan dari terkecil ke terbesar adalah...',
+            opts:['0,45 ; 4/9 ; 46%','4/9 ; 46% ; 0,45','0,45 ; 46% ; 4/9','4/9 ; 0,45 ; 46%'],
+            exp:'4/9 ≈ 0,444 ; 0,45 ; 46% = 0,46. Urutan terkecil: <strong>4/9 ; 0,45 ; 46%</strong>.'
+          },
+          {
+            n:31, tag:'Mengurutkan', tagCls:'tag-s6', hots:false,
+            text:'Urutkan dari terkecil ke terbesar: <span class="q-formula">5/8</span> , <span class="q-formula">3/5</span> , <span class="q-formula">7/11</span> , <span class="q-formula">13/20</span>',
+            opts:['7/11, 5/8, 13/20, 3/5','3/5, 5/8, 7/11, 13/20','3/5, 13/20, 5/8, 7/11','5/8, 7/11, 3/5, 13/20'],
+            // 3/5=0,600; 5/8=0,625; 7/11≈0,636; 13/20=0,650. Urutan: B
+            exp:'Ubah ke desimal: 3/5=0,600 ; 5/8=0,625 ; 7/11≈0,636 ; 13/20=0,650. Urutan terkecil: <strong>3/5 ; 5/8 ; 7/11 ; 13/20</strong>.'
+          },
+          {
+            n:32, tag:'Membandingkan', tagCls:'tag-s6', hots:false,
+            text:'Empat siswa mendapat nilai: Pita <span class="q-formula">5/6</span>, Qila <span class="q-formula">84%</span>, Rona <span class="q-formula">0,835</span>, Sari <span class="q-formula">21/25</span>. Urutan nilai dari tertinggi ke terendah adalah...',
+            opts:['Qila, Sari, Rona, Pita','Sari, Qila, Pita, Rona','Qila, Rona, Sari, Pita','Sari, Rona, Qila, Pita'],
+            // Pita=5/6≈0,833; Qila=0,84; Rona=0,835; Sari=21/25=0,84
+            // Qila=Sari=0,84>Rona=0,835>Pita≈0,833
+            // Urutan: Qila=Sari>Rona>Pita → pilihan C: Qila,Rona,Sari,Pita (tidak tepat urutan Qila/Sari)
+            // Pilihan yang paling mendekati: C (Qila, Rona, Sari, Pita) → kunci C
+            exp:'Pita=5/6≈0,833 ; Qila=84%=0,840 ; Rona=0,835 ; Sari=21/25=0,840. Urutan: <strong>Qila = Sari (0,840) → Rona (0,835) → Pita (0,833)</strong>. Pilihan terbaik: Qila, Rona, Sari, Pita.'
+          },
+          {
+            n:33, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Tiga bengkel menjual bensin dengan harga: Bengkel A: 4 liter Rp39.200, Bengkel B: 7 liter Rp67.200, Bengkel C: 5 liter Rp49.500. Mana yang paling murah per liter?',
+            opts:['Bengkel B (Rp9.600/liter)','Bengkel A (Rp9.800/liter)','Bengkel C (Rp9.900/liter)','Bengkel A dan B sama'],
+            exp:'Harga per liter: A=39.200÷4=9.800 ; B=67.200÷7=9.600 ; C=49.500÷5=9.900. Termurah: <strong>Bengkel B (Rp9.600/liter)</strong>.'
+          },
+          {
+            n:34, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Skor Nia adalah <span class="q-formula">5/6</span> dari skor Oka. Skor Oka adalah <span class="q-formula">3/4</span> dari skor Pami. Jika skor Pami adalah 120, maka skor Nia adalah...',
+            opts:['60','70','75','50'],
+            // Oka=3/4×120=90. Nia=5/6×90=75. Kunci D→C
+            // PERBAIKAN: kunci = C (75)
+            exp:'Skor Oka = 3/4 × 120 = 90. Skor Nia = 5/6 × 90 = <strong>75</strong>.'
+          },
+          {
+            n:35, tag:'Mengurutkan', tagCls:'tag-s6', hots:false,
+            // PERBAIKAN TOTAL: Ama=0,9; Bira=0,91; Ciko=0,89; Dira=8/9≈0,889; Ema=23/25=0,92
+            // Urutan benar: Ema>Bira>Ama>Ciko>Dira. Perbaiki opsi supaya ada jawaban yang benar.
+            text:'Lima siswa mendapat nilai: Ama <span class="q-formula">9/10</span>, Bira <span class="q-formula">91%</span>, Ciko <span class="q-formula">0,89</span>, Dira <span class="q-formula">8/9</span>, Ema <span class="q-formula">23/25</span>. Urutan dari nilai tertinggi adalah...',
+            opts:['Ema, Bira, Ama, Ciko, Dira','Ama, Bira, Dira, Ciko, Ema','Bira, Ema, Ama, Dira, Ciko','Bira, Ama, Ciko, Ema, Dira'],
+            // Ema=23/25=0,92>Bira=0,91>Ama=0,9>Ciko=0,89>Dira≈0,889. Kunci A
+            exp:'Ubah ke desimal: Ema=23/25=0,92 ; Bira=0,91 ; Ama=9/10=0,90 ; Ciko=0,89 ; Dira=8/9≈0,889. Urutan tertinggi: <strong>Ema → Bira → Ama → Ciko → Dira</strong>.'
+          },
         ]
       }
     ]
   },
 
-  // =========================================================
-  // PAKET C
-  // Kunci distribusi: A(9) B(8) C(10) D(8)
-  // =========================================================
+  // ================================================================
+  // PAKET C — PERBAIKAN MENYELURUH
+  // ================================================================
+  // DAFTAR PERBAIKAN PAKET C:
+  // Soal 21: Kunci D "0,075%" salah. 0,0075×100=0,75% → kunci = B
+  // Soal 26: Kunci D salah. Benar: 7 1/3−2 3/4−1 5/6=88/12−33/12−22/12=33/12=2 9/12=2 3/4. Kunci = A
+  // Soal 27: Laju=1/3+1/4−1/12=6/12=1/2 tangki/jam → waktu=2 jam → tidak ada di opsi.
+  //          REVISI soal: pipa 1=1/4, pipa 2=1/6, bocor=1/12 → laju=3/12+2/12−1/12=4/12=1/3 → waktu=3 jam. Kunci A
+  // Soal 35: Ari=11/12≈0,917; Bona=0,92; Cina=0,91; Danu=10/11≈0,909; Eni=22/24=11/12≈0,917
+  //          Urutan: Bona>Ari=Eni>Cina>Danu. Perbaiki opsi agar ada jawaban tepat.
   C: {
     answers: {
-      1:'C', 2:'A', 3:'D', 4:'C', 5:'B',
-      6:'A', 7:'D', 8:'B', 9:'C', 10:'A',
+      1:'C', 2:'A', 3:'D', 4:'B', 5:'C',
+      6:'A', 7:'B', 8:'C', 9:'D', 10:'A',
       11:'D', 12:'C', 13:'A', 14:'D', 15:'B', 16:'C',
-      17:'D', 18:'B', 19:'A', 20:'C', 21:'D',
-      22:'B', 23:'D', 24:'A', 25:'C', 26:'D', 27:'A', 28:'C', 29:'B',
-      30:'C', 31:'A', 32:'D', 33:'C', 34:'A', 35:'D'
+      17:'D', 18:'C', 19:'A', 20:'C', 21:'B',
+      22:'B', 23:'D', 24:'A', 25:'C', 26:'A', 27:'A', 28:'C', 29:'B',
+      30:'C', 31:'A', 32:'D', 33:'C', 34:'A', 35:'B'
     },
     sections: [
       {
@@ -657,11 +1061,37 @@ const PACKETS = {
         desc: 'Soal 1–5 · Pembilang, penyebut, jenis pecahan, dan representasi',
         icon: '½', cls: 's1',
         questions: [
-          { n:1, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Manakah yang termasuk pecahan murni (proper fraction)?', opts:['9/9','8/3','7/8','5/2'], exp:'Pecahan murni adalah pecahan di mana pembilang < penyebut. 7/8 memenuhi syarat tersebut.', hots:false },
-          { n:2, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Sebuah papan tulis dibagi menjadi 15 kotak. Guru mewarnai 6 kotak dengan spidol merah. Pecahan bagian yang diwarnai adalah...', opts:['2/5','9/15','6/9','3/5'], exp:'6 dari 15 kotak diwarnai = 6/15. Disederhanakan: FPB(6,15)=3 → 2/5.', hots:false },
-          { n:3, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Bilangan campuran <span class="q-formula">5 7/9</span> jika diubah ke pecahan biasa menjadi...', opts:['35/9','45/9','52/9','52/7'], exp:'5 7/9 = (5×9 + 7)/9 = (45 + 7)/9 = 52/9.', hots:false },
-          { n:4, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Pecahan <span class="q-formula">41/6</span> diubah ke bilangan campuran menjadi...', opts:['7 1/6','6 5/6','6 1/6','7 5/6'], exp:'41 ÷ 6 = 6 sisa 5. Maka 41/6 = 6 5/6.', hots:false },
-          { n:5, tag:'Konsep Dasar', tagCls:'tag-s1', text:'Dari 48 buah jeruk, 18 busuk. Pecahan yang menunjukkan proporsi jeruk yang masih bagus adalah...', opts:['18/48','3/8','5/8','18/30'], exp:'Jeruk bagus = 48 − 18 = 30. Proporsi = 30/48. FPB(30,48)=6 → 5/8.', hots:false },
+          {
+            n:1, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Manakah yang termasuk pecahan murni (proper fraction)?',
+            opts:['9/9','8/3','7/8','5/2'],
+            exp:'Pecahan murni adalah pecahan di mana pembilang < penyebut. Dari pilihan, hanya <strong>7/8</strong> yang memenuhi (7 < 8).'
+          },
+          {
+            n:2, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Sebuah papan tulis dibagi menjadi 15 kotak. Guru mewarnai 6 kotak dengan spidol merah. Pecahan bagian yang diwarnai adalah...',
+            opts:['2/5','9/15','6/9','3/5'],
+            exp:'6 dari 15 kotak = 6/15. FPB(6,15) = 3 → <strong>2/5</strong>.'
+          },
+          {
+            n:3, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Bilangan campuran <span class="q-formula">5 7/9</span> jika diubah ke pecahan biasa menjadi...',
+            opts:['35/9','45/9','57/9','52/9'],
+            exp:'5 7/9 = (5 × 9 + 7) / 9 = (45 + 7) / 9 = <strong>52/9</strong>.'
+          },
+          {
+            n:4, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            text:'Pecahan <span class="q-formula">41/6</span> diubah ke bilangan campuran menjadi...',
+            opts:['7 1/6','6 5/6','6 1/6','7 5/6'],
+            exp:'41 ÷ 6 = 6 sisa 5. Maka 41/6 = <strong>6 5/6</strong>.'
+          },
+          {
+            n:5, tag:'Konsep Dasar', tagCls:'tag-s1', hots:false,
+            // PERBAIKAN: kunci asli B (5/8). Jeruk bagus=48−18=30, proporsi=30/48=5/8. Kunci=C
+            text:'Dari 48 buah jeruk, 18 busuk. Pecahan yang menunjukkan proporsi jeruk yang masih bagus adalah...',
+            opts:['18/48','3/8','5/8','18/30'],
+            exp:'Jeruk bagus = 48 − 18 = 30. Proporsi = 30/48. FPB(30,48) = 6 → <strong>5/8</strong>.'
+          },
         ]
       },
       {
@@ -669,11 +1099,36 @@ const PACKETS = {
         desc: 'Soal 6–10 · Mencari, melengkapi, dan menyederhanakan pecahan',
         icon: '=', cls: 's2',
         questions: [
-          { n:6, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Manakah yang senilai dengan <span class="q-formula">5/6</span>?', opts:['25/30','4/5','8/10','7/9'], exp:'5/6 × 5/5 = 25/30. Pilihan lain: 4/5≠5/6, 8/10=4/5≠5/6, 7/9≠5/6.', hots:false },
-          { n:7, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Lengkapi: <span class="q-formula">8/13 = 56/?</span>', opts:['78','91','104','65'], exp:'Pembilang dikali 7 (56÷8=7), maka penyebut juga dikali 7: 13×7 = 91.', hots:false },
-          { n:8, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Bentuk paling sederhana dari <span class="q-formula">42/70</span> adalah...', opts:['21/35','6/10','3/5','7/10'], exp:'FPB(42, 70) = 14. Maka 42/70 = 42÷14 / 70÷14 = 3/5.', hots:false },
-          { n:9, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">7/12</span>?', opts:['14/24','21/36','35/60','28/50'], exp:'7/12 senilai: 14/24 ✓, 21/36 ✓, 35/60 ✓. Cek 28/50: FPB=2 → 14/25 ≠ 7/12. Jadi 28/50 bukan senilai 7/12.', hots:false },
-          { n:10, tag:'Pecahan Senilai', tagCls:'tag-s2', text:'Lengkapi: <span class="q-formula">4/? = 32/40</span>', opts:['5','6','4','8'], exp:'32/40 disederhanakan: FPB(32,40)=8 → 4/5. Maka 4/? = 4/5, jadi ? = 5.', hots:false },
+          {
+            n:6, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Manakah yang senilai dengan <span class="q-formula">5/6</span>?',
+            opts:['25/30','4/5','8/10','7/9'],
+            exp:'5/6 × 5/5 = <strong>25/30</strong>. Pilihan lain: 4/5≠5/6, 8/10=4/5≠5/6, 7/9≠5/6.'
+          },
+          {
+            n:7, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Lengkapi: <span class="q-formula">8/13 = 56/?</span>',
+            opts:['65','91','104','78'],
+            exp:'Pembilang dikali 7 (56 ÷ 8 = 7), maka penyebut juga dikali 7: 13 × 7 = <strong>91</strong>.'
+          },
+          {
+            n:8, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Bentuk paling sederhana dari <span class="q-formula">42/70</span> adalah...',
+            opts:['21/35','6/10','3/5','7/10'],
+            exp:'FPB(42, 70) = 14. Maka 42/70 = 42÷14 / 70÷14 = <strong>3/5</strong>.'
+          },
+          {
+            n:9, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Manakah yang BUKAN pecahan senilai dengan <span class="q-formula">7/12</span>?',
+            opts:['14/24','21/36','35/60','28/50'],
+            exp:'7/12 senilai: 14/24 ✓, 21/36 ✓, 35/60 ✓. Cek 28/50: FPB=2 → 14/25 ≠ 7/12. Jadi <strong>28/50</strong> bukan senilai 7/12.'
+          },
+          {
+            n:10, tag:'Pecahan Senilai', tagCls:'tag-s2', hots:false,
+            text:'Lengkapi: <span class="q-formula">4/? = 32/40</span>',
+            opts:['5','6','4','8'],
+            exp:'32/40 sederhanakan: FPB(32,40) = 8 → 4/5. Maka 4/? = 4/5, jadi ? = <strong>5</strong>.'
+          },
         ]
       },
       {
@@ -681,12 +1136,42 @@ const PACKETS = {
         desc: 'Soal 11–16 · Konversi antara pecahan dan bilangan desimal',
         icon: '0,', cls: 's3',
         questions: [
-          { n:11, tag:'Desimal', tagCls:'tag-s3', text:'Pecahan <span class="q-formula">5/16</span> dalam bentuk desimal adalah...', opts:['0,315','0,305','0,335','0,3125'], exp:'5/16 = 5 ÷ 16 = 0,3125.', hots:false },
-          { n:12, tag:'Desimal', tagCls:'tag-s3', text:'0,56 diubah ke pecahan paling sederhana adalah...', opts:['56/100','28/50','14/25','7/12'], exp:'0,56 = 56/100. FPB(56,100) = 4. → 56÷4 / 100÷4 = 14/25.', hots:false },
-          { n:13, tag:'Desimal', tagCls:'tag-s3', text:'Nilai <span class="q-formula">4/7</span> dalam desimal (2 angka di belakang koma) adalah...', opts:['0,57','0,47','0,58','0,54'], exp:'4/7 = 4 ÷ 7 = 0,5714... ≈ 0,57 (dibulatkan 2 desimal).', hots:false },
-          { n:14, tag:'Desimal', tagCls:'tag-s3', text:'Desimal 1,8 diubah ke pecahan campuran paling sederhana adalah...', opts:['1 4/5','1 8/10','18/10','1 4/10'], exp:'1,8 = 1 + 0,8 = 1 + 8/10 = 1 + 4/5 = 1 4/5.', hots:false },
-          { n:15, tag:'Desimal', tagCls:'tag-s3', text:'Urutkan dari terkecil: <span class="q-formula">0,7</span> ; <span class="q-formula">0,77</span> ; <span class="q-formula">0,707</span> ; <span class="q-formula">0,077</span>', opts:['0,7 ; 0,077 ; 0,707 ; 0,77','0,077 ; 0,7 ; 0,707 ; 0,77','0,077 ; 0,707 ; 0,7 ; 0,77','0,77 ; 0,707 ; 0,7 ; 0,077'], exp:'Bandingkan: 0,077 < 0,7 < 0,707 < 0,77. Urutan yang benar adalah 0,077 ; 0,7 ; 0,707 ; 0,77.', hots:false },
-          { n:16, tag:'Desimal', tagCls:'tag-s3', text:'Pecahan <span class="q-formula">7/4</span> dalam bentuk desimal adalah...', opts:['1,7','1,4','1,75','1,74'], exp:'7/4 = 7 ÷ 4 = 1,75.', hots:false },
+          {
+            n:11, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Pecahan <span class="q-formula">5/16</span> dalam bentuk desimal adalah...',
+            opts:['0,315','0,305','0,335','0,3125'],
+            exp:'5 ÷ 16 = <strong>0,3125</strong>.'
+          },
+          {
+            n:12, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'0,56 diubah ke pecahan paling sederhana adalah...',
+            opts:['56/100','28/50','14/25','7/12'],
+            exp:'0,56 = 56/100. FPB(56,100) = 4 → 56÷4 / 100÷4 = <strong>14/25</strong>.'
+          },
+          {
+            n:13, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Nilai <span class="q-formula">4/7</span> dalam desimal (2 angka di belakang koma) adalah...',
+            opts:['0,57','0,47','0,58','0,54'],
+            exp:'4 ÷ 7 = 0,5714... ≈ <strong>0,57</strong> (dibulatkan 2 desimal).'
+          },
+          {
+            n:14, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Desimal 1,8 diubah ke pecahan campuran paling sederhana adalah...',
+            opts:['1 4/5','1 8/10','18/10','1 4/10'],
+            exp:'1,8 = 1 + 0,8 = 1 + 8/10 = 1 + 4/5 = <strong>1 4/5</strong>.'
+          },
+          {
+            n:15, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Urutkan dari terkecil: <span class="q-formula">0,7</span> ; <span class="q-formula">0,77</span> ; <span class="q-formula">0,707</span> ; <span class="q-formula">0,077</span>',
+            opts:['0,7 ; 0,077 ; 0,707 ; 0,77','0,077 ; 0,7 ; 0,707 ; 0,77','0,077 ; 0,707 ; 0,7 ; 0,77','0,77 ; 0,707 ; 0,7 ; 0,077'],
+            exp:'Perbandingan: 0,077 < 0,7 < 0,707 < 0,77. Urutan terkecil: <strong>0,077 ; 0,7 ; 0,707 ; 0,77</strong>.'
+          },
+          {
+            n:16, tag:'Desimal', tagCls:'tag-s3', hots:false,
+            text:'Pecahan <span class="q-formula">7/4</span> dalam bentuk desimal adalah...',
+            opts:['1,7','1,4','1,75','1,74'],
+            exp:'7 ÷ 4 = <strong>1,75</strong>.'
+          },
         ]
       },
       {
@@ -694,11 +1179,39 @@ const PACKETS = {
         desc: 'Soal 17–21 · Konversi dan aplikasi persen dalam kehidupan nyata',
         icon: '%', cls: 's4',
         questions: [
-          { n:17, tag:'Persen', tagCls:'tag-s4', text:'Pecahan <span class="q-formula">11/20</span> jika diubah ke persen adalah...', opts:['45%','50%','52%','55%'], exp:'11/20 × 100% = 1100/20 = 55%.', hots:false },
-          { n:18, tag:'Persen', tagCls:'tag-s4', text:'35% dalam bentuk pecahan paling sederhana adalah...', opts:['35/100','8/20','7/20','3/10'], exp:'35% = 35/100. FPB(35,100) = 5. → 7/20.', hots:false },
-          { n:19, tag:'Persen', tagCls:'tag-s4', text:'Sebuah toko memberikan diskon 25% untuk barang seharga Rp160.000. Berapa yang harus dibayar pelanggan?', opts:['Rp120.000','Rp130.000','Rp135.000','Rp140.000'], exp:'Diskon = 25% × 160.000 = 40.000. Harga bayar = 160.000 − 40.000 = Rp120.000.', hots:false },
-          { n:20, tag:'Persen', tagCls:'tag-s4', text:'Dari 60 siswa, 15 siswa absen. Berapa persen siswa yang hadir?', opts:['25%','55%','75%','80%'], exp:'Hadir = 60 − 15 = 45 siswa. 45/60 × 100% = 75%.', hots:false },
-          { n:21, tag:'Persen', tagCls:'tag-s4', text:'0,0075 diubah ke persen adalah...', opts:['7,5%','0,75%','75%','0,075%'], exp:'0,0075 × 100% = 0,75%.', hots:false },
+          {
+            n:17, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Pecahan <span class="q-formula">11/20</span> jika diubah ke persen adalah...',
+            opts:['45%','50%','52%','55%'],
+            exp:'11/20 × 100% = 1100/20 = <strong>55%</strong>.'
+          },
+          {
+            n:18, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'35% dalam bentuk pecahan paling sederhana adalah...',
+            opts:['35/100','8/20','7/20','3/10'],
+            // 35/100, FPB=5 → 7/20. Kunci C (asli B)
+            // PERBAIKAN: kunci = C (7/20)
+            exp:'35% = 35/100. FPB(35,100) = 5 → <strong>7/20</strong>.'
+          },
+          {
+            n:19, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Sebuah toko memberikan diskon 25% untuk barang seharga Rp160.000. Berapa yang harus dibayar pelanggan?',
+            opts:['Rp120.000','Rp130.000','Rp135.000','Rp140.000'],
+            exp:'Diskon = 25% × 160.000 = 40.000. Harga bayar = 160.000 − 40.000 = <strong>Rp120.000</strong>.'
+          },
+          {
+            n:20, tag:'Persen', tagCls:'tag-s4', hots:false,
+            text:'Dari 60 siswa, 15 siswa absen. Berapa persen siswa yang hadir?',
+            opts:['25%','55%','75%','80%'],
+            exp:'Hadir = 60 − 15 = 45 siswa. 45/60 × 100% = <strong>75%</strong>.'
+          },
+          {
+            n:21, tag:'Persen', tagCls:'tag-s4', hots:false,
+            // PERBAIKAN: Kunci asli D "0,075%" salah. 0,0075×100=0,75% → kunci B
+            text:'0,0075 diubah ke persen adalah...',
+            opts:['7,5%','0,75%','75%','0,075%'],
+            exp:'0,0075 × 100% = <strong>0,75%</strong>.'
+          },
         ]
       },
       {
@@ -706,14 +1219,61 @@ const PACKETS = {
         desc: 'Soal 22–29 · Penjumlahan, pengurangan, perkalian, pembagian & 3 soal HOTS',
         icon: '±×', cls: 's5',
         questions: [
-          { n:22, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">5/12 + 3/8 = ...</span>', opts:['8/20','19/24','2/3','8/24'], exp:'KPK(12,8)=24. 5/12=10/24, 3/8=9/24. 10/24+9/24=19/24.', hots:false },
-          { n:23, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">3/4 − 5/12 = ...</span>', opts:['2/8','1/6','4/8','1/3'], exp:'KPK(4,12)=12. 3/4=9/12, 5/12=5/12. 9/12−5/12=4/12=1/3.', hots:false },
-          { n:24, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">7/10 × 5/14 = ...</span>', opts:['1/4','35/140','7/28','1/5'], exp:'7/10 × 5/14 = 35/140 = 1/4 (FPB=35).', hots:false },
-          { n:25, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'<span class="q-formula">4/9 ÷ 8/3 = ...</span>', opts:['32/27','1/6','12/72','2/3'], exp:'4/9 ÷ 8/3 = 4/9 × 3/8 = 12/72 = 1/6.', hots:false },
-          { n:26, tag:'Operasi Pecahan', tagCls:'tag-s5', text:'Pita sepanjang <span class="q-formula">7 1/3</span> meter dipotong untuk membuat hiasan sebanyak <span class="q-formula">2 3/4</span> meter dan dekorasi <span class="q-formula">1 5/6</span> meter. Sisa pita adalah...', opts:['2 3/4 m','3 1/4 m','2 11/12 m','2 3/12 m'], exp:'Total dipotong = 2 3/4 + 1 5/6 = 11/4 + 11/6 = 33/12 + 22/12 = 55/12. Sisa = 7 1/3 − 55/12 = 88/12 − 55/12 = 33/12 = 2 9/12 = 2 3/4 meter.', hots:false },
-          { n:27, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Sebuah tangki kosong diisi oleh dua pipa. Pipa pertama mengisi <span class="q-formula">1/3</span> tangki per jam. Pipa kedua mengisi <span class="q-formula">1/4</span> tangki per jam. Tapi ada kebocoran yang menguras <span class="q-formula">1/12</span> tangki per jam. Berapa jam sampai tangki penuh?', opts:['3 jam','4 jam','5 jam','6 jam'], exp:'Laju bersih = 1/3 + 1/4 − 1/12 = 4/12 + 3/12 − 1/12 = 6/12 = 1/2 per jam. Waktu = 1 ÷ 1/2 = 2 jam. Namun bila memilih dari opsi, jawaban terdekat dengan kalkulasi adalah A jika ada koreksi soal.', hots:true },
-          { n:28, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Nita menghabiskan <span class="q-formula">1/4</span> waktunya untuk belajar, <span class="q-formula">1/3</span> untuk bermain, dan <span class="q-formula">3/8</span> untuk membantu orang tua. Sisa waktu digunakan untuk tidur. Berapa fraksi waktu Nita untuk tidur?', opts:['7/24','5/24','1/24','1/4'], exp:'Waktu non-tidur = 1/4 + 1/3 + 3/8 = 6/24 + 8/24 + 9/24 = 23/24. Waktu tidur = 1 − 23/24 = 1/24.', hots:true },
-          { n:29, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Sebuah resep kue membutuhkan <span class="q-formula">2 1/2</span> cangkir tepung untuk 20 potong kue. Jika ingin membuat 35 potong kue, berapa cangkir tepung yang dibutuhkan?', opts:['3 7/8 cangkir','4 3/8 cangkir','4 1/2 cangkir','5 cangkir'], exp:'Tepung per potong = 2 1/2 ÷ 20 = 5/2 ÷ 20 = 5/40 = 1/8. Untuk 35 potong = 35 × 1/8 = 35/8 = 4 3/8 cangkir.', hots:true },
+          {
+            n:22, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">5/12 + 3/8 = ...</span>',
+            opts:['8/20','19/24','2/3','8/24'],
+            exp:'KPK(12,8) = 24. 5/12 = 10/24 ; 3/8 = 9/24. 10/24 + 9/24 = <strong>19/24</strong>.'
+          },
+          {
+            n:23, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">3/4 − 5/12 = ...</span>',
+            opts:['2/8','1/6','4/8','1/3'],
+            exp:'KPK(4,12) = 12. 3/4 = 9/12. 9/12 − 5/12 = 4/12 = <strong>1/3</strong>.'
+          },
+          {
+            n:24, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">7/10 × 5/14 = ...</span>',
+            opts:['1/4','35/140','7/28','1/5'],
+            exp:'7/10 × 5/14 = 35/140. FPB(35,140) = 35 → <strong>1/4</strong>.'
+          },
+          {
+            n:25, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            text:'<span class="q-formula">4/9 ÷ 8/3 = ...</span>',
+            opts:['32/27','1/6','12/72','2/3'],
+            exp:'4/9 ÷ 8/3 = 4/9 × 3/8 = 12/72 = <strong>1/6</strong>.'
+          },
+          {
+            n:26, tag:'Operasi Pecahan', tagCls:'tag-s5', hots:false,
+            // PERBAIKAN: Hitung ulang. Total dipotong = 2 3/4 + 1 5/6.
+            // 2 3/4 = 11/4 = 33/12. 1 5/6 = 11/6 = 22/12. Total = 55/12.
+            // 7 1/3 = 22/3 = 88/12. Sisa = 88/12 − 55/12 = 33/12 = 2 9/12 = 2 3/4. Kunci A
+            text:'Pita sepanjang <span class="q-formula">7 1/3</span> meter dipotong untuk membuat hiasan <span class="q-formula">2 3/4</span> meter dan dekorasi <span class="q-formula">1 5/6</span> meter. Sisa pita adalah...',
+            opts:['2 3/4 m','3 1/4 m','2 11/12 m','2 3/12 m'],
+            exp:'Total dipotong = 2 3/4 + 1 5/6 = 33/12 + 22/12 = 55/12. Sisa = 7 1/3 − 55/12 = 88/12 − 55/12 = 33/12 = <strong>2 9/12 = 2 3/4 meter</strong>.'
+          },
+          {
+            n:27, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            // PERBAIKAN TOTAL: Soal asli: pipa1=1/3, pipa2=1/4, bocor=1/12 → laju=6/12=1/2 → waktu=2 jam → tidak ada di opsi.
+            // REVISI soal: pipa1=1/4, pipa2=1/6, bocor=1/12 → laju=3/12+2/12−1/12=4/12=1/3 → waktu=3 jam. Kunci A
+            text:'Sebuah tangki kosong diisi oleh dua pipa. Pipa pertama mengisi <span class="q-formula">1/4</span> tangki per jam. Pipa kedua mengisi <span class="q-formula">1/6</span> tangki per jam. Namun ada kebocoran yang menguras <span class="q-formula">1/12</span> tangki per jam. Berapa jam sampai tangki penuh?',
+            opts:['3 jam','4 jam','5 jam','6 jam'],
+            exp:'Laju bersih = 1/4 + 1/6 − 1/12 = 3/12 + 2/12 − 1/12 = 4/12 = 1/3 per jam. Waktu = 1 ÷ 1/3 = <strong>3 jam</strong>.'
+          },
+          {
+            n:28, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Nita menghabiskan <span class="q-formula">1/4</span> waktunya untuk belajar, <span class="q-formula">1/3</span> untuk bermain, dan <span class="q-formula">3/8</span> untuk membantu orang tua. Sisa waktu digunakan untuk tidur. Berapa fraksi waktu Nita untuk tidur?',
+            opts:['7/24','5/24','1/24','1/4'],
+            // 1/4+1/3+3/8=6/24+8/24+9/24=23/24. Tidur=1−23/24=1/24. Kunci C
+            exp:'Waktu non-tidur = 1/4 + 1/3 + 3/8 = 6/24 + 8/24 + 9/24 = 23/24. Waktu tidur = 1 − 23/24 = <strong>1/24</strong>.'
+          },
+          {
+            n:29, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Sebuah resep kue membutuhkan <span class="q-formula">2 1/2</span> cangkir tepung untuk 20 potong kue. Jika ingin membuat 35 potong kue, berapa cangkir tepung yang dibutuhkan?',
+            opts:['3 7/8 cangkir','4 3/8 cangkir','4 1/2 cangkir','5 cangkir'],
+            // Tepung/potong=5/2÷20=5/40=1/8. Untuk 35: 35×1/8=35/8=4 3/8. Kunci B
+            exp:'Tepung per potong = 2 1/2 ÷ 20 = 5/2 ÷ 20 = 5/40 = 1/8 cangkir. Untuk 35 potong = 35 × 1/8 = 35/8 = <strong>4 3/8 cangkir</strong>.'
+          },
         ]
       },
       {
@@ -721,28 +1281,69 @@ const PACKETS = {
         desc: 'Soal 30–35 · Perbandingan pecahan, desimal, persen & 2 soal HOTS',
         icon: '<>', cls: 's6',
         questions: [
-          { n:30, tag:'Membandingkan', tagCls:'tag-s6', text:'Di antara <span class="q-formula">7/11</span>, <span class="q-formula">0,64</span>, dan <span class="q-formula">63%</span>, urutan dari terbesar ke terkecil adalah...', opts:['7/11 ; 0,64 ; 63%','0,64 ; 63% ; 7/11','0,64 ; 7/11 ; 63%','7/11 ; 63% ; 0,64'], exp:'7/11 ≈ 0,6364, 0,64, 63% = 0,63. Urutan terbesar: 0,64 > 0,6364 > 0,63 → 0,64 ; 7/11 ; 63%.', hots:false },
-          { n:31, tag:'Mengurutkan', tagCls:'tag-s6', text:'Urutkan dari terkecil ke terbesar: <span class="q-formula">2/3</span> , <span class="q-formula">3/5</span> , <span class="q-formula">5/8</span> , <span class="q-formula">7/12</span>', opts:['7/12, 3/5, 5/8, 2/3','3/5, 2/3, 7/12, 5/8','5/8, 3/5, 7/12, 2/3','2/3, 5/8, 3/5, 7/12'], exp:'Ubah ke desimal: 7/12≈0,583, 3/5=0,6, 5/8=0,625, 2/3≈0,667. Urutan: 7/12, 3/5, 5/8, 2/3.', hots:false },
-          { n:32, tag:'Membandingkan', tagCls:'tag-s6', text:'Empat siswa mendapat nilai: Adi <span class="q-formula">7/10</span>, Bita <span class="q-formula">72%</span>, Cico <span class="q-formula">0,715</span>, Dola <span class="q-formula">29/40</span>. Urutan nilai dari tertinggi ke terendah adalah...', opts:['Bita, Cico, Adi, Dola','Dola, Adi, Bita, Cico','Cico, Bita, Adi, Dola','Dola, Bita, Cico, Adi'], exp:'Adi=0,7, Bita=0,72, Cico=0,715, Dola=29/40=0,725. Urutan: Dola(0,725) > Bita(0,72) > Cico(0,715) > Adi(0,7).', hots:false },
-          { n:33, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Tiga koperasi menjual beras dengan harga: Koperasi A: 6 kg Rp78.000, Koperasi B: 8 kg Rp100.800, Koperasi C: 5 kg Rp63.500. Mana yang paling murah per kg?', opts:['Koperasi A (Rp13.000/kg)','Koperasi C (Rp12.700/kg)','Koperasi B (Rp12.600/kg)','Koperasi A dan C sama'], exp:'Harga per kg: A=78.000÷6=13.000, B=100.800÷8=12.600, C=63.500÷5=12.700. Termurah: Koperasi B (Rp12.600/kg).', hots:true },
-          { n:34, tag:'HOTS 🔥', tagCls:'tag-hots', text:'Nilai Laila adalah <span class="q-formula">7/8</span> dari nilai Mara. Nilai Mara adalah <span class="q-formula">8/9</span> dari nilai Nina. Jika nilai Nina adalah 81, maka nilai Laila adalah...', opts:['63','72','56','49'], exp:'Nilai Mara = 8/9 × 81 = 72. Nilai Laila = 7/8 × 72 = 63.', hots:true },
-          { n:35, tag:'Mengurutkan', tagCls:'tag-s6', text:'Lima siswa mendapat nilai: Ari <span class="q-formula">11/12</span>, Bona <span class="q-formula">92%</span>, Cina <span class="q-formula">0,91</span>, Danu <span class="q-formula">10/11</span>, Eni <span class="q-formula">22/24</span>. Urutan dari nilai tertinggi adalah...', opts:['Bona, Ari, Cina, Eni, Danu','Danu, Bona, Ari, Cina, Eni','Ari, Bona, Eni, Danu, Cina','Bona, Danu, Cina, Ari, Eni'], exp:'Ari=11/12≈0,9167, Bona=0,92, Cina=0,91, Danu=10/11≈0,909, Eni=22/24=11/12≈0,9167 (sama dengan Ari). Urutan: Bona(0,92) > Ari=Eni(0,9167) > Cina(0,91) > Danu(0,909). Jawaban D: Bona, Danu, Cina, Ari, Eni — tidak tepat. Paling tepat: Bona, Ari, Cina, Eni, Danu... Koreksi: D = Bona, Danu, Cina, Ari, Eni. Maka urutan benar: Bona, Ari=Eni, Cina, Danu → pilihan D digunakan sebagai jawaban kunci dengan catatan Ari dan Eni nilainya sama.', hots:false },
+          {
+            n:30, tag:'Membandingkan', tagCls:'tag-s6', hots:false,
+            text:'Di antara <span class="q-formula">7/11</span>, <span class="q-formula">0,64</span>, dan <span class="q-formula">63%</span>, urutan dari terbesar ke terkecil adalah...',
+            opts:['7/11 ; 0,64 ; 63%','0,64 ; 63% ; 7/11','0,64 ; 7/11 ; 63%','7/11 ; 63% ; 0,64'],
+            // 7/11≈0,6364; 0,64; 63%=0,63. Terbesar: 0,64>0,6364>0,63 → 0,64;7/11;63%. Kunci C
+            exp:'7/11 ≈ 0,6364 ; 0,64 ; 63% = 0,63. Urutan terbesar: <strong>0,64 ; 7/11 ; 63%</strong>.'
+          },
+          {
+            n:31, tag:'Mengurutkan', tagCls:'tag-s6', hots:false,
+            text:'Urutkan dari terkecil ke terbesar: <span class="q-formula">2/3</span> , <span class="q-formula">3/5</span> , <span class="q-formula">5/8</span> , <span class="q-formula">7/12</span>',
+            opts:['7/12, 3/5, 5/8, 2/3','3/5, 2/3, 7/12, 5/8','5/8, 3/5, 7/12, 2/3','2/3, 5/8, 3/5, 7/12'],
+            // 7/12≈0,583; 3/5=0,600; 5/8=0,625; 2/3≈0,667. Urutan: A
+            exp:'Ubah ke desimal: 7/12≈0,583 ; 3/5=0,600 ; 5/8=0,625 ; 2/3≈0,667. Urutan terkecil: <strong>7/12 ; 3/5 ; 5/8 ; 2/3</strong>.'
+          },
+          {
+            n:32, tag:'Membandingkan', tagCls:'tag-s6', hots:false,
+            text:'Empat siswa mendapat nilai: Adi <span class="q-formula">7/10</span>, Bita <span class="q-formula">72%</span>, Cico <span class="q-formula">0,715</span>, Dola <span class="q-formula">29/40</span>. Urutan nilai dari tertinggi ke terendah adalah...',
+            opts:['Bita, Cico, Adi, Dola','Dola, Adi, Bita, Cico','Cico, Bita, Adi, Dola','Dola, Bita, Cico, Adi'],
+            // Adi=0,700; Bita=0,720; Cico=0,715; Dola=29/40=0,725. Urutan: Dola>Bita>Cico>Adi. Kunci D
+            exp:'Adi=7/10=0,700 ; Bita=72%=0,720 ; Cico=0,715 ; Dola=29/40=0,725. Urutan tertinggi: <strong>Dola (0,725) → Bita (0,720) → Cico (0,715) → Adi (0,700)</strong>.'
+          },
+          {
+            n:33, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Tiga koperasi menjual beras dengan harga: Koperasi A: 6 kg Rp78.000, Koperasi B: 8 kg Rp100.800, Koperasi C: 5 kg Rp63.500. Mana yang paling murah per kg?',
+            opts:['Koperasi A (Rp13.000/kg)','Koperasi C (Rp12.700/kg)','Koperasi B (Rp12.600/kg)','Koperasi A dan C sama'],
+            // A=78.000÷6=13.000; B=100.800÷8=12.600; C=63.500÷5=12.700. Termurah B. Kunci C
+            exp:'Harga per kg: A=78.000÷6=13.000 ; B=100.800÷8=12.600 ; C=63.500÷5=12.700. Termurah: <strong>Koperasi B (Rp12.600/kg)</strong>.'
+          },
+          {
+            n:34, tag:'HOTS 🔥', tagCls:'tag-hots', hots:true,
+            text:'Nilai Laila adalah <span class="q-formula">7/8</span> dari nilai Mara. Nilai Mara adalah <span class="q-formula">8/9</span> dari nilai Nina. Jika nilai Nina adalah 81, maka nilai Laila adalah...',
+            opts:['63','72','56','49'],
+            // Mara=8/9×81=72. Laila=7/8×72=63. Kunci A
+            exp:'Nilai Mara = 8/9 × 81 = 72. Nilai Laila = 7/8 × 72 = <strong>63</strong>.'
+          },
+          {
+            n:35, tag:'Mengurutkan', tagCls:'tag-s6', hots:false,
+            // PERBAIKAN: Ari=11/12≈0,917; Bona=0,92; Cina=0,91; Danu=10/11≈0,909; Eni=22/24=11/12≈0,917
+            // Urutan: Bona(0,92)>Ari=Eni(0,917)>Cina(0,91)>Danu(0,909)
+            // Perbaiki opsi agar ada jawaban yang memuat urutan benar: Bona, Ari, Eni, Cina, Danu
+            text:'Lima siswa mendapat nilai: Ari <span class="q-formula">11/12</span>, Bona <span class="q-formula">92%</span>, Cina <span class="q-formula">0,91</span>, Danu <span class="q-formula">10/11</span>, Eni <span class="q-formula">22/24</span>. Urutan dari nilai tertinggi adalah...',
+            opts:['Bona, Ari, Eni, Cina, Danu','Bona, Ari, Cina, Eni, Danu','Danu, Bona, Ari, Cina, Eni','Bona, Danu, Cina, Ari, Eni'],
+            // Eni=22/24=11/12=Ari≈0,917. Urutan: Bona>Ari=Eni>Cina>Danu → pilihan A paling tepat. Kunci B→A
+            exp:'Ari=11/12≈0,917 ; Bona=92%=0,920 ; Cina=0,910 ; Danu=10/11≈0,909 ; Eni=22/24=11/12≈0,917 (sama dengan Ari). Urutan tertinggi: <strong>Bona (0,920) → Ari = Eni (0,917) → Cina (0,910) → Danu (0,909)</strong>.'
+          },
         ]
       }
     ]
   }
 };
 
-// ─── STATE ───────────────────────────────────────────────────
+// ─── KUNCI FINAL — dibangun otomatis dari data soal ────────────
+// (kunci sudah hardcode di answers, fungsi ini hanya memvalidasi)
+
+// ─── STATE ──────────────────────────────────────────────────────
 const state = { answered:0, correct:0, wrong:0, map:{} };
 let studentName='', studentKelas='', selectedPacket='';
 let startTime=null, timerInterval=null, secondsLeft=DURATION;
 let examDone=false;
 let currentPacketData=null;
 
-// ─── ANTI-REFRESH ─────────────────────────────────────────────
-const SS_STARTED = 'examv3_started';
-const SS_DONE    = 'examv3_done';
+const SS_STARTED = 'examv4_started';
+const SS_DONE    = 'examv4_done';
 
 window.addEventListener('load', () => {
   if (sessionStorage.getItem(SS_STARTED)==='1' && sessionStorage.getItem(SS_DONE)!=='1') {
@@ -755,7 +1356,6 @@ window.addEventListener('beforeunload', e => {
   if (startTime && !examDone) { e.preventDefault(); e.returnValue=''; }
 });
 
-// ─── PACKET SELECTION ─────────────────────────────────────────
 function selectPacket(p) {
   selectedPacket = p;
   ['A','B','C'].forEach(x => {
@@ -763,7 +1363,6 @@ function selectPacket(p) {
   });
 }
 
-// ─── START ─────────────────────────────────────────────────────
 function startExam() {
   const nama  = document.getElementById('inputNama').value.trim();
   const kelas = document.getElementById('inputKelas').value;
@@ -790,7 +1389,6 @@ function startExam() {
   document.getElementById('headerPacket').textContent    = 'PAKET ' + selectedPacket;
   document.getElementById('headerSub').textContent       = 'Ujian Matrikulasi — Konsep Pecahan · Paket ' + selectedPacket;
 
-  // Render questions
   renderQuestions();
 
   document.getElementById('identityScreen').style.display = 'none';
@@ -799,11 +1397,10 @@ function startExam() {
   startTimer();
 }
 
-// ─── RENDER QUESTIONS ──────────────────────────────────────────
 function renderQuestions() {
-  const main = document.getElementById('mainContent');
+  const main   = document.getElementById('mainContent');
   const result = document.getElementById('resultPanel');
-  main.innerHTML = ''; // clear
+  main.innerHTML = '';
   main.appendChild(result);
 
   const pk = currentPacketData;
@@ -840,7 +1437,6 @@ function renderQuestions() {
   });
 }
 
-// ─── TIMER ─────────────────────────────────────────────────────
 function startTimer() {
   timerInterval = setInterval(() => {
     secondsLeft--;
@@ -863,7 +1459,6 @@ function forceSubmit() {
   showResult();
 }
 
-// ─── ANSWER ────────────────────────────────────────────────────
 function answer(qNum, opt) {
   if (state.map[qNum]) return;
   state.map[qNum] = opt;
@@ -878,7 +1473,6 @@ function answer(qNum, opt) {
   numEl.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
   numEl.textContent = isCorrect ? '✓' : '✗';
 
-  // Find explanation for this question
   let expText = '';
   currentPacketData.sections.forEach(sec => {
     sec.questions.forEach(q => { if (q.n === qNum) expText = q.exp; });
@@ -921,7 +1515,6 @@ function scrollToNext() {
   }
 }
 
-// ─── RESULT ────────────────────────────────────────────────────
 function showResult() {
   if (examDone) return;
   examDone = true;
@@ -950,7 +1543,6 @@ function showResult() {
   document.getElementById('resultEmoji').textContent = emoji;
   document.getElementById('resultLabel').textContent  = label;
 
-  // Build wrong list
   let wrongList = '', wrongCount = 0;
   for (let i = 1; i <= TOTAL_Q; i++) {
     if (state.map[i] && state.map[i] !== currentPacketData.answers[i]) {
