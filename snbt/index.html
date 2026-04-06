@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan SNBT — Roda Kereta &amp; Putaran</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --surface2: #f0efe9;
+    --border: #e2e0d8;
+    --border2: #c9c7bc;
+    --text: #1a1916;
+    --text2: #6b6962;
+    --blue: #2563eb;
+    --blue-bg: #eff6ff;
+    --blue-border: #bfdbfe;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --green-border: #bbf7d0;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+    --red-border: #fecaca;
+    --amber: #d97706;
+    --amber-bg: #fffbeb;
+    --amber-border: #fde68a;
+    --purple: #7c3aed;
+    --purple-bg: #f5f3ff;
+    --purple-border: #ddd6fe;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px; gap: 16px;
+  }
+  .site-logo { display: flex; align-items: center; gap: 10px; }
+  .logo-badge {
+    width: 40px; height: 40px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--blue-bg); border: 1px solid var(--blue-border);
+    font-size: 20px; flex-shrink: 0;
+  }
+  .logo-text { font-size: 14px; font-weight: 600; line-height: 1.2; }
+  .logo-sub { font-size: 11px; color: var(--text2); }
+  .header-stats { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+  .hstat { display: flex; align-items: center; gap: 4px; }
+  .hstat-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .hstat-val { font-weight: 600; }
+
+  .progress-wrap {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0 24px 10px; position: sticky; top: 56px; z-index: 99;
+  }
+  .progress-inner { max-width: 900px; margin: 0 auto; }
+  .progress-meta {
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text2);
+    margin-bottom: 6px; margin-top: 8px;
+  }
+  .progress-track {
+    height: 6px; background: var(--surface2);
+    border-radius: 999px; overflow: hidden; border: 1px solid var(--border);
+  }
+  .progress-fill {
+    height: 100%; background: var(--blue); border-radius: 999px;
+    width: 0%; transition: width 0.4s cubic-bezier(.4,0,.2,1);
+  }
+
+  .main { max-width: 900px; margin: 0 auto; padding: 24px 24px 80px; }
+
+  /* CONTEXT BOX */
+  .context-box {
+    background: var(--amber-bg); border: 1px solid var(--amber-border);
+    border-radius: 14px; padding: 18px 20px; margin-bottom: 24px;
+  }
+  .context-box h3 {
+    font-size: 13px; font-weight: 700; color: var(--amber);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .context-box p { font-size: 13px; line-height: 1.7; }
+  .ctx-math {
+    display: inline-block; background: var(--surface);
+    border: 1px solid var(--amber-border); border-radius: 6px;
+    padding: 2px 8px; font-family: 'DM Mono', monospace;
+    font-size: 12px; color: var(--amber); margin: 0 2px;
+  }
+  .context-img {
+    margin: 14px 0 0; text-align: center;
+    background: var(--surface); border: 1px solid var(--amber-border);
+    border-radius: 10px; padding: 10px; overflow: hidden;
+  }
+  .context-img img {
+    width: 100%; max-width: 600px; height: auto;
+    display: block; margin: 0 auto;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    margin: 32px 0 16px;
+  }
+  .section-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+    background: var(--purple-bg); border: 1px solid var(--purple-border);
+  }
+  .section-info h2 { font-size: 16px; font-weight: 700; }
+  .section-info p { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px; margin-bottom: 12px;
+    transition: box-shadow 0.15s;
+  }
+  .q-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .q-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
+  .q-num {
+    min-width: 28px; height: 28px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: var(--text2);
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .q-num.answered-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+  .q-num.answered-wrong   { background: var(--red-bg);   border-color: var(--red-border);   color: var(--red);   }
+  .q-text { font-size: 14px; line-height: 1.65; flex: 1; }
+  .q-formula {
+    display: inline-block; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 2px 8px; font-family: 'DM Mono', monospace;
+    font-size: 13px; color: var(--blue); margin: 0 2px;
+  }
+
+  /* Image inside soal 4 */
+  .q-img-wrap {
+    margin: 14px 0 4px; text-align: center;
+  }
+  .q-img-wrap img {
+    width: 100%; max-width: 240px; height: auto;
+    display: block; margin: 0 auto; border-radius: 8px;
+  }
+
+  /* OPTIONS */
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 480px) { .options { grid-template-columns: 1fr; } }
+  .option {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; border: 1px solid var(--border);
+    border-radius: 10px; cursor: pointer;
+    background: var(--surface2); transition: all 0.12s;
+    font-size: 13px; user-select: none;
+  }
+  .option:hover { background: var(--blue-bg); border-color: var(--blue-border); }
+  .option.correct      { background: var(--green-bg); border-color: var(--green);        color: var(--green); }
+  .option.wrong        { background: var(--red-bg);   border-color: var(--red);          color: var(--red);   }
+  .option.show-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+  .opt-label {
+    width: 24px; height: 24px; border-radius: 6px;
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+    background: var(--surface); color: var(--text2);
+  }
+
+  /* EXPLANATION */
+  .explanation { display: none; margin-top: 12px; padding: 12px 14px; border-radius: 10px; font-size: 13px; line-height: 1.65; }
+  .explanation.show    { display: block; }
+  .explanation.correct { background: var(--green-bg); border: 1px solid var(--green-border); color: #14532d; }
+  .explanation.wrong   { background: var(--red-bg);   border: 1px solid var(--red-border);   color: #7f1d1d; }
+  .exp-label { font-weight: 700; margin-right: 6px; }
+
+  /* RESULT */
+  .result-panel {
+    display: none; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px 24px; margin-top: 32px; text-align: center;
+  }
+  .result-panel.show { display: block; }
+  .result-emoji  { font-size: 52px; margin-bottom: 12px; }
+  .result-score  { font-size: 40px; font-weight: 700; color: var(--blue); }
+  .result-label  { font-size: 16px; color: var(--text2); margin-top: 6px; margin-bottom: 20px; }
+  .result-grid   { display: flex; justify-content: center; gap: 24px; margin-bottom: 24px; }
+  .r-stat        { text-align: center; }
+  .r-stat-val    { font-size: 28px; font-weight: 700; }
+  .r-stat-lbl    { font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .green-val { color: var(--green); }
+  .red-val   { color: var(--red);   }
+  .blue-val  { color: var(--blue);  }
+
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .btn {
+    padding: 9px 18px; border-radius: 9px; border: 1px solid var(--border2);
+    background: var(--surface2); font-family: inherit; font-size: 13px;
+    font-weight: 600; cursor: pointer; color: var(--text); transition: all 0.12s;
+  }
+  .btn:hover { background: var(--border); }
+  .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 10px 24px; z-index: 98;
+  }
+  .bottom-nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .nav-info { font-size: 13px; color: var(--text2); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="site-logo">
+      <div class="logo-badge">🚂</div>
+      <div>
+        <div class="logo-text">Latihan SNBT</div>
+        <div class="logo-sub">PM 2024 — Roda &amp; Putaran</div>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="hstat">
+        <div class="hstat-dot" style="background:var(--green)"></div>
+        <span id="hCorrect" class="hstat-val" style="color:var(--green)">0</span>
+        <span style="color:var(--text2)">Benar</span>
+      </div>
+      <div class="hstat">
+        <div class="hstat-dot" style="background:var(--red)"></div>
+        <span id="hWrong" class="hstat-val" style="color:var(--red)">0</span>
+        <span style="color:var(--text2)">Salah</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="progress-meta">
+      <span id="progLabel">0 dari 4 soal dijawab</span>
+      <span id="progPct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+</div>
+
+<main class="main">
+
+  <div class="context-box">
+    <h3>📋 Konteks Soal — PM 2024 Hari Kedua Sesi I</h3>
+    <p>
+      Gambar berikut merupakan kereta api yang memiliki roda dengan jari-jari
+      <span class="ctx-math">R₁ = R₂ ≠ R₃ ≠ R₄</span>.
+      Terdapat titik <strong>A</strong>, <strong>B</strong>, dan <strong>C</strong>
+      berturut-turut pada tepi roda dengan jari-jari
+      <span class="ctx-math">R₂</span>, <span class="ctx-math">R₃</span>, dan <span class="ctx-math">R₄</span>.
+    </p>
+    <div class="context-img">
+      <img src="1.svg" alt="Gambar kereta api dengan roda R1, R2, R3, R4 dan titik A, B, C">
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-icon">⚙️</div>
+    <div class="section-info">
+      <h2>Soal 1–4 — Roda Kereta &amp; Putaran</h2>
+      <p>Perbandingan jari-jari roda, putaran, dan posisi titik</p>
+    </div>
+  </div>
+
+  <!-- SOAL 1 -->
+  <div class="q-card" id="qc1">
+    <div class="q-top">
+      <div class="q-num" id="qn1">1</div>
+      <div class="q-text">
+        Jika perbandingan antara <span class="q-formula">R₂</span> dan <span class="q-formula">R₃</span> adalah <span class="q-formula">3 : 2</span>, maka perbandingan <strong>banyaknya putaran</strong> antara <span class="q-formula">R₂</span> dan <span class="q-formula">R₃</span> adalah …
+      </div>
+    </div>
+    <div class="options">
+      <div class="option" onclick="answer(1,'A')"><span class="opt-label">A</span><span class="opt-text">2 : 3</span></div>
+      <div class="option" onclick="answer(1,'B')"><span class="opt-label">B</span><span class="opt-text">4 : 9</span></div>
+      <div class="option" onclick="answer(1,'C')"><span class="opt-label">C</span><span class="opt-text">3 : 2</span></div>
+      <div class="option" onclick="answer(1,'D')"><span class="opt-label">D</span><span class="opt-text">9 : 4</span></div>
+      <div class="option" onclick="answer(1,'E')"><span class="opt-label">E</span><span class="opt-text">1 : 4</span></div>
+    </div>
+    <div class="explanation" id="exp1"></div>
+  </div>
+
+  <!-- SOAL 2 -->
+  <div class="q-card" id="qc2">
+    <div class="q-top">
+      <div class="q-num" id="qn2">2</div>
+      <div class="q-text">
+        Jika perbandingan antara <span class="q-formula">R₂</span> dan <span class="q-formula">R₃</span> adalah <span class="q-formula">9 : 7</span>, maka titik <strong>A</strong> dan <strong>B</strong> akan <strong>bersama kembali</strong> ke posisi awal saat …
+      </div>
+    </div>
+    <div class="options">
+      <div class="option" onclick="answer(2,'A')"><span class="opt-label">A</span><span class="opt-text">R₂ berputar sebanyak 9 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(2,'B')"><span class="opt-label">B</span><span class="opt-text">R₃ berputar sebanyak 28 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(2,'C')"><span class="opt-label">C</span><span class="opt-text">R₂ berputar sebanyak 21 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(2,'D')"><span class="opt-label">D</span><span class="opt-text">R₂ berputar sebanyak 17 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(2,'E')"><span class="opt-label">E</span><span class="opt-text">R₂ berputar sebanyak 7 kali atau kelipatannya</span></div>
+    </div>
+    <div class="explanation" id="exp2"></div>
+  </div>
+
+  <!-- SOAL 3 -->
+  <div class="q-card" id="qc3">
+    <div class="q-top">
+      <div class="q-num" id="qn3">3</div>
+      <div class="q-text">
+        Jika perbandingan antara <span class="q-formula">R₂ : R₃ : R₄ = 9 : 7 : 3</span>, maka titik <strong>A</strong>, <strong>B</strong>, <strong>C</strong> akan <strong>bersama kembali</strong> ke posisi awal saat …
+      </div>
+    </div>
+    <div class="options">
+      <div class="option" onclick="answer(3,'A')"><span class="opt-label">A</span><span class="opt-text">R₂ berputar sebanyak 9 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(3,'B')"><span class="opt-label">B</span><span class="opt-text">R₃ berputar sebanyak 28 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(3,'C')"><span class="opt-label">C</span><span class="opt-text">R₄ berputar sebanyak 30 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(3,'D')"><span class="opt-label">D</span><span class="opt-text">R₂ berputar sebanyak 7 kali atau kelipatannya</span></div>
+      <div class="option" onclick="answer(3,'E')"><span class="opt-label">E</span><span class="opt-text">R₂ berputar sebanyak 17 kali atau kelipatannya</span></div>
+    </div>
+    <div class="explanation" id="exp3"></div>
+  </div>
+
+  <!-- SOAL 4 -->
+  <div class="q-card" id="qc4">
+    <div class="q-top">
+      <div class="q-num" id="qn4">4</div>
+      <div class="q-text">
+        Jika perbandingan antara <span class="q-formula">R₂</span> dan <span class="q-formula">R₃</span> adalah <span class="q-formula">4 : 3</span> dan <span class="q-formula">R₂</span> berputar sebanyak <span class="q-formula">8 kali</span> searah jarum jam, maka posisi titik <strong>B</strong> berada pada nomor …
+        <div class="q-img-wrap">
+          <img src="2.svg" alt="Roda R₃ dengan sektor bernomor 1 sampai 5">
+        </div>
+      </div>
+    </div>
+    <div class="options">
+      <div class="option" onclick="answer(4,'A')"><span class="opt-label">A</span><span class="opt-text">1</span></div>
+      <div class="option" onclick="answer(4,'B')"><span class="opt-label">B</span><span class="opt-text">2</span></div>
+      <div class="option" onclick="answer(4,'C')"><span class="opt-label">C</span><span class="opt-text">3</span></div>
+      <div class="option" onclick="answer(4,'D')"><span class="opt-label">D</span><span class="opt-text">4</span></div>
+      <div class="option" onclick="answer(4,'E')"><span class="opt-label">E</span><span class="opt-text">5</span></div>
+    </div>
+    <div class="explanation" id="exp4"></div>
+  </div>
+
+  <div class="result-panel" id="resultPanel">
+    <div class="result-emoji" id="resultEmoji">🎉</div>
+    <div class="result-score" id="resultScore">0/4</div>
+    <div class="result-label" id="resultLabel">Selesai!</div>
+    <div class="result-grid">
+      <div class="r-stat"><div class="r-stat-val green-val" id="rCorrect">0</div><div class="r-stat-lbl">Benar</div></div>
+      <div class="r-stat"><div class="r-stat-val red-val"   id="rWrong">0</div><div class="r-stat-lbl">Salah</div></div>
+      <div class="r-stat"><div class="r-stat-val blue-val"  id="rPct">0%</div><div class="r-stat-lbl">Skor</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="restartAll()">Ulangi dari Awal</button>
+    </div>
+  </div>
+
+</main>
+
+<div class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <div class="nav-info">Dijawab: <strong id="navAnswered">0</strong>/4</div>
+    <div class="btn-row">
+      <button class="btn" onclick="scrollToNext()">Soal berikutnya ↓</button>
+      <button class="btn btn-primary" onclick="showResult()" id="finishBtn" style="display:none">Lihat Hasil</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TOTAL = 4;
+const ANSWERS = { 1:'A', 2:'E', 3:'C', 4:'C' };
+const EXPLANATIONS = {
+  1: `Jari-jari berbanding terbalik dengan banyak putaran (jarak tempuh sama). Jika R₂ : R₃ = 3 : 2, maka putaran R₂ : putaran R₃ = 2 : 3. Roda lebih besar → keliling lebih besar → perlu lebih sedikit putaran.`,
+  2: `R₂ : R₃ = 9 : 7, sehingga putaran R₂ : putaran R₃ = 7 : 9. A dan B bersama kembali saat R₂ berputar 7 kali atau kelipatannya (dan R₃ berputar 9 kali atau kelipatannya).`,
+  3: `R₂ : R₃ : R₄ = 9 : 7 : 3, sehingga putaran R₂ : R₃ : R₄ = 7 : 9 : 21. KPK(7, 9, 21) = 63. Maka: R₂ berputar 9 kali, R₃ berputar 7 kali, R₄ berputar 30 kali atau kelipatannya. ✓ Pilihan C benar.`,
+  4: `R₂ : R₃ = 4 : 3, sehingga putaran R₂ : R₃ = 3 : 4. Jika R₂ berputar 8 kali → R₃ berputar (4/3) × 8 = 32/3 kali. Sisa putaran = 32/3 mod 1 = 2/3 putaran. Roda R₃ memiliki 10 sektor, titik B mulai di nomor 1. 2/3 putaran = 240° searah jarum jam dari posisi 1 → posisi nomor 3.`
+};
+
+const state = { answered: 0, correct: 0, wrong: 0, map: {} };
+
+function answer(qNum, opt) {
+  if (state.map[qNum]) return;
+  state.map[qNum] = opt;
+  const correct = ANSWERS[qNum];
+  const isCorrect = opt === correct;
+  if (isCorrect) state.correct++; else state.wrong++;
+  state.answered++;
+
+  const numEl = document.getElementById('qn' + qNum);
+  numEl.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  numEl.textContent = isCorrect ? '✓' : '✗';
+
+  const card = document.getElementById('qc' + qNum);
+  const opts = card.querySelectorAll('.option');
+  const labels = ['A','B','C','D','E'];
+  opts.forEach((el, i) => {
+    el.onclick = null;
+    if (labels[i] === opt && !isCorrect) el.classList.add('wrong');
+    if (labels[i] === correct) el.classList.add(isCorrect ? 'correct' : 'show-correct');
+  });
+
+  const exp = document.getElementById('exp' + qNum);
+  exp.className = 'explanation show ' + (isCorrect ? 'correct' : 'wrong');
+  exp.innerHTML = '<span class="exp-label">' + (isCorrect ? '✓ Benar!' : '✗ Kurang tepat.') + '</span>' + EXPLANATIONS[qNum];
+
+  updateStats();
+  if (state.answered === TOTAL) document.getElementById('finishBtn').style.display = 'inline-block';
+}
+
+function updateStats() {
+  document.getElementById('hCorrect').textContent = state.correct;
+  document.getElementById('hWrong').textContent = state.wrong;
+  document.getElementById('navAnswered').textContent = state.answered;
+  const pct = Math.round(state.answered / TOTAL * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = state.answered + ' dari ' + TOTAL + ' soal dijawab';
+  document.getElementById('progPct').textContent = pct + '%';
+}
+
+function scrollToNext() {
+  for (let i = 1; i <= TOTAL; i++) {
+    if (!state.map[i]) {
+      document.getElementById('qc' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+  }
+}
+
+function showResult() {
+  const pct = Math.round(state.correct / TOTAL * 100);
+  document.getElementById('rCorrect').textContent = state.correct;
+  document.getElementById('rWrong').textContent = state.wrong;
+  document.getElementById('rPct').textContent = pct + '%';
+  document.getElementById('resultScore').textContent = state.correct + '/' + TOTAL;
+  let emoji = '😊', label = 'Jangan menyerah! Ulangi lagi!';
+  if (pct === 100)    { emoji = '🏆'; label = 'Sempurna! Luar biasa!'; }
+  else if (pct >= 75) { emoji = '🎉'; label = 'Bagus sekali! Pertahankan!'; }
+  else if (pct >= 50) { emoji = '👍'; label = 'Cukup baik, terus berlatih!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultLabel').textContent = label;
+  document.getElementById('resultPanel').classList.add('show');
+  document.getElementById('resultPanel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function restartAll() { location.reload(); }
+</script>
+</body>
+</html>
