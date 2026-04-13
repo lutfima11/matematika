@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Latihan Soal Pengetahuan Kuantitatif — Matematika</title>
+<title>Latihan Soal PK — Pengetahuan Kuantitatif Matematika</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -497,8 +497,8 @@
 <div class="container">
 
   <div class="hero">
-    <div class="hero-badge">📐 Pak Lutfi </div>
-    <h1>Latihan Soal<br><em>Pengetahuan &amp; Kuantitatif</em></h1>
+    <div class="hero-badge">📐 UTBK Series</div>
+    <h1>Latihan Soal<br><em>Pengetahuan Kuantitatif</em></h1>
     <p>Kerjakan soal-soal di bawah tanpa penilaian otomatis. Gunakan sebagai bahan latihan mandiri.</p>
   </div>
 
@@ -613,7 +613,7 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
 Berdasarkan informasi berikut, manakah pernyataan di bawah ini yang bernilai benar?`,
     bsItems: [
       { label: '1', text: 'Beda dari setiap suku ke-n adalah 3.' },
-      { label: '2', text: 'Jika u₁ + u₂ + u₃ + ⋯ + u₅₀₄ = 63.750, maka n = 250.' },
+      { label: '2', text: 'Jika u₁ + u₂ + u₃ + ⋯ + uₙ = 63.750, maka n = 250.' },
       { label: '3', text: 'Nilai dari U₅₀₅₀ − U₄₉₉₉ menghasilkan bilangan genap.' },
     ]
   },
@@ -920,6 +920,62 @@ Jika ADEC adalah persegi panjang, berapa luas daerah arsiran? Putuskan apakah pe
       'Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan'
     ]
   },
+  // ---- SOAL 22: Trapesium ABCD dan garis l ----
+  {
+    id: 22,
+    type: 'ds',
+    topic: 'Geometri',
+    text: `Jika sebuah trapesium ABCD merupakan sebuah trapesium yang sama kaki dengan titik sudutnya adalah A(0, 0), B(8, 0), C(2, g), D(6, g). Apakah garis <em>l</em> : y = mx + c memotong trapesium ABCD?
+
+Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
+    statements: [
+      { label: '(1)', text: 'm > 0 dan c < g' },
+      { label: '(2)', text: 'm < 0 dan c > 0' },
+    ],
+    options: [
+      'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
+      'Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup',
+      'DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup',
+      'Baik pernyataan (1) SAJA maupun pernyataan (2) SAJA cukup untuk menjawab pertanyaan',
+      'Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan'
+    ]
+  },
+
+  // ---- SOAL 23: p, q, r bilangan real — ekspresi besar ----
+  {
+    id: 23,
+    type: 'pg',
+    topic: 'Aljabar',
+    text: `Misalkan p, q, r adalah bilangan real sehingga diberikan persamaan berikut.
+
+<div class="math-block">(p + q + r)(1/p + 1/q + 1/r) = 1</div>
+
+Maka nilai yang mungkin dari
+
+<div class="math-block">       1                 1              1              1
+─────────────────  −  ───────────  −  ───────────  −  ───────────  = …
+(p + q + r)²⁸⁰⁵²⁰²⁵   p²⁸⁰⁵²⁰²⁵     q²⁸⁰⁵²⁰²⁵     r²⁸⁰⁵²⁰²⁵</div>`,
+    options: ['(a) 0', '(b) 100', '(c) 10.000', '(d) 1.000.000', '(e) 100.000.000']
+  },
+
+  // ---- SOAL 24: Fungsi totient Euler φ(n) ----
+  {
+    id: 24,
+    type: 'bs',
+    topic: 'Teori Bilangan',
+    text: `Misalkan p₁, p₂, p₃, …, pₖ adalah bilangan-bilangan prima berbeda yang membagi habis n untuk bilangan bulat n > 1. Nilai dari φ(n) dapat dihitung sebagai berikut.
+
+<div class="math-block">φ(n) = n · (1 − 1/p₁) · (1 − 1/p₂) · (1 − 1/p₃) ··· (1 − 1/pₖ)</div>
+
+Tentukan apakah pernyataan-pernyataan berikut bernilai BENAR atau SALAH!`,
+    bsItems: [
+      { label: '1', text: 'φ(70) < φ(72)' },
+      { label: '2', text: 'Jika φ(n) = 4/5 · n, maka n tidak habis dibagi 5.' },
+      { label: '3', text: 'Jika n adalah bilangan bulat yang habis dibagi 2, maka φ(n) ≤ 1/2 · n.' },
+      { label: '4', text: 'Jika p dan q adalah dua bilangan prima berbeda, maka φ(pq) = φ(p) · φ(q).' },
+    ]
+  },
+
   // ---- SOAL 21: Sudut x, y, z dua garis sejajar ----
   {
     id: 21,
