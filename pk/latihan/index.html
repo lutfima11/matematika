@@ -31,7 +31,6 @@
     overflow-x: hidden;
   }
 
-  /* Decorative background */
   body::before {
     content: '';
     position: fixed;
@@ -44,7 +43,6 @@
     z-index: 0;
   }
 
-  /* === HEADER === */
   header {
     position: sticky;
     top: 0;
@@ -99,7 +97,6 @@
     width: 0%;
   }
 
-  /* === LAYOUT === */
   .container {
     max-width: 860px;
     margin: 0 auto;
@@ -108,7 +105,6 @@
     z-index: 1;
   }
 
-  /* === HERO === */
   .hero {
     text-align: center;
     margin-bottom: 4rem;
@@ -153,7 +149,6 @@
     line-height: 1.6;
   }
 
-  /* === TOPIC FILTER === */
   .filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -180,7 +175,6 @@
     font-weight: 600;
   }
 
-  /* === QUESTION CARD === */
   .q-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -267,7 +261,6 @@
     line-height: 1.6;
   }
 
-  /* === OPTIONS — Pilihan Ganda === */
   .options-list {
     display: flex;
     flex-direction: column;
@@ -312,7 +305,6 @@
     color: var(--text);
   }
 
-  /* === OPTIONS — Benar/Salah === */
   .bs-table {
     width: 100%;
     border-collapse: collapse;
@@ -340,7 +332,6 @@
   }
 
   .bs-table tr:last-child td { border-bottom: none; }
-
   .bs-table td:not(:first-child) { text-align: center; }
 
   .bs-toggle {
@@ -367,7 +358,6 @@
   .bs-btn.active-b { background: rgba(111,207,151,0.2); color: var(--correct); }
   .bs-btn.active-s { background: rgba(235,87,87,0.15); color: var(--wrong); }
 
-  /* === OPTIONS — Esai === */
   .esai-area {
     background: var(--surface2);
     border: 1px solid var(--border);
@@ -393,7 +383,6 @@
 
   .esai-area textarea::placeholder { color: var(--text-muted); }
 
-  /* === NAVIGATION === */
   .nav-row {
     display: flex;
     align-items: center;
@@ -436,7 +425,6 @@
     color: var(--text-muted);
   }
 
-  /* === EMPTY STATE === */
   .empty {
     text-align: center;
     padding: 4rem 2rem;
@@ -445,7 +433,6 @@
   .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
   .empty p { font-size: 0.9rem; }
 
-  /* === DIVIDER === */
   .section-title {
     font-family: 'Fraunces', serif;
     font-size: 1.05rem;
@@ -460,7 +447,6 @@
   }
   .section-title span { color: var(--accent); }
 
-  /* Sub-soal style */
   .sub-q {
     margin: 0.5rem 0 1rem;
     padding-left: 1rem;
@@ -470,7 +456,6 @@
     color: var(--text);
   }
 
-  /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--surface); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
@@ -507,7 +492,6 @@
 </div>
 
 <script>
-// ===================== DATA SOAL =====================
 const soalData = [
   // ---- SOAL 1: Barisan Bilangan Real ----
   {
@@ -793,6 +777,60 @@ Jika h⁻¹(x) adalah fungsi invers dari h(x), maka manakah dari tiga pernyataan
       { label: '3', text: 'h⁻¹(3) = −4' },
     ]
   },
+
+  // ---- SOAL 16 (BARU): Peluang ab ganjil ----
+  {
+    id: 16,
+    type: 'esai',
+    topic: 'Kombinatorika',
+    text: `Misalkan bilangan <em>a</em> dipilih dari himpunan bilangan ganjil positif yang kurang dari 10 serta bilangan <em>b</em> dipilih dari himpunan {1, 2, 4, 7, 9}. Peluang <em>ab</em> bernilai ganjil adalah x/y dengan x dan y pasangan bilangan bulat yang saling koprima.
+
+Nilai dari x + y = …`
+  },
+
+  // ---- SOAL 17 (BARU): Garis k melalui kuadran II — DS ----
+  {
+    id: 17,
+    type: 'ds',
+    topic: 'Fungsi',
+    text: `Garis <em>k</em> ditentukan oleh persamaan y = f(x) = mx + c dengan m ≠ 0 dan c ≠ 0. Apakah garis <em>k</em> melalui kuadran II?
+
+Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
+    statements: [
+      { label: '(1)', text: 'f(1) = 0' },
+      { label: '(2)', text: 'c = 3' },
+    ],
+    options: [
+      'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
+      'Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup',
+      'DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup',
+      'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan pernyataan (2) SAJA cukup',
+      'Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan'
+    ]
+  },
+
+  // ---- SOAL 18 (BARU): r dan s bilangan asli berurutan — BS ----
+  {
+    id: 18,
+    type: 'pg',
+    topic: 'Teori Bilangan',
+    text: `Diketahui r dan s berturut-turut bilangan asli berurutan dengan r &lt; s. Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+<div class="info-box">
+(1) (r + s)² &gt; r² + s²<br>
+(2) r² + s² adalah bilangan genap<br>
+(3) r² − rs + s² adalah bilangan genap<br>
+(4) r² − s² &lt; 0
+</div>`,
+    options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
+  },
+
+  // ---- SOAL 19 (BARU): Fungsi kuadrat nilai maks 9 ----
+  {
+    id: 19,
+    type: 'esai',
+    topic: 'Fungsi',
+    text: `Nilai maksimum suatu fungsi kuadrat f adalah 9 dan grafik fungsi tersebut melalui titik (−4, 0) dan titik (2, 0). Jika grafik fungsi f memotong sumbu-y di titik (m, n), nilai m + n = …`
+  },
 ];
 
 // ===================== STATE =====================
@@ -826,7 +864,6 @@ function renderQuestions() {
     return;
   }
 
-  // Group by topic
   const groups = {};
   filtered.forEach(s => {
     if (!groups[s.topic]) groups[s.topic] = [];
@@ -855,7 +892,6 @@ function renderCard(s, num) {
   let body = '';
 
   if (s.type === 'pg' || s.type === 'ds') {
-    // Show statements if DS
     let stmts = '';
     if (s.statements) {
       stmts = `<div class="info-box" style="margin-bottom:1rem">` +
@@ -895,7 +931,6 @@ function renderCard(s, num) {
     </table>`;
 
   } else {
-    // Esai
     body = `<div class="esai-area">
       <textarea placeholder="Tuliskan jawaban dan langkah penyelesaian kamu di sini…"
                 oninput="saveEsai(${s.id}, this.value)">${answers[s.id] || ''}</textarea>
