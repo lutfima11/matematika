@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Latihan Soal PK — Penalaran & Matematika</title>
+<title>Latihan Soal Pengetahuan Kuantitatif — Matematika</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -261,6 +261,22 @@
     line-height: 1.6;
   }
 
+  .svg-figure {
+    display: flex;
+    justify-content: center;
+    margin: 1.2rem 0;
+    padding: 1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .svg-figure svg {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+  }
+
   .options-list {
     display: flex;
     flex-direction: column;
@@ -490,6 +506,56 @@
   <div id="questions-container"></div>
 
 </div>
+
+<!-- Inline SVG template for soal 21 (18pk) -->
+<template id="svg-18pk">
+<svg viewBox="96 22 222 175" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left vertical line -->
+  <line x1="113.386" y1="34" x2="113.386" y2="192" stroke="#333" stroke-width="2.5" stroke-linecap="square"/>
+  <!-- Right vertical line -->
+  <line x1="302.476" y1="34" x2="302.476" y2="192" stroke="#333" stroke-width="2.5" stroke-linecap="square"/>
+  <!-- Left shaded triangle -->
+  <path d="M113.386,151.181 L113.386,75.5906 L207.874,113.386 Z" fill="rgba(0,0,0,0.18)" stroke="#333" stroke-width="2.3" stroke-linejoin="bevel"/>
+  <!-- Right shaded triangle -->
+  <path d="M302.645,150.979 L302.645,75.3885 L208.156,113.184 Z" fill="rgba(0,0,0,0.18)" stroke="#333" stroke-width="2.3" stroke-linejoin="bevel"/>
+  <!-- Tick marks: left upper arm (single tick) -->
+  <line x1="157" y1="99" x2="161" y2="90" stroke="#333" stroke-width="2.3"/>
+  <!-- Tick marks: left lower arm (single tick) -->
+  <line x1="163" y1="138" x2="160" y2="129" stroke="#333" stroke-width="2.3"/>
+  <!-- Tick marks: right upper arm (double tick) -->
+  <line x1="256" y1="97" x2="252" y2="88" stroke="#333" stroke-width="2.3"/>
+  <line x1="262" y1="95" x2="258" y2="86" stroke="#333" stroke-width="2.3"/>
+  <!-- Tick marks: right lower arm (double tick) -->
+  <line x1="249" y1="135" x2="253" y2="126" stroke="#333" stroke-width="2.3"/>
+  <line x1="255" y1="137" x2="259" y2="128" stroke="#333" stroke-width="2.3"/>
+  <!-- Labels -->
+  <text x="284" y="74" font-family="serif" font-size="15" font-style="italic" fill="#111">x°</text>
+  <text x="231" y="118" font-family="serif" font-size="15" font-style="italic" fill="#111">y°</text>
+  <text x="173" y="121" font-family="serif" font-size="15" fill="#111">z°</text>
+</svg>
+</template>
+
+<!-- Inline SVG template for soal 20 (hidden, referenced by JS) -->
+<template id="svg-11pk">
+<svg viewBox="400 45 270 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Shaded trapezoid region BDEC -->
+  <path d="M491.339,75.5906 L623.622,75.5906 L623.622,188.976 L434.646,188.976 Z"
+        fill="rgba(0,0,0,0.18)" stroke="none"/>
+  <!-- Outer rectangle ADEC outline -->
+  <polyline points="434.646,75.5906 434.646,188.976" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="square"/>
+  <polyline points="434.646,188.976 623.622,188.976" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="square"/>
+  <polyline points="623.622,188.976 623.622,75.5906" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="square"/>
+  <polyline points="623.622,75.5906 434.646,75.5906" fill="none" stroke="#333" stroke-width="2.2" stroke-linecap="square"/>
+  <!-- Diagonal BD -->
+  <line x1="491.339" y1="75.5906" x2="434.646" y2="188.976" stroke="#333" stroke-width="2.2" stroke-linecap="square"/>
+  <!-- Labels -->
+  <text x="428" y="68" font-family="serif" font-size="16" font-weight="700" fill="#111">A</text>
+  <text x="484" y="68" font-family="serif" font-size="16" font-weight="700" fill="#111">B</text>
+  <text x="618" y="68" font-family="serif" font-size="16" font-weight="700" fill="#111">C</text>
+  <text x="425" y="206" font-family="serif" font-size="16" font-weight="700" fill="#111">D</text>
+  <text x="618" y="206" font-family="serif" font-size="16" font-weight="700" fill="#111">E</text>
+</svg>
+</template>
 
 <script>
 const soalData = [
@@ -778,7 +844,7 @@ Jika h⁻¹(x) adalah fungsi invers dari h(x), maka manakah dari tiga pernyataan
     ]
   },
 
-  // ---- SOAL 16 (BARU): Peluang ab ganjil ----
+  // ---- SOAL 16: Peluang ab ganjil ----
   {
     id: 16,
     type: 'esai',
@@ -788,7 +854,7 @@ Jika h⁻¹(x) adalah fungsi invers dari h(x), maka manakah dari tiga pernyataan
 Nilai dari x + y = …`
   },
 
-  // ---- SOAL 17 (BARU): Garis k melalui kuadran II — DS ----
+  // ---- SOAL 17: Garis k melalui kuadran II — DS ----
   {
     id: 17,
     type: 'ds',
@@ -809,7 +875,7 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     ]
   },
 
-  // ---- SOAL 18 (BARU): r dan s bilangan asli berurutan — BS ----
+  // ---- SOAL 18: r dan s bilangan asli berurutan ----
   {
     id: 18,
     type: 'pg',
@@ -824,12 +890,47 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
 
-  // ---- SOAL 19 (BARU): Fungsi kuadrat nilai maks 9 ----
+  // ---- SOAL 19: Fungsi kuadrat nilai maks 9 ----
   {
     id: 19,
     type: 'esai',
     topic: 'Fungsi',
     text: `Nilai maksimum suatu fungsi kuadrat f adalah 9 dan grafik fungsi tersebut melalui titik (−4, 0) dan titik (2, 0). Jika grafik fungsi f memotong sumbu-y di titik (m, n), nilai m + n = …`
+  },
+
+  // ---- SOAL 20: Luas daerah arsiran ADEC (gambar 11pk) ----
+  {
+    id: 20,
+    type: 'ds',
+    topic: 'Geometri',
+    text: `Perhatikan gambar di bawah ini.
+
+<div class="svg-figure" id="svg-container-20"></div>
+
+Jika ADEC adalah persegi panjang, berapa luas daerah arsiran? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
+    statements: [
+      { label: '1.', text: 'BD = 15' },
+      { label: '2.', text: 'AD = 12' },
+    ],
+    options: [
+      'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
+      'Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup',
+      'DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup',
+      'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan pernyataan (2) SAJA cukup',
+      'Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan'
+    ]
+  },
+  // ---- SOAL 21: Sudut x, y, z dua garis sejajar ----
+  {
+    id: 21,
+    type: 'pg',
+    topic: 'Geometri',
+    text: `Perhatikan gambar berikut ini.
+
+<div class="svg-figure" id="svg-container-21"></div>
+
+Jika x + y + z = 270° dan 2x + z = 360°, maka nilai sudut y adalah …°`,
+    options: ['(a) 15', '(b) 30', '(c) 45', '(d) 60', '(e) 90']
   },
 ];
 
@@ -880,6 +981,21 @@ function renderQuestions() {
   });
 
   container.innerHTML = html;
+
+  // Inject SVG for soal 20
+  const svgContainer = document.getElementById('svg-container-20');
+  if (svgContainer) {
+    const tmpl = document.getElementById('svg-11pk');
+    if (tmpl) svgContainer.innerHTML = tmpl.innerHTML;
+  }
+
+  // Inject SVG for soal 21
+  const svgContainer21 = document.getElementById('svg-container-21');
+  if (svgContainer21) {
+    const tmpl21 = document.getElementById('svg-18pk');
+    if (tmpl21) svgContainer21.innerHTML = tmpl21.innerHTML;
+  }
+
   updateProgress(filtered);
 }
 
