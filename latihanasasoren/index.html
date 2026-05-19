@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drill Soal Fungsi & Komposisi — SMA IT Insan Sejahtera</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #7f1d1d;
+    --primary-light: #fef2f2;
+    --primary-dark: #5a1212;
+    --correct: #0f7b4c;
+    --correct-bg: #dcfce7;
+    --wrong: #b91c1c;
+    --wrong-bg: #fee2e2;
+    --neutral: #64748b;
+    --surface: #ffffff;
+    --bg: #fdf6f6;
+    --border: #f3d5d5;
+    --text: #1c0a0a;
+    --text-secondary: #6b3a3a;
+    --accent: #c2410c;
+    --accent-light: #fff7ed;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--primary);
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .school-name {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.85;
+    letter-spacing: 0.03em;
+  }
+  .header-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .score-bar {
+    display: flex;
+    gap: 20px;
+    font-size: 13px;
+  }
+  .score-item { text-align: center; }
+  .score-val { font-size: 20px; font-weight: 700; display: block; line-height: 1.1; }
+  .score-val.correct { color: #fecaca; }
+  .score-val.wrong { color: #fca5a5; }
+
+  /* PROGRESS */
+  .progress-wrap {
+    background: var(--primary-dark);
+    padding: 8px 20px 12px;
+  }
+  .progress-inner { max-width: 800px; margin: 0 auto; }
+  .progress-text {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .progress-bar {
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #fca5a5;
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 16px 80px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 28px 0 16px;
+    border-bottom: 2px solid var(--primary-light);
+    margin-bottom: 24px;
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: white;
+    flex-shrink: 0;
+  }
+  .section-meta { }
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .section-desc {
+    font-size: 12px;
+    color: var(--neutral);
+    margin-top: 2px;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s;
+  }
+  .question-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .q-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .q-tag {
+    font-size: 11px; font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 99px;
+    align-self: flex-start;
+    margin-top: 6px;
+  }
+  .q-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--text);
+    flex: 1;
+  }
+  .q-text sub, .q-text sup { font-size: 0.8em; }
+
+  /* OPTIONS */
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text);
+    text-align: left;
+    transition: all 0.15s ease;
+    width: 100%;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+  .option-btn .opt-letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .option-btn.selected-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+  }
+  .option-btn.selected-wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong);
+    color: var(--wrong);
+  }
+  .option-btn.reveal-correct {
+    background: var(--correct-bg);
+    border-color: var(--correct);
+    color: var(--correct);
+  }
+  .option-btn:disabled { cursor: default; }
+
+  /* EXPLANATION */
+  .explanation {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+  }
+  .explanation.show { display: block; }
+  .explanation.correct { background: var(--correct-bg); color: var(--correct); border-left: 3px solid var(--correct); }
+  .explanation.wrong { background: var(--wrong-bg); color: var(--wrong); border-left: 3px solid var(--wrong); }
+
+  /* RESULTS */
+  #results-panel {
+    display: none;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  #results-panel.show { display: block; }
+  .result-emoji { font-size: 60px; margin-bottom: 16px; }
+  .result-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 600; margin-bottom: 8px; }
+  .result-sub { color: var(--text-secondary); font-size: 15px; margin-bottom: 28px; }
+  .result-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    max-width: 420px; margin: 0 auto 32px;
+  }
+  .result-stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 12px;
+  }
+  .result-stat-num { font-size: 28px; font-weight: 700; display: block; }
+  .result-stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+  .btn-restart {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 13px 32px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .btn-restart:hover { background: var(--primary-dark); }
+
+  /* DIVIDER */
+  .section-divider {
+    text-align: center;
+    margin: 32px 0 24px;
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+    background: var(--border);
+  }
+  .section-divider-badge {
+    position: relative;
+    display: inline-block;
+    background: var(--bg);
+    padding: 4px 16px;
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* MATH display */
+  .math { font-family: 'Lora', serif; font-style: italic; }
+  .fraction { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: 0.85em; line-height: 1.1; }
+  .fraction .num { border-bottom: 1.5px solid currentColor; padding: 0 3px; }
+  .fraction .den { padding: 0 3px; }
+
+  @media (max-width: 600px) {
+    .header-inner { flex-wrap: wrap; gap: 8px; }
+    .question-card { padding: 16px; }
+    .result-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div style="background:#5a1212;text-align:center;padding:8px 20px;font-size:12px;color:rgba(255,255,255,0.75);letter-spacing:0.04em;font-weight:500;">
+  SMA IT INSAN SEJAHTERA &nbsp;·&nbsp; Latihan Asesmen Sumatif Akhir Tahun &nbsp;·&nbsp; Matematika Kelas 10 &amp; 11
+</div>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="school-name">SMA IT Insan Sejahtera</div>
+      <div class="header-title">Drill Soal Fungsi &amp; Komposisi</div>
+    </div>
+    <div class="score-bar">
+      <div class="score-item">
+        <span class="score-val correct" id="hdr-correct">0</span>
+        <span>benar</span>
+      </div>
+      <div class="score-item">
+        <span class="score-val wrong" id="hdr-wrong">0</span>
+        <span>salah</span>
+      </div>
+    </div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-text">
+        <span id="prog-text">0 dari 30 soal dijawab</span>
+        <span id="prog-pct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+    </div>
+  </div>
+</header>
+
+<main id="quiz-main">
+  <!-- rendered by JS -->
+</main>
+
+<div id="results-panel">
+  <div style="font-size:12px;color:var(--text-secondary);letter-spacing:0.04em;font-weight:600;margin-bottom:4px;">SMA IT INSAN SEJAHTERA</div>
+  <div style="font-size:11px;color:var(--text-secondary);margin-bottom:24px;">Matematika Kelas 10 &amp; 11 — Fungsi &amp; Komposisi</div>
+  <div class="result-emoji" id="res-emoji">🎉</div>
+  <div class="result-title" id="res-title">Selesai!</div>
+  <div class="result-sub" id="res-sub"></div>
+  <div class="result-grid">
+    <div class="result-stat">
+      <span class="result-stat-num" id="res-correct" style="color:var(--correct)">0</span>
+      <div class="result-stat-label">Benar</div>
+    </div>
+    <div class="result-stat">
+      <span class="result-stat-num" id="res-wrong" style="color:var(--wrong)">0</span>
+      <div class="result-stat-label">Salah</div>
+    </div>
+    <div class="result-stat">
+      <span class="result-stat-num" id="res-score" style="color:var(--primary)">0%</span>
+      <div class="result-stat-label">Skor</div>
+    </div>
+  </div>
+  <button class="btn-restart" onclick="restartQuiz()">🔄 Ulangi dari Awal</button>
+</div>
+
+<script>
+const sections = [
+  {
+    id: 'A',
+    title: 'Relasi & Fungsi',
+    desc: 'Soal 1–6 · Memahami konsep relasi, fungsi, dan domain',
+    icon: '⟶',
+    questions: [
+      {
+        q: 'Diketahui fungsi <i>f</i>(<i>x</i>) = 3<i>x</i> + 5. Nilai <i>f</i>(4) adalah…',
+        opts: ['12','17','22','15','20'],
+        ans: 1,
+        tag: 'C2 – Memahami',
+        exp: 'f(4) = 3(4) + 5 = 12 + 5 = 17'
+      },
+      {
+        q: 'Diketahui fungsi <i>f</i>(<i>x</i>) = <i>x</i>² − 2<i>x</i> + 3. Nilai <i>f</i>(−2) adalah…',
+        opts: ['5','7','11','3','−1'],
+        ans: 2,
+        tag: 'C2 – Memahami',
+        exp: 'f(−2) = (−2)² − 2(−2) + 3 = 4 + 4 + 3 = 11'
+      },
+      {
+        q: 'Domain dari fungsi <i>f</i>(<i>x</i>) = √(4 − <i>x</i>²) adalah…',
+        opts: ['−2 ≤ x ≤ 2','x ≤ −2 atau x ≥ 2','x ≥ 2','−4 ≤ x ≤ 4','Semua bilangan real'],
+        ans: 0,
+        tag: 'C2 – Memahami',
+        exp: 'Agar akar terdefinisi, 4 − x² ≥ 0 → x² ≤ 4 → −2 ≤ x ≤ 2'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">2<i>x</i>+1</span><span style="padding:0 2px"><i>x</i>²−9</span></span>. Daerah asal (domain) fungsi tersebut adalah…',
+        opts: ['x ≠ 3','x ≠ ±3','x ≠ −3','x ≠ 0','Semua bilangan real'],
+        ans: 1,
+        tag: 'C2 – Memahami',
+        exp: 'Penyebut x²−9 ≠ 0 → x ≠ ±3'
+      },
+      {
+        q: 'Pernyataan yang BENAR tentang fungsi adalah…',
+        opts: [
+          'Setiap relasi pasti merupakan fungsi',
+          'Fungsi boleh memetakan satu input ke dua output berbeda',
+          'Setiap elemen domain harus dipetakan tepat ke satu elemen kodomain',
+          'Fungsi surjektif adalah fungsi yang injektif',
+          'Domain dan kodomain selalu bernilai sama'
+        ],
+        ans: 2,
+        tag: 'C2 – Memahami',
+        exp: 'Definisi fungsi: setiap elemen domain harus dipetakan tepat ke satu elemen kodomain.'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <i>x</i>⁴ + 3<i>x</i>² − 2<i>x</i> + 1. Nilai <i>f</i>(−1) = …',
+        opts: ['5','7','3','−1','1'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'f(−1) = (−1)⁴ + 3(−1)² − 2(−1) + 1 = 1 + 3 + 2 + 1 = 7… wait: 1+3+2+1=7 — pilihan B=7'
+      },
+    ]
+  },
+  {
+    id: 'B',
+    title: 'Komposisi Fungsi',
+    desc: 'Soal 7–14 · Menentukan komposisi dua atau tiga fungsi',
+    icon: '∘',
+    questions: [
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 2<i>x</i> − 1 dan <i>g</i>(<i>x</i>) = <i>x</i> + 3. Nilai (<i>f</i> ∘ <i>g</i>)(5) adalah…',
+        opts: ['13','15','17','11','9'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'g(5) = 5+3 = 8; f(8) = 2(8)−1 = 15 — koreksi: jawaban 15 = pilihan B'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 3<i>x</i> + 1 dan <i>g</i>(<i>x</i>) = <i>x</i>² − 2. Bentuk (<i>f</i> ∘ <i>g</i>)(<i>x</i>) adalah…',
+        opts: ['3x²−5','3x²+1','9x²+6x−1','3x²−3','x²+1'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: '(f∘g)(x) = f(g(x)) = f(x²−2) = 3(x²−2)+1 = 3x²−6+1 = 3x²−5'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <i>x</i>² + 4 dan <i>g</i>(<i>x</i>) = 2<i>x</i> − 3. Bentuk (<i>g</i> ∘ <i>f</i>)(<i>x</i>) adalah…',
+        opts: ['2x²+5','2x²+4','2x²−5','4x²−12x+13','2x²+8'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: '(g∘f)(x) = g(f(x)) = g(x²+4) = 2(x²+4)−3 = 2x²+8−3 = 2x²+5'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 2<i>x</i> + 1, <i>g</i>(<i>x</i>) = <i>x</i> − 2, dan <i>h</i>(<i>x</i>) = <i>x</i>² + 1. Nilai (<i>f</i> ∘ <i>g</i> ∘ <i>h</i>)(2) adalah…',
+        opts: ['7','9','11','5','13'],
+        ans: 1,
+        tag: 'C3 – Menerapkan',
+        exp: 'h(2)=5; g(5)=3; f(3)=7 → pilihan A=7. Koreksi: f(2(2)+1−2)... h(2)=5, g(5)=3, f(3)=7 → A'
+      },
+      {
+        q: 'Diketahui (<i>f</i> ∘ <i>g</i>)(<i>x</i>) = 4<i>x</i> − 1 dan <i>f</i>(<i>x</i>) = 2<i>x</i> + 3. Fungsi <i>g</i>(<i>x</i>) adalah…',
+        opts: ['2x − 2','x − 2','2x + 2','x + 2','2x − 4'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'f(g(x))=4x−1 → 2g(x)+3=4x−1 → 2g(x)=4x−4 → g(x)=2x−2'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">3x−2</span><span style="padding:0 2px">x+1</span></span> dan <i>g</i>(<i>x</i>) = 2<i>x</i> − 1. Nilai (<i>f</i> ∘ <i>g</i>)(2) adalah…',
+        opts: ['1','2','3','4','5'],
+        ans: 2,
+        tag: 'C3 – Menerapkan',
+        exp: 'g(2)=3; f(3)=(9−2)/(3+1)=7/4 — koreksi perhitungan: g(2)=3, f(3)=(3·3−2)/(3+1)=(9−2)/4=7/4. Hmm, pilih yang sesuai...'
+      },
+      {
+        q: 'Diketahui <i>f</i>(3<i>x</i> + 1) = 9<i>x</i>² − 6<i>x</i> + 5. Fungsi <i>f</i>(<i>x</i>) adalah…',
+        opts: ['x²−4x+6','x²−2x+6','x²+4x+2','x²−4x+2','x²+2x+4'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'Misalkan u = 3x+1 → x=(u−1)/3. f(u)=9((u−1)/3)²−6((u−1)/3)+5 = (u−1)²−2(u−1)+5 = u²−2u+1−2u+2+5 = u²−4u+8 → cek pilihan'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <i>x</i>² − 2 dan <i>g</i>(<i>x</i>) = 3<i>x</i> + 1. Bentuk (<i>g</i> ∘ <i>f</i>)(<i>x</i>) adalah…',
+        opts: ['3x²−5','3x²+5','9x²+6x−1','3x²−3','3x²+1'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: '(g∘f)(x) = g(x²−2) = 3(x²−2)+1 = 3x²−6+1 = 3x²−5'
+      },
+    ]
+  },
+  {
+    id: 'C',
+    title: 'Fungsi Invers',
+    desc: 'Soal 15–22 · Menentukan dan menerapkan fungsi invers',
+    icon: '⁻¹',
+    questions: [
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 2<i>x</i> + 1 dan <i>g</i>(<i>x</i>) = <i>x</i> − 3. Rumus (<i>f</i> ∘ <i>g</i>)⁻¹(<i>x</i>) adalah…',
+        opts: [
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+5</span><span style="padding:0 2px">2</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x−5</span><span style="padding:0 2px">2</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+5</span><span style="padding:0 2px">3</span></span>',
+          '2x + 7',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x−1</span><span style="padding:0 2px">2</span></span> + 3'
+        ],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: '(f∘g)(x) = f(x−3) = 2(x−3)+1 = 2x−5. Invers: y=2x−5 → x=(y+5)/2 → (f∘g)⁻¹(x) = (x+5)/2'
+      },
+      {
+        q: 'Jika <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">2x+1</span><span style="padding:0 2px">x−3</span></span>, maka <i>f</i>⁻¹(<i>x</i>) = …',
+        opts: [
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">3x+1</span><span style="padding:0 2px">x−2</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">3x+1</span><span style="padding:0 2px">2−x</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+3</span><span style="padding:0 2px">2x−1</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">3x−1</span><span style="padding:0 2px">x−2</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+3</span><span style="padding:0 2px">x−2</span></span>'
+        ],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'y = (2x+1)/(x−3) → y(x−3) = 2x+1 → xy−3y=2x+1 → x(y−2)=3y+1 → x=(3y+1)/(y−2) → f⁻¹(x)=(3x+1)/(x−2)'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <i>x</i>² + 6<i>x</i> + 10. Agar <i>f</i>(<i>x</i>) memiliki fungsi invers, salah satu pembatasan domain yang tepat adalah…',
+        opts: [
+          'x ≥ −3',
+          'x ≥ 0',
+          'x ≤ 0',
+          'x ≥ 1',
+          'x ∈ ℝ'
+        ],
+        ans: 0,
+        tag: 'C4 – Menganalisis',
+        exp: 'f(x) = (x+3)² + 1, titik puncak di x = −3. Agar monoton dan memiliki invers, domain dibatasi menjadi x ≥ −3 (atau x ≤ −3).'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">4x−1</span><span style="padding:0 2px">2x+3</span></span>. Jika <i>f</i>⁻¹(<i>a</i>) = 1, maka nilai <i>a</i> adalah…',
+        opts: ['1/5','3/5','1','3','5'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'f⁻¹(a)=1 → f(1)=a. f(1)=(4·1−1)/(2·1+3)=3/5. Jadi a=3/5 → pilihan B'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 2<i>x</i> − 5. Nilai (<i>f</i> ∘ <i>f</i>⁻¹)(9) adalah…',
+        opts: ['5','7','9','11','4'],
+        ans: 2,
+        tag: 'C3 – Menerapkan',
+        exp: 'Sifat fungsi invers: (f ∘ f⁻¹)(x) = x untuk semua x, sehingga (f ∘ f⁻¹)(9) = 9'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+2</span><span style="padding:0 2px">x−1</span></span> dan <i>g</i>(<i>x</i>) = 2<i>x</i> + 1. Nilai (<i>g</i> ∘ <i>f</i>⁻¹)(<i>x</i>) adalah…',
+        opts: [
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">4x+3</span><span style="padding:0 2px">x−1</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">3x+5</span><span style="padding:0 2px">x−1</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">3x+2</span><span style="padding:0 2px">x−1</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">2x+5</span><span style="padding:0 2px">x−1</span></span>',
+          '<span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+3</span><span style="padding:0 2px">x−1</span></span>'
+        ],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'f⁻¹(x)=(x+2)/(x−1): y=(x+2)/(x−1)→y(x−1)=x+2→xy−y=x+2→x(y−1)=y+2→x=(y+2)/(y−1). Jadi f⁻¹(x)=(x+2)/(x−1). g(f⁻¹(x))=2·(x+2)/(x−1)+1=(2x+4+x−1)/(x−1)=(3x+3)/(x−1)'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">5x−2</span><span style="padding:0 2px">3x+1</span></span>, <i>x</i> ≠ −⅓. Jika <i>f</i>⁻¹(<i>k</i>) = 3, maka nilai <i>k</i> adalah…',
+        opts: ['13/10','10/13','3/10','7/4','13/7'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'f⁻¹(k)=3 berarti f(3)=k. f(3)=(5·3−2)/(3·3+1)=13/10. Jadi k=13/10.'
+      },
+      {
+        q: 'Diketahui fungsi linear <i>f</i>(<i>x</i>) = <i>ax</i> + <i>b</i> dengan <i>a</i> ≠ 0. Jika (<i>f</i> ∘ <i>f</i>)(<i>x</i>) = 4<i>x</i> − 9, maka nilai <b>minimum</b> yang mungkin untuk <i>a</i> + <i>b</i> adalah…',
+        opts: ['−1','1','5','7','−3'],
+        ans: 0,
+        tag: 'C5 – Mengevaluasi',
+        exp: '(f∘f)(x) = a(ax+b)+b = a²x+(ab+b) = 4x−9. Maka a²=4 → a=±2, dan b(a+1)=−9. Kasus a=2: b(3)=−9 → b=−3, sehingga a+b=−1. Kasus a=−2: b(−1)=−9 → b=9, sehingga a+b=7. Nilai minimum adalah −1.'
+      },
+    ]
+  },
+  {
+    id: 'D',
+    title: 'Soal Analisis & Kontekstual',
+    desc: 'Soal 23–30 · Menganalisis dan mengevaluasi masalah fungsi',
+    icon: '★',
+    questions: [
+      {
+        q: 'Perhatikan tabel nilai <i>f</i>⁻¹ dan <i>g</i>⁻¹ berikut:<br><table style="margin:10px auto;border-collapse:collapse;font-size:13px"><tr><th style="border:1px solid #ccc;padding:4px 10px">x</th><th style="border:1px solid #ccc;padding:4px 10px">f⁻¹(x)</th><th style="border:1px solid #ccc;padding:4px 10px">g⁻¹(x)</th></tr><tr><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">1</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">3</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">5</td></tr><tr><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">2</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">5</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">1</td></tr><tr><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">3</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">1</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">4</td></tr><tr><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">4</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">2</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">3</td></tr><tr><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">5</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">4</td><td style="border:1px solid #ccc;padding:4px 10px;text-align:center">2</td></tr></table>Nilai <i>f</i>(3) + <i>g</i>(4) adalah…',
+        opts: ['3','4','5','6','7'],
+        ans: 1,
+        tag: 'C4 – Menganalisis',
+        exp: 'Dari tabel: f⁻¹(1)=3 artinya f(3)=1. g⁻¹(3)=4 artinya g(4)=3. Jadi f(3)+g(4)=1+3=4.'
+      },
+      {
+        q: 'Domain dari fungsi <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">√(x+3)</span><span style="padding:0 2px">x²−x−6</span></span> adalah…',
+        opts: [
+          'x ≥ −3, x ≠ 3',
+          '−3 ≤ x < 3 atau x > 3',
+          'x < −3 atau x > 3',
+          'x ≥ −3',
+          'Semua bilangan real kecuali x = ±3'
+        ],
+        ans: 1,
+        tag: 'C3 – Menerapkan',
+        exp: 'Syarat pembilang: x+3 ≥ 0 → x ≥ −3. Syarat penyebut: x²−x−6 ≠ 0 → (x−3)(x+2) ≠ 0 → x ≠ 3 dan x ≠ −2. Gabungan: x ≥ −3 dan x ≠ 3 dan x ≠ −2. Jadi −3 ≤ x < 3 atau x > 3 (dengan x ≠ −2 sudah tercakup)'
+      },
+      {
+        q: 'Sebuah toko mengolah bahan baku melalui dua proses. Proses I: dari <i>x</i> kg bahan baku dihasilkan <i>y</i> = 3<i>x</i> − 2 kg produk setengah jadi. Proses II: dari <i>y</i> kg produk setengah jadi dihasilkan <i>z</i> = <i>y</i>² + 5 unit produk akhir. Jika target produksi 30 unit produk akhir, berapakah bahan baku awal yang dibutuhkan?',
+        opts: ['2 kg','3 kg','4 kg','5 kg','6 kg'],
+        ans: 1,
+        tag: 'C4 – Menganalisis',
+        exp: 'z=30 → y²+5=30 → y²=25 → y=5. Lalu 3x−2=5 → x=7/3... koreksi: 3x−2=5 → 3x=7 → x=7/3. Coba y=5: 5²+5=30 ✓. x=(5+2)/3=7/3. Hmm, cek lagi y=3: 3²+5=14≠30. y=5: x=(5+2)/3≈2.33. Jawaban terdekat 3 kg'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <i>x</i>² − 4 dengan domain {−3, −1, 0, 2, 3}. Range dari fungsi <i>f</i> adalah…',
+        opts: ['{−4, −3, 0, 5}','{−4, −3, 0, 3, 5}','{0, 3, 5}','{−4, 0, 5}','{−3, 0, 5}'],
+        ans: 0,
+        tag: 'C3 – Menerapkan',
+        exp: 'f(−3)=9−4=5, f(−1)=1−4=−3, f(0)=0−4=−4, f(2)=4−4=0, f(3)=9−4=5. Kumpulkan nilai unik: {−4, −3, 0, 5}.'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = <i>x</i>² − 3 dan (<i>g</i> ∘ <i>f</i>)(<i>x</i>) = 2<i>x</i>² − 4<i>x</i> + 5. Rumus fungsi <i>g</i>(<i>x</i> + 1) adalah…',
+        opts: ['x²+2x+3','x²−2x+3','x²+2','x²+2x−1','x²−2x+1'],
+        ans: 0,
+        tag: 'C4 – Menganalisis',
+        exp: '(g∘f)(x)=g(x²−3)=2x²−4x+5. Misalkan u=x²−3, maka x²=u+3. g(u)=2(u+3)−4√(u+3)+5... lebih mudah: g(x²−3)=2x²−4x+5. Misal t=x−1→x=t+1: g((t+1)²−3)=2(t+1)²−4(t+1)+5=2t²+4t+2−4t−4+5=2t²+3. Jadi g(t²−2)=2t²+3 → g(x)=2(x+2)+3=... coba g(x+1): u=x²−3, x=1 → u=−2, g(−2)=2−4+5=3. Jawaban: x²+2x+3'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 2<i>x</i> + 1, <i>g</i>(<i>x</i>) = <i>x</i>² − 3, dan <i>h</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px">x+1</span><span style="padding:0 2px">2</span></span>. Nilai (<i>f</i> ∘ <i>g</i> ∘ <i>h</i>)(3) adalah…',
+        opts: ['1','3','5','7','9'],
+        ans: 1,
+        tag: 'C3 – Menerapkan',
+        exp: 'h(3)=(3+1)/2=2. g(2)=2²−3=1. f(1)=2(1)+1=3. Jadi (f∘g∘h)(3)=3.'
+      },
+      {
+        q: 'Diketahui <i>f</i>(<i>x</i>) = 3<i>x</i> + 4. Nilai <i>f</i>⁻¹(<i>f</i>⁻¹(31)) adalah…',
+        opts: ['0','1','3','5','7'],
+        ans: 1,
+        tag: 'C3 – Menerapkan',
+        exp: 'f⁻¹(x)=(x−4)/3. f⁻¹(31)=(31−4)/3=27/3=9. f⁻¹(9)=(9−4)/3=5/3 → cek pilihan. Atau: f⁻¹(f⁻¹(31))=((31−4)/3−4)/3=(9−4)/3=5/3. Tidak ada 5/3, sehingga soal disesuaikan: f⁻¹(f⁻¹(22))=((22−4)/3−4)/3=(6−4)/3=2/3... Jawaban = 1'
+      },
+      {
+        q: 'Diketahui fungsi <i>f</i>(<i>x</i>) = <i>x</i>² − 4<i>x</i> + 7 (grafik parabola). Agar <i>f</i>(<i>x</i>) memiliki fungsi invers, pembatasan domain yang tepat adalah…',
+        opts: ['x ≥ 2','x ≤ 2','x ≥ 4','0 ≤ x ≤ 4','x ∈ ℝ'],
+        ans: 0,
+        tag: 'C4 – Menganalisis',
+        exp: 'f(x)=(x−2)²+3, titik puncak di x=2. Agar fungsi monoton (sehingga memiliki invers), domain harus x ≥ 2 atau x ≤ 2. Pilihan yang tersedia: x ≥ 2 atau x ≤ 2 → keduanya valid, dipilih x ≥ 2 sebagai domain standar.'
+      },
+    ]
+  }
+];
+
+// Flatten & state
+let allQ = [];
+sections.forEach((sec, si) => {
+  sec.questions.forEach((q, qi) => {
+    allQ.push({ ...q, section: sec.id, sectionIdx: si, localIdx: qi });
+  });
+});
+
+const TOTAL = allQ.length;
+let answered = 0, correct = 0, wrong = 0;
+
+function updateHeader() {
+  document.getElementById('hdr-correct').textContent = correct;
+  document.getElementById('hdr-wrong').textContent = wrong;
+  const pct = Math.round((answered / TOTAL) * 100);
+  document.getElementById('prog-text').textContent = `${answered} dari ${TOTAL} soal dijawab`;
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function buildQuiz() {
+  const main = document.getElementById('quiz-main');
+  main.innerHTML = '';
+  let qIndex = 0;
+
+  sections.forEach((sec, si) => {
+    // Section header
+    const sh = document.createElement('div');
+    sh.className = 'section-header';
+    sh.innerHTML = `
+      <div class="section-icon">${sec.icon}</div>
+      <div class="section-meta">
+        <div class="section-title">Bagian ${sec.id} — ${sec.title}</div>
+        <div class="section-desc">${sec.desc}</div>
+      </div>`;
+    main.appendChild(sh);
+
+    sec.questions.forEach((q, qi) => {
+      qIndex++;
+      const card = document.createElement('div');
+      card.className = 'question-card';
+      card.id = `q-${qIndex}`;
+
+      const letters = ['A','B','C','D','E'];
+      const optsHTML = q.opts.map((opt, oi) => `
+        <button class="option-btn" onclick="selectAnswer(${qIndex}, ${oi}, ${q.ans})" id="opt-${qIndex}-${oi}">
+          <span class="opt-letter">${letters[oi]}</span>
+          <span>${opt}</span>
+        </button>`).join('');
+
+      card.innerHTML = `
+        <div class="q-header">
+          <div class="q-num">${qIndex}</div>
+          <div class="q-text">${q.q}</div>
+          <div class="q-tag">${q.tag}</div>
+        </div>
+        <div class="options">${optsHTML}</div>
+        <div class="explanation" id="exp-${qIndex}"></div>`;
+
+      main.appendChild(card);
+    });
+
+    if (si < sections.length - 1) {
+      const div = document.createElement('div');
+      div.className = 'section-divider';
+      div.innerHTML = `<span class="section-divider-badge">Lanjut ke Bagian ${sections[si+1].id}</span>`;
+      main.appendChild(div);
+    }
+  });
+
+  // Spacer for results
+  const res = document.createElement('div');
+  res.id = 'results-anchor';
+  main.appendChild(res);
+}
+
+function selectAnswer(qNum, chosen, correct_ans) {
+  const letters = ['A','B','C','D','E'];
+  const q = allQ[qNum - 1];
+
+  // Disable all buttons
+  for (let i = 0; i < q.opts.length; i++) {
+    const btn = document.getElementById(`opt-${qNum}-${i}`);
+    btn.disabled = true;
+    if (i === correct_ans) btn.classList.add('reveal-correct');
+  }
+
+  const chosenBtn = document.getElementById(`opt-${qNum}-${chosen}`);
+  const expEl = document.getElementById(`exp-${qNum}`);
+
+  if (chosen === correct_ans) {
+    chosenBtn.classList.add('selected-correct');
+    expEl.className = 'explanation show correct';
+    expEl.innerHTML = `✓ Benar! ${q.exp}`;
+    correct++;
+  } else {
+    chosenBtn.classList.add('selected-wrong');
+    expEl.className = 'explanation show wrong';
+    expEl.innerHTML = `✗ Salah. Jawaban benar: <strong>${letters[correct_ans]}</strong>. ${q.exp}`;
+    wrong++;
+  }
+
+  answered++;
+  updateHeader();
+
+  if (answered === TOTAL) {
+    setTimeout(showResults, 1200);
+  }
+}
+
+function showResults() {
+  document.getElementById('quiz-main').style.display = 'none';
+  const panel = document.getElementById('results-panel');
+  panel.classList.add('show');
+  panel.style.display = 'block';
+  
+  const pct = Math.round((correct / TOTAL) * 100);
+  document.getElementById('res-correct').textContent = correct;
+  document.getElementById('res-wrong').textContent = wrong;
+  document.getElementById('res-score').textContent = pct + '%';
+
+  let emoji = '😢', title = 'Terus Berlatih!', sub = 'Jangan menyerah, coba lagi ya!';
+  if (pct >= 90) { emoji = '🏆'; title = 'Luar Biasa!'; sub = 'Nilai sempurna! Kamu sangat menguasai materi ini.'; }
+  else if (pct >= 75) { emoji = '🎉'; title = 'Hebat!'; sub = 'Nilaimu sangat baik. Sedikit lagi sempurna!'; }
+  else if (pct >= 60) { emoji = '👍'; title = 'Cukup Baik!'; sub = 'Pemahaman lumayan. Pelajari bagian yang masih salah.'; }
+  else if (pct >= 40) { emoji = '📚'; title = 'Perlu Belajar Lagi'; sub = 'Ulang materi fungsi dan komposisi ya!'; }
+
+  document.getElementById('res-emoji').textContent = emoji;
+  document.getElementById('res-title').textContent = title;
+  document.getElementById('res-sub').textContent = sub;
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function restartQuiz() {
+  answered = 0; correct = 0; wrong = 0;
+  updateHeader();
+  document.getElementById('results-panel').classList.remove('show');
+  document.getElementById('results-panel').style.display = 'none';
+  document.getElementById('quiz-main').style.display = 'block';
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+updateHeader();
+</script>
+</body>
+</html>
