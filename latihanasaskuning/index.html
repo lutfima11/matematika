@@ -527,9 +527,9 @@ Yang termasuk pemetaan (fungsi) adalah…`,
       {
         q: 'Diketahui fungsi <i>f</i>(<i>x</i>) = <span style="display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;font-size:0.85em"><span style="border-bottom:1.5px solid;padding:0 2px"><i>x</i>+2</span><span style="padding:0 2px"><i>x</i>−3</span></span> untuk <i>x</i> ≠ 3 dan <i>g</i>(<i>x</i>) = <i>x</i>² + 4. Jika nilai (<i>f</i> ∘ <i>g</i>)⁻¹(2) = <i>k</i>, maka nilai <i>k</i> positif yang memenuhi adalah…',
         opts: ['1', '2', '3', '4', '5'],
-        ans: 0,
+        ans: 1,
         tag: 'C3 – Menerapkan',
-        exp: '(f∘g)⁻¹(2) = k berarti (f∘g)(k) = 2. f(g(k)) = 2 → f(k²+4) = 2 → (k²+4+2)/(k²+4−3) = 2 → (k²+6)/(k²+1) = 2 → k²+6 = 2k²+2 → k² = 4 → k = ±2. Nilai k positif = 2... cek ulang: k=1: f(g(1))=f(5)=(5+2)/(5−3)=7/2≠2. k=2: f(g(2))=f(8)=(8+2)/(8−3)=10/5=2 ✓. Jadi k=2.'
+        exp: '(f∘g)⁻¹(2) = k berarti (f∘g)(k) = 2. Hitung: f(g(k)) = 2 → f(k²+4) = 2 → (k²+4+2)/(k²+4−3) = 2 → (k²+6)/(k²+1) = 2 → k²+6 = 2k²+2 → k² = 4 → k = ±2. Nilai k positif = 2. Verifikasi: f(g(2)) = f(8) = (8+2)/(8−3) = 10/5 = 2 ✓.'
       },
       {
         q: 'Perhatikan grafik fungsi kuadrat <i>h</i>(<i>x</i>) = (<i>x</i> − 1)² − 4. Agar grafik tersebut memiliki fungsi invers yang valid, pembatasan domain yang tepat adalah…',
@@ -554,9 +554,9 @@ Yang termasuk pemetaan (fungsi) adalah…`,
       {
         q: 'Diketahui fungsi linear <i>f</i>(<i>x</i>) = <i>ax</i> + <i>b</i> dengan <i>a</i> ≠ 0. Jika fungsi tersebut memenuhi kondisi <i>f</i> ∘ <i>f</i>(<i>x</i>) = 9<i>x</i> − 8, maka nilai <strong>maksimum</strong> yang mungkin untuk bentuk <i>a</i> + <i>b</i> adalah…',
         opts: ['0', '-1', '1', '7', '9'],
-        ans: 3,
+        ans: 2,
         tag: 'C5 – Mengevaluasi',
-        exp: '(f∘f)(x) = a(ax+b)+b = a²x+(ab+b) = 9x−8. Maka a² = 9 → a = ±3, dan b(a+1) = −8. Kasus a=3: b(4)=−8 → b=−2, a+b=1. Kasus a=−3: b(−2)=−8 → b=4, a+b=1. Hmm, sama-sama 1... Coba ulang: ab+b=−8 → b(a+1)=−8. a=3: b=−2, a+b=1. a=−3: b(−2)=−8 → b=4, a+b=1. Nilai maksimum = 7 jika menggunakan a+b dengan b yang berbeda... Soal ini memiliki dua kasus berbeda; cek kembali: f∘f(x)=9x−8 → a²=9, b(a+1)=−8. a=3: b=−2, a+b=1. a=−3: b=4, a+b=1. Nilai maksimum a+b = 7. (Perhatikan pilihan tersedia, jawaban D=7).'
+        exp: '(f∘f)(x) = a(ax+b)+b = a²x+(ab+b) = 9x−8. Maka a² = 9 → a = ±3, dan b(a+1) = −8. Kasus a = 3: b(4) = −8 → b = −2, maka a+b = 3+(−2) = 1. Kasus a = −3: b(−2) = −8 → b = 4, maka a+b = −3+4 = 1. Pada kedua kasus, nilai a+b = 1 (maksimum = 1).'
       },
     ]
   },
@@ -583,16 +583,16 @@ Yang termasuk pemetaan (fungsi) adalah…`,
       {
         q: 'Diketahui pasangan (<i>x</i>, <i>y</i>) = (2, −3) merupakan penyelesaian dari sistem persamaan 3<i>x</i> + 4<i>y</i> = −6 dan <i>kx</i> − 2<i>y</i> = 4. Nilai konstanta <i>k</i> adalah…',
         opts: ['-2', '-1', '1', '2', '5'],
-        ans: 2,
+        ans: 1,
         tag: 'C2 – Memahami',
-        exp: 'Substitusi (2, −3) ke persamaan kedua: k(2)−2(−3) = 4 → 2k+6 = 4 → 2k = −2 → k = −1. Jawaban B (k=−1).'
+        exp: 'Substitusi (x, y) = (2, −3) ke persamaan kedua: k(2) − 2(−3) = 4 → 2k + 6 = 4 → 2k = −2 → k = −1. Jawaban: k = −1.'
       },
       {
         q: 'Himpunan penyelesaian dari sistem persamaan 2<i>x</i> + 3<i>y</i> = −8 dan 3<i>x</i> − 4<i>y</i> = 5 adalah {(<i>x</i>, <i>y</i>)}. Nilai <i>x</i> · <i>y</i> adalah…',
         opts: ['-6', '-4', '2', '4', '6'],
-        ans: 0,
+        ans: 2,
         tag: 'C3 – Menerapkan',
-        exp: 'Dari 2x+3y=−8 dan 3x−4y=5. Eliminasi: 8x+12y=−32 dan 9x−12y=15. Jumlah: 17x=−17 → x=−1. 2(−1)+3y=−8 → 3y=−6 → y=−2. x·y=(−1)(−2)=2. Koreksi: jawaban C=2. Namun cek ulang sesuai soal asli → x·y=−6 berarti ada penyesuaian angka; jawaban A = −6.'
+        exp: 'Eliminasi: kalikan pers.1 dengan 4 dan pers.2 dengan 3 → 8x+12y=−32 dan 9x−12y=15. Jumlahkan: 17x=−17 → x=−1. Substitusi: 2(−1)+3y=−8 → 3y=−6 → y=−2. Maka x·y = (−1)·(−2) = 2.'
       },
       {
         q: 'Seorang pedagang membeli 50 buah buah-buahan yang terdiri dari apel dan jeruk. Harga apel Rp5.000 per buah dan harga jeruk Rp7.000 per buah. Jika total uang yang dibelanjakan adalah Rp310.000, banyak apel yang dibeli adalah…',
@@ -611,9 +611,9 @@ Yang termasuk pemetaan (fungsi) adalah…`,
       {
         q: 'Agar sistem persamaan linear <i>qx</i> + 4<i>y</i> = 6 dan 6<i>x</i> − 8<i>y</i> = <i>p</i> mempunyai tak hingga banyak penyelesaian, maka nilai <i>p</i> + <i>q</i> adalah…',
         opts: ['-15', '-9', '-3', '3', '9'],
-        ans: 2,
+        ans: 0,
         tag: 'C3 – Menerapkan',
-        exp: 'Tak hingga penyelesaian jika kedua persamaan identik (berimpit). Perkalian persamaan I × (−2): −2qx−8y=−12. Bandingkan dengan 6x−8y=p: −2q=6 → q=−3 dan p=−12. Maka p+q=−12+(−3)=−15. Cek: p+q=−12+(−3)=−15. Jawaban A=−15... Namun sesuaikan pilihan: jawaban yang tepat adalah −3 (jawaban C) jika konstanta disesuaikan; mari cek ulang: q+4y=6 (×(−2)): −2qx−8y=−12 harus = 6x−8y=p → −2q=6→q=−3, p=−12. p+q=−15. Jawaban A.'
+        exp: 'Tak hingga penyelesaian jika kedua persamaan identik (berimpit). Kalikan persamaan I dengan −2: −2qx − 8y = −12. Bandingkan dengan persamaan II: 6x − 8y = p. Maka −2q = 6 → q = −3, dan p = −12. Sehingga p + q = −12 + (−3) = −15.'
       },
       {
         q: 'Di sebuah bioskop terdapat 80 penonton yang terdiri dari dewasa dan anak-anak. Harga tiket dewasa Rp40.000 dan tiket anak Rp25.000. Jika total pendapatan Rp2.600.000, berapa banyak penonton dewasa?',
@@ -623,11 +623,11 @@ Yang termasuk pemetaan (fungsi) adalah…`,
         exp: 'Misalkan dewasa = d, anak = a. d+a=80 dan 40000d+25000a=2600000 → 40d+25a=2600 → 8d+5a=520. Dari a=80−d: 8d+5(80−d)=520 → 8d+400−5d=520 → 3d=120 → d=40.'
       },
       {
-        q: 'Jika himpunan penyelesaian dari sistem persamaan berikut: 3<i>x</i> + <i>y</i> + 2<i>z</i> = 10, <i>x</i> − 2<i>y</i> + 3<i>z</i> = 5, dan 2<i>x</i> + 3<i>y</i> − <i>z</i> = 8 adalah {<i>x</i>, <i>y</i>, <i>z</i>}, maka nilai <i>x</i> · <i>y</i> · <i>z</i> adalah…',
+        q: 'Jika himpunan penyelesaian dari sistem persamaan berikut: 2<i>x</i> + <i>y</i> + <i>z</i> = 7, <i>x</i> + 3<i>y</i> − <i>z</i> = 4, dan <i>x</i> − <i>y</i> + 2<i>z</i> = 5 adalah {<i>x</i>, <i>y</i>, <i>z</i>}, maka nilai <i>x</i> · <i>y</i> · <i>z</i> adalah…',
         opts: ['6', '4', '2', '-2', '-4'],
         ans: 0,
         tag: 'C3 – Menerapkan',
-        exp: 'Dari sistem: 3x+y+2z=10, x−2y+3z=5, 2x+3y−z=8. Menjumlahkan semua: 6x+2y+4z=23 → 3x+y+2z=23/2 (tidak bulat). Cari dengan eliminasi bertahap: dari persamaan 1 dan 2 eliminasi y... Solusi: x=1, y=2, z=3 → cek: 3+2+6=11≠10. Coba x=2, y=1, z=1.5... Jawab: x·y·z=6 (pilihan A).'
+        exp: 'Eliminasi: dari pers.1 dan pers.2, eliminasi z → (2x+y+z)+(x+3y−z)=7+4 → 3x+4y=11. Dari pers.2 dan pers.3: (x+3y−z)+2(x−y+2z)=4+10 → 3x+y+3z=14, lanjutkan eliminasi. Solusi: x=1, y=2, z=3. Verifikasi: 2+2+3=7 ✓, 1+6−3=4 ✓, 1−2+6=5 ✓. Maka x·y·z = 1×2×3 = 6.'
       },
     ]
   },
@@ -651,18 +651,18 @@ Yang termasuk pemetaan (fungsi) adalah…`,
         exp: 'Persamaan 2 adalah 2× persamaan 1. Persamaan 3 adalah 4× persamaan 1. Jika a = 10 (= 2×5), ketiga persamaan konsisten dan berimpit → tak hingga penyelesaian. Jika a ≠ 10, persamaan 2 kontradiksi dengan persamaan 1 → tidak ada penyelesaian (inkonsisten).'
       },
       {
-        q: 'Diketahui SPLTV:<br><div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px 18px;max-width:340px;margin:10px auto;font-size:14px;line-height:2">2<i>x</i> + 3<i>y</i> + 4<i>z</i> = 17<br>3<i>x</i> + 2<i>y</i> + <i>z</i> = 10<br><i>x</i> + 4<i>y</i> + 2<i>z</i> = 11</div>Nilai dari <i>x</i> + <i>y</i> + <i>z</i> adalah…',
+        q: 'Diketahui SPLTV:<br><div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:14px 18px;max-width:340px;margin:10px auto;font-size:14px;line-height:2"><i>x</i> + <i>y</i> + <i>z</i> = 5<br>2<i>x</i> + <i>y</i> + <i>z</i> = 6<br>3<i>x</i> + 2<i>y</i> − <i>z</i> = 5</div>Nilai dari <i>x</i> + <i>y</i> + <i>z</i> adalah…',
         opts: ['3', '4', '5', '6', '7'],
-        ans: 1,
+        ans: 2,
         tag: 'C4 – Menganalisis',
-        exp: 'Jumlahkan semua persamaan: (2+3+1)x+(3+2+4)y+(4+1+2)z = 17+10+11 → 6x+9y+7z = 38. Coba cari pola lain: persamaan 1+2+3 = 6x+9y+7z=38. Tidak langsung. Cari solusi: dari eliminasi diperoleh x=1, y=2, z=1 → 2+6+4=12≠17. Coba x=2, y=1, z=2: 4+3+8=15≠17. Jawaban x+y+z=4 (pilihan B).'
+        exp: 'Dari pers.1 dan pers.2: (2x+y+z)−(x+y+z)=6−5 → x=1. Substitusi x=1 ke pers.1: 1+y+z=5 → y+z=4. Substitusi x=1 ke pers.3: 3+2y−z=5 → 2y−z=2. Dari y+z=4 dan 2y−z=2: jumlahkan → 3y=6 → y=2, z=2. Verifikasi: 1+2+2=5 ✓, 2+2+2=6 ✓, 3+4−2=5 ✓. Maka x+y+z = 5.'
       },
       {
-        q: 'Diketahui umur Bapak (B), Ibu (I), dan Putri (P) memenuhi: Lima tahun yang lalu, jumlah umur ketiganya adalah 80 tahun. Saat ini, umur Ibu 3 tahun lebih muda dari Bapak. Saat ini, umur Bapak adalah empat kali umur Putri. Umur Putri saat ini adalah…',
+        q: 'Diketahui umur Bapak (B), Ibu (I), dan Putri (P) memenuhi: Lima tahun yang lalu, jumlah umur ketiganya adalah 80 tahun. Saat ini, umur Ibu 3 tahun lebih muda dari Bapak. Saat ini, umur Bapak adalah tiga kali umur Putri. Umur Putri saat ini adalah…',
         opts: ['10 tahun', '12 tahun', '14 tahun', '16 tahun', '18 tahun'],
-        ans: 0,
+        ans: 2,
         tag: 'C3 – Menerapkan',
-        exp: 'Saat ini: B+I+P = 80+15 = 95 (karena 5 tahun lalu jumlah = 80, saat ini masing-masing +5). I = B−3. B = 4P. Substitusi: 4P+(4P−3)+P = 95 → 9P−3 = 95 → 9P = 98... tidak bulat. Coba: (B−5)+(I−5)+(P−5)=80 → B+I+P=95. 4P+(4P−3)+P=95 → 9P=98 → tidak bulat. Penyesuaian: Bapak 3× Putri: 3P+(3P−3)+P=95 → 7P=98 → P=14. Jawaban C=14.'
+        exp: 'Misalkan saat ini: Bapak = B, Ibu = I, Putri = P. Lima tahun lalu: (B−5)+(I−5)+(P−5) = 80 → B+I+P = 95. Dari soal: I = B−3 dan B = 3P (Bapak tiga kali umur Putri). Substitusi: 3P + (3P−3) + P = 95 → 7P − 3 = 95 → 7P = 98 → P = 14. Verifikasi: P=14, B=42, I=39 → 42+39+14=95 ✓.'
       },
       {
         q: 'Diketahui SPLDV: 2025<i>x</i> − 3<i>y</i> = −60 dan 2025<i>x</i> + 5<i>y</i> = 20. Tanpa menghitung nilai eksak, tentukan di kuadran mana titik potong kedua garis tersebut berada…',
@@ -672,18 +672,18 @@ Yang termasuk pemetaan (fungsi) adalah…`,
         exp: 'Kurangi persamaan 1 dari 2: 8y = 80 → y = 10 (positif). Substitusi ke pers 1: 2025x = −60+3(10) = −60+30 = −30 → x = −30/2025 < 0. Maka x < 0 dan y > 0 → Kuadran II.'
       },
       {
-        q: 'Diketahui tiga fungsi linear: <i>f</i>(<i>x</i>) = <i>px</i> + 1, <i>g</i>(<i>x</i>) = <i>qx</i> + 2, <i>h</i>(<i>x</i>) = <i>rx</i> + 1, dengan <i>p</i> + <i>q</i> + <i>r</i> = 10. Jika nilai fungsi komposisi memenuhi: <i>f</i> ∘ <i>g</i>(1) = 9, <i>g</i> ∘ <i>h</i>(2) = 14, <i>h</i> ∘ <i>f</i>(0) = 4, maka nilai dari <i>pq</i> + <i>qr</i> + <i>pr</i> adalah…',
+        q: 'Diketahui tiga fungsi linear: <i>f</i>(<i>x</i>) = <i>px</i> + 1, <i>g</i>(<i>x</i>) = <i>qx</i> + 2, <i>h</i>(<i>x</i>) = <i>rx</i> + 1, dengan <i>p</i> + <i>q</i> + <i>r</i> = 10. Jika nilai fungsi komposisi memenuhi: <i>f</i> ∘ <i>g</i>(1) = 11, <i>g</i> ∘ <i>h</i>(2) = 35, <i>h</i> ∘ <i>f</i>(0) = 6, maka nilai dari <i>pq</i> + <i>qr</i> + <i>pr</i> adalah…',
         opts: ['26', '29', '31', '35', '38'],
         ans: 2,
         tag: 'C5 – Mengevaluasi',
-        exp: 'f∘g(1): g(1)=q+2, f(q+2)=p(q+2)+1=9 → p(q+2)=8. g∘h(2): h(2)=2r+1, g(2r+1)=q(2r+1)+2=14 → q(2r+1)=12. h∘f(0): f(0)=1, h(1)=r+1=4 → r=3. Dari r=3: q(7)=12 → q=12/7 (tidak bulat). Penyesuaian nilai: dengan r=3, q=2, p=5 → p+q+r=10 ✓. pq+qr+pr=10+6+15=31. Jawaban C.'
+        exp: 'h∘f(0): f(0)=1, h(1)=r·1+1=r+1=6 → r=5. g∘h(2): h(2)=2(5)+1=11, g(11)=11q+2=35 → 11q=33 → q=3. Dari p+q+r=10: p=10−3−5=2. Verifikasi f∘g(1): g(1)=3+2=5, f(5)=2(5)+1=11 ✓. Maka pq+qr+pr = 2(3)+3(5)+2(5) = 6+15+10 = 31.'
       },
       {
-        q: 'Diketahui tiga metode penyelesaian SPLDV: grafik, substitusi, dan eliminasi. Seorang siswa mendapat SPLDV: 3<i>x</i> + 2<i>y</i> = 12 dan 5<i>x</i> − 4<i>y</i> = 4. Metode eliminasi yang paling efisien untuk sistem ini adalah mengeliminasi variabel <i>y</i>. Nilai <i>x</i> + <i>y</i> yang diperoleh adalah…',
+        q: 'Diketahui tiga metode penyelesaian SPLDV: grafik, substitusi, dan eliminasi. Seorang siswa mendapat SPLDV: 3<i>x</i> + 2<i>y</i> = 12 dan 2<i>x</i> − <i>y</i> = 1. Metode eliminasi yang paling efisien untuk sistem ini adalah mengeliminasi variabel <i>y</i>. Nilai <i>x</i> + <i>y</i> yang diperoleh adalah…',
         opts: ['3', '4', '5', '6', '7'],
         ans: 2,
         tag: 'C3 – Menerapkan',
-        exp: 'Kalikan persamaan 1 dengan 2: 6x+4y=24. Jumlah dengan pers 2: 11x=28 → x=28/11 (tidak bulat). Coba eliminasi x: 5(3x+2y)=60 dan 3(5x−4y)=12 → 15x+10y=60 dan 15x−12y=12 → 22y=48 → y=24/11. Hmm, soal ini x+y=5 dengan nilai bulat lebih mudah: 3(2)+2y=12→y=3, x+y=5 ✓. Jadi x=2, y=3, x+y=5.'
+        exp: 'Kalikan persamaan 2 dengan 2: 4x−2y=2. Jumlahkan dengan persamaan 1: (3x+2y)+(4x−2y)=12+2 → 7x=14 → x=2. Substitusi ke pers.2: 2(2)−y=1 → y=3. Maka x+y = 2+3 = 5. Verifikasi pers.1: 3(2)+2(3)=6+6=12 ✓.'
       },
     ]
   }
