@@ -846,16 +846,15 @@ function restartQuiz() {
 let lastAnsweredQ = 0;
 
 function scrollToNext() {
-  for (let i = lastAnsweredQ + 1; i <= TOTAL; i++) {
-    const card = document.getElementById('q-' + i);
-    if (card) {
-      const opt = document.getElementById('opt-' + i + '-0');
-      if (opt && !opt.disabled) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        return;
-      }
+  // always find the first unanswered question from the top
+  for (let i = 1; i <= TOTAL; i++) {
+    const opt = document.getElementById('opt-' + i + '-0');
+    if (opt && !opt.disabled) {
+      document.getElementById('q-' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
     }
   }
+  // all answered
   const anchor = document.getElementById('results-anchor');
   if (anchor) anchor.scrollIntoView({ behavior: 'smooth' });
 }
