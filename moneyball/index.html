@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moneyball – Rangkuman Interaktif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a5c38;
+    --green-light: #2d8a55;
+    --green-pale: #e8f5ee;
+    --green-mid: #c8e8d5;
+    --cream: #faf8f3;
+    --amber: #c97b1a;
+    --amber-pale: #fdf3e3;
+    --red: #b83232;
+    --red-pale: #fceaea;
+    --navy: #1a2744;
+    --navy-light: #2d3f6b;
+    --text: #1c1c1c;
+    --text-muted: #6b7280;
+    --border: #e2e8f0;
+    --white: #ffffff;
+    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 24px rgba(0,0,0,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    color: white;
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #2d3f6b 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--green-pale);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: #5acd89; font-style: italic; }
+  .hero-sub {
+    font-size: 15px;
+    opacity: 0.7;
+    position: relative;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+  }
+  .hero-author {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #a8c4b8;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 36px;
+    position: relative;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num {
+    font-size: 28px;
+    font-weight: 600;
+    color: #5acd89;
+    display: block;
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  /* NAV TABS */
+  .nav-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 16px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn:hover { color: var(--green); }
+  .tab-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 40px 80px;
+  }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    color: var(--navy);
+  }
+  .card p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #374151;
+  }
+  .card p + p { margin-top: 12px; }
+
+  /* QUOTE */
+  .quote-block {
+    background: var(--navy);
+    color: white;
+    border-radius: 14px;
+    padding: 32px 36px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    line-height: 0.6;
+    color: rgba(255,255,255,0.15);
+    float: left;
+    margin-right: 12px;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #d1e8de;
+  }
+  .quote-source {
+    margin-top: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    text-align: right;
+  }
+
+  /* CHAPTER TIMELINE */
+  .chapter-list { position: relative; padding-left: 28px; }
+  .chapter-list::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--green-mid), var(--border));
+  }
+  .chapter-item {
+    position: relative;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  .chapter-item::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green-light);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--green-mid);
+    transition: transform 0.2s;
+  }
+  .chapter-item:hover::before { transform: scale(1.3); }
+  .chapter-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--green);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .chapter-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .chapter-detail {
+    display: none;
+    background: var(--green-pale);
+    border-left: 3px solid var(--green-light);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #2d5a3d;
+  }
+  .chapter-item.open .chapter-detail { display: block; }
+  .chapter-item.open .chapter-title { color: var(--green); }
+
+  /* CHARACTERS */
+  .char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .char-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .char-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .char-card.active {
+    border-color: var(--green-light);
+    background: var(--green-pale);
+    box-shadow: 0 0 0 2px var(--green-mid);
+  }
+  .char-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    font-family: 'Playfair Display', serif;
+  }
+  .char-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .char-role {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 10px;
+  }
+  .char-bio {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+  .char-detail-panel {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 20px;
+    display: none;
+    box-shadow: var(--shadow-md);
+  }
+  .char-detail-panel.visible { display: block; }
+  .char-detail-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .char-detail-panel p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #374151;
+    margin-bottom: 12px;
+  }
+  .char-tag {
+    display: inline-block;
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin: 2px 3px 2px 0;
+  }
+
+  /* STAT CONCEPT */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  @media (max-width: 600px) { .concept-grid { grid-template-columns: 1fr; } }
+  .concept-card {
+    border-radius: 12px;
+    padding: 22px;
+    border: 1px solid transparent;
+  }
+  .concept-card.good {
+    background: var(--green-pale);
+    border-color: var(--green-mid);
+  }
+  .concept-card.bad {
+    background: var(--red-pale);
+    border-color: #fca5a5;
+  }
+  .concept-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .concept-card.good .concept-label { color: var(--green); }
+  .concept-card.bad .concept-label { color: var(--red); }
+  .concept-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+  .concept-card.good h4 { color: var(--navy); }
+  .concept-card.bad h4 { color: #7f1d1d; }
+  .concept-card p { font-size: 13.5px; line-height: 1.65; color: #4b5563; }
+
+  /* PAYROLL CHART */
+  .payroll-chart { margin: 24px 0; }
+  .payroll-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .team-name { width: 120px; font-size: 13px; font-weight: 500; color: var(--navy); flex-shrink: 0; }
+  .bar-wrap { flex: 1; background: var(--border); border-radius: 4px; overflow: hidden; height: 28px; }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    transition: width 1s ease;
+  }
+  .bar-fill.highlight { background: var(--green-light); }
+  .bar-fill.normal { background: var(--navy-light); }
+  .bar-fill.dim { background: #94a3b8; }
+  .wins-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--green);
+    min-width: 60px;
+    text-align: right;
+  }
+
+  /* LESSON PILLS */
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .lesson-pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 18px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+  .lesson-pill:hover { border-color: var(--green-light); background: var(--green-pale); }
+  .lesson-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .lesson-head {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .lesson-body {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    display: none;
+  }
+  .lesson-pill.open .lesson-body { display: block; }
+  .lesson-pill.open { background: var(--amber-pale); border-color: #f6c064; }
+
+  /* SECTION HEADER */
+  .sec-hdr {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sec-hdr h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .sec-hdr p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .tag-green { background: var(--green-pale); color: var(--green); }
+  .tag-amber { background: var(--amber-pale); color: var(--amber); }
+  .tag-red { background: var(--red-pale); color: var(--red); }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  /* WIN STREAK BANNER */
+  .streak-banner {
+    background: var(--navy);
+    color: white;
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .streak-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #5acd89;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .streak-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .streak-desc { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.8); }
+
+  @media (max-width: 640px) {
+    .content { padding: 24px 20px 60px; }
+    .hero { padding: 40px 20px 36px; }
+    .hero-stats { gap: 24px; }
+    .card { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Rangkuman Interaktif</div>
+  <h1>Moneyball: <span>The Art of</span><br>Winning an Unfair Game</h1>
+  <p class="hero-sub">Michael Lewis · Diterbitkan 2003</p>
+  <p class="hero-author">Kisah nyata revolusi data di dunia baseball</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="num">103</span>
+      <span class="lbl">Kemenangan 2002</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">$40M</span>
+      <span class="lbl">Gaji tim setahun</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">20</span>
+      <span class="lbl">Kemenangan beruntun</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">12</span>
+      <span class="lbl">Bab utama</span>
+    </div>
+  </div>
+</div>
+
+<div class="nav-bar">
+  <button class="tab-btn active" onclick="showTab('sinopsis')">📖 Sinopsis</button>
+  <button class="tab-btn" onclick="showTab('bab')">📑 Per Bab</button>
+  <button class="tab-btn" onclick="showTab('tokoh')">👤 Tokoh</button>
+  <button class="tab-btn" onclick="showTab('konsep')">📊 Konsep Kunci</button>
+  <button class="tab-btn" onclick="showTab('pelajaran')">💡 Pelajaran</button>
+</div>
+
+<div class="content">
+
+  <!-- SINOPSIS -->
+  <div class="section active" id="sinopsis">
+    <div class="sec-hdr">
+      <h2>Tentang Buku Ini</h2>
+      <p>Kisata nyata bagaimana satu tim baseball miskin mengalahkan raksasa berduit dengan senjata paling tidak terduga: <em>data dan logika</em>.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Premis Utama</div>
+      <h3>Uang bukan satu-satunya cara menang</h3>
+      <p>Di awal 2002, New York Yankees memiliki penggajian pemain senilai $126 juta. Oakland Athletics hanya $40 juta — hampir sepertiga dari rival terkaya mereka. Namun selama tiga tahun berturut-turut, Oakland berhasil menembus playoff. Bagaimana bisa?</p>
+      <p>Michael Lewis menelusuri jawaban itu ke satu orang: <strong>Billy Beane</strong>, General Manager Oakland A's yang mantan atlet gagal, yang memutuskan untuk merevolusi cara membangun tim baseball — bukan dengan dompet tebal, tetapi dengan analisis statistik dan pemikiran rasional.</p>
+    </div>
+
+    <div class="quote-block">
+      <span class="quote-mark">"</span>
+      <div class="quote-text">Cara mereka memandang permainan ini menyerupai cara seorang ilmuwan memandang alam — bukan dengan perasaan dan intuisi, tetapi dengan data dan logika yang terukur.</div>
+      <div class="quote-source">— Michael Lewis, Moneyball</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Masalah yang Dihadapi</div>
+      <h3>Ketidakadilan sistemik dalam Major League Baseball</h3>
+      <p>Baseball profesional memiliki jurang ekonomi yang sangat dalam. Tim kaya bisa membeli pemain bintang di pasar bebas; tim miskin hanya bisa menyaksikan pemain terbaik mereka pergi. Oakland kehilangan tiga pemain kunci sekaligus di musim lepas — Jason Giambi (ke Yankees, $120 juta), Johnny Damon (ke Red Sox), dan Jason Isringhausen (ke Cardinals).</p>
+      <p>Billy Beane menghadapi pilihan: menyerah pada sistem yang tidak adil, atau <strong>menemukan cara baru bermain</strong>.</p>
+    </div>
+
+    <div class="streak-banner">
+      <div>
+        <div class="streak-num">20</div>
+        <div class="streak-label">Kemenangan beruntun</div>
+      </div>
+      <div class="streak-desc">
+        Puncak musim 2002: Oakland A's mencetak 20 kemenangan beruntun — rekor liga American League yang tak pernah dicapai dalam 102 tahun sejarah kompetisi. Ini bukan keberuntungan. Ini adalah hasil sistem yang dirancang dengan cermat.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Dampak & Warisan</div>
+      <h3>Sebuah revolusi yang menyebar</h3>
+      <p>Setelah buku ini terbit pada 2003, dunia olahraga profesional berubah. Tim-tim dari NHL, NBA, NFL mulai mengadopsi pendekatan serupa. Boston Red Sox menyewa Bill James dan merekrut Theo Epstein — keduanya berhaluan data — dan akhirnya mengakhiri "Curse of the Bambino" dengan juara dunia 2004.</p>
+      <p>Moneyball bukan hanya tentang baseball. Ini adalah kisah tentang bagaimana <strong>berpikir berbeda dari pasar</strong> bisa menghasilkan keunggulan kompetitif yang tak terduga.</p>
+      <br>
+      <span class="tag tag-green">Analitik data</span>
+      <span class="tag tag-green">Ekonomi olahraga</span>
+      <span class="tag tag-amber">Manajemen tim</span>
+      <span class="tag tag-amber">Psikologi pengambilan keputusan</span>
+    </div>
+  </div>
+
+  <!-- BAB PER BAB -->
+  <div class="section" id="bab">
+    <div class="sec-hdr">
+      <h2>Rangkuman Per Bab</h2>
+      <p>Klik setiap bab untuk membaca ringkasan isi dan insight utamanya.</p>
+    </div>
+
+    <div class="chapter-list" id="chapterList">
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Preface</div>
+        <div class="chapter-title">Bagaimana Buku Ini Lahir</div>
+        <div class="chapter-desc">Lewis menjelaskan pertanyaan yang memicunya: bagaimana tim termiskin bisa memenangkan begitu banyak pertandingan?</div>
+        <div class="chapter-detail">Lewis terpesona oleh paradoks: Oakland A's dengan gaji $34 juta berhasil menang 102 pertandingan di satu musim. Kontras ini memunculkan pertanyaan besar — apakah uang memang menentukan kemenangan dalam olahraga profesional? Ia menemukan jawabannya di kantor depan Billy Beane, dan akhirnya memutuskan untuk menulis buku ini bukan sebagai biografi orang, melainkan sebagai biografi sebuah <em>ide</em>.</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 1</div>
+        <div class="chapter-title">The Curse of Talent (Kutukan Bakat)</div>
+        <div class="chapter-desc">Kisah Billy Beane muda — atlet sempurna yang justru gagal di MLB karena terlalu percaya pada bakat, bukan keterampilan.</div>
+        <div class="chapter-detail">Billy Beane di masa SMA adalah calon bintang sempurna: wajah tampan, bodi atletis, berlari secepat sprinter, melempar sekeras peluru meriam. Semua scout menginginkannya. Ia melewatkan tawaran beasiswa Stanford demi kontrak pertama dengan New York Mets. Namun di liga profesional, semuanya berantakan. Ia tidak bisa menghadapi kegagalan. Setiap strike-out berakhir dengan meledakkan kemarahan. Karier pemainnya hancur — dan momen itu membentuk Billy Beane menjadi GM yang terobsesi dengan <em>menemukan pemain yang undervalued</em>, bukan yang terlihat paling "sempurna".</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 2</div>
+        <div class="chapter-title">How to Find a Ballplayer (Cara Menemukan Pemain)</div>
+        <div class="chapter-desc">Drama ruang draft 2002 dimulai: Billy dan Paul DePodesta berhadapan dengan para scout tradisional yang mengandalkan "mata dan insting".</div>
+        <div class="chapter-detail">Inilah inti konflik buku ini. Para scout senior memeriksa calon pemain dengan "lima alat": lari, lempar, tangkap, pukul, pukul bertenaga. Billy dan asistennya Paul DePodesta membawa laptop berisi statistik. Bagi para scout, seorang pemain harus punya "good body" dan "good face". Bagi Billy, satu-satunya pertanyaan adalah: "Bisa dia tidak-out?" (Can he not make outs?). Konflik ini menggambarkan benturan antara tradisi dan sains, antara perasaan dan data.</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 3</div>
+        <div class="chapter-title">The Enlightenment (Pencerahan)</div>
+        <div class="chapter-desc">Sejarah sabermetrics — gerakan analisis statistik baseball yang digagas Bill James selama puluhan tahun sebelum akhirnya ditemukan Billy Beane.</div>
+        <div class="chapter-detail">Bill James adalah pustakawan dan penjaga malam yang memulai menganalisis statistik baseball secara mendalam sejak akhir 1970-an, menerbitkan "Baseball Abstract" secara mandiri. Ia menemukan bahwa kebanyakan asumsi konvensional baseball — nilai bunt, base-stealing, RBI — adalah omong kosong yang tidak terbukti secara statistik. Dua metrik yang paling penting ternyata: On-Base Percentage (kemampuan tidak out) dan Slugging Percentage. Bersama mereka membentuk OPS. Namun selama dua dekade, dunia baseball mengabaikannya. Billy Beane-lah yang akhirnya menerapkan pemikiran James ke tim nyata.</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 4</div>
+        <div class="chapter-title">Field of Ignorance (Ladang Kebodohan)</div>
+        <div class="chapter-desc">Bagaimana bias dan tradisi membuat baseball menolak data selama puluhan tahun — bahkan ketika datanya sudah ada di depan mata.</div>
+        <div class="chapter-detail">Lewis menggambarkan budaya "club" baseball: para eksekutif, pelatih, dan scout adalah orang-orang yang saling melindungi satu sama lain. Menjadi buruk dalam pekerjaan tidak membuatmu dipecat — tetapi mengkritik cara lama bisa mengakhiri kariermu. Institusi ini tidak punya mekanisme untuk menerima pengetahuan baru. Hasilnya: kesalahan terus berulang, uang miliaran dolar terbuang untuk pemain yang salah dinilai, dan tidak ada yang bertanya "mengapa?"</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 5</div>
+        <div class="chapter-title">The Jeremy Brown Blue Plate Special</div>
+        <div class="chapter-desc">Draft 2002 yang bersejarah: Billy memilih Jeremy Brown, catcher gemuk dari Alabama yang ditertawakan seluruh baseball — dan terbukti benar.</div>
+        <div class="chapter-detail">Jeremy Brown adalah antitesis "good body": pendek, gemuk, tidak atletis secara visual. Tidak ada tim lain yang mau meliriknya. Namun Paul DePodesta melihat statistiknya: on-base percentage tertinggi di liga amatir. Billy memilihnya di putaran pertama. Seluruh dunia baseball menertawakan pilihan ini. Namun di akhir buku, Jeremy Brown membuktikan bahwa data tidak berbohong — ia menjadi pemain paling produktif dari seluruh draft 2002 Oakland.</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 6</div>
+        <div class="chapter-title">The Science of Winning an Unfair Game</div>
+        <div class="chapter-desc">Filosofi inti Oakland: menghindari out adalah lebih penting dari mencetak run. OBP (On-Base Percentage) adalah raja.</div>
+        <div class="chapter-detail">Bab ini adalah jantung intelektual buku. Billy dan Paul menyadari bahwa baseball konvensional undervalue kemampuan untuk tidak keluar, dan overvalue hal-hal yang terlihat spektakuler — home run, stolen base, batting average. Satu persen kenaikan OBP tim menghasilkan jauh lebih banyak kemenangan daripada yang dipercaya orang. Maka Oakland secara sistematis membeli pemain dengan OBP tinggi yang diabaikan pasar karena tubuhnya "jelek" atau gayanya "tidak seksi".</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 7–9</div>
+        <div class="chapter-title">Pemain-Pemain Undervalued</div>
+        <div class="chapter-desc">Kisah Scott Hatteberg, Kevin Youkilis, dan berbagai pemain yang karenanya "reject" di tempat lain justru menjadi kunci Oakland.</div>
+        <div class="chapter-detail">Scott Hatteberg adalah catcher dengan cedera saraf yang tidak bisa lagi melempar — semua tim melepasnya. Billy melihat OBP-nya yang luar biasa dan mengubahnya menjadi first baseman. Chad Bradford adalah pitcher lambat 84 mph yang melempar underhand hampir seperti bowling — dicemooh semua scout — namun statistiknya sempurna. Kevin Youkilis dijuluki "The Greek God of Walks" oleh Paul DePodesta: tubuh gempal, tapi jarang sekali out. Bab-bab ini memperlihatkan bahwa pasar baseball penuh dengan "arbitrage" yang bisa dieksploitasi oleh mereka yang mau membaca data.</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 10–11</div>
+        <div class="chapter-title">The Trading Desk & The Human Element</div>
+        <div class="chapter-desc">Billy sebagai trader pemain yang agresif — dan konflik antara sains dan emosi manusia di balik permainan ini.</div>
+        <div class="chapter-detail">Bab 9 menampilkan Billy di "trading desk" — menelepon GM tim lain di hari-hari menjelang trade deadline, menukar pemain seperti saham di bursa efek. Bab 11 menunjukkan paradoks Billy: ia mengklaim bahwa pemain tidak bisa diubah, bahwa data adalah segalanya — namun diam-diam ia terus "memanipulasi" pemain dengan cara-cara kecil. Ia memasang taruhan $50 dengan Ramon Hernandez agar ia memukul bola ke arah yang benar. Ia menyuruh Terrence Long berlari sungguh-sungguh dengan cerita tentang email dari fans marah. Sains dan emosi manusia ternyata tidak bisa dipisahkan sepenuhnya.</div>
+      </div>
+
+      <div class="chapter-item" onclick="toggleChapter(this)">
+        <div class="chapter-num">Bab 12 & Epilog</div>
+        <div class="chapter-title">The Speed of the Idea & The Badger</div>
+        <div class="chapter-desc">Musim berakhir, play-off tiba, ide menyebar — dan Jeremy Brown berlari menuju home run yang tak ia sadari sendiri.</div>
+        <div class="chapter-detail">Oakland kalah di play-off dari Minnesota Twins — dan media baseball langsung menyimpulkan bahwa "Moneyball tidak bisa menang di play-off." Namun Lewis menunjukkan bahwa analisis statistik membuktikan tim Oakland justru bermain lebih baik secara ofensif; mereka kalah karena Tim Hudson gagal tampil. Di epilog, Jeremy Brown — si "bad body catcher" — memukul sebuah pukulan yang ia kira akan berakhir jadi triple, lalu terpeleset dan jatuh di antara base pertama dan kedua... dan menyadari bahwa bola sudah melewati pagar. Home run. Sebuah metafora sempurna: kesuksesan datang bahkan ketika kamu tidak menyadarinya.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TOKOH -->
+  <div class="section" id="tokoh">
+    <div class="sec-hdr">
+      <h2>Tokoh-Tokoh Utama</h2>
+      <p>Klik kartu untuk membaca profil lengkap setiap tokoh.</p>
+    </div>
+
+    <div class="char-grid" id="charGrid">
+
+      <div class="char-card" onclick="showChar('beane', this)">
+        <div class="char-avatar" style="background:#dbeafe;color:#1e40af;">BB</div>
+        <div class="char-name">Billy Beane</div>
+        <div class="char-role" style="color:var(--green)">General Manager, Oakland A's</div>
+        <div class="char-bio">Mantan pemain gagal yang menjadi arsitek revolusi. Menggabungkan kemarahan personal terhadap ketidakadilan sistem dengan logika dingin seorang analis.</div>
+      </div>
+
+      <div class="char-card" onclick="showChar('depo', this)">
+        <div class="char-avatar" style="background:#dcfce7;color:#15803d;">PD</div>
+        <div class="char-name">Paul DePodesta</div>
+        <div class="char-role" style="color:var(--navy)">Assistant GM, Harvard Graduate</div>
+        <div class="char-bio">Senjata rahasia Billy. Lulusan Harvard ekonomi yang melihat dunia melalui laptop dan spreadsheet — bukan lapangan baseball.</div>
+      </div>
+
+      <div class="char-card" onclick="showChar('hatt', this)">
+        <div class="char-avatar" style="background:#fef9c3;color:#854d0e;">SH</div>
+        <div class="char-name">Scott Hatteberg</div>
+        <div class="char-role" style="color:var(--amber)">First Baseman</div>
+        <div class="char-bio">Catcher yang kariernya dianggap tamat akibat cedera saraf. Oakland mengubahnya jadi first baseman dan ia mencetak home run walk-off di game ke-20 winning streak.</div>
+      </div>
+
+      <div class="char-card" onclick="showChar('brad', this)">
+        <div class="char-avatar" style="background:#fce7f3;color:#9d174d;">CB</div>
+        <div class="char-name">Chad Bradford</div>
+        <div class="char-role" style="color:var(--red)">Relief Pitcher</div>
+        <div class="char-bio">Pitcher underhand paling aneh di baseball — melempar hampir dari tanah, kecepatan 84 mph. Semua tim meremehkan; statistiknya hampir tak tertandingi.</div>
+      </div>
+
+      <div class="char-card" onclick="showChar('james', this)">
+        <div class="char-avatar" style="background:#f3e8ff;color:#6b21a8;">BJ</div>
+        <div class="char-name">Bill James</div>
+        <div class="char-role" style="color:#6b21a8">Sabermetrician, Penggagas Ide</div>
+        <div class="char-bio">Pustakawan yang selama 20 tahun sendirian menganalisis statistik baseball dari perspektif matematika — diabaikan oleh industri, dipuja oleh Billy Beane.</div>
+      </div>
+
+      <div class="char-card" onclick="showChar('brown', this)">
+        <div class="char-avatar" style="background:#fef3c7;color:#92400e;">JB</div>
+        <div class="char-name">Jeremy Brown</div>
+        <div class="char-role" style="color:var(--amber)">Catcher — First Round Pick 2002</div>
+        <div class="char-bio">"The Badger" — bodi gemuk, tidak atletis secara visual. Namun on-base percentage tertinggi di league amatir. Semua orang menertawakannya; data membuktikan mereka salah.</div>
+      </div>
+
+    </div>
+
+    <div class="char-detail-panel" id="charDetail"></div>
+  </div>
+
+  <!-- KONSEP KUNCI -->
+  <div class="section" id="konsep">
+    <div class="sec-hdr">
+      <h2>Konsep Statistik Kunci</h2>
+      <p>Inilah cara berbeda Oakland A's melihat nilai seorang pemain baseball.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Metrik yang Dinilai Ulang</div>
+      <h3>Apa yang benar-benar penting?</h3>
+      <p>Baseball konvensional mengagungkan statistik yang terlihat "heroik": home run, stolen base, batting average tinggi. Oakland A's justru memfokuskan diri pada statistik yang mengukur satu hal sederhana: <strong>seberapa sering pemain tidak membuat out.</strong></p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card good">
+        <div class="concept-label">✓ Diutamakan Oakland</div>
+        <h4>On-Base Percentage (OBP)</h4>
+        <p>Persentase pemain mencapai base dengan cara apapun — hit, walk, atau hit-by-pitch. Mengukur kemampuan utama: tidak keluar dari game.</p>
+      </div>
+      <div class="concept-card bad">
+        <div class="concept-label">✗ Dilebih-lebihkan pasar</div>
+        <h4>Batting Average (BA)</h4>
+        <p>Hanya mengukur hit dibagi at-bat. Mengabaikan walk — padahal walk sama bernilainya dengan single dalam hal tidak membuat out.</p>
+      </div>
+      <div class="concept-card good">
+        <div class="concept-label">✓ Diutamakan Oakland</div>
+        <h4>Slugging Percentage (SLG)</h4>
+        <p>Total bases per at-bat. Mengukur kekuatan pukulan secara nyata — lebih akurat dari sekadar jumlah home run.</p>
+      </div>
+      <div class="concept-card bad">
+        <div class="concept-label">✗ Dilebih-lebihkan pasar</div>
+        <h4>Stolen Bases & RBI</h4>
+        <p>Stolen base berisiko — jika ketangkap, buang satu out. RBI bergantung pada posisi di lineup, bukan kemampuan murni pemain.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Temuan Voros McCracken</div>
+      <h3>DIPS: Defense Independent Pitching Statistics</h3>
+      <p>Seorang paralegal pengangguran bernama Voros McCracken menemukan sesuatu yang mengejutkan seluruh dunia baseball: <strong>pitcher tidak bisa mengontrol apakah bola yang dipukul akan jatuh sebagai hit atau tidak.</strong></p>
+      <p>Yang bisa dikontrol pitcher hanya tiga hal: walk yang diberikan, home run yang diizinkan, dan strikeout yang diraih. Semua hal lainnya adalah <em>luck</em>. Ini menjelaskan mengapa Oakland bisa mendapatkan Chad Bradford — pitcher yang semua tim curigai karena "gaya aneh" — padahal statistik intinya sempurna.</p>
+    </div>
+
+    <div class="payroll-chart">
+      <div style="margin-bottom:16px;">
+        <div class="card-title">Perbandingan Efisiensi Tim MLB 2002</div>
+        <p style="font-size:14px;color:var(--text-muted)">Gaji tim vs jumlah kemenangan musim reguler</p>
+      </div>
+      <div class="payroll-row">
+        <div class="team-name">New York Yankees</div>
+        <div class="bar-wrap"><div class="bar-fill normal" style="width:100%">$126M</div></div>
+        <div class="wins-badge">103 W</div>
+      </div>
+      <div class="payroll-row">
+        <div class="team-name">Oakland A's</div>
+        <div class="bar-wrap"><div class="bar-fill highlight" style="width:32%">$40M</div></div>
+        <div class="wins-badge" style="color:var(--green);font-weight:700;">103 W ⚡</div>
+      </div>
+      <div class="payroll-row">
+        <div class="team-name">Baltimore Orioles</div>
+        <div class="bar-wrap"><div class="bar-fill dim" style="width:70%">$95M</div></div>
+        <div class="wins-badge" style="color:var(--red)">67 W</div>
+      </div>
+      <div class="payroll-row">
+        <div class="team-name">Texas Rangers</div>
+        <div class="bar-wrap"><div class="bar-fill dim" style="width:63%">$85M</div></div>
+        <div class="wins-badge" style="color:var(--red)">72 W</div>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Oakland menghasilkan kemenangan seharga $0.39M per win. Baltimore dan Texas membayar hampir $3M per win.</p>
+    </div>
+
+  </div>
+
+  <!-- PELAJARAN -->
+  <div class="section" id="pelajaran">
+    <div class="sec-hdr">
+      <h2>Pelajaran dari Moneyball</h2>
+      <p>Klik setiap tile untuk membaca insight yang bisa diterapkan di luar baseball.</p>
+    </div>
+
+    <div class="lessons-grid">
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">🔍</span>
+        <div class="lesson-head">Temukan apa yang diundervalue pasar</div>
+        <div class="lesson-body">Pasar (termasuk pasar tenaga kerja, investasi, atau kompetisi bisnis) selalu salah dalam menilai sesuatu. Cari celah antara persepsi dan realitas — di situlah keunggulan kompetitif bisa ditemukan.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">📊</span>
+        <div class="lesson-head">Data mengalahkan intuisi dalam jangka panjang</div>
+        <div class="lesson-body">Perasaan dan pengalaman seringkali dikuatkan oleh bias konfirmasi. Data yang dikumpulkan dengan tepat lebih sering benar daripada "mata" manusia, terutama untuk keputusan berulang dalam skala besar.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">💰</span>
+        <div class="lesson-head">Efisiensi, bukan anggaran terbesar</div>
+        <div class="lesson-body">Bukan siapa yang punya uang paling banyak yang menang, tapi siapa yang paling bijak membelanjakan setiap dollarnya. Startup kecil bisa mengalahkan korporasi besar dengan alokasi sumber daya yang lebih cerdas.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">🧱</span>
+        <div class="lesson-head">Institusi lambat berubah — gunakan itu</div>
+        <div class="lesson-body">Tradisi dan status quo melindungi diri sendiri. Institusi besar cenderung mempertahankan cara lama bukan karena efektif, tapi karena mengubahnya mengancam posisi orang-orang di dalamnya. Orang luar bisa mengambil keuntungan dari resistensi ini.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">👁️</span>
+        <div class="lesson-head">Jangan nilai buku dari sampulnya</div>
+        <div class="lesson-body">Jeremy Brown, Scott Hatteberg, Chad Bradford — semuanya "ditolak" karena penampilan fisik atau gaya yang tidak konvensional. Namun kinerjanya tak tertandingi. Banyak bakat tersembunyi di tempat yang tidak ada orang mau melihat.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">🎲</span>
+        <div class="lesson-head">Hasil jangka pendek adalah kebisingan</div>
+        <div class="lesson-body">Oakland kalah di play-off — dan semua media menyimpulkan sistemnya gagal. Namun statistik musim penuh (162 game) jauh lebih bermakna daripada 5 game play-off. Jangan biarkan kebisingan jangka pendek mengubah strategi jangka panjang yang terbukti benar.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">🔄</span>
+        <div class="lesson-head">Ide menyebar lebih cepat dari perkiraan</div>
+        <div class="lesson-body">Dalam beberapa tahun setelah Oakland sukses, Boston Red Sox, Toronto Blue Jays, dan puluhan tim lain mengadopsi pendekatan serupa. Ide yang benar tidak bisa dibendung selamanya — meski butuh keberanian awal untuk menjalankannya sendiri.</div>
+      </div>
+
+      <div class="lesson-pill" onclick="toggleLesson(this)">
+        <span class="lesson-icon">🤯</span>
+        <div class="lesson-head">Ego bisa merusak pengambilan keputusan</div>
+        <div class="lesson-body">Billy hampir menerima tawaran Boston senilai $12.5 juta, lalu membatalkannya — karena menyadari ia hampir mengulang kesalahan di usia 18 tahun: membuat keputusan besar berdasarkan uang. Kesadaran diri adalah komponen penting dari rasionalitas.</div>
+      </div>
+
+    </div>
+
+    <hr class="divider">
+
+    <div class="quote-block">
+      <span class="quote-mark">"</span>
+      <div class="quote-text">Ada pasar yang tidak efisien di hampir setiap bidang kehidupan. Yang dibutuhkan hanyalah seseorang dengan keberanian intelektual untuk mengeksploitasinya.</div>
+      <div class="quote-source">— Parafrase dari tema utama Moneyball</div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleChapter(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.chapter-item').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+
+function toggleLesson(el) {
+  el.classList.toggle('open');
+}
+
+const charData = {
+  beane: {
+    name: 'Billy Beane',
+    role: 'General Manager, Oakland Athletics',
+    color: '#dbeafe',
+    textColor: '#1e40af',
+    initials: 'BB',
+    tags: ['Visioner', 'Ex-atlet gagal', 'Anti-tradisi', 'Pengambil risiko'],
+    bio: `Billy Beane adalah paradoks hidup: atlet paling berbakat di generasinya yang justru hancur di liga profesional. Setelah melewatkan tawaran beasiswa Stanford demi kontrak pertamanya, ia menemukan bahwa bakat fisik yang diidolakan para scout tidak cukup di lapangan sesungguhnya.
+
+Kegagalan sebagai pemain membentuk obsesinya sebagai manajer. Ia sadar betul bahwa sistem penilaian pemain baseball adalah omong kosong: scout membeli "penampilan" dan "potensi", bukan kinerja nyata. Sebagai GM Oakland, ia memutuskan untuk melawan arus.
+
+Yang membuat Billy unik adalah keberaniannya untuk tidak konsisten secara terbuka: ia mengklaim bahwa logika adalah segalanya, namun di balik layar ia sangat emosional — tidak mampu menonton pertandingan sendiri karena terlalu stres, sering berjalan di tempat parkir sambil menggenggam scorecard di tangan. Ia memahami bahwa pemain adalah manusia, bukan aset statis — dan kadang tindakan kecil seperti taruhan $50 atau percakapan ringan bisa mengubah performa pemain secara dramatis.`
+  },
+  depo: {
+    name: 'Paul DePodesta',
+    role: 'Assistant General Manager',
+    color: '#dcfce7',
+    textColor: '#15803d',
+    initials: 'PD',
+    tags: ['Harvard Economics', 'Sabermetrician', 'Analyst', 'Introvert'],
+    bio: `Paul DePodesta adalah "senjata rahasia" yang Billy Beane tidak bisa hidup tanpanya. Lulusan Harvard jurusan ekonomi, ia bergabung dengan Oakland A's bukan melalui jalur pemain baseball, melainkan melalui jalur analisis data.
+
+Kehadirannya di ruang draft menciptakan gesekan dengan para scout senior. Mereka melihatnya sebagai ancaman — "bocah Harvard dengan laptop" yang mencoba mengganti pengalaman puluhan tahun dengan angka-angka dari komputer. Paul tidak peduli. Ia terobsesi dengan satu ide: bahwa pasar pemain baseball penuh dengan inefficiency yang bisa dieksploitasi.
+
+Ia menemukan Kevin Youkilis ("The Greek God of Walks") hanya dengan melihat OBP-nya yang luar biasa tinggi. Ia mengidentifikasi Chad Bradford sebagai pitcher berharga dari Triple-A ketika semua tim lain mengabaikannya. Paul adalah contoh nyata bahwa outsider perspective — seseorang yang tidak "minum kool-aid" budaya lama — bisa menjadi keunggulan kompetitif yang luar biasa.`
+  },
+  hatt: {
+    name: 'Scott Hatteberg',
+    role: 'First Baseman, Oakland Athletics',
+    color: '#fef9c3',
+    textColor: '#854d0e',
+    initials: 'SH',
+    tags: ['Injured veteran', 'High OBP', 'Pemukul sabar', 'Hero walk-off'],
+    bio: `Scott Hatteberg adalah simbol sempurna dari filosofi Oakland A's: seorang pemain yang "dibuang" oleh sistem konvensional, tapi diambil kembali oleh tim yang mau melihat lebih dalam dari sekadar penampilan.
+
+Sebagai catcher, Hatteberg mengalami cedera saraf di siku yang merusak kemampuan melempar. Semua tim melakukan hal yang logis: melepasnya. Billy Beane melakukan hal yang berbeda: melihat statistik memukul dan OBP-nya yang konsisten tinggi, lalu memutuskan untuk mengubahnya menjadi first baseman — posisi yang belum pernah ia mainkan secara profesional.
+
+Momen paling dramatis di buku ini adalah milik Hatteberg: dengan skor seri 11-11 di inning ke-9, setelah Oakland hampir melepas winning streak 20 pertandingan bersejarah, ia maju ke batter's box dengan kopi empat cangkir dalam darahnya dan raket baseball pemberian orang asing yang belum pernah ia pakai. Pitch kedua dari Grimsley — bola tinggi di zona pukulan. Hatteberg memukul. Bola terbang ke deep right center. Home run. Winning streak 20 tercapai.`
+  },
+  brad: {
+    name: 'Chad Bradford',
+    role: 'Relief Pitcher, Oakland Athletics',
+    color: '#fce7f3',
+    textColor: '#9d174d',
+    initials: 'CB',
+    tags: ['Pitcher underhand', '84 mph', 'Unorthodox', 'Ground ball specialist'],
+    bio: `Chad Bradford adalah pitcher paling aneh yang pernah ada di Major League Baseball — dan salah satu yang paling efektif. Ia melempar bola hampir dari permukaan tanah, buku-buku jarinya kadang menyentuh tanah saat ia melepas bola. Kecepatannya hanya 84 mph di zaman di mana pitcher berharga biasanya di atas 95 mph.
+
+Setiap tim yang melihatnya berlatih tertawa atau geleng kepala. Chicago White Sox, tim yang membesarkannya, berulang kali mengirimnya kembali ke Triple-A meskipun statistiknya di level profesional rendah hampir sempurna.
+
+Voros McCracken, analis amatir yang mengembangkan "DIPS theory", menemukan Bradford dalam analisis statistiknya dan terpesona. Paul DePodesta menemukan temuan yang sama. Billy Beane mendapatkannya dari White Sox dengan "memberikan catcher minor league" sebagai imbalan — hampir gratis.
+
+Kisah Bradford adalah tentang pentingnya keyakinan pada data di tengah kebisingan tradisi dan prasangka estetik. Cara ia melempar mungkin jelek, tapi angka-angkanya berbicara jelas: ia hampir tidak pernah memberikan walks, hampir tidak pernah kena home run, dan ground ball rate-nya 5:1 — lima kali di atas rata-rata liga.`
+  },
+  james: {
+    name: 'Bill James',
+    role: 'Sabermetrician, "Bapak Analisis Baseball Modern"',
+    color: '#f3e8ff',
+    textColor: '#6b21a8',
+    initials: 'BJ',
+    tags: ['Outsider', 'Statistician', 'Iconoclast', 'Penjaga malam'],
+    bio: `Bill James adalah sosok yang paling sedikit muncul secara langsung di buku ini, namun paling berpengaruh secara intelektual. Ia adalah pustakawan dan penjaga malam di pabrik makanan di Kansas yang mulai menulis analisis baseball mendalam di akhir 1970-an — atas biayanya sendiri, dengan penerbit mandiri, untuk audiens yang hampir tidak ada.
+
+Selama dua dekade, James menerbitkan "Baseball Abstract" tahunan yang berisi pemikiran-pemikiran radikal: bahwa sacrifice bunt umumnya merugikan tim, bahwa stolen base hampir selalu tidak worth the risk, bahwa RBI bukan metrik pemain tapi metrik keberuntungan lineup, bahwa on-base percentage dan slugging percentage adalah dua statistik terpenting yang hampir tidak pernah dibicarakan.
+
+Dunia baseball profesional mengabaikannya — bahkan menertawakannya. Namun sekumpulan kecil penggemar intelektual membaca dan berpikir. Billy Beane adalah seorang dari mereka. Ketika Boston Red Sox akhirnya menyewa James sebagai konsultan senior setelah membaca Moneyball, James akhirnya mendapat tempat yang layak di dunia yang selama 25 tahun menolaknya.`
+  },
+  brown: {
+    name: 'Jeremy Brown',
+    role: 'Catcher — First Round Pick, Draft 2002',
+    color: '#fef3c7',
+    textColor: '#92400e',
+    initials: 'JB',
+    tags: ['Undervalued', '"Bad body"', 'High OBP', 'Simbol filosofi Oakland'],
+    bio: `Jeremy Brown dari Hueytown, Alabama adalah taruhan paling kontroversial Billy Beane di Draft 2002. Tubuhnya pendek dan gempal. Baseball America dengan sadis mencetak foto yearbook-nya dengan keterangan "Bad Body Rap." Scout-scout dari tim lain menertawakan pilihan Oakland.
+
+Billy dan Paul tidak melihat tubuhnya. Mereka melihat satu angka: on-base percentage tertinggi di seluruh baseball amatir. Di sistem minor league Oakland, Brown berkembang pesat. Di Visalia (Single-A), ia memimpin tim dalam batting average, OBP, dan slugging percentage sekaligus, mencetak 40 RBI dalam 55 pertandingan.
+
+Epilog buku ini diakhiri dengan Brown: ia memukul pukulan keras yang ia yakini akan berakhir jadi triple, berlari sekeras-kerasnya, lalu terpleset dan jatuh antara base pertama dan kedua. Ia bangkit, bersiap kembali ke base... lalu melihat teman-temannya berdiri sambil tertawa-tawa di dugout. Ia menoleh ke outfield. Bola sudah di luar pagar. Home run. Tidak ada yang lebih tepat menggambarkan filosofi Moneyball dari momen ini: sukses datang bahkan ketika kamu tidak menyadarinya sedang terjadi.`
+  }
+};
+
+function showChar(id, el) {
+  document.querySelectorAll('.char-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+
+  const d = charData[id];
+  const panel = document.getElementById('charDetail');
+  panel.innerHTML = `
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
+      <div style="width:56px;height:56px;border-radius:50%;background:${d.color};color:${d.textColor};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;font-family:'Playfair Display',serif;flex-shrink:0;">${d.initials}</div>
+      <div>
+        <h3 style="margin:0;font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);">${d.name}</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin:4px 0 0;">${d.role}</p>
+      </div>
+    </div>
+    <div style="margin-bottom:18px;">
+      ${d.tags.map(t => `<span class="char-tag">${t}</span>`).join('')}
+    </div>
+    ${d.bio.split('\n\n').filter(p=>p.trim()).map(p => `<p>${p}</p>`).join('')}
+  `;
+  panel.classList.add('visible');
+  setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+}
+</script>
+
+</body>
+</html>
