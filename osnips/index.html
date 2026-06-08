@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal OSN IPS — Tingkat Kabupaten</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --card: #ffffff;
+    --accent: #1a3a5c;
+    --accent2: #c8a96a;
+    --text: #1c1c1e;
+    --muted: #6b7280;
+    --border: #e5ddd0;
+    --green: #166534;
+    --green-bg: #dcfce7;
+    --red: #991b1b;
+    --red-bg: #fee2e2;
+    --radius: 14px;
+    --shadow: 0 2px 16px rgba(26,58,92,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  header {
+    background: var(--accent);
+    color: white;
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(200,169,106,0.15);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(200,169,106,0.10);
+  }
+  .header-badge {
+    display: inline-block;
+    background: var(--accent2);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    margin-bottom: 6px;
+    position: relative;
+  }
+  header p {
+    font-size: 14px;
+    opacity: 0.75;
+    position: relative;
+  }
+  .progress-bar-wrap {
+    background: var(--border);
+    height: 6px;
+    border-radius: 3px;
+    margin: 1.5rem auto 0;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent2);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-text {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 6px;
+    position: relative;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .question-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    box-shadow: var(--shadow);
+    transition: border-color 0.2s;
+  }
+  .question-card.answered { border-color: var(--accent2); }
+  .question-card.correct { border-color: #16a34a; background: #f0fdf4; }
+  .question-card.wrong { border-color: #dc2626; background: #fef2f2; }
+
+  .q-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    flex-shrink: 0;
+  }
+  .q-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+  .q-text { font-size: 15px; line-height: 1.65; font-weight: 400; padding-top: 4px; }
+
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    text-align: left;
+    transition: all 0.15s;
+    line-height: 1.5;
+    color: var(--text);
+    width: 100%;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: #eef3f9;
+  }
+  .option-btn .opt-key {
+    min-width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .option-btn.selected { border-color: var(--accent); background: #e8f0f9; }
+  .option-btn.correct-answer { border-color: #16a34a !important; background: #dcfce7 !important; }
+  .option-btn.wrong-answer { border-color: #dc2626 !important; background: #fee2e2 !important; }
+  .option-btn.correct-answer .opt-key { background: #16a34a; }
+  .option-btn.wrong-answer .opt-key { background: #dc2626; }
+  .option-btn:disabled { cursor: default; }
+
+  .explanation {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: #fffbeb;
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    color: #78350f;
+    line-height: 1.6;
+    display: none;
+  }
+  .explanation.show { display: block; }
+
+  .nav-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2rem 0 1rem;
+  }
+  .btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.3px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover { background: #0f2540; transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--card);
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+  }
+  .btn-secondary:hover { background: #eef3f9; }
+  .btn-wa {
+    background: #25d366;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-wa:hover { background: #1da851; transform: translateY(-1px); }
+  .btn-wa svg { width: 18px; height: 18px; fill: white; }
+
+  .result-card {
+    background: var(--accent);
+    color: white;
+    border-radius: var(--radius);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    display: none;
+  }
+  .result-card.show { display: block; }
+  .result-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+    margin: 1rem 0 0.5rem;
+  }
+  .result-grade {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .result-detail {
+    opacity: 0.7;
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+  }
+  .score-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  .score-item { text-align: center; }
+  .score-item .val { font-size: 1.4rem; font-weight: 700; }
+  .score-item .lbl { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+  .score-item .correct-val { color: #86efac; }
+  .score-item .wrong-val { color: #fca5a5; }
+
+  .answer-key {
+    display: none;
+    margin-top: 1rem;
+  }
+  .answer-key.show { display: block; }
+
+  .student-form {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow);
+  }
+  .form-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 12px; }
+  .form-group { flex: 1; min-width: 200px; }
+  .form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus { border-color: var(--accent); }
+
+  .sticky-footer {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 10px 1.5rem;
+    z-index: 100;
+    box-shadow: 0 -2px 12px rgba(26,58,92,0.18);
+  }
+  .footer-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .footer-stat .fs-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .footer-stat .fs-dot.green { background: #4ade80; }
+  .footer-stat .fs-dot.red { background: #f87171; }
+  .footer-stat .fs-dot.gray { background: rgba(255,255,255,0.4); }
+  .footer-stat .fs-val { font-size: 17px; font-weight: 700; min-width: 22px; text-align: center; }
+  .footer-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.2); }
+
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem 1.5rem; }
+    .container { padding: 1.5rem 0.75rem; }
+    .question-card { padding: 1.25rem; }
+    .result-score { font-size: 3.5rem; }
+    .score-breakdown { gap: 1.2rem; }
+    .sticky-footer { gap: 1rem; padding: 10px 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">OSN IPS 2026</div>
+  <h1>Latihan Soal OSN IPS</h1>
+  <p>Tingkat Kabupaten — 30 Soal Pilihan Ganda</p>
+  <p style="margin-top: 10px; opacity: 0.6; font-size: 12px; letter-spacing: 0.5px;">SMP IT Insan Sejahtera &nbsp;·&nbsp; Santi Nurhamidah, S.Pd., Gr.</p>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressBar"></div>
+  </div>
+  <div class="progress-text" id="progressText">0 dari 30 soal terjawab</div>
+</header>
+
+<div class="container">
+
+  <!-- Form Identitas -->
+  <div class="student-form" id="studentForm">
+    <div class="section-label">Identitas Peserta</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" id="studentName" placeholder="Tulis nama lengkap..." />
+      </div>
+      <div class="form-group">
+        <label>Kelas</label>
+        <input type="text" id="studentClass" placeholder="Contoh: IX A" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Soal -->
+  <div class="section-label">Soal Latihan</div>
+  <div id="quizContainer"></div>
+
+  <!-- Tombol Navigasi -->
+  <div class="nav-buttons" id="navButtons">
+    <button class="btn btn-primary" onclick="submitQuiz()">Selesai &amp; Lihat Nilai</button>
+    <button class="btn btn-secondary" onclick="resetQuiz()">Ulangi</button>
+  </div>
+
+  <!-- Hasil -->
+  <div class="result-card" id="resultCard">
+    <div class="header-badge" style="background: rgba(200,169,106,0.2); color: var(--accent2);">Hasil Ujian</div>
+    <div class="result-score" id="scoreDisplay">0</div>
+    <div class="result-grade" id="gradeDisplay">—</div>
+    <div class="result-detail" id="resultDetail">—</div>
+    <div class="score-breakdown">
+      <div class="score-item">
+        <div class="val correct-val" id="correctCount">0</div>
+        <div class="lbl">Benar</div>
+      </div>
+      <div class="score-item">
+        <div class="val wrong-val" id="wrongCount">0</div>
+        <div class="lbl">Salah</div>
+      </div>
+      <div class="score-item">
+        <div class="val" id="emptyCount">0</div>
+        <div class="lbl">Kosong</div>
+      </div>
+    </div>
+    <div class="nav-buttons" style="justify-content:center; margin-top: 0.5rem;">
+      <button class="btn btn-wa" onclick="sendToWhatsApp()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Kirim ke WhatsApp
+      </button>
+      <button class="btn btn-secondary" onclick="toggleAnswerKey()">Lihat Pembahasan</button>
+      <button class="btn btn-secondary" onclick="resetQuiz()">Ulangi</button>
+    </div>
+  </div>
+
+  <!-- Kunci Jawaban Pembahasan -->
+  <div class="answer-key" id="answerKey"></div>
+
+</div>
+
+<!-- Sticky Footer -->
+<div class="sticky-footer" id="stickyFooter">
+  <div class="footer-stat">
+    <div class="fs-dot green"></div>
+    <span>Benar</span>
+    <span class="fs-val" id="footerCorrect">0</span>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-stat">
+    <div class="fs-dot red"></div>
+    <span>Salah</span>
+    <span class="fs-val" id="footerWrong">0</span>
+  </div>
+  <div class="footer-divider"></div>
+  <div class="footer-stat">
+    <div class="fs-dot gray"></div>
+    <span>Belum</span>
+    <span class="fs-val" id="footerEmpty">30</span>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    n: 1,
+    q: "Apa yang dimaksud dengan kelangkaan dalam ilmu ekonomi?",
+    opts: ["Kekurangan barang mewah di pasaran", "Ketidakseimbangan antara kebutuhan manusia yang tidak terbatas dengan alat pemenuhan yang terbatas", "Kondisi negara miskin yang kekurangan sumber daya", "Situasi di mana harga barang sangat tinggi"],
+    a: 1,
+    ex: "Kelangkaan (scarcity) adalah kondisi di mana kebutuhan manusia tidak terbatas sementara alat pemuas kebutuhannya terbatas. Ini merupakan masalah pokok ekonomi."
+  },
+  {
+    n: 2,
+    q: "Sistem ekonomi di mana seluruh kegiatan ekonomi direncanakan dan dikendalikan oleh pemerintah pusat disebut...",
+    opts: ["Sistem ekonomi pasar", "Sistem ekonomi campuran", "Sistem ekonomi komando/terpusat", "Sistem ekonomi tradisional"],
+    a: 2,
+    ex: "Sistem ekonomi komando (terpusat/terencana) adalah sistem di mana pemerintah pusat memegang kendali penuh atas keputusan ekonomi, produksi, dan distribusi. Contoh: Uni Soviet, Korea Utara."
+  },
+  {
+    n: 3,
+    q: "Faktor produksi yang paling menentukan kemajuan ekonomi suatu bangsa di era modern adalah...",
+    opts: ["Sumber daya alam", "Modal uang", "Kewirausahaan dan teknologi", "Tenaga kerja kasar"],
+    a: 2,
+    ex: "Di era modern, kewirausahaan (entrepreneurship) dan penguasaan teknologi dianggap sebagai faktor penentu utama kemajuan ekonomi karena keduanya dapat mengoptimalkan penggunaan faktor produksi lainnya."
+  },
+  {
+    n: 4,
+    q: "Hukum permintaan menyatakan bahwa, ceteris paribus, hubungan antara harga dan jumlah barang yang diminta adalah...",
+    opts: ["Berbanding lurus (positif)", "Berbanding terbalik (negatif)", "Tidak ada hubungan", "Berubah-ubah tergantung jenis barang"],
+    a: 1,
+    ex: "Hukum permintaan: jika harga suatu barang naik, jumlah yang diminta akan turun, dan sebaliknya — dengan asumsi faktor lain tetap (ceteris paribus). Ini menghasilkan kurva permintaan yang miring ke bawah."
+  },
+  {
+    n: 5,
+    q: "Indikator yang paling umum digunakan untuk mengukur tingkat kesejahteraan penduduk suatu negara adalah...",
+    opts: ["Jumlah populasi", "Pendapatan Nasional Bruto (GNP) per kapita", "Luas wilayah negara", "Jumlah ekspor negara"],
+    a: 1,
+    ex: "GNP/GNI per kapita digunakan sebagai indikator umum kesejahteraan karena mencerminkan rata-rata pendapatan tiap penduduk. Namun indikator ini tidak memperhitungkan distribusi pendapatan."
+  },
+  {
+    n: 6,
+    q: "Proses perpindahan penduduk dari desa ke kota dengan tujuan mencari pekerjaan disebut...",
+    opts: ["Transmigrasi", "Urbanisasi", "Migrasi internasional", "Ruralisasi"],
+    a: 1,
+    ex: "Urbanisasi adalah perpindahan penduduk dari desa ke kota. Faktor penarik (pull factor) meliputi peluang kerja dan fasilitas kota, sedangkan faktor pendorong (push factor) meliputi kemiskinan dan sempitnya lahan pertanian."
+  },
+  {
+    n: 7,
+    q: "Angin muson barat yang bertiup di Indonesia menyebabkan terjadinya...",
+    opts: ["Musim kemarau di seluruh Indonesia", "Musim hujan di sebagian besar wilayah Indonesia", "Musim semi yang singkat", "Badai tropis yang kuat"],
+    a: 1,
+    ex: "Angin muson barat bertiup dari Asia (Benua Asia) menuju Australia (sekitar bulan Oktober–April) melewati Samudra Hindia sehingga membawa banyak uap air dan menyebabkan musim hujan di Indonesia."
+  },
+  {
+    n: 8,
+    q: "Wilayah kepulauan Indonesia yang secara geografis berada paling timur adalah...",
+    opts: ["Pulau Kalimantan", "Pulau Sulawesi", "Pulau Papua", "Kepulauan Maluku"],
+    a: 2,
+    ex: "Pulau Papua (dan pulau-pulau di sekitarnya) merupakan wilayah Indonesia yang berada paling timur, berbatasan langsung dengan Papua Nugini. Titik paling timur Indonesia berada di Merauke."
+  },
+  {
+    n: 9,
+    q: "Tektonik lempeng menjelaskan bahwa banyak gunung berapi aktif di Indonesia karena negara ini terletak di...",
+    opts: ["Daerah khatulistiwa", "Pertemuan tiga lempeng tektonik besar", "Jalur perdagangan dunia", "Zona iklim tropis"],
+    a: 1,
+    ex: "Indonesia terletak di pertemuan lempeng Eurasia, Indo-Australia, dan Pasifik. Interaksi antar lempeng ini menghasilkan aktivitas vulkanik dan seismik yang tinggi, menempatkan Indonesia di 'Ring of Fire' Pasifik."
+  },
+  {
+    n: 10,
+    q: "Apa yang dimaksud dengan Zona Ekonomi Eksklusif (ZEE) Indonesia?",
+    opts: ["Wilayah laut 200 mil laut dari garis pangkal pantai di mana Indonesia memiliki hak eksklusif untuk mengeksplorasi sumber daya", "Wilayah perairan yang dilarang dimasuki kapal asing", "Kawasan khusus untuk budidaya ikan", "Jalur laut internasional yang dikelola Indonesia"],
+    a: 0,
+    ex: "ZEE adalah wilayah laut sejauh 200 mil laut (±370 km) dari garis pangkal pantai. Di zona ini, negara memiliki hak berdaulat atas eksplorasi dan eksploitasi sumber daya alam, baik hayati maupun non-hayati."
+  },
+  {
+    n: 11,
+    q: "Organisasi ASEAN didirikan pada tahun 1967 di kota...",
+    opts: ["Jakarta, Indonesia", "Kuala Lumpur, Malaysia", "Bangkok, Thailand", "Manila, Filipina"],
+    a: 2,
+    ex: "ASEAN (Association of Southeast Asian Nations) didirikan pada 8 Agustus 1967 di Bangkok, Thailand, melalui penandatanganan Deklarasi Bangkok oleh 5 negara pendiri: Indonesia, Malaysia, Thailand, Filipina, dan Singapura."
+  },
+  {
+    n: 12,
+    q: "Perubahan Sosial yang terjadi secara mendadak dan di luar kendali masyarakat disebut...",
+    opts: ["Evolusi sosial", "Reformasi", "Revolusi", "Akulturasi"],
+    a: 2,
+    ex: "Revolusi adalah perubahan sosial yang terjadi secara cepat, mendadak, dan sering kali menyentuh sendi-sendi pokok kehidupan masyarakat. Contoh: Revolusi Prancis, Revolusi Industri."
+  },
+  {
+    n: 13,
+    q: "Proses masuk dan menyebarnya unsur-unsur kebudayaan asing ke dalam suatu kebudayaan lokal sehingga lambat laun diterima tanpa menghilangkan kepribadian budaya sendiri disebut...",
+    opts: ["Asimilasi", "Difusi", "Akulturasi", "Amalgamasi"],
+    a: 2,
+    ex: "Akulturasi adalah proses percampuran dua kebudayaan atau lebih yang saling bertemu dan memengaruhi, tetapi masing-masing masih mempertahankan ciri khasnya. Contoh: arsitektur masjid bergaya Jawa."
+  },
+  {
+    n: 14,
+    q: "Mobilitas sosial vertikal ke atas (social climbing) ditunjukkan oleh contoh berikut...",
+    opts: ["Seorang guru pindah mengajar ke sekolah lain di kota yang sama", "Seorang buruh tani menjadi pengusaha sukses", "Seorang direktur pindah jabatan ke posisi yang setara", "Seorang pedagang berpindah dari satu pasar ke pasar lain"],
+    a: 1,
+    ex: "Mobilitas sosial vertikal ke atas (social climbing) adalah perpindahan status sosial dari lapisan bawah ke lapisan atas yang lebih tinggi. Contoh: buruh tani yang menjadi pengusaha sukses."
+  },
+  {
+    n: 15,
+    q: "Salah satu ciri utama masyarakat multikultural adalah...",
+    opts: ["Seluruh warga memiliki kebudayaan yang sama", "Adanya keberagaman suku, ras, agama, dan budaya dalam satu masyarakat", "Tidak ada konflik antar kelompok masyarakat", "Pemimpin tunggal yang mengatur seluruh kelompok"],
+    a: 1,
+    ex: "Masyarakat multikultural ditandai oleh keberagaman budaya, suku, agama, ras, dan golongan dalam satu komunitas atau negara yang hidup berdampingan. Indonesia adalah contoh klasik masyarakat multikultural."
+  },
+  {
+    n: 16,
+    q: "Badan PBB yang bertugas menangani masalah kesehatan dunia adalah...",
+    opts: ["UNESCO", "UNICEF", "WHO", "FAO"],
+    a: 2,
+    ex: "WHO (World Health Organization / Organisasi Kesehatan Dunia) adalah badan khusus PBB yang bertanggung jawab atas kesehatan internasional. Didirikan tahun 1948, bermarkas di Jenewa, Swiss."
+  },
+  {
+    n: 17,
+    q: "Proklamasi Kemerdekaan Indonesia dibacakan pada tanggal...",
+    opts: ["17 Agustus 1945", "18 Agustus 1945", "17 Juli 1945", "20 Oktober 1945"],
+    a: 0,
+    ex: "Proklamasi Kemerdekaan Indonesia dibacakan oleh Ir. Soekarno didampingi Drs. Mohammad Hatta pada 17 Agustus 1945 pukul 10.00 WIB di Jalan Pegangsaan Timur No. 56, Jakarta."
+  },
+  {
+    n: 18,
+    q: "Sistem tanam paksa (cultuurstelsel) yang diterapkan Belanda di Indonesia dipelopori oleh...",
+    opts: ["Herman Willem Daendels", "Thomas Stamford Raffles", "Johannes van den Bosch", "Jan Pieterszoon Coen"],
+    a: 2,
+    ex: "Sistem tanam paksa (cultuurstelsel) diterapkan oleh Gubernur Jenderal Johannes van den Bosch mulai tahun 1830. Rakyat diwajibkan menyerahkan 1/5 tanahnya untuk tanaman ekspor atau kerja rodi 66 hari/tahun."
+  },
+  {
+    n: 19,
+    q: "Sumpah Pemuda yang diikrarkan pada 28 Oktober 1928 menegaskan tiga hal, yaitu...",
+    opts: ["Satu bangsa, satu tanah air, satu bahasa persatuan", "Satu agama, satu bangsa, satu pemerintahan", "Satu pendidikan, satu hukum, satu bahasa", "Satu perjuangan, satu tujuan, satu cita-cita"],
+    a: 0,
+    ex: "Sumpah Pemuda menegaskan: (1) Kami putra-putri Indonesia mengaku berbangsa satu, bangsa Indonesia; (2) bertanah air satu, tanah air Indonesia; (3) menjunjung bahasa persatuan, bahasa Indonesia."
+  },
+  {
+    n: 20,
+    q: "Konferensi Asia-Afrika yang menghasilkan Dasasila Bandung diselenggarakan di Bandung pada tahun...",
+    opts: ["1945", "1950", "1955", "1960"],
+    a: 2,
+    ex: "Konferensi Asia-Afrika diselenggarakan di Bandung pada 18–24 April 1955. Dihadiri oleh 29 negara Asia dan Afrika, menghasilkan Dasasila Bandung sebagai prinsip hidup berdampingan secara damai."
+  },
+  {
+    n: 21,
+    q: "Kegiatan ekonomi yang mengolah bahan mentah menjadi barang jadi atau setengah jadi disebut sektor...",
+    opts: ["Primer", "Sekunder", "Tersier", "Kuarterner"],
+    a: 1,
+    ex: "Sektor sekunder adalah kegiatan ekonomi yang mengolah hasil sektor primer (bahan mentah/alam) menjadi barang jadi atau setengah jadi melalui proses industri/manufaktur. Contoh: pabrik tekstil, industri makanan."
+  },
+  {
+    n: 22,
+    q: "Keunggulan komparatif (comparative advantage) dalam perdagangan internasional dikemukakan oleh...",
+    opts: ["Adam Smith", "David Ricardo", "John Maynard Keynes", "Karl Marx"],
+    a: 1,
+    ex: "David Ricardo mengembangkan teori keunggulan komparatif, yang menyatakan bahwa suatu negara sebaiknya mengkhususkan diri memproduksi barang yang dapat diproduksi dengan biaya relatif (opportunity cost) paling rendah dibanding negara lain."
+  },
+  {
+    n: 23,
+    q: "Neraca perdagangan suatu negara dikatakan defisit apabila...",
+    opts: ["Nilai ekspor lebih besar dari nilai impor", "Nilai impor lebih besar dari nilai ekspor", "Nilai ekspor sama dengan nilai impor", "Tidak ada kegiatan ekspor sama sekali"],
+    a: 1,
+    ex: "Neraca perdagangan defisit (trade deficit) terjadi ketika nilai impor suatu negara melebihi nilai ekspornya. Ini berarti negara membeli lebih banyak barang dari luar negeri dibanding yang dijualnya ke luar negeri."
+  },
+  {
+    n: 24,
+    q: "Lembaga keuangan yang berfungsi sebagai bank sentral Republik Indonesia adalah...",
+    opts: ["Bank BRI", "Bank Mandiri", "Bank Indonesia", "Otoritas Jasa Keuangan (OJK)"],
+    a: 2,
+    ex: "Bank Indonesia adalah bank sentral Republik Indonesia yang bertugas menetapkan dan melaksanakan kebijakan moneter, mengatur dan menjaga kelancaran sistem pembayaran, serta menjaga stabilitas keuangan."
+  },
+  {
+    n: 25,
+    q: "Globalisasi membawa dampak negatif berupa homogenisasi budaya yang artinya...",
+    opts: ["Munculnya beragam budaya baru di setiap daerah", "Tersebarnya satu budaya dominan yang menggerus budaya lokal", "Terjadinya pertukaran budaya yang saling menguntungkan", "Berkembangnya identitas budaya lokal yang semakin kuat"],
+    a: 1,
+    ex: "Homogenisasi budaya adalah proses di mana budaya lokal tergeser dan digantikan oleh satu budaya dominan (biasanya budaya Barat/global). Dampaknya: hilangnya kearifan lokal, perubahan gaya hidup, dan erosi identitas budaya."
+  },
+  {
+    n: 26,
+    q: "Laut Banda, Laut Flores, dan Laut Jawa termasuk dalam jenis laut...",
+    opts: ["Laut dalam (samudra)", "Laut tepi (marginal sea)", "Laut tengah (mediterranean sea)", "Laut pedalaman (inland sea)"],
+    a: 1,
+    ex: "Laut tepi (marginal sea) adalah laut yang terletak di tepi benua dan dipisahkan dari samudra oleh gugusan pulau atau semenanjung. Laut Banda, Flores, dan Jawa termasuk jenis ini karena terletak di antara pulau-pulau."
+  },
+  {
+    n: 27,
+    q: "Piramida penduduk yang berbentuk ekspansif (muda) menunjukkan bahwa suatu negara memiliki...",
+    opts: ["Angka kematian yang tinggi dan angka kelahiran yang rendah", "Angka kelahiran tinggi dan sebagian besar penduduk berusia muda", "Jumlah lansia yang dominan dalam struktur penduduk", "Pertumbuhan penduduk yang negatif"],
+    a: 1,
+    ex: "Piramida ekspansif (berbentuk limas/muda) menunjukkan angka kelahiran tinggi, angka kematian tinggi, dan proporsi penduduk usia muda yang dominan. Ciri khas negara berkembang. Indonesia termasuk kategori ini."
+  },
+  {
+    n: 28,
+    q: "Pembangunan berkelanjutan (sustainable development) bertujuan untuk...",
+    opts: ["Memaksimalkan pertumbuhan ekonomi tanpa batas", "Memenuhi kebutuhan generasi sekarang tanpa mengorbankan kemampuan generasi mendatang", "Melestarikan alam tanpa mempertimbangkan kebutuhan manusia", "Memprioritaskan industri besar daripada usaha kecil"],
+    a: 1,
+    ex: "Pembangunan berkelanjutan (sustainable development) didefinisikan sebagai pembangunan yang memenuhi kebutuhan generasi masa kini tanpa mengorbankan kemampuan generasi mendatang untuk memenuhi kebutuhannya sendiri (Brundtland Commission, 1987)."
+  },
+  {
+    n: 29,
+    q: "Apakah fungsi utama APBN (Anggaran Pendapatan dan Belanja Negara) bagi suatu negara?",
+    opts: ["Sebagai alat untuk memperkaya pejabat negara", "Sebagai rencana keuangan pemerintah untuk membiayai penyelenggaraan negara dan pembangunan", "Untuk mengatur perdagangan internasional", "Sebagai cadangan dana darurat bencana alam"],
+    a: 1,
+    ex: "APBN berfungsi sebagai: (1) alokasi — mengalokasikan sumber daya untuk kepentingan publik; (2) distribusi — pemerataan pendapatan masyarakat; (3) stabilisasi — menjaga stabilitas ekonomi; dan (4) otorisasi — dasar pelaksanaan pengeluaran negara."
+  },
+  {
+    n: 30,
+    q: "Konsep 'Bumi Pertiwi' yang sering disebut dalam lagu kebangsaan Indonesia mengacu pada...",
+    opts: ["Nama lain Pulau Jawa saja", "Seluruh tanah air Indonesia sebagai ibu pertiwi yang dicintai", "Wilayah pertanian subur di Indonesia", "Kawasan hutan hujan tropis Kalimantan"],
+    a: 1,
+    ex: "Ibu Pertiwi atau Bumi Pertiwi adalah personifikasi tanah air Indonesia secara keseluruhan — melambangkan rasa cinta dan nasionalisme terhadap seluruh wilayah NKRI dari Sabang sampai Merauke, dari Miangas hingga Pulau Rote."
+  }
+];
+
+const LABELS = ['A','B','C','D'];
+const WA_NUMBER = '6282218966476';
+let userAnswers = new Array(30).fill(null);
+let submitted = false;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'qcard-' + i;
+    card.innerHTML = `
+      <div class="q-header">
+        <div class="q-number">${q.n}</div>
+        <div class="q-text">${q.q}</div>
+      </div>
+      <div class="options" id="opts-${i}">
+        ${q.opts.map((opt, j) => `
+          <button class="option-btn" id="opt-${i}-${j}" onclick="selectAnswer(${i}, ${j})" aria-label="Pilihan ${LABELS[j]}">
+            <span class="opt-key">${LABELS[j]}</span>
+            <span>${opt}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp-${i}">💡 <strong>Pembahasan:</strong> ${q.ex}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function selectAnswer(qi, optIdx) {
+  if (submitted) return;
+  userAnswers[qi] = optIdx;
+  const q = questions[qi];
+  const card = document.getElementById('qcard-' + qi);
+
+  document.querySelectorAll(`#opts-${qi} .option-btn`).forEach((btn, j) => {
+    btn.classList.toggle('selected', j === optIdx);
+  });
+  card.classList.add('answered');
+
+  // Langsung tampilkan benar/salah + pembahasan saat klik
+  document.querySelectorAll(`#opts-${qi} .option-btn`).forEach(btn => btn.disabled = true);
+  document.getElementById(`opt-${qi}-${q.a}`).classList.add('correct-answer');
+  card.classList.remove('answered');
+
+  if (optIdx === q.a) {
+    card.classList.add('correct');
+  } else {
+    card.classList.add('wrong');
+    document.getElementById(`opt-${qi}-${optIdx}`).classList.add('wrong-answer');
+    document.getElementById(`opt-${qi}-${optIdx}`).classList.remove('selected');
+  }
+
+  // Tampilkan pembahasan langsung
+  const exp = document.getElementById('exp-' + qi);
+  if (exp) exp.classList.add('show');
+
+  updateProgress();
+  updateFooter();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  const pct = (answered / 30) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${answered} dari 30 soal terjawab`;
+}
+
+function updateFooter() {
+  const correct = userAnswers.reduce((n, a, i) => a !== null && a === questions[i].a ? n+1 : n, 0);
+  const wrong = userAnswers.reduce((n, a, i) => a !== null && a !== questions[i].a ? n+1 : n, 0);
+  const empty = userAnswers.filter(a => a === null).length;
+  document.getElementById('footerCorrect').textContent = correct;
+  document.getElementById('footerWrong').textContent = wrong;
+  document.getElementById('footerEmpty').textContent = empty;
+}
+
+function submitQuiz() {
+  if (!submitted) {
+    const unanswered = userAnswers.filter(a => a === null).length;
+    if (unanswered > 0) {
+      const go = confirm(`Masih ada ${unanswered} soal yang belum dijawab. Lanjutkan untuk melihat nilai?`);
+      if (!go) return;
+    }
+    submitted = true;
+  }
+
+  // Handle soal yang belum dijawab (kosong) — tampilkan kunci jawaban
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === null) {
+      document.querySelectorAll(`#opts-${i} .option-btn`).forEach(btn => btn.disabled = true);
+      document.getElementById(`opt-${i}-${q.a}`).classList.add('correct-answer');
+      const exp = document.getElementById('exp-' + i);
+      if (exp) exp.classList.add('show');
+    }
+  });
+
+  let correct = userAnswers.reduce((n, a, i) => a !== null && a === questions[i].a ? n+1 : n, 0);
+  const wrong = userAnswers.filter((a, i) => a !== null && a !== questions[i].a).length;
+  const empty = userAnswers.filter(a => a === null).length;
+  const score = Math.round((correct / 30) * 100);
+
+  let grade = '', detail = '';
+  if (score >= 90) { grade = '🏆 Luar Biasa — Sangat Siap OSN!'; detail = 'Performa sempurna. Pertahankan dan tingkatkan!'; }
+  else if (score >= 80) { grade = '🥇 Sangat Baik'; detail = 'Sangat siap untuk tingkat kabupaten. Perkuat area yang masih kurang.'; }
+  else if (score >= 70) { grade = '🥈 Baik'; detail = 'Hasil cukup kuat. Perlu pendalaman materi lebih lanjut.'; }
+  else if (score >= 60) { grade = '🥉 Cukup'; detail = 'Pemahaman dasar sudah ada, tapi perlu banyak latihan lagi.'; }
+  else { grade = '📚 Perlu Lebih Giat Belajar'; detail = 'Pelajari kembali materi dari awal dan ulangi latihan ini.'; }
+
+  document.getElementById('scoreDisplay').textContent = score;
+  document.getElementById('gradeDisplay').textContent = grade;
+  document.getElementById('resultDetail').textContent = detail;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('wrongCount').textContent = wrong;
+  document.getElementById('emptyCount').textContent = empty;
+
+  updateFooter();
+
+  const resultCard = document.getElementById('resultCard');
+  resultCard.classList.add('show');
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  document.getElementById('navButtons').style.display = 'none';
+}
+
+function toggleAnswerKey() {
+  const ak = document.getElementById('answerKey');
+  ak.classList.toggle('show');
+  if (ak.classList.contains('show')) {
+    ak.innerHTML = '<div class="section-label">Pembahasan Soal</div>';
+    questions.forEach((q, i) => {
+      const exp = document.getElementById('exp-' + i);
+      if (exp) exp.classList.add('show');
+    });
+    ak.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    questions.forEach((q, i) => {
+      const exp = document.getElementById('exp-' + i);
+      if (exp) exp.classList.remove('show');
+    });
+  }
+}
+
+function sendToWhatsApp() {
+  const name = document.getElementById('studentName').value.trim() || '(Tidak diisi)';
+  const kelas = document.getElementById('studentClass').value.trim() || '-';
+
+  let correct = userAnswers.reduce((n, a, i) => a !== null && a === questions[i].a ? n+1 : n, 0);
+  const score = Math.round((correct / 30) * 100);
+  const wrong = userAnswers.filter((a, i) => a !== null && a !== questions[i].a).length;
+  const empty = userAnswers.filter(a => a === null).length;
+
+  let detailJawaban = '';
+  questions.forEach((q, i) => {
+    const ua = userAnswers[i];
+    const status = ua === null ? '⬜' : (ua === q.a ? '✅' : '❌');
+    const pilihan = ua !== null ? LABELS[ua] : '-';
+    detailJawaban += `${status} No.${q.n}: ${pilihan}\n`;
+  });
+
+  let msg =
+`*HASIL LATIHAN OSN IPS — TINGKAT KABUPATEN*
+─────────────────────────
+👤 Nama    : ${name}
+📚 Kelas   : ${kelas}
+─────────────────────────
+📊 *NILAI : ${score}*
+✅ Benar  : ${correct} soal
+❌ Salah  : ${wrong} soal
+⬜ Kosong : ${empty} soal
+─────────────────────────
+📝 DETAIL JAWABAN:
+${detailJawaban}
+─────────────────────────
+Dikirim dari: Latihan Soal OSN IPS`;
+
+  const encoded = encodeURIComponent(msg);
+  window.open(`https://wa.me/${WA_NUMBER}?text=${encoded}`, '_blank');
+}
+
+function resetQuiz() {
+  if (!confirm('Ulangi latihan dari awal?')) return;
+  userAnswers = new Array(30).fill(null);
+  submitted = false;
+  document.getElementById('resultCard').classList.remove('show');
+  document.getElementById('answerKey').classList.remove('show');
+  document.getElementById('navButtons').style.display = 'flex';
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('progressText').textContent = '0 dari 30 soal terjawab';
+  updateFooter();
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
