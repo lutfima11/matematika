@@ -1,1 +1,829 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ujian Online — Matrikulasi Kelas X · SMA IT Insan Sejahtera</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- MathJax LaTeX Rendering -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']]
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --surface2: #f0efe9;
+  --border: #e2e0d8;
+  --border2: #c9c7bc;
+  --text: #1a1916;
+  --text2: #6b6962;
+  --text3: #9e9b94;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-border: #bfdbfe;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --green-border: #bbf7d0;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --red-border: #fecaca;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-border: #fde68a;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --purple-border: #ddd6fe;
+  --teal: #0d9488;
+  --teal-bg: #f0fdfa;
+  --teal-border: #99f6e4;
+  --hots: #be185d;
+  --hots-bg: #fdf2f8;
+  --hots-border: #fbcfe8;
+}
+
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* MathJax inline override agar tidak breaking layout */
+mjx-container { display: inline !important; margin: 0 2px; }
+mjx-container[display="true"] { display: block !important; margin: 8px 0; }
+
+/* ── IDENTITY SCREEN ── */
+#identityScreen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+#identityScreen::before {
+  content: ''; position: absolute; top: -120px; right: -120px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+  pointer-events: none;
+}
+#identityScreen::after {
+  content: ''; position: absolute; bottom: -80px; left: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #bbf7d0 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.identity-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 24px; padding: 48px 40px;
+  width: 100%; max-width: 520px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  position: relative; z-index: 1;
+  animation: slideUp 0.5s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+.school-badge { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.school-logo { width: 52px; height: 52px; border-radius: 12px; background: var(--blue-bg); border: 1px solid var(--blue-border); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.school-info h1 { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.school-info p { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+.form-title { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+.form-subtitle { font-size: 13px; color: var(--text2); margin-bottom: 28px; line-height: 1.5; }
+
+.packet-selector { margin-bottom: 22px; }
+.packet-label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+.packet-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.packet-opt {
+  border: 2px solid var(--border); border-radius: 12px;
+  padding: 14px 10px; text-align: center; cursor: pointer;
+  background: var(--surface2); transition: all 0.15s;
+  user-select: none;
+}
+.packet-opt:hover { border-color: var(--blue); background: var(--blue-bg); }
+.packet-opt.active { border-color: var(--blue); background: var(--blue-bg); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.packet-opt .pkt-letter { font-size: 22px; font-weight: 800; color: var(--blue); display: block; line-height: 1; margin-bottom: 4px; }
+.packet-opt .pkt-name { font-size: 11px; font-weight: 600; color: var(--text2); }
+.packet-opt.active .pkt-name { color: var(--blue); }
+
+.form-group { margin-bottom: 18px; }
+.form-label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+.form-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--surface2); transition: all 0.15s; outline: none; }
+.form-input:focus { border-color: var(--blue); background: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.form-input::placeholder { color: var(--text3); }
+.form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--surface2); transition: all 0.15s; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6962' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+.form-select:focus { border-color: var(--blue); background-color: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.exam-info-box { background: var(--blue-bg); border: 1px solid var(--blue-border); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.exam-info-box .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.exam-info-box p { font-size: 12px; color: var(--blue); line-height: 1.6; }
+.exam-info-box strong { font-weight: 700; }
+
+.warn-box { background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; display: flex; gap: 10px; align-items: flex-start; }
+.warn-box p { font-size: 12px; color: var(--red); line-height: 1.6; }
+
+.btn-start { width: 100%; padding: 14px; background: var(--blue); color: #fff; border: none; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.15s; letter-spacing: 0.2px; }
+.btn-start:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); }
+.btn-start:active { transform: translateY(0); }
+.form-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
+
+/* ── INVALID SCREEN ── */
+#invalidScreen { display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 24px; background: var(--bg); }
+.invalid-card { background: var(--surface); border: 1px solid var(--red-border); border-radius: 24px; padding: 56px 40px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 8px 40px rgba(220,38,38,0.1); animation: slideUp 0.4s ease; }
+.invalid-icon { font-size: 56px; margin-bottom: 16px; }
+.invalid-title { font-size: 22px; font-weight: 800; color: var(--red); margin-bottom: 10px; }
+.invalid-msg { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); z-index: 500; display: none; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 44px 36px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); animation: slideUp .35s ease; }
+.modal-icon { font-size: 48px; margin-bottom: 14px; }
+.modal-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.modal-title.red { color: var(--red); }
+.modal-title.amber { color: var(--amber); }
+.modal-msg { font-size: 13px; color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
+.modal-msg strong { color: var(--text); font-weight: 700; }
+
+.confirm-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
+.cs-box { background: var(--surface2); border-radius: 10px; padding: 12px 8px; }
+.cs-val { font-size: 22px; font-weight: 800; }
+.cs-lbl { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.cs-green { color: var(--green); }
+.cs-red   { color: var(--red); }
+.cs-amber { color: var(--amber); }
+
+.modal-btns { display: flex; gap: 10px; justify-content: center; }
+.btn-modal { padding: 12px 24px; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; border: none; }
+.btn-modal-primary { background: var(--green); color: #fff; }
+.btn-modal-primary:hover { background: #15803d; }
+.btn-modal-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border2); }
+.btn-modal-secondary:hover { background: var(--surface); }
+.btn-modal-danger { background: var(--blue); color: #fff; }
+.btn-modal-danger:hover { background: #1d4ed8; }
+
+/* ── EXAM SCREEN ── */
+#examScreen { display: none; }
+
+.site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; }
+.site-logo { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.2; }
+.logo-sub { font-size: 11px; color: var(--text2); }
+.header-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+
+.packet-badge { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--purple-bg); border: 1px solid var(--purple-border); color: var(--purple); letter-spacing: 0.5px; text-transform: uppercase; }
+
+.timer-wrap { display: flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; }
+.timer-icon { font-size: 14px; }
+.timer-val { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; color: var(--text); min-width: 48px; text-align: center; transition: color .3s; }
+.timer-val.warn { color: var(--amber); }
+.timer-val.danger { color: var(--red); animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+.student-chip { display: flex; align-items: center; gap: 8px; background: var(--blue-bg); border: 1px solid var(--blue-border); border-radius: 999px; padding: 4px 12px 4px 6px; font-size: 12px; color: var(--blue); font-weight: 600; }
+.student-chip-avatar { width: 24px; height: 24px; background: var(--blue); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+
+.header-stats { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.hstat { display: flex; align-items: center; gap: 4px; }
+.hstat-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hstat-val { font-weight: 600; }
+
+.progress-wrap { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px 10px; position: sticky; top: 56px; z-index: 99; }
+.progress-inner { max-width: 960px; margin: 0 auto; }
+.progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 6px; margin-top: 8px; }
+.progress-track { height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.progress-fill { height: 100%; background: var(--blue); border-radius: 999px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+
+.main { max-width: 960px; margin: 0 auto; padding: 24px 24px 100px; }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin: 32px 0 16px; }
+.section-header:first-child { margin-top: 0; }
+.section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; }
+.section-info h2 { font-size: 16px; font-weight: 700; }
+.section-info p { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 12px; transition: box-shadow 0.15s; }
+.q-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.q-card.hots-card { border-color: var(--hots-border); }
+.q-card.hots-card:hover { box-shadow: 0 2px 12px rgba(190,24,93,0.08); }
+
+.q-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
+.q-num { min-width: 28px; height: 28px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); flex-shrink: 0; margin-top: 1px; transition: all 0.2s; }
+.q-num.answered-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+.q-num.answered-wrong { background: var(--red-bg); border-color: var(--red-border); color: var(--red); }
+
+.q-text { font-size: 14px; line-height: 1.65; color: var(--text); flex: 1; }
+
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 480px) { .options { grid-template-columns: 1fr; } }
+
+.option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--surface2); transition: all 0.12s; font-size: 13px; user-select: none; }
+.option:hover { background: var(--blue-bg); border-color: var(--blue-border); }
+.option.selected { background: var(--blue-bg); border-color: var(--blue); }
+.option.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.option.wrong { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+.option.show-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+
+.opt-label { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; background: var(--surface); color: var(--text2); transition: all 0.12s; }
+.option.selected .opt-label { background: var(--blue); border-color: var(--blue); color: #fff; }
+.option.correct .opt-label { background: var(--green); border-color: var(--green); color: #fff; }
+.option.wrong .opt-label { background: var(--red); border-color: var(--red); color: #fff; }
+.option.show-correct .opt-label { background: var(--green); border-color: var(--green); color: #fff; }
+
+.opt-text { font-size: 13px; }
+
+.explanation { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.6; display: none; }
+.explanation.show { display: block; }
+.explanation.correct { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+.explanation.wrong { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
+.exp-label { font-weight: 700; margin-right: 4px; }
+
+.topic-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+.hots-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--hots-bg); border: 1px solid var(--hots-border); color: var(--hots); letter-spacing: 0.5px; text-transform: uppercase; margin-left: 6px; vertical-align: middle; }
+
+/* ── RESULT PANEL ── */
+.result-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 44px 32px; text-align: center; margin-top: 32px; display: none; }
+.result-panel.show { display: block; animation: slideUp 0.5s ease; }
+.result-emoji { font-size: 60px; margin-bottom: 16px; }
+.result-score { font-size: 56px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.result-label { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+.student-result-info { display: inline-flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: var(--text2); margin-bottom: 8px; font-weight: 600; }
+.packet-result-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--purple-bg); border: 1px solid var(--purple-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--purple); font-weight: 700; margin-bottom: 8px; }
+.duration-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--amber); font-weight: 600; margin-bottom: 24px; }
+.result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+.r-stat { background: var(--surface2); border-radius: 12px; padding: 16px 12px; }
+.r-stat-val { font-size: 28px; font-weight: 800; }
+.r-stat-lbl { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.green-val { color: var(--green); }
+.red-val { color: var(--red); }
+.blue-val { color: var(--blue); }
+
+.wa-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: #25d366; color: #fff; border: none; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.15s; margin-bottom: 12px; }
+.wa-btn:hover { background: #1ebe5c; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+.wa-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+.btn-secondary { padding: 10px 20px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text); transition: all 0.15s; display: inline-block; }
+.btn-secondary:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.result-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.sent-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--green); font-weight: 600; }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-top: 1px solid var(--border); padding: 12px 24px; z-index: 200; }
+.bottom-nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.nav-info { font-size: 12px; color: var(--text2); }
+.nav-info strong { color: var(--text); }
+.btn-row { display: flex; gap: 10px; align-items: center; }
+.btn { padding: 10px 20px; border-radius: 10px; border: 1px solid var(--border2); background: var(--surface2); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text); transition: all 0.15s; }
+.btn:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-primary:hover { background: #1d4ed8; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
+
+/* ── SECTION COLORS ── */
+.s1 .section-icon { background: var(--blue-bg); color: var(--blue); }
+.s2 .section-icon { background: var(--green-bg); color: var(--green); }
+.s3 .section-icon { background: var(--amber-bg); color: var(--amber); }
+.s4 .section-icon { background: var(--red-bg); color: var(--red); }
+.s5 .section-icon { background: var(--purple-bg); color: var(--purple); }
+.s6 .section-icon { background: var(--teal-bg); color: var(--teal); }
+
+.tag-s1 { background: var(--blue-bg); color: var(--blue); }
+.tag-s2 { background: var(--green-bg); color: var(--green); }
+.tag-s3 { background: var(--amber-bg); color: var(--amber); }
+.tag-s4 { background: var(--red-bg); color: var(--red); }
+.tag-s5 { background: var(--purple-bg); color: var(--purple); }
+.tag-s6 { background: var(--teal-bg); color: var(--teal); }
+.tag-hots { background: var(--hots-bg); color: var(--hots); }
+
+.unanswered-list { background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; font-size: 12px; color: var(--amber); text-align: left; line-height: 1.7; }
+.unanswered-list strong { font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ IDENTITY SCREEN -->
+<div id="identityScreen">
+  <div class="identity-card">
+    <div class="school-badge">
+      <div class="school-logo">🎓</div>
+      <div class="school-info">
+        <h1>SMA IT Insan Sejahtera</h1>
+        <p>Program Matrikulasi Matematika</p>
+      </div>
+    </div>
+    <h2 class="form-title">Ujian Online<br>Matrikulasi Kelas X</h2>
+    <p class="form-subtitle">Isi identitasmu dan pilih paket soal yang ditentukan gurumu. Pastikan semua data sudah benar sebelum memulai.</p>
+    <div class="exam-info-box">
+      <span class="icon">📋</span>
+      <p><strong>30 soal</strong> pilihan ganda · 5 materi (Bilangan & Himpunan, Operasi Hitung, Pecahan, Pangkat & Akar, Aljabar) + 5 soal HOTS · <strong>3 Paket Soal</strong> (A / B / C) · Waktu: <strong>40 menit</strong> · Hasil dikirim ke guru via WhatsApp.</p>
+    </div>
+    <div class="warn-box">
+      <span class="icon">⚠️</span>
+      <p>Jika kamu me-<strong>refresh</strong> atau menutup halaman setelah ujian dimulai, ujianmu akan dinyatakan <strong>TIDAK VALID</strong>.</p>
+    </div>
+    <div class="packet-selector">
+      <span class="packet-label">Pilih Paket Soal</span>
+      <div class="packet-options">
+        <div class="packet-opt" id="pktA" onclick="selectPacket('A')">
+          <span class="pkt-letter">A</span>
+          <span class="pkt-name">Paket A</span>
+        </div>
+        <div class="packet-opt" id="pktB" onclick="selectPacket('B')">
+          <span class="pkt-letter">B</span>
+          <span class="pkt-name">Paket B</span>
+        </div>
+        <div class="packet-opt" id="pktC" onclick="selectPacket('C')">
+          <span class="pkt-letter">C</span>
+          <span class="pkt-name">Paket C</span>
+        </div>
+      </div>
+      <div class="form-error" id="errPaket">Paket soal harus dipilih.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputNama">Nama Lengkap</label>
+      <input type="text" id="inputNama" class="form-input" placeholder="Contoh: Ahmad Fauzan" autocomplete="off">
+      <div class="form-error" id="errNama">Nama tidak boleh kosong.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputKelas">Kelas</label>
+      <select id="inputKelas" class="form-select">
+        <option value="">— Pilih Kelas —</option>
+        <option value="10.1">10.1</option>
+        <option value="10.2">10.2</option>
+        <option value="10.3">10.3</option>
+        <option value="11.1">11.1</option>
+        <option value="11.2">11.2</option>
+        <option value="11.3">11.3</option>
+      </select>
+      <div class="form-error" id="errKelas">Kelas harus dipilih.</div>
+    </div>
+    <button class="btn-start" onclick="startExam()">Mulai Ujian →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ INVALID SCREEN -->
+<div id="invalidScreen">
+  <div class="invalid-card">
+    <div class="invalid-icon">🚫</div>
+    <div class="invalid-title">Ujian Tidak Valid</div>
+    <p class="invalid-msg">Halaman di-refresh atau dibuka ulang setelah ujian dimulai.<br><br>Ujianmu <strong style="color:var(--red)">dinyatakan tidak valid</strong> dan tidak dapat dilanjutkan.<br><br>Hubungi gurumu untuk mendapatkan sesi ujian baru.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ MODAL: WAKTU HABIS -->
+<div class="modal-overlay" id="timeModal">
+  <div class="modal-box">
+    <div class="modal-icon">⏰</div>
+    <div class="modal-title red">Waktu Habis!</div>
+    <p class="modal-msg">Waktu 40 menit telah habis. Hasil ujianmu akan dihitung otomatis dari jawaban yang sudah masuk.</p>
+    <div class="modal-btns">
+      <button class="btn-modal btn-modal-danger" onclick="forceSubmit()">Lihat Hasil Saya →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ MODAL: KONFIRMASI SUBMIT -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <div class="modal-icon">📋</div>
+    <div class="modal-title amber">Selesaikan Ujian?</div>
+    <p class="modal-msg">Pastikan semua jawabanmu sudah benar sebelum mengakhiri ujian. <strong>Jawaban tidak bisa diubah setelah selesai.</strong></p>
+    <div class="confirm-stats">
+      <div class="cs-box"><div class="cs-val cs-green" id="csBengar">0</div><div class="cs-lbl">✓ Benar</div></div>
+      <div class="cs-box"><div class="cs-val cs-red" id="csSalah">0</div><div class="cs-lbl">✗ Salah</div></div>
+      <div class="cs-box"><div class="cs-val cs-amber" id="csSkip">0</div><div class="cs-lbl">— Belum dijawab</div></div>
+    </div>
+    <div class="unanswered-list" id="unansweredWarning" style="display:none"></div>
+    <div class="modal-btns">
+      <button class="btn-modal btn-modal-secondary" onclick="closeConfirmModal()">Kembali ke Soal</button>
+      <button class="btn-modal btn-modal-primary" onclick="confirmSubmit()">Ya, Selesaikan →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ EXAM SCREEN -->
+<div id="examScreen">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">
+        <div>
+          <div class="logo-text">SMA IT Insan Sejahtera</div>
+          <div class="logo-sub" id="headerSub">Ujian Matrikulasi — Matrikulasi Kelas X</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="packet-badge" id="headerPacket">PAKET —</div>
+        <div class="timer-wrap">
+          <span class="timer-icon">⏱</span>
+          <span class="timer-val" id="timerVal">40:00</span>
+        </div>
+        <div class="header-stats">
+          <div class="hstat"><div class="hstat-dot" style="background:var(--green)"></div><span class="hstat-val" id="hCorrect">0</span></div>
+          <span style="color:var(--border2)">|</span>
+          <div class="hstat"><div class="hstat-dot" style="background:var(--red)"></div><span class="hstat-val" id="hWrong">0</span></div>
+        </div>
+        <div class="student-chip">
+          <div class="student-chip-avatar" id="avatarInitial">?</div>
+          <span id="chipName">Siswa</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-meta">
+        <span id="progLabel">0 dari 30 soal dijawab</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="main" id="mainContent">
+    <div class="result-panel" id="resultPanel">
+      <div class="result-emoji" id="resultEmoji">🎉</div>
+      <div class="result-score" id="resultScore">0/30</div>
+      <div class="result-label" id="resultLabel">Ujian selesai!</div>
+      <div class="student-result-info" id="studentResultInfo">👤 Nama · Kelas</div>
+      <div class="packet-result-badge" id="packetResultBadge">📦 Paket —</div>
+      <div class="duration-badge" id="durationBadge">⏱ Durasi: — menit</div>
+      <div class="result-grid">
+        <div class="r-stat"><div class="r-stat-val green-val" id="rCorrect">0</div><div class="r-stat-lbl">✓ Benar</div></div>
+        <div class="r-stat"><div class="r-stat-val red-val" id="rWrong">0</div><div class="r-stat-lbl">✗ Salah</div></div>
+        <div class="r-stat"><div class="r-stat-val blue-val" id="rPct">0%</div><div class="r-stat-lbl">Nilai</div></div>
+      </div>
+      <div class="result-actions">
+        <a id="waBtn" href="#" class="wa-btn" target="_blank" onclick="markSent()">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.084 1.504 5.806L.058 23.5a.5.5 0 0 0 .615.611l5.796-1.517A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.158-1.422l-.369-.222-3.838 1.005 1.023-3.74-.242-.384A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Kirim Hasil ke Guru via WhatsApp
+        </a>
+        <div id="sentBadge" style="display:none"><span class="sent-badge">✅ Hasil sudah dikirim ke guru!</span></div>
+        <button class="btn-secondary" onclick="location.reload()">Ulangi Ujian dari Awal</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <div class="nav-info">Dijawab: <strong id="navAnswered">0</strong>/30</div>
+      <div class="btn-row">
+        <button class="btn" onclick="scrollToNext()">Soal berikutnya ↓</button>
+        <button class="btn btn-primary" onclick="showConfirmModal()" id="finishBtn" style="display:none">Lihat Hasil &amp; Kirim →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const GURU_WA  = '6281770618414';
+const TOTAL_Q  = 30;
+const DURATION = 40 * 60;
+const EXAM_TITLE_JS = 'Matrikulasi Kelas X';
+
+// ══════════════════════════════════════════════════════════════
+// BANK SOAL — semua ekspresi matematik menggunakan LaTeX (\(...\))
+// ══════════════════════════════════════════════════════════════
+const PACKETS = {"A": {"answers": {"1": "C", "2": "A", "3": "B", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A", "16": "A", "17": "A", "18": "A", "19": "A", "20": "A", "21": "A", "22": "A", "23": "A", "24": "A", "25": "A", "26": "A", "27": "A", "28": "A", "29": "A", "30": "A"}, "sections": [{"title": "Materi 1 — Sistem Bilangan & Himpunan", "desc": "Jenis bilangan, garis bilangan, notasi & operasi himpunan", "icon": "ℕ∩", "cls": "s1", "questions": [{"n": 1, "tag": "Jenis Bilangan", "tagCls": "tag-s1", "hots": false, "text": "Di antara bilangan berikut, manakah yang termasuk bilangan asli?", "opts": ["0", "-5", "9", "\\(\\dfrac{1}{2}\\)"], "exp": "Bilangan asli dimulai dari 1, 2, 3, \\(\\ldots\\) Angka 0 adalah bilangan cacah (bukan asli), \\(-5\\) adalah bilangan bulat negatif, dan \\(\\dfrac{1}{2}\\) adalah pecahan. Jawaban: 9."}, {"n": 2, "tag": "Nilai Mutlak", "tagCls": "tag-s1", "hots": false, "text": "Nilai dari \\(|{-8}| + |5| - |{-2}|\\) adalah…", "opts": ["11", "1", "-11", "15"], "exp": "\\(|{-8}|=8,\\; |5|=5,\\; |{-2}|=2\\). Maka \\(8+5-2=11\\)."}, {"n": 3, "tag": "Notasi Himpunan", "tagCls": "tag-s1", "hots": false, "text": "Himpunan kosong dilambangkan dengan…", "opts": ["\\(\\{0\\}\\)", "\\(\\varnothing\\) atau \\(\\{\\}\\)", "\\(\\{\\varnothing\\}\\)", "0"], "exp": "Himpunan kosong adalah himpunan yang tidak memiliki anggota, dilambangkan \\(\\varnothing\\) atau \\(\\{\\}\\). \\(\\{0\\}\\) bukan kosong (punya anggota 0)."}, {"n": 4, "tag": "Operasi Himpunan", "tagCls": "tag-s1", "hots": false, "text": "Jika \\(n(A)=15\\), \\(n(B)=10\\), dan \\(n(A \\cap B)=4\\), maka \\(n(A \\cup B)\\) adalah…", "opts": ["21", "25", "29", "19"], "exp": "Gunakan rumus \\(n(A \\cup B)=n(A)+n(B)-n(A \\cap B) = 15+10-4=21\\)."}, {"n": 5, "tag": "Diagram Venn", "tagCls": "tag-s1", "hots": false, "text": "Dari 35 siswa, 20 siswa suka Matematika, 18 siswa suka IPA, dan 10 siswa suka keduanya. Banyak siswa yang suka Matematika atau IPA adalah…", "opts": ["28 siswa", "38 siswa", "18 siswa", "48 siswa"], "exp": "\\(n(M \\cup I) = n(M)+n(I)-n(M \\cap I) = 20+18-10=28\\) siswa."}, {"n": 6, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Semesta bilangan asli 1 sampai 30. \\(A\\) adalah himpunan kelipatan 4 dan \\(B\\) adalah himpunan kelipatan 6. Banyak anggota \\(A \\cup B\\) adalah…", "opts": ["10", "12", "9", "14"], "exp": "\\(n(A)=7\\), \\(n(B)=5\\). Irisan adalah kelipatan KPK(4,6)=12, yaitu \\(\\{12,24\\}\\), sehingga \\(n(A\\cap B)=2\\). Maka \\(n(A \\cup B)=7+5-2=10\\)."}]}, {"title": "Materi 2 — Operasi Hitung Bilangan", "desc": "Bilangan bulat, urutan operasi, faktorisasi prima, KPK & FPB", "icon": "+×", "cls": "s2", "questions": [{"n": 7, "tag": "Bil. Bulat", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\(-12 + 7\\) adalah…", "opts": ["-5", "5", "-19", "19"], "exp": "\\(-12+7=-5\\)."}, {"n": 8, "tag": "Perkalian & Pembagian", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\((-8) \\times 7\\) adalah…", "opts": ["-56", "56", "-15", "15"], "exp": "Negatif \\(\\times\\) positif \\(=\\) negatif. \\(8\\times7=56\\), maka hasilnya \\(-56\\)."}, {"n": 9, "tag": "Urutan Operasi", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\(8 + 4 \\times 3\\) adalah…", "opts": ["20", "36", "24", "12"], "exp": "Perkalian dikerjakan lebih dulu: \\(4\\times3=12\\). Kemudian \\(8+12=20\\)."}, {"n": 10, "tag": "KPK & FPB Dasar", "tagCls": "tag-s2", "hots": false, "text": "KPK dari 12 dan 18 adalah…", "opts": ["36", "6", "216", "72"], "exp": "\\(12=2^2\\times3\\), \\(18=2\\times3^2\\). KPK \\(=2^2\\times3^2=36\\)."}, {"n": 11, "tag": "Aplikasi KPK/FPB", "tagCls": "tag-s2", "hots": false, "text": "Sebuah toko memiliki 84 apel dan 60 jeruk yang akan dibagi rata ke sebanyak mungkin keranjang tanpa sisa. Banyak keranjang yang bisa dibuat adalah…", "opts": ["12 keranjang", "24 keranjang", "6 keranjang", "4 keranjang"], "exp": "Banyak keranjang maksimum \\(=\\) FPB(84,60) \\(=12\\)."}, {"n": 12, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Tiga bus berangkat bersamaan dari terminal pukul 06.00. Bus A berangkat lagi setiap 15 menit, Bus B setiap 20 menit, dan Bus C setiap 25 menit. Ketiga bus akan berangkat bersamaan lagi untuk pertama kali pada pukul…", "opts": ["11.00", "10.00", "09.00", "12.00"], "exp": "KPK(15,20,25) \\(=300\\) menit \\(=5\\) jam. Pukul \\(06.00+5\\) jam \\(=11.00\\)."}]}, {"title": "Materi 3 — Pecahan", "desc": "Konversi, perbandingan, operasi hitung, dan skala", "icon": "½", "cls": "s3", "questions": [{"n": 13, "tag": "Konversi Pecahan", "tagCls": "tag-s3", "hots": false, "text": "Bentuk pecahan campuran dari \\(\\dfrac{23}{6}\\) adalah…", "opts": ["\\(3\\,\\dfrac{5}{6}\\)", "\\(3\\,\\dfrac{4}{6}\\)", "\\(4\\,\\dfrac{5}{6}\\)", "\\(2\\,\\dfrac{5}{6}\\)"], "exp": "\\(23\\div6=3\\) sisa \\(5\\). Maka \\(\\dfrac{23}{6}=3\\,\\dfrac{5}{6}\\)."}, {"n": 14, "tag": "Membandingkan", "tagCls": "tag-s3", "hots": false, "text": "Manakah pecahan yang lebih besar, \\(\\dfrac{5}{6}\\) atau \\(\\dfrac{7}{9}\\)?", "opts": ["\\(\\dfrac{5}{6}\\) lebih besar", "\\(\\dfrac{7}{9}\\) lebih besar", "keduanya sama", "tidak bisa dibandingkan"], "exp": "KPK(6,9)=18. \\(\\dfrac{5}{6}=\\dfrac{15}{18}\\), \\(\\dfrac{7}{9}=\\dfrac{14}{18}\\). Karena \\(15>14\\), \\(\\dfrac{5}{6}\\) lebih besar."}, {"n": 15, "tag": "Operasi Pecahan", "tagCls": "tag-s3", "hots": false, "text": "\\(\\dfrac{3}{5} + \\dfrac{1}{4} = \\ldots\\)", "opts": ["\\(\\dfrac{17}{20}\\)", "\\(\\dfrac{4}{9}\\)", "\\(\\dfrac{19}{20}\\)", "\\(\\dfrac{3}{10}\\)"], "exp": "KPK(5,4)=20. \\(\\dfrac{12}{20}+\\dfrac{5}{20}=\\dfrac{17}{20}\\)."}, {"n": 16, "tag": "Perbandingan", "tagCls": "tag-s3", "hots": false, "text": "Harga 3 kg mangga adalah Rp45.000. Dengan perbandingan senilai, harga 8 kg mangga adalah…", "opts": ["Rp120.000", "Rp135.000", "Rp360.000", "Rp100.000"], "exp": "Harga per kg \\(=45.000\\div3=15.000\\). Harga 8 kg \\(=8\\times15.000=120.000\\)."}, {"n": 17, "tag": "Skala", "tagCls": "tag-s3", "hots": false, "text": "Jarak dua kota pada peta adalah 6 cm dengan skala peta 1:2.500.000. Jarak sebenarnya kedua kota adalah…", "opts": ["150 km", "15 km", "1.500 km", "1,5 km"], "exp": "Jarak sebenarnya \\(=6\\times2.500.000=15.000.000\\) cm \\(=150\\) km."}, {"n": 18, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Sebuah kue dipotong menjadi beberapa bagian. Andi memakan \\(\\dfrac{1}{4}\\) bagian, Budi memakan \\(\\dfrac{2}{5}\\) dari sisa kue setelah dimakan Andi, dan sisanya untuk Citra. Bagian kue yang didapat Citra adalah…", "opts": ["\\(\\dfrac{9}{20}\\)", "\\(\\dfrac{3}{10}\\)", "\\(\\dfrac{1}{4}\\)", "\\(\\dfrac{11}{20}\\)"], "exp": "Sisa setelah Andi \\(=\\dfrac{3}{4}\\). Bagian Budi \\(=\\dfrac{2}{5}\\times\\dfrac{3}{4}=\\dfrac{3}{10}\\). Bagian Citra \\(=\\dfrac{3}{4}-\\dfrac{3}{10}=\\dfrac{9}{20}\\)."}]}, {"title": "Materi 4 — Pangkat & Akar", "desc": "Notasi pangkat, sifat operasi pangkat, pangkat negatif, dan bentuk akar", "icon": "√", "cls": "s4", "questions": [{"n": 19, "tag": "Notasi Pangkat", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(3^4\\) adalah…", "opts": ["81", "12", "64", "243"], "exp": "\\(3^4=3\\times3\\times3\\times3=81\\)."}, {"n": 20, "tag": "Sifat Pangkat", "tagCls": "tag-s4", "hots": false, "text": "Bentuk sederhana dari \\(2^3 \\times 2^5\\) adalah…", "opts": ["\\(2^8\\)", "\\(2^{15}\\)", "\\(4^8\\)", "\\(2^2\\)"], "exp": "\\(a^m\\times a^n=a^{m+n}\\). Maka \\(2^3\\times2^5=2^8\\)."}, {"n": 21, "tag": "Pangkat 0 & Negatif", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(2^{-3}\\) adalah…", "opts": ["\\(\\dfrac{1}{8}\\)", "-8", "\\(-\\dfrac{1}{8}\\)", "8"], "exp": "\\(2^{-3}=\\dfrac{1}{2^3}=\\dfrac{1}{8}\\)."}, {"n": 22, "tag": "Bentuk Akar", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(\\sqrt{64}\\) adalah…", "opts": ["8", "32", "16", "6"], "exp": "\\(\\sqrt{64}=8\\) karena \\(8^2=64\\)."}, {"n": 23, "tag": "Operasi Akar", "tagCls": "tag-s4", "hots": false, "text": "Hasil dari \\(3\\sqrt{2} + 5\\sqrt{2}\\) adalah…", "opts": ["\\(8\\sqrt{2}\\)", "\\(8\\sqrt{4}\\)", "\\(15\\sqrt{2}\\)", "8"], "exp": "Bentuk akar sejenis, cukup jumlahkan koefisien: \\((3+5)\\sqrt{2}=8\\sqrt{2}\\)."}, {"n": 24, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Hasil dari \\(\\sqrt{75} - \\sqrt{27} + \\sqrt{12}\\) adalah…", "opts": ["\\(4\\sqrt{3}\\)", "0", "\\(10\\sqrt{3}\\)", "\\(4\\sqrt{9}\\)"], "exp": "\\(\\sqrt{75}=5\\sqrt{3}\\), \\(\\sqrt{27}=3\\sqrt{3}\\), \\(\\sqrt{12}=2\\sqrt{3}\\). Maka \\(5\\sqrt{3}-3\\sqrt{3}+2\\sqrt{3}=4\\sqrt{3}\\)."}]}, {"title": "Materi 5 — Aljabar Dasar", "desc": "Suku sejenis, substitusi, operasi bentuk aljabar, dan PLSV", "icon": "x", "cls": "s5", "questions": [{"n": 25, "tag": "Suku Aljabar", "tagCls": "tag-s5", "hots": false, "text": "Bentuk paling sederhana dari \\(7x + 3y - 2x + 5y\\) adalah…", "opts": ["\\(5x + 8y\\)", "\\(5x + 2y\\)", "\\(9x + 8y\\)", "\\(10xy\\)"], "exp": "Kelompokkan suku sejenis: \\((7x-2x)+(3y+5y)=5x+8y\\)."}, {"n": 26, "tag": "Substitusi", "tagCls": "tag-s5", "hots": false, "text": "Jika \\(x=3\\), nilai dari \\(2x+5\\) adalah…", "opts": ["11", "13", "8", "10"], "exp": "\\(2(3)+5=6+5=11\\)."}, {"n": 27, "tag": "Operasi Aljabar", "tagCls": "tag-s5", "hots": false, "text": "Hasil dari \\((x+3)(x+5)\\) adalah…", "opts": ["\\(x^2+8x+15\\)", "\\(x^2+15x+8\\)", "\\(x^2+8x+8\\)", "\\(x^2+2x+15\\)"], "exp": "\\((x+3)(x+5)=x^2+5x+3x+15=x^2+8x+15\\)."}, {"n": 28, "tag": "PLSV Dasar", "tagCls": "tag-s5", "hots": false, "text": "Penyelesaian dari persamaan \\(4x + 3 = 2x + 15\\) adalah…", "opts": ["6", "9", "3", "-6"], "exp": "\\(4x-2x=15-3 \\Rightarrow 2x=12 \\Rightarrow x=6\\)."}, {"n": 29, "tag": "Soal Cerita PLSV", "tagCls": "tag-s5", "hots": false, "text": "Jumlah dua bilangan bulat berurutan adalah 47. Bilangan yang lebih kecil adalah…", "opts": ["23", "24", "22", "25"], "exp": "Misalkan bilangan tersebut \\(x\\) dan \\(x+1\\). \\(x+(x+1)=47 \\Rightarrow 2x=46 \\Rightarrow x=23\\)."}, {"n": 30, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Sebuah persegi panjang memiliki panjang \\((2x+5)\\) cm dan lebar \\((x+3)\\) cm. Jika kelilingnya 40 cm, luas persegi panjang tersebut adalah…", "opts": ["91 cm\\(^2\\)", "40 cm\\(^2\\)", "20 cm\\(^2\\)", "84 cm\\(^2\\)"], "exp": "Keliling \\(=2[(2x+5)+(x+3)]=6x+16=40 \\Rightarrow x=4\\). Panjang \\(=13\\) cm, lebar \\(=7\\) cm. Luas \\(=13\\times7=91\\) cm\\(^2\\)."}]}]}, "B": {"answers": {"1": "C", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A", "16": "A", "17": "A", "18": "A", "19": "A", "20": "A", "21": "A", "22": "A", "23": "A", "24": "A", "25": "A", "26": "A", "27": "A", "28": "A", "29": "A", "30": "A"}, "sections": [{"title": "Materi 1 — Sistem Bilangan & Himpunan", "desc": "Jenis bilangan, garis bilangan, notasi & operasi himpunan", "icon": "ℕ∩", "cls": "s1", "questions": [{"n": 1, "tag": "Jenis Bilangan", "tagCls": "tag-s1", "hots": false, "text": "Di antara bilangan berikut, manakah yang termasuk bilangan bulat negatif?", "opts": ["3", "0", "-7", "\\(\\dfrac{2}{5}\\)"], "exp": "Bilangan bulat negatif adalah bilangan bulat yang kurang dari nol. Hanya \\(-7\\) yang memenuhi; \\(3\\) dan \\(0\\) bukan negatif, \\(\\dfrac{2}{5}\\) adalah pecahan."}, {"n": 2, "tag": "Nilai Mutlak", "tagCls": "tag-s1", "hots": false, "text": "Nilai dari \\(|{-15}| - |6| + |{-3}|\\) adalah…", "opts": ["12", "24", "-12", "6"], "exp": "\\(|{-15}|=15,\\;|6|=6,\\;|{-3}|=3\\). Maka \\(15-6+3=12\\)."}, {"n": 3, "tag": "Notasi Himpunan", "tagCls": "tag-s1", "hots": false, "text": "Diketahui \\(Q = \\{x \\mid x \\text{ kelipatan } 4, x<20\\}\\). Anggota \\(Q\\) dengan cara pendataan adalah…", "opts": ["\\(\\{4,8,12,16\\}\\)", "\\(\\{4,8,12,16,20\\}\\)", "\\(\\{0,4,8,12,16\\}\\)", "\\(\\{4,8,12\\}\\)"], "exp": "Kelipatan 4 yang kurang dari 20: \\(4,8,12,16\\) (20 tidak termasuk karena syaratnya \\(x<20\\))."}, {"n": 4, "tag": "Operasi Himpunan", "tagCls": "tag-s1", "hots": false, "text": "Diketahui \\(A=\\{2,3,5,7,11\\}\\) dan \\(B=\\{3,5,7,9,11\\}\\). Hasil dari \\(A \\cap B\\) adalah…", "opts": ["\\(\\{3,5,7,11\\}\\)", "\\(\\{2,9\\}\\)", "\\(\\{2,3,5,7,9,11\\}\\)", "\\(\\{\\}\\)"], "exp": "Anggota yang ada di \\(A\\) \\textit{dan} \\(B\\): \\(2\\) tidak ada di \\(B\\), \\(9\\) tidak ada di \\(A\\), sisanya \\(\\{3,5,7,11\\}\\) ada di keduanya."}, {"n": 5, "tag": "Diagram Venn", "tagCls": "tag-s1", "hots": false, "text": "Dari 42 siswa, 26 siswa gemar sepak bola, 20 siswa gemar bulu tangkis, dan 12 siswa gemar keduanya. Banyak siswa yang gemar sepak bola atau bulu tangkis adalah…", "opts": ["34 siswa", "46 siswa", "18 siswa", "38 siswa"], "exp": "\\(n(A \\cup B)=26+20-12=34\\) siswa."}, {"n": 6, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Semesta bilangan asli 1 sampai 40. \\(A\\) adalah himpunan kelipatan 5 dan \\(B\\) adalah himpunan kelipatan 8. Banyak anggota \\(A \\cup B\\) adalah…", "opts": ["12", "13", "11", "14"], "exp": "\\(n(A)=8\\), \\(n(B)=5\\). Irisan adalah kelipatan KPK(5,8)=40, yaitu \\(\\{40\\}\\), sehingga \\(n(A\\cap B)=1\\). Maka \\(n(A \\cup B)=8+5-1=12\\)."}]}, {"title": "Materi 2 — Operasi Hitung Bilangan", "desc": "Bilangan bulat, urutan operasi, faktorisasi prima, KPK & FPB", "icon": "+×", "cls": "s2", "questions": [{"n": 7, "tag": "Bil. Bulat", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\(-25 + 13\\) adalah…", "opts": ["-12", "12", "-38", "38"], "exp": "\\(-25+13=-12\\)."}, {"n": 8, "tag": "Perkalian & Pembagian", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\((-72) \\div (-8)\\) adalah…", "opts": ["9", "-9", "8", "-8"], "exp": "Negatif \\(\\div\\) negatif \\(=\\) positif. \\(72\\div8=9\\)."}, {"n": 9, "tag": "Urutan Operasi", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\(6 + 3 \\times 5\\) adalah…", "opts": ["21", "45", "18", "11"], "exp": "Perkalian dulu: \\(3\\times5=15\\). Kemudian \\(6+15=21\\)."}, {"n": 10, "tag": "KPK & FPB Dasar", "tagCls": "tag-s2", "hots": false, "text": "FPB dari 54 dan 72 adalah…", "opts": ["18", "6", "9", "36"], "exp": "\\(54=2\\times3^3\\), \\(72=2^3\\times3^2\\). FPB \\(=2\\times3^2=18\\)."}, {"n": 11, "tag": "Aplikasi KPK/FPB", "tagCls": "tag-s2", "hots": false, "text": "Dua sepeda motor melintas bersamaan di suatu pos pukul 07.00. Sepeda motor pertama melintas lagi setiap 15 menit, dan kedua setiap 25 menit. Keduanya akan melintas bersamaan lagi pada pukul…", "opts": ["08.15", "07.40", "08.00", "07.55"], "exp": "KPK(15,25) \\(=75\\) menit \\(=1\\) jam \\(15\\) menit. Pukul \\(07.00+1{:}15=08.15\\)."}, {"n": 12, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Tiga lampu menyala bersamaan pukul 20.00. Lampu A menyala tiap 18 menit, lampu B tiap 24 menit, dan lampu C tiap 30 menit. Ketiganya menyala bersamaan lagi pertama kali pukul…", "opts": ["02.00 (hari berikutnya)", "23.00", "00.00", "01.00"], "exp": "KPK(18,24,30) \\(=360\\) menit \\(=6\\) jam. Pukul \\(20.00+6\\) jam \\(=02.00\\) dini hari berikutnya."}]}, {"title": "Materi 3 — Pecahan", "desc": "Konversi, perbandingan, operasi hitung, dan skala", "icon": "½", "cls": "s3", "questions": [{"n": 13, "tag": "Konversi Pecahan", "tagCls": "tag-s3", "hots": false, "text": "Pecahan biasa dari bilangan campuran \\(3\\,\\dfrac{2}{7}\\) adalah…", "opts": ["\\(\\dfrac{23}{7}\\)", "\\(\\dfrac{21}{7}\\)", "\\(\\dfrac{17}{7}\\)", "\\(\\dfrac{19}{7}\\)"], "exp": "\\(3\\,\\dfrac{2}{7}=\\dfrac{3\\times7+2}{7}=\\dfrac{23}{7}\\)."}, {"n": 14, "tag": "Membandingkan", "tagCls": "tag-s3", "hots": false, "text": "Manakah pecahan yang lebih kecil, \\(\\dfrac{4}{9}\\) atau \\(\\dfrac{5}{11}\\)?", "opts": ["\\(\\dfrac{4}{9}\\) lebih kecil", "\\(\\dfrac{5}{11}\\) lebih kecil", "keduanya sama", "tidak bisa dibandingkan"], "exp": "KPK(9,11)=99. \\(\\dfrac{4}{9}=\\dfrac{44}{99}\\), \\(\\dfrac{5}{11}=\\dfrac{45}{99}\\). Karena \\(44<45\\), \\(\\dfrac{4}{9}\\) lebih kecil."}, {"n": 15, "tag": "Operasi Pecahan", "tagCls": "tag-s3", "hots": false, "text": "\\(\\dfrac{7}{10} - \\dfrac{1}{4} = \\ldots\\)", "opts": ["\\(\\dfrac{9}{20}\\)", "\\(\\dfrac{6}{6}\\)", "\\(\\dfrac{2}{5}\\)", "\\(\\dfrac{3}{14}\\)"], "exp": "KPK(10,4)=20. \\(\\dfrac{14}{20}-\\dfrac{5}{20}=\\dfrac{9}{20}\\)."}, {"n": 16, "tag": "Perbandingan", "tagCls": "tag-s3", "hots": false, "text": "Harga 5 buku tulis adalah Rp27.500. Dengan perbandingan senilai, harga 12 buku tulis sejenis adalah…", "opts": ["Rp66.000", "Rp60.000", "Rp72.000", "Rp55.000"], "exp": "Harga per buku \\(=27.500\\div5=5.500\\). Harga 12 buku \\(=12\\times5.500=66.000\\)."}, {"n": 17, "tag": "Skala", "tagCls": "tag-s3", "hots": false, "text": "Jarak sebenarnya dua desa adalah 45 km. Jika digambar dengan skala 1:900.000, jarak pada peta adalah…", "opts": ["5 cm", "50 cm", "0,5 cm", "9 cm"], "exp": "\\(45\\) km \\(=4.500.000\\) cm. Jarak peta \\(=4.500.000\\div900.000=5\\) cm."}, {"n": 18, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Sebuah tangki berisi \\(\\dfrac{3}{5}\\) penuh air. Setelah digunakan \\(\\dfrac{1}{4}\\) dari isi tangki saat ini, sisa air dalam tangki adalah…", "opts": ["\\(\\dfrac{9}{20}\\)", "\\(\\dfrac{1}{4}\\)", "\\(\\dfrac{3}{20}\\)", "\\(\\dfrac{11}{20}\\)"], "exp": "Sisa \\(=\\dfrac{3}{5}\\times\\left(1-\\dfrac{1}{4}\\right)=\\dfrac{3}{5}\\times\\dfrac{3}{4}=\\dfrac{9}{20}\\)."}]}, {"title": "Materi 4 — Pangkat & Akar", "desc": "Notasi pangkat, sifat operasi pangkat, pangkat negatif, dan bentuk akar", "icon": "√", "cls": "s4", "questions": [{"n": 19, "tag": "Notasi Pangkat", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(4^3\\) adalah…", "opts": ["64", "12", "81", "48"], "exp": "\\(4^3=4\\times4\\times4=64\\)."}, {"n": 20, "tag": "Sifat Pangkat", "tagCls": "tag-s4", "hots": false, "text": "Bentuk sederhana dari \\(4^6 \\div 4^2\\) adalah…", "opts": ["\\(4^4\\)", "\\(4^8\\)", "\\(4^3\\)", "\\(1^4\\)"], "exp": "\\(a^m\\div a^n=a^{m-n}\\). Maka \\(4^6\\div4^2=4^4\\)."}, {"n": 21, "tag": "Pangkat 0 & Negatif", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(3^{-2}\\) adalah…", "opts": ["\\(\\dfrac{1}{9}\\)", "-9", "9", "\\(-\\dfrac{1}{6}\\)"], "exp": "\\(3^{-2}=\\dfrac{1}{3^2}=\\dfrac{1}{9}\\)."}, {"n": 22, "tag": "Bentuk Akar", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(\\sqrt[3]{64}\\) adalah…", "opts": ["4", "8", "21,3", "16"], "exp": "\\(\\sqrt[3]{64}=4\\) karena \\(4^3=64\\)."}, {"n": 23, "tag": "Operasi Akar", "tagCls": "tag-s4", "hots": false, "text": "Hasil dari \\(6\\sqrt{3} - 2\\sqrt{3}\\) adalah…", "opts": ["\\(4\\sqrt{3}\\)", "4", "\\(8\\sqrt{3}\\)", "\\(4\\sqrt{9}\\)"], "exp": "\\((6-2)\\sqrt{3}=4\\sqrt{3}\\)."}, {"n": 24, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Jika panjang sisi sebuah kubus adalah \\(\\sqrt{12}\\) cm, volume kubus tersebut adalah…", "opts": ["\\(24\\sqrt{3}\\) cm\\(^3\\)", "\\(12\\sqrt{12}\\) cm\\(^3\\)", "36 cm\\(^3\\)", "144 cm\\(^3\\)"], "exp": "Volume \\(=(\\sqrt{12})^3=\\sqrt{12}\\times\\sqrt{12}\\times\\sqrt{12}=12\\times\\sqrt{12}=12\\times2\\sqrt{3}=24\\sqrt{3}\\) cm\\(^3\\)."}]}, {"title": "Materi 5 — Aljabar Dasar", "desc": "Suku sejenis, substitusi, operasi bentuk aljabar, dan PLSV", "icon": "x", "cls": "s5", "questions": [{"n": 25, "tag": "Suku Aljabar", "tagCls": "tag-s5", "hots": false, "text": "Bentuk paling sederhana dari \\(9m - 4n - 3m + 7n\\) adalah…", "opts": ["\\(6m + 3n\\)", "\\(6m - 3n\\)", "\\(12m + 3n\\)", "\\(6m + 11n\\)"], "exp": "Kelompokkan suku sejenis: \\((9m-3m)+(-4n+7n)=6m+3n\\)."}, {"n": 26, "tag": "Substitusi", "tagCls": "tag-s5", "hots": false, "text": "Jika \\(y=-3\\), nilai dari \\(4y^2+2y\\) adalah…", "opts": ["30", "42", "-30", "6"], "exp": "\\(4(-3)^2+2(-3)=4(9)-6=36-6=30\\)."}, {"n": 27, "tag": "Operasi Aljabar", "tagCls": "tag-s5", "hots": false, "text": "Hasil dari \\((4x-3)(x+2)\\) adalah…", "opts": ["\\(4x^2+5x-6\\)", "\\(4x^2+11x-6\\)", "\\(4x^2+5x+6\\)", "\\(4x^2-5x-6\\)"], "exp": "\\((4x-3)(x+2)=4x^2+8x-3x-6=4x^2+5x-6\\)."}, {"n": 28, "tag": "PLSV Dasar", "tagCls": "tag-s5", "hots": false, "text": "Penyelesaian dari persamaan \\(5x - 8 = 2x + 10\\) adalah…", "opts": ["6", "3", "-6", "\\(\\dfrac{2}{3}\\)"], "exp": "\\(5x-2x=10+8 \\Rightarrow 3x=18 \\Rightarrow x=6\\)."}, {"n": 29, "tag": "Soal Cerita PLSV", "tagCls": "tag-s5", "hots": false, "text": "Selisih dua bilangan adalah 9, dan jumlah keduanya adalah 41. Bilangan yang lebih besar adalah…", "opts": ["25", "16", "32", "20"], "exp": "Misalkan bilangan besar \\(=x\\), kecil \\(=y\\). \\(x-y=9\\) dan \\(x+y=41\\). Jumlahkan kedua persamaan: \\(2x=50 \\Rightarrow x=25\\)."}, {"n": 30, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Sebuah persegi panjang memiliki panjang \\((3x-2)\\) cm dan lebar \\((x+4)\\) cm. Jika kelilingnya 44 cm, luas persegi panjang tersebut adalah…", "opts": ["117 cm\\(^2\\)", "44 cm\\(^2\\)", "22 cm\\(^2\\)", "108 cm\\(^2\\)"], "exp": "Keliling \\(=2[(3x-2)+(x+4)]=8x+4=44 \\Rightarrow x=5\\). Panjang \\(=13\\) cm, lebar \\(=9\\) cm. Luas \\(=13\\times9=117\\) cm\\(^2\\)."}]}]}, "C": {"answers": {"1": "C", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A", "16": "A", "17": "A", "18": "A", "19": "A", "20": "A", "21": "A", "22": "A", "23": "A", "24": "A", "25": "A", "26": "A", "27": "A", "28": "A", "29": "A", "30": "A"}, "sections": [{"title": "Materi 1 — Sistem Bilangan & Himpunan", "desc": "Jenis bilangan, garis bilangan, notasi & operasi himpunan", "icon": "ℕ∩", "cls": "s1", "questions": [{"n": 1, "tag": "Jenis Bilangan", "tagCls": "tag-s1", "hots": false, "text": "Di antara bilangan berikut, manakah yang termasuk bilangan irasional?", "opts": ["\\(\\dfrac{1}{3}\\)", "\\(\\sqrt{16}\\)", "\\(\\sqrt{5}\\)", "-2"], "exp": "\\(\\sqrt{16}=4\\) (rasional/bulat). \\(\\sqrt{5}\\) memiliki desimal tak berhenti dan tak berulang, sehingga irasional."}, {"n": 2, "tag": "Nilai Mutlak", "tagCls": "tag-s1", "hots": false, "text": "Nilai dari \\(|{-10}| - |3| + |{-6}|\\) adalah…", "opts": ["13", "19", "-13", "7"], "exp": "\\(|{-10}|=10,\\;|3|=3,\\;|{-6}|=6\\). Maka \\(10-3+6=13\\)."}, {"n": 3, "tag": "Notasi Himpunan", "tagCls": "tag-s1", "hots": false, "text": "Diketahui \\(B=\\{2,4,6,8,10,12\\}\\). Nilai \\(n(B)\\) (kardinalitas) adalah…", "opts": ["6", "5", "7", "12"], "exp": "\\(B\\) memiliki 6 anggota, sehingga \\(n(B)=6\\)."}, {"n": 4, "tag": "Operasi Himpunan", "tagCls": "tag-s1", "hots": false, "text": "Diketahui \\(A=\\{1,2,3,4,5,6\\}\\) dan \\(B=\\{4,5,6,7,8\\}\\). Hasil dari \\(A \\cup B\\) adalah…", "opts": ["\\(\\{1,2,3,4,5,6,7,8\\}\\)", "\\(\\{4,5,6\\}\\)", "\\(\\{1,2,3\\}\\)", "\\(\\{7,8\\}\\)"], "exp": "Gabungkan semua anggota tanpa pengulangan: \\(\\{1,2,3,4,5,6,7,8\\}\\)."}, {"n": 5, "tag": "Diagram Venn", "tagCls": "tag-s1", "hots": false, "text": "Dari 50 siswa, 30 siswa suka musik pop, 22 siswa suka musik dangdut, dan 8 siswa tidak suka keduanya. Banyak siswa yang suka keduanya adalah…", "opts": ["10 siswa", "12 siswa", "8 siswa", "14 siswa"], "exp": "Yang suka minimal satu \\(=50-8=42\\). Maka \\(n(A \\cap B)=30+22-42=10\\) siswa."}, {"n": 6, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Dari 60 siswa, 35 siswa gemar IPA, 28 siswa gemar IPS, dan 10 siswa tidak gemar keduanya. Banyak siswa yang HANYA gemar satu mata pelajaran (bukan keduanya) adalah…", "opts": ["37 siswa", "50 siswa", "13 siswa", "45 siswa"], "exp": "\\(n(A \\cup B)=60-10=50\\). Maka \\(n(A \\cap B)=35+28-50=13\\). Yang hanya gemar satu \\(=50-13=37\\) siswa."}]}, {"title": "Materi 2 — Operasi Hitung Bilangan", "desc": "Bilangan bulat, urutan operasi, faktorisasi prima, KPK & FPB", "icon": "+×", "cls": "s2", "questions": [{"n": 7, "tag": "Bil. Bulat", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\(9 - (-14)\\) adalah…", "opts": ["23", "-5", "5", "-23"], "exp": "Mengurangi dengan bilangan negatif sama dengan menambah: \\(9-(-14)=9+14=23\\)."}, {"n": 8, "tag": "Perkalian & Pembagian", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\((-6) \\times (-5) \\times 2\\) adalah…", "opts": ["60", "-60", "11", "-11"], "exp": "\\((-6)\\times(-5)=30\\) (negatif\\(\\times\\)negatif\\(=\\)positif). Kemudian \\(30\\times2=60\\)."}, {"n": 9, "tag": "Urutan Operasi", "tagCls": "tag-s2", "hots": false, "text": "Hasil dari \\(20 \\div 5 + 3 \\times 4\\) adalah…", "opts": ["16", "28", "10", "20"], "exp": "Kali/bagi sebelum tambah: \\(20\\div5=4\\) dan \\(3\\times4=12\\). Maka \\(4+12=16\\)."}, {"n": 10, "tag": "KPK & FPB Dasar", "tagCls": "tag-s2", "hots": false, "text": "KPK dari 8 dan 20 adalah…", "opts": ["40", "160", "4", "20"], "exp": "\\(8=2^3\\), \\(20=2^2\\times5\\). KPK \\(=2^3\\times5=40\\)."}, {"n": 11, "tag": "Aplikasi KPK/FPB", "tagCls": "tag-s2", "hots": false, "text": "Sebuah pabrik memiliki 90 baut dan 135 mur yang akan dikemas rata ke sebanyak mungkin kotak tanpa sisa. Banyak kotak yang bisa dibuat adalah…", "opts": ["45 kotak", "15 kotak", "9 kotak", "5 kotak"], "exp": "Banyak kotak maksimum \\(=\\) FPB(90,135) \\(=45\\)."}, {"n": 12, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Ibu memiliki 60 kue nastar dan 96 kue kastengel untuk dibagi rata ke sebanyak mungkin toples tanpa sisa. Banyak kue nastar di setiap toples adalah…", "opts": ["5 kue", "12 kue", "8 kue", "6 kue"], "exp": "Banyak toples maksimum \\(=\\) FPB(60,96) \\(=12\\). Nastar per toples \\(=60\\div12=5\\)."}]}, {"title": "Materi 3 — Pecahan", "desc": "Konversi, perbandingan, operasi hitung, dan skala", "icon": "½", "cls": "s3", "questions": [{"n": 13, "tag": "Konversi Pecahan", "tagCls": "tag-s3", "hots": false, "text": "Bentuk desimal \\(0{,}625\\) diubah ke pecahan paling sederhana menjadi…", "opts": ["\\(\\dfrac{5}{8}\\)", "\\(\\dfrac{625}{1000}\\)", "\\(\\dfrac{3}{4}\\)", "\\(\\dfrac{5}{9}\\)"], "exp": "\\(0{,}625=\\dfrac{625}{1000}\\), disederhanakan menjadi \\(\\dfrac{5}{8}\\)."}, {"n": 14, "tag": "Membandingkan", "tagCls": "tag-s3", "hots": false, "text": "Urutan dari yang terbesar untuk \\(\\dfrac{5}{6},\\dfrac{7}{9},\\dfrac{11}{12},\\dfrac{3}{4}\\) adalah…", "opts": ["\\(\\dfrac{11}{12},\\dfrac{5}{6},\\dfrac{7}{9},\\dfrac{3}{4}\\)", "\\(\\dfrac{3}{4},\\dfrac{7}{9},\\dfrac{5}{6},\\dfrac{11}{12}\\)", "\\(\\dfrac{11}{12},\\dfrac{7}{9},\\dfrac{5}{6},\\dfrac{3}{4}\\)", "\\(\\dfrac{5}{6},\\dfrac{11}{12},\\dfrac{7}{9},\\dfrac{3}{4}\\)"], "exp": "Samakan penyebut ke 36: \\(\\dfrac{5}{6}=\\dfrac{30}{36}\\), \\(\\dfrac{7}{9}=\\dfrac{28}{36}\\), \\(\\dfrac{11}{12}=\\dfrac{33}{36}\\), \\(\\dfrac{3}{4}=\\dfrac{27}{36}\\). Urutan turun: \\(\\dfrac{11}{12}>\\dfrac{5}{6}>\\dfrac{7}{9}>\\dfrac{3}{4}\\)."}, {"n": 15, "tag": "Operasi Pecahan", "tagCls": "tag-s3", "hots": false, "text": "\\(\\dfrac{3}{4} \\times \\dfrac{8}{9} = \\ldots\\)", "opts": ["\\(\\dfrac{2}{3}\\)", "\\(\\dfrac{3}{4}\\)", "\\(\\dfrac{8}{9}\\)", "\\(\\dfrac{5}{6}\\)"], "exp": "\\(\\dfrac{3}{4}\\times\\dfrac{8}{9}=\\dfrac{24}{36}\\). FPB(24,36)=12, disederhanakan menjadi \\(\\dfrac{2}{3}\\)."}, {"n": 16, "tag": "Perbandingan", "tagCls": "tag-s3", "hots": false, "text": "Suatu pekerjaan selesai oleh 6 orang dalam 18 hari. Jika ingin selesai dalam 9 hari (perbandingan berbalik nilai), banyak pekerja yang dibutuhkan adalah…", "opts": ["12 pekerja", "3 pekerja", "27 pekerja", "9 pekerja"], "exp": "Total pekerja-hari \\(=6\\times18=108\\). Untuk 9 hari, dibutuhkan \\(108\\div9=12\\) pekerja."}, {"n": 17, "tag": "Skala", "tagCls": "tag-s3", "hots": false, "text": "Sebuah denah dibuat dengan skala 1:200. Jika panjang sebenarnya sebuah lorong adalah 12 m, panjang lorong pada denah adalah…", "opts": ["6 cm", "60 cm", "24 cm", "0,6 cm"], "exp": "\\(12\\) m \\(=1.200\\) cm. Panjang pada denah \\(=1.200\\div200=6\\) cm."}, {"n": 18, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Perbandingan uang Deni dan Fajar mula-mula adalah \\(2:3\\). Jika uang Deni ditambah Rp30.000 (uang Fajar tetap), perbandingannya menjadi \\(4:5\\). Uang Fajar mula-mula adalah…", "opts": ["Rp225.000", "Rp200.000", "Rp250.000", "Rp180.000"], "exp": "Misalkan Deni \\(=2k\\), Fajar \\(=3k\\). \\(\\dfrac{2k+30.000}{3k}=\\dfrac{4}{5} \\Rightarrow 5(2k+30.000)=12k \\Rightarrow 10k+150.000=12k \\Rightarrow k=75.000\\). Fajar \\(=3k=225.000\\)."}]}, {"title": "Materi 4 — Pangkat & Akar", "desc": "Notasi pangkat, sifat operasi pangkat, pangkat negatif, dan bentuk akar", "icon": "√", "cls": "s4", "questions": [{"n": 19, "tag": "Notasi Pangkat", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\((-3)^4\\) adalah…", "opts": ["81", "-81", "12", "-12"], "exp": "Pangkat genap dari bilangan negatif menghasilkan bilangan positif: \\((-3)^4=81\\)."}, {"n": 20, "tag": "Sifat Pangkat", "tagCls": "tag-s4", "hots": false, "text": "Bentuk sederhana dari \\((2^3)^3\\) adalah…", "opts": ["\\(2^9\\)", "\\(2^6\\)", "\\(2^{27}\\)", "\\(6^3\\)"], "exp": "\\((a^m)^n=a^{m\\times n}\\). Maka \\((2^3)^3=2^9\\)."}, {"n": 21, "tag": "Pangkat 0 & Negatif", "tagCls": "tag-s4", "hots": false, "text": "Nilai dari \\(6^0 + 2^{-1}\\) adalah…", "opts": ["\\(\\dfrac{3}{2}\\)", "1", "0", "7"], "exp": "\\(6^0=1\\) dan \\(2^{-1}=\\dfrac{1}{2}\\). Maka \\(1+\\dfrac{1}{2}=\\dfrac{3}{2}\\)."}, {"n": 22, "tag": "Bentuk Akar", "tagCls": "tag-s4", "hots": false, "text": "Bentuk paling sederhana dari \\(\\sqrt{45}\\) adalah…", "opts": ["\\(3\\sqrt{5}\\)", "\\(5\\sqrt{3}\\)", "\\(9\\sqrt{5}\\)", "\\(15\\sqrt{3}\\)"], "exp": "\\(45=9\\times5\\). \\(\\sqrt{45}=\\sqrt{9}\\times\\sqrt{5}=3\\sqrt{5}\\)."}, {"n": 23, "tag": "Operasi Akar", "tagCls": "tag-s4", "hots": false, "text": "Hasil dari \\(\\sqrt{2} \\times \\sqrt{8}\\) adalah…", "opts": ["4", "\\(\\sqrt{10}\\)", "16", "\\(2\\sqrt{2}\\)"], "exp": "\\(\\sqrt{2}\\times\\sqrt{8}=\\sqrt{16}=4\\)."}, {"n": 24, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Bentuk sederhana dari \\((3\\sqrt{2})^2 - (2\\sqrt{5})^2 \\div 2\\) adalah…", "opts": ["8", "-2", "38", "4"], "exp": "\\((3\\sqrt{2})^2=9\\times2=18\\). \\((2\\sqrt{5})^2\\div2=20\\div2=10\\). Maka \\(18-10=8\\)."}]}, {"title": "Materi 5 — Aljabar Dasar", "desc": "Suku sejenis, substitusi, operasi bentuk aljabar, dan PLSV", "icon": "x", "cls": "s5", "questions": [{"n": 25, "tag": "Suku Aljabar", "tagCls": "tag-s5", "hots": false, "text": "Pada bentuk aljabar \\(6x^2 - 5x + 2\\), koefisien dari \\(x\\) adalah…", "opts": ["-5", "6", "2", "-6"], "exp": "Koefisien adalah bilangan yang menempel pada variabel. Koefisien dari \\(x\\) adalah \\(-5\\)."}, {"n": 26, "tag": "Substitusi", "tagCls": "tag-s5", "hots": false, "text": "Jika \\(a=2\\) dan \\(b=-1\\), nilai dari \\(a^2 - 3ab\\) adalah…", "opts": ["10", "-2", "2", "-10"], "exp": "\\(a^2=4\\). \\(3ab=3(2)(-1)=-6\\). Maka \\(a^2-3ab=4-(-6)=10\\)."}, {"n": 27, "tag": "Operasi Aljabar", "tagCls": "tag-s5", "hots": false, "text": "Hasil dari \\(6a(3a+2)\\) adalah…", "opts": ["\\(18a^2+12a\\)", "\\(18a^2-12a\\)", "\\(9a+12a\\)", "\\(18a+12a\\)"], "exp": "Distribusikan \\(6a\\): \\(6a\\times3a=18a^2\\), \\(6a\\times2=12a\\)."}, {"n": 28, "tag": "PLSV Dasar", "tagCls": "tag-s5", "hots": false, "text": "Penyelesaian dari persamaan \\(4(x+3) = 2(x+9)\\) adalah…", "opts": ["3", "6", "-3", "15"], "exp": "\\(4x+12=2x+18 \\Rightarrow 2x=6 \\Rightarrow x=3\\)."}, {"n": 29, "tag": "Soal Cerita PLSV", "tagCls": "tag-s5", "hots": false, "text": "Keliling suatu segitiga sama kaki adalah 33 cm. Sisi kaki (dua sisi sama panjang) adalah \\((x+3)\\) cm dan alasnya adalah \\((x-3)\\) cm. Panjang alas segitiga tersebut adalah…", "opts": ["7 cm", "13 cm", "10 cm", "9 cm"], "exp": "Keliling \\(=2(x+3)+(x-3)=3x+3=33 \\Rightarrow x=10\\). Alas \\(=x-3=7\\) cm."}, {"n": 30, "tag": "HOTS 🔥", "tagCls": "tag-hots", "hots": true, "text": "Sebuah toko memberi diskon 20% dari harga awal suatu barang, lalu menambahkan biaya admin Rp4.000, sehingga harga akhir menjadi Rp68.000. Harga awal barang tersebut adalah…", "opts": ["Rp80.000", "Rp72.000", "Rp90.000", "Rp85.000"], "exp": "Misalkan harga awal \\(=x\\). \\(0{,}8x+4.000=68.000 \\Rightarrow 0{,}8x=64.000 \\Rightarrow x=80.000\\)."}]}]}};
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+const state = { answered:0, correct:0, wrong:0, map:{} };
+let studentName='', studentKelas='', selectedPacket='';
+let startTime=null, timerInterval=null, secondsLeft=DURATION;
+let examDone=false;
+let currentPacketData=null;
+
+const SS_STARTED = 'examv4_started';
+const SS_DONE    = 'examv4_done';
+
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem(SS_STARTED)==='1' && sessionStorage.getItem(SS_DONE)!=='1') {
+    document.getElementById('identityScreen').style.display = 'none';
+    document.getElementById('invalidScreen').style.display  = 'flex';
+  }
+});
+
+window.addEventListener('beforeunload', e => {
+  if (startTime && !examDone) { e.preventDefault(); e.returnValue=''; }
+});
+
+function selectPacket(p) {
+  selectedPacket = p;
+  ['A','B','C'].forEach(x => {
+    document.getElementById('pkt'+x).classList.toggle('active', x===p);
+  });
+}
+
+function startExam() {
+  const nama  = document.getElementById('inputNama').value.trim();
+  const kelas = document.getElementById('inputKelas').value;
+  let valid = true;
+
+  if (!selectedPacket) { document.getElementById('errPaket').style.display='block'; valid=false; }
+  else                   document.getElementById('errPaket').style.display='none';
+  if (!nama)  { document.getElementById('errNama').style.display='block'; valid=false; }
+  else          document.getElementById('errNama').style.display='none';
+  if (!kelas) { document.getElementById('errKelas').style.display='block'; valid=false; }
+  else          document.getElementById('errKelas').style.display='none';
+  if (!valid) return;
+
+  studentName  = nama;
+  studentKelas = kelas;
+  startTime    = new Date();
+  currentPacketData = PACKETS[selectedPacket];
+
+  sessionStorage.setItem(SS_STARTED, '1');
+  sessionStorage.removeItem(SS_DONE);
+
+  document.getElementById('chipName').textContent        = nama.split(' ')[0] + ' · ' + kelas;
+  document.getElementById('avatarInitial').textContent   = nama.charAt(0).toUpperCase();
+  document.getElementById('headerPacket').textContent    = 'PAKET ' + selectedPacket;
+  document.getElementById('headerSub').textContent       = 'Ujian Matrikulasi — ' + EXAM_TITLE_JS + ' · Paket ' + selectedPacket;
+
+  renderQuestions();
+
+  document.getElementById('identityScreen').style.display = 'none';
+  document.getElementById('examScreen').style.display     = 'block';
+  window.scrollTo(0,0);
+  startTimer();
+}
+
+// ──────────────────────────────────────────────────────────────
+// RENDER — setelah render, panggil MathJax untuk typeset ulang
+// ──────────────────────────────────────────────────────────────
+function renderQuestions() {
+  const main   = document.getElementById('mainContent');
+  const result = document.getElementById('resultPanel');
+  main.innerHTML = '';
+  main.appendChild(result);
+
+  const pk = currentPacketData;
+
+  pk.sections.forEach(sec => {
+    const sh = document.createElement('div');
+    sh.className = 'section-header ' + sec.cls;
+    sh.innerHTML = `<div class="section-icon">${sec.icon}</div><div class="section-info"><h2>${sec.title}</h2><p>${sec.desc}</p></div>`;
+    main.insertBefore(sh, result);
+
+    sec.questions.forEach(q => {
+      const card = document.createElement('div');
+      card.className = 'q-card' + (q.hots ? ' hots-card' : '');
+      card.id = 'qc' + q.n;
+
+      const optsHtml = q.opts.map((o, i) => {
+        const lbl = ['A','B','C','D'][i];
+        return `<div class="option" onclick="answer(${q.n},'${lbl}')"><span class="opt-label">${lbl}</span><span class="opt-text">${o}</span></div>`;
+      }).join('');
+
+      card.innerHTML = `
+        <div class="q-top">
+          <div class="q-num" id="qn${q.n}">${q.n}</div>
+          <div class="q-text">
+            <span class="topic-tag ${q.tagCls}">${q.tag}</span><br>
+            ${q.text}
+          </div>
+        </div>
+        <div class="options">${optsHtml}</div>
+        <div class="explanation" id="exp${q.n}"></div>
+      `;
+      main.insertBefore(card, result);
+    });
+  });
+
+  // Typeset MathJax setelah DOM diisi
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([main]).catch(err => console.warn('MathJax error:', err));
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// TIMER
+// ──────────────────────────────────────────────────────────────
+function startTimer() {
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    const m = String(Math.floor(secondsLeft/60)).padStart(2,'0');
+    const s = String(secondsLeft%60).padStart(2,'0');
+    const el = document.getElementById('timerVal');
+    el.textContent = m + ':' + s;
+    if      (secondsLeft <= 60)  el.className = 'timer-val danger';
+    else if (secondsLeft <= 300) el.className = 'timer-val warn';
+    else                          el.className = 'timer-val';
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      if (!examDone) document.getElementById('timeModal').classList.add('show');
+    }
+  }, 1000);
+}
+
+function forceSubmit() {
+  document.getElementById('timeModal').classList.remove('show');
+  showResult();
+}
+
+// ──────────────────────────────────────────────────────────────
+// ANSWER
+// ──────────────────────────────────────────────────────────────
+function answer(qNum, opt) {
+  if (state.map[qNum]) return;
+  state.map[qNum] = opt;
+
+  const correct   = currentPacketData.answers[qNum];
+  const isCorrect = opt === correct;
+
+  if (isCorrect) state.correct++; else state.wrong++;
+  state.answered++;
+
+  const numEl = document.getElementById('qn' + qNum);
+  numEl.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  numEl.textContent = isCorrect ? '✓' : '✗';
+
+  let expText = '';
+  currentPacketData.sections.forEach(sec => {
+    sec.questions.forEach(q => { if (q.n === qNum) expText = q.exp; });
+  });
+
+  const card   = document.getElementById('qc' + qNum);
+  const opts   = card.querySelectorAll('.option');
+  const labels = ['A','B','C','D'];
+  opts.forEach((el, i) => {
+    el.onclick = null;
+    if (labels[i] === opt && !isCorrect) el.classList.add('wrong');
+    if (labels[i] === correct)           el.classList.add(isCorrect ? 'correct' : 'show-correct');
+  });
+
+  const exp = document.getElementById('exp' + qNum);
+  exp.className = 'explanation show ' + (isCorrect ? 'correct' : 'wrong');
+  exp.innerHTML = '<span class="exp-label">' + (isCorrect ? '✓ Benar!' : '✗ Kurang tepat.') + '</span>' + expText;
+
+  // Typeset penjelasan yang baru muncul
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([exp]).catch(err => console.warn('MathJax error:', err));
+  }
+
+  updateStats();
+
+  if (state.answered === TOTAL_Q) {
+    document.getElementById('finishBtn').style.display = 'inline-block';
+  }
+}
+
+function updateStats() {
+  document.getElementById('hCorrect').textContent    = state.correct;
+  document.getElementById('hWrong').textContent      = state.wrong;
+  document.getElementById('navAnswered').textContent = state.answered;
+  const pct = Math.round(state.answered / TOTAL_Q * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent    = state.answered + ' dari ' + TOTAL_Q + ' soal dijawab';
+  document.getElementById('progPct').textContent      = pct + '%';
+}
+
+function scrollToNext() {
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) {
+      const el = document.getElementById('qc' + i);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// MODAL KONFIRMASI SUBMIT
+// ──────────────────────────────────────────────────────────────
+function showConfirmModal() {
+  const unanswered = [];
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) unanswered.push(i);
+  }
+
+  document.getElementById('csBengar').textContent = state.correct;
+  document.getElementById('csSalah').textContent  = state.wrong;
+  document.getElementById('csSkip').textContent   = unanswered.length;
+
+  const warnEl = document.getElementById('unansweredWarning');
+  if (unanswered.length > 0) {
+    const listStr = unanswered.slice(0, 15).join(', ') + (unanswered.length > 15 ? ', ...' : '');
+    warnEl.innerHTML = `<strong>⚠ Soal belum dijawab (${unanswered.length} soal):</strong> No. ${listStr}`;
+    warnEl.style.display = 'block';
+  } else {
+    warnEl.style.display = 'none';
+  }
+
+  document.getElementById('confirmModal').classList.add('show');
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirmModal').classList.remove('show');
+}
+
+function confirmSubmit() {
+  document.getElementById('confirmModal').classList.remove('show');
+  showResult();
+}
+
+// ──────────────────────────────────────────────────────────────
+// RESULT
+// ──────────────────────────────────────────────────────────────
+function showResult() {
+  if (examDone) return;
+  examDone = true;
+  clearInterval(timerInterval);
+  sessionStorage.setItem(SS_DONE, '1');
+
+  const endTime  = new Date();
+  const duration = Math.round((endTime - startTime) / 60000);
+  const pct      = Math.round(state.correct / TOTAL_Q * 100);
+
+  document.getElementById('rCorrect').textContent      = state.correct;
+  document.getElementById('rWrong').textContent        = state.wrong;
+  document.getElementById('rPct').textContent          = pct + '%';
+  document.getElementById('resultScore').textContent   = state.correct + '/' + TOTAL_Q;
+  document.getElementById('studentResultInfo').textContent = '👤 ' + studentName + ' · Kelas ' + studentKelas;
+  document.getElementById('packetResultBadge').textContent = '📦 Paket ' + selectedPacket;
+  document.getElementById('durationBadge').textContent = '⏱ Durasi: ' + duration + ' menit';
+  document.getElementById('finishBtn').style.display   = 'none';
+
+  let emoji='😊', label='';
+  if (pct>=90)      { emoji='🏆'; label='Luar biasa! Nilai sempurna!'; }
+  else if (pct>=75) { emoji='🎉'; label='Bagus sekali! Pertahankan prestasimu!'; }
+  else if (pct>=60) { emoji='👍'; label='Cukup baik, terus berlatih!'; }
+  else              { emoji='💪'; label='Jangan menyerah! Yuk pelajari lagi!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultLabel').textContent  = label;
+
+  let wrongList = '', wrongCount = 0;
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (state.map[i] && state.map[i] !== currentPacketData.answers[i]) {
+      wrongCount++;
+      if (wrongCount <= 10) {
+        wrongList += `\n  Soal ${i}: Jawab ${state.map[i]}, Kunci ${currentPacketData.answers[i]}`;
+      }
+    }
+  }
+  if (wrongCount > 10) wrongList += `\n  ...dan ${wrongCount-10} soal lainnya`;
+
+  let skipList = '', skipCount = 0;
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) {
+      skipCount++;
+      if (skipCount <= 5) skipList += `\n  Soal ${i}: Tidak dijawab`;
+    }
+  }
+  if (skipCount > 5) skipList += `\n  ...dan ${skipCount-5} soal lainnya`;
+
+  const tanggal = endTime.toLocaleDateString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  const jam     = endTime.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+
+  let msg = `📊 *HASIL UJIAN MATRIKULASI*\n`;
+  msg += `🏫 SMA IT Insan Sejahtera\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Nama:* ${studentName}\n`;
+  msg += `🏫 *Kelas:* ${studentKelas}\n`;
+  msg += `📦 *Paket Soal:* Paket ${selectedPacket}\n`;
+  msg += `📅 *Tanggal:* ${tanggal}\n`;
+  msg += `⏰ *Jam:* ${jam} (durasi ${duration} menit)\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `✅ *Benar:* ${state.correct} soal\n`;
+  msg += `❌ *Salah:* ${state.wrong} soal\n`;
+  if (skipCount > 0) msg += `➖ *Tidak dijawab:* ${skipCount} soal\n`;
+  msg += `📝 *Dijawab:* ${state.answered}/${TOTAL_Q} soal\n`;
+  msg += `🎯 *Nilai:* *${pct}%* ${emoji}\n`;
+  if (wrongList) {
+    msg += `━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `❌ *Soal yang salah:*${wrongList}\n`;
+  }
+  if (skipList) {
+    msg += `━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `➖ *Soal tidak dijawab:*${skipList}\n`;
+  }
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Dikirim otomatis dari Ujian Online ${EXAM_TITLE_JS} — ${TOTAL_Q} Soal + 5 HOTS — Paket ${selectedPacket}_`;
+
+  document.getElementById('waBtn').href = 'https://wa.me/6281770618414?text=' + encodeURIComponent(msg);
+
+  const panel = document.getElementById('resultPanel');
+  panel.classList.add('show');
+  setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'start' }), 200);
+}
+
+function markSent() {
+  setTimeout(() => { document.getElementById('sentBadge').style.display = 'block'; }, 1000);
+}
+</script>
+</body>
+</html>
