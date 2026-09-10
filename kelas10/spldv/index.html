@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz SPLDV — Sistem Persamaan Linear Dua Variabel · SMA IT Insan Sejahtera</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- MathJax LaTeX Rendering -->
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']]
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --surface2: #f0efe9;
+  --border: #e2e0d8;
+  --border2: #c9c7bc;
+  --text: #1a1916;
+  --text2: #6b6962;
+  --text3: #9e9b94;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-border: #bfdbfe;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --green-border: #bbf7d0;
+  --red: #dc2626;
+  --red-bg: #fef2f2;
+  --red-border: #fecaca;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-border: #fde68a;
+  --purple: #7c3aed;
+  --purple-bg: #f5f3ff;
+  --purple-border: #ddd6fe;
+  --teal: #0d9488;
+  --teal-bg: #f0fdfa;
+  --teal-border: #99f6e4;
+  --hots: #be185d;
+  --hots-bg: #fdf2f8;
+  --hots-border: #fbcfe8;
+}
+
+body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+mjx-container { display: inline !important; margin: 0 2px; }
+mjx-container[display="true"] { display: block !important; margin: 8px 0; }
+
+/* ── IDENTITY SCREEN ── */
+#identityScreen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+#identityScreen::before {
+  content: ''; position: absolute; top: -120px; right: -120px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #bfdbfe 0%, transparent 70%);
+  pointer-events: none;
+}
+#identityScreen::after {
+  content: ''; position: absolute; bottom: -80px; left: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #bbf7d0 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.identity-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 24px; padding: 48px 40px;
+  width: 100%; max-width: 560px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  position: relative; z-index: 1;
+  animation: slideUp 0.5s cubic-bezier(.4,0,.2,1);
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
+
+.school-badge { display: flex; align-items: center; gap: 12px; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+.school-logo { width: 52px; height: 52px; border-radius: 12px; background: var(--blue-bg); border: 1px solid var(--blue-border); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+.school-info h1 { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.3; }
+.school-info p { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+.form-title { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1.2; margin-bottom: 6px; }
+.form-subtitle { font-size: 13px; color: var(--text2); margin-bottom: 28px; line-height: 1.5; }
+
+.packet-selector { margin-bottom: 22px; }
+.packet-label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+.packet-options { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+@media (max-width: 480px) { .packet-options { grid-template-columns: repeat(3, 1fr); } }
+.packet-opt {
+  border: 2px solid var(--border); border-radius: 12px;
+  padding: 12px 6px; text-align: center; cursor: pointer;
+  background: var(--surface2); transition: all 0.15s;
+  user-select: none;
+}
+.packet-opt:hover { border-color: var(--blue); background: var(--blue-bg); }
+.packet-opt.active { border-color: var(--blue); background: var(--blue-bg); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.packet-opt .pkt-letter { font-size: 20px; font-weight: 800; color: var(--blue); display: block; line-height: 1; margin-bottom: 4px; }
+.packet-opt .pkt-name { font-size: 10px; font-weight: 600; color: var(--text2); }
+.packet-opt.active .pkt-name { color: var(--blue); }
+
+.form-group { margin-bottom: 18px; }
+.form-label { display: block; font-size: 12px; font-weight: 700; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; }
+.form-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--surface2); transition: all 0.15s; outline: none; }
+.form-input:focus { border-color: var(--blue); background: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+.form-input::placeholder { color: var(--text3); }
+.form-select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--surface2); transition: all 0.15s; outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6962' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+.form-select:focus { border-color: var(--blue); background-color: var(--surface); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+.exam-info-box { background: var(--blue-bg); border: 1px solid var(--blue-border); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.exam-info-box .icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.exam-info-box p { font-size: 12px; color: var(--blue); line-height: 1.6; }
+.exam-info-box strong { font-weight: 700; }
+
+.warn-box { background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 10px; padding: 12px 16px; margin-bottom: 24px; display: flex; gap: 10px; align-items: flex-start; }
+.warn-box p { font-size: 12px; color: var(--red); line-height: 1.6; }
+
+.btn-start { width: 100%; padding: 14px; background: var(--blue); color: #fff; border: none; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.15s; letter-spacing: 0.2px; }
+.btn-start:hover { background: #1d4ed8; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,0.35); }
+.btn-start:active { transform: translateY(0); }
+.form-error { font-size: 12px; color: var(--red); margin-top: 5px; display: none; }
+
+/* ── INVALID SCREEN ── */
+#invalidScreen { display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 24px; background: var(--bg); }
+.invalid-card { background: var(--surface); border: 1px solid var(--red-border); border-radius: 24px; padding: 56px 40px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 8px 40px rgba(220,38,38,0.1); animation: slideUp 0.4s ease; }
+.invalid-icon { font-size: 56px; margin-bottom: 16px; }
+.invalid-title { font-size: 22px; font-weight: 800; color: var(--red); margin-bottom: 10px; }
+.invalid-msg { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); z-index: 500; display: none; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 44px 36px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,0.2); animation: slideUp .35s ease; }
+.modal-icon { font-size: 48px; margin-bottom: 14px; }
+.modal-title { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.modal-title.red { color: var(--red); }
+.modal-title.amber { color: var(--amber); }
+.modal-msg { font-size: 13px; color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
+.modal-msg strong { color: var(--text); font-weight: 700; }
+
+.confirm-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
+.cs-box { background: var(--surface2); border-radius: 10px; padding: 12px 8px; }
+.cs-val { font-size: 22px; font-weight: 800; }
+.cs-lbl { font-size: 11px; color: var(--text2); margin-top: 2px; }
+.cs-green { color: var(--green); }
+.cs-red   { color: var(--red); }
+.cs-amber { color: var(--amber); }
+
+.unanswered-list { font-size: 12px; color: var(--red); background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; text-align: left; line-height: 1.6; }
+
+.modal-btns { display: flex; gap: 10px; justify-content: center; }
+.btn-modal { padding: 12px 24px; border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; border: none; }
+.btn-modal-primary { background: var(--green); color: #fff; }
+.btn-modal-primary:hover { background: #15803d; }
+.btn-modal-secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border2); }
+.btn-modal-secondary:hover { background: var(--surface); }
+.btn-modal-danger { background: var(--blue); color: #fff; }
+.btn-modal-danger:hover { background: #1d4ed8; }
+
+/* ── EXAM SCREEN ── */
+#examScreen { display: none; }
+
+.site-header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; gap: 16px; flex-wrap: wrap; }
+.site-logo { display: flex; align-items: center; gap: 10px; }
+.logo-text { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.2; }
+.logo-sub { font-size: 11px; color: var(--text2); }
+.header-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; flex-wrap: wrap; }
+
+.packet-badge { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; background: var(--purple-bg); border: 1px solid var(--purple-border); color: var(--purple); letter-spacing: 0.5px; text-transform: uppercase; }
+
+.timer-wrap { display: flex; align-items: center; gap: 6px; background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 5px 14px; }
+.timer-icon { font-size: 14px; }
+.timer-val { font-family: 'DM Mono', monospace; font-size: 15px; font-weight: 500; color: var(--text); min-width: 48px; text-align: center; transition: color .3s; }
+.timer-val.warn { color: var(--amber); }
+.timer-val.danger { color: var(--red); animation: blink 1s infinite; }
+
+.student-chip { display: flex; align-items: center; gap: 8px; background: var(--blue-bg); border: 1px solid var(--blue-border); border-radius: 999px; padding: 4px 12px 4px 6px; font-size: 12px; color: var(--blue); font-weight: 600; }
+.student-chip-avatar { width: 24px; height: 24px; background: var(--blue); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; }
+
+.header-stats { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.hstat { display: flex; align-items: center; gap: 4px; }
+.hstat-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hstat-val { font-weight: 600; }
+
+.progress-wrap { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px 10px; position: sticky; top: 56px; z-index: 99; }
+.progress-inner { max-width: 960px; margin: 0 auto; }
+.progress-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text2); margin-bottom: 6px; margin-top: 8px; }
+.progress-track { height: 6px; background: var(--surface2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.progress-fill { height: 100%; background: var(--blue); border-radius: 999px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+
+.main { max-width: 960px; margin: 0 auto; padding: 24px 24px 100px; }
+
+.section-header { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.section-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0; background: var(--blue-bg); border: 1px solid var(--blue-border); color: var(--blue); }
+.section-info h2 { font-size: 16px; font-weight: 700; }
+.section-info p { font-size: 12px; color: var(--text2); margin-top: 1px; }
+
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 12px; transition: box-shadow 0.15s; }
+.q-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.q-card.hots-card { border-color: var(--hots-border); }
+.q-card.hots-card:hover { box-shadow: 0 2px 12px rgba(190,24,93,0.08); }
+
+.q-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 14px; }
+.q-num { min-width: 28px; height: 28px; background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text2); flex-shrink: 0; margin-top: 1px; transition: all 0.2s; }
+.q-num.answered-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+.q-num.answered-wrong { background: var(--red-bg); border-color: var(--red-border); color: var(--red); }
+
+.q-text { font-size: 14px; line-height: 1.65; color: var(--text); flex: 1; }
+
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 480px) { .options { grid-template-columns: 1fr; } }
+
+.option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--surface2); transition: all 0.12s; font-size: 13px; user-select: none; }
+.option:hover { background: var(--blue-bg); border-color: var(--blue-border); }
+.option.selected { background: var(--blue-bg); border-color: var(--blue); }
+.option.correct { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.option.wrong { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+.option.show-correct { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+
+.opt-label { width: 24px; height: 24px; border-radius: 6px; border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; background: var(--surface); color: var(--text2); transition: all 0.12s; }
+.option.selected .opt-label { background: var(--blue); border-color: var(--blue); color: #fff; }
+.option.correct .opt-label { background: var(--green); border-color: var(--green); color: #fff; }
+.option.wrong .opt-label { background: var(--red); border-color: var(--red); color: #fff; }
+.option.show-correct .opt-label { background: var(--green); border-color: var(--green); color: #fff; }
+
+.opt-text { font-size: 13px; }
+
+.explanation { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.6; display: none; }
+.explanation.show { display: block; }
+.explanation.correct { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+.explanation.wrong { background: var(--red-bg); border: 1px solid var(--red-border); color: var(--red); }
+.exp-label { font-weight: 700; margin-right: 4px; }
+
+.topic-tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; margin-bottom: 8px; margin-right: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
+.tag-b1 { background: var(--blue-bg); border: 1px solid var(--blue-border); color: var(--blue); }
+.tag-b2 { background: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); }
+.tag-b3 { background: var(--amber-bg); border: 1px solid var(--amber-border); color: var(--amber); }
+.tag-b4 { background: var(--purple-bg); border: 1px solid var(--purple-border); color: var(--purple); }
+
+.diff-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 999px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; vertical-align: middle; }
+.diff-mudah { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+.diff-sedang { background: var(--blue-bg); border: 1px solid var(--blue-border); color: var(--blue); }
+.diff-sukar { background: var(--hots-bg); border: 1px solid var(--hots-border); color: var(--hots); }
+
+/* ── RESULT PANEL ── */
+.result-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 44px 32px; text-align: center; margin-top: 32px; display: none; }
+.result-panel.show { display: block; animation: slideUp 0.5s ease; }
+.result-emoji { font-size: 60px; margin-bottom: 16px; }
+.result-score { font-size: 56px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 6px; }
+.result-label { font-size: 14px; color: var(--text2); margin-bottom: 8px; }
+.student-result-info { display: inline-flex; align-items: center; gap: 8px; background: var(--surface2); border: 1px solid var(--border); border-radius: 999px; padding: 6px 16px; font-size: 13px; color: var(--text2); margin-bottom: 8px; font-weight: 600; }
+.packet-result-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--purple-bg); border: 1px solid var(--purple-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--purple); font-weight: 700; margin-bottom: 8px; }
+.duration-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--amber-bg); border: 1px solid var(--amber-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--amber); font-weight: 600; margin-bottom: 24px; }
+.result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 28px; }
+.r-stat { background: var(--surface2); border-radius: 12px; padding: 16px 12px; }
+.r-stat-val { font-size: 28px; font-weight: 800; }
+.r-stat-lbl { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.green-val { color: var(--green); }
+.red-val { color: var(--red); }
+.blue-val { color: var(--blue); }
+
+.wa-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: #25d366; color: #fff; border: none; border-radius: 12px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all 0.15s; margin-bottom: 12px; }
+.wa-btn:hover { background: #1ebe5c; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+.wa-icon { width: 22px; height: 22px; flex-shrink: 0; }
+
+.btn-secondary { padding: 10px 20px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 10px; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--text); transition: all 0.15s; display: inline-block; }
+.btn-secondary:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.result-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.sent-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-bg); border: 1px solid var(--green-border); border-radius: 999px; padding: 6px 14px; font-size: 12px; color: var(--green); font-weight: 600; }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-top: 1px solid var(--border); padding: 12px 24px; z-index: 200; }
+.bottom-nav-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.nav-info { font-size: 12px; color: var(--text2); }
+.nav-info strong { color: var(--text); }
+.btn-row { display: flex; gap: 10px; align-items: center; }
+.btn { padding: 10px 18px; border-radius: 10px; border: 1px solid var(--border2); background: var(--surface2); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; color: var(--text); transition: all 0.15s; }
+.btn:hover { background: var(--surface); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+.btn-primary:hover { background: #1d4ed8; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ IDENTITY SCREEN -->
+<div id="identityScreen">
+  <div class="identity-card">
+    <div class="school-badge">
+      <div class="school-logo">📐</div>
+      <div class="school-info">
+        <h1>SMA IT Insan Sejahtera</h1>
+        <p>Kelas X — Matrikulasi</p>
+      </div>
+    </div>
+    <div class="form-title">Quiz SPLDV</div>
+    <div class="form-subtitle">Sistem Persamaan Linear Dua Variabel — 15 soal pilihan ganda, 20 menit. Pilih salah satu dari 5 paket soal di bawah ini.</div>
+    <div class="packet-selector">
+      <span class="packet-label">Pilih Paket Soal</span>
+      <div class="packet-options">
+        <div class="packet-opt" id="pktA" onclick="selectPacket('A')">
+          <span class="pkt-letter">A</span>
+          <span class="pkt-name">Paket A</span>
+        </div>
+        <div class="packet-opt" id="pktB" onclick="selectPacket('B')">
+          <span class="pkt-letter">B</span>
+          <span class="pkt-name">Paket B</span>
+        </div>
+        <div class="packet-opt" id="pktC" onclick="selectPacket('C')">
+          <span class="pkt-letter">C</span>
+          <span class="pkt-name">Paket C</span>
+        </div>
+        <div class="packet-opt" id="pktD" onclick="selectPacket('D')">
+          <span class="pkt-letter">D</span>
+          <span class="pkt-name">Paket D</span>
+        </div>
+        <div class="packet-opt" id="pktE" onclick="selectPacket('E')">
+          <span class="pkt-letter">E</span>
+          <span class="pkt-name">Paket E</span>
+        </div>
+      </div>
+      <div class="form-error" id="errPaket">Paket soal harus dipilih.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputNama">Nama Lengkap</label>
+      <input type="text" id="inputNama" class="form-input" placeholder="Contoh: Ahmad Fauzan" autocomplete="off">
+      <div class="form-error" id="errNama">Nama tidak boleh kosong.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputKelas">Kelas</label>
+      <select id="inputKelas" class="form-select">
+        <option value="">— Pilih Kelas —</option>
+        <option value="10.1">10.1</option>
+        <option value="10.2">10.2</option>
+        <option value="10.3">10.3</option>
+        <option value="11.1">11.1</option>
+        <option value="11.2">11.2</option>
+        <option value="11.3">11.3</option>
+      </select>
+      <div class="form-error" id="errKelas">Kelas harus dipilih.</div>
+    </div>
+    <div class="exam-info-box">
+      <span class="icon">💡</span>
+      <p><strong>15 soal</strong> · komposisi 4 Mudah + 7 Sedang + 4 Sukar. Jawaban langsung dikoreksi beserta pembahasan setiap soal.</p>
+    </div>
+    <div class="warn-box">
+      <span class="icon">⚠️</span>
+      <p>Jangan me-refresh atau menutup halaman setelah quiz dimulai — quiz akan dianggap <strong>tidak valid</strong>.</p>
+    </div>
+    <button class="btn-start" onclick="startExam()">Mulai Quiz →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ INVALID SCREEN -->
+<div id="invalidScreen">
+  <div class="invalid-card">
+    <div class="invalid-icon">🚫</div>
+    <div class="invalid-title">Quiz Tidak Valid</div>
+    <p class="invalid-msg">Halaman di-refresh atau dibuka ulang setelah quiz dimulai.<br><br>Quiz-mu <strong style="color:var(--red)">dinyatakan tidak valid</strong> dan tidak dapat dilanjutkan.<br><br>Hubungi gurumu untuk mendapatkan sesi quiz baru.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ MODAL: WAKTU HABIS -->
+<div class="modal-overlay" id="timeModal">
+  <div class="modal-box">
+    <div class="modal-icon">⏰</div>
+    <div class="modal-title red">Waktu Habis!</div>
+    <p class="modal-msg">Waktu 20 menit telah habis. Hasil quiz-mu akan dihitung otomatis dari jawaban yang sudah masuk.</p>
+    <div class="modal-btns">
+      <button class="btn-modal btn-modal-danger" onclick="forceSubmit()">Lihat Hasil Saya →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ MODAL: KONFIRMASI SUBMIT -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box">
+    <div class="modal-icon">📋</div>
+    <div class="modal-title amber">Selesaikan Quiz?</div>
+    <p class="modal-msg">Pastikan semua jawabanmu sudah benar sebelum mengakhiri quiz. <strong>Jawaban tidak bisa diubah setelah selesai.</strong></p>
+    <div class="confirm-stats">
+      <div class="cs-box"><div class="cs-val cs-green" id="csBengar">0</div><div class="cs-lbl">✓ Benar</div></div>
+      <div class="cs-box"><div class="cs-val cs-red" id="csSalah">0</div><div class="cs-lbl">✗ Salah</div></div>
+      <div class="cs-box"><div class="cs-val cs-amber" id="csSkip">0</div><div class="cs-lbl">— Belum dijawab</div></div>
+    </div>
+    <div class="unanswered-list" id="unansweredWarning" style="display:none"></div>
+    <div class="modal-btns">
+      <button class="btn-modal btn-modal-secondary" onclick="closeConfirmModal()">Kembali ke Soal</button>
+      <button class="btn-modal btn-modal-primary" onclick="confirmSubmit()">Ya, Selesaikan →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ EXAM SCREEN -->
+<div id="examScreen">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-logo">
+        <div>
+          <div class="logo-text">SMA IT Insan Sejahtera</div>
+          <div class="logo-sub" id="headerSub">Quiz SPLDV</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="packet-badge" id="headerPacket">PAKET —</div>
+        <div class="timer-wrap">
+          <span class="timer-icon">⏱</span>
+          <span class="timer-val" id="timerVal">20:00</span>
+        </div>
+        <div class="header-stats">
+          <div class="hstat"><div class="hstat-dot" style="background:var(--green)"></div><span class="hstat-val" id="hCorrect">0</span></div>
+          <span style="color:var(--border2)">|</span>
+          <div class="hstat"><div class="hstat-dot" style="background:var(--red)"></div><span class="hstat-val" id="hWrong">0</span></div>
+        </div>
+        <div class="student-chip">
+          <div class="student-chip-avatar" id="avatarInitial">?</div>
+          <span id="chipName">Siswa</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-inner">
+      <div class="progress-meta">
+        <span id="progLabel">0 dari 15 soal dijawab</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="main" id="mainContent">
+    <div class="section-header">
+      <div class="section-icon">x,y</div>
+      <div class="section-info">
+        <h2>Sistem Persamaan Linear Dua Variabel (SPLDV)</h2>
+        <p>Eliminasi, substitusi, soal cerita, dan kondisi khusus — 4 Mudah · 7 Sedang · 4 Sukar</p>
+      </div>
+    </div>
+    <div class="result-panel" id="resultPanel">
+      <div class="result-emoji" id="resultEmoji">🎉</div>
+      <div class="result-score" id="resultScore">0/15</div>
+      <div class="result-label" id="resultLabel">Quiz selesai!</div>
+      <div class="student-result-info" id="studentResultInfo">👤 Nama · Kelas</div>
+      <div class="packet-result-badge" id="packetResultBadge">📦 Paket —</div>
+      <div class="duration-badge" id="durationBadge">⏱ Durasi: — menit</div>
+      <div class="result-grid">
+        <div class="r-stat"><div class="r-stat-val green-val" id="rCorrect">0</div><div class="r-stat-lbl">✓ Benar</div></div>
+        <div class="r-stat"><div class="r-stat-val red-val" id="rWrong">0</div><div class="r-stat-lbl">✗ Salah</div></div>
+        <div class="r-stat"><div class="r-stat-val blue-val" id="rPct">0%</div><div class="r-stat-lbl">Nilai</div></div>
+      </div>
+      <div class="result-actions">
+        <a id="waBtn" href="#" class="wa-btn" target="_blank" onclick="markSent()">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.084 1.504 5.806L.058 23.5a.5.5 0 0 0 .615.611l5.796-1.517A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.158-1.422l-.369-.222-3.838 1.005 1.023-3.74-.242-.384A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Kirim Hasil ke Guru via WhatsApp
+        </a>
+        <div id="sentBadge" style="display:none"><span class="sent-badge">✅ Hasil sudah dikirim ke guru!</span></div>
+        <button class="btn-secondary" onclick="location.reload()">Ulangi Quiz dari Awal</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottom-nav">
+    <div class="bottom-nav-inner">
+      <div class="nav-info">Dijawab: <strong id="navAnswered">0</strong>/15</div>
+      <div class="btn-row">
+        <button class="btn" onclick="scrollToNext()">Soal berikutnya ↓</button>
+        <button class="btn btn-primary" onclick="showConfirmModal()" id="finishBtn" style="display:none">Lihat Hasil &amp; Kirim →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const GURU_WA  = '6281770618414';
+const TOTAL_Q  = 15;
+const DURATION = 20 * 60;
+const EXAM_TITLE_JS = 'Quiz SPLDV';
+const PAKET_KEYS = ["A", "B", "C", "D", "E"];
+
+// ══════════════════════════════════════════════════════════════
+// BANK SOAL — semua ekspresi matematik menggunakan LaTeX (\(...\))
+// ══════════════════════════════════════════════════════════════
+const PACKETS = {"A": {"answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A"}, "questions": [{"tag": "B1 · Eliminasi Dasar", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}3x+2y=16\\\\x-y=2\\end{cases}\\) adalah …", "opts": ["(4, 2)", "(2, 4)", "(4, -2)", "(5, 3)"], "correct": "A", "exp": "Kalikan pers. 2 dengan 2: \\(2x-2y=4\\). Jumlahkan dengan pers. 1: \\(5x=20\\Rightarrow x=4\\). Substitusi: \\(y=x-(2)=2\\).", "n": 1}, {"tag": "B2 · Substitusi Dasar", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+2y=7\\\\3x-y=14\\end{cases}\\) adalah …", "opts": ["(5, 1)", "(4, 2)", "(1, 5)", "(5, 3)"], "correct": "A", "exp": "Dari pers. 1: \\(x=7-2y\\). Substitusi ke pers. 2: \\(3(7-2y)-y=14\\Rightarrow 21-7y=14\\Rightarrow y=1\\). Maka \\(x=7-2(1)=5\\).", "n": 2}, {"tag": "B1 · Eliminasi, Tanda Negatif", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}2x-3y=10\\\\5x+2y=-13\\end{cases}\\) adalah …", "opts": ["(-1, -4)", "(1, 4)", "(-4, -1)", "(-1, -5)"], "correct": "A", "exp": "Kalikan pers. 1 \\(\\times2\\) dan pers. 2 \\(\\times3\\): \\(19x=-19\\Rightarrow x=-1\\). Kalikan pers. 1 \\(\\times5\\) dan pers. 2 \\(\\times2\\): \\(-19y=76\\Rightarrow y=-4\\).", "n": 3}, {"tag": "B2 · Substitusi, Verifikasi", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+3y=-2\\\\2x-y=10\\end{cases}\\) adalah …", "opts": ["(4, -2)", "(4, 2)", "(3, -2)", "(-2, 4)"], "correct": "A", "exp": "Dari pers. 1: \\(x=-2-3y\\). Substitusi ke pers. 2: \\(2(-2-3y)-y=10\\Rightarrow -4-7y=10\\Rightarrow y=-2\\). Maka \\(x=-2-3(-2)=4\\).", "n": 4}, {"tag": "B3 · Aplikasi Harga Tiket", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Suatu gedung pertunjukan menampung 300 penonton. Tiket kelas I Rp8.000 dan kelas II Rp5.000. Total penjualan Rp1.800.000. Jumlah penonton kelas I adalah … orang.", "opts": ["100 orang", "200 orang", "120 orang", "190 orang"], "correct": "A", "exp": "Misalkan kelas I \\(=x\\), kelas II \\(=y\\). \\(x+y=300\\) dan \\(8.000x+5.000y=1.800.000\\). Eliminasi: diperoleh \\(x=100\\) dan \\(y=200\\).", "n": 5}, {"tag": "B3 · Aplikasi Umur", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "4 tahun lalu umur Andi sama dengan 3 kali umur Budi. 4 tahun kemudian umur Andi 2 kali umur Budi. Umur Andi sekarang adalah … tahun.", "opts": ["28 tahun", "12 tahun", "32 tahun", "24 tahun"], "correct": "A", "exp": "Misalkan umur Andi \\(=A\\), umur Budi \\(=B\\). \\(A-4=3(B-4)\\) dan \\(A+4=2(B+4)\\). Eliminasi kedua persamaan: diperoleh \\(B=12\\) dan \\(A=28\\).", "n": 6}, {"tag": "B3 · Aplikasi Kombinasi Harga", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Kantin menjual nasi ayam dan nasi ikan. Senin: 4 nasi ayam + 3 nasi ikan = Rp64.000. Selasa: 2 nasi ayam + 5 nasi ikan = Rp60.000. Harga satu nasi ayam adalah …", "opts": ["Rp10.000", "Rp8.000", "Rp11.000", "Rp7.000"], "correct": "A", "exp": "Misalkan harga nasi ayam \\(=x\\) dan nasi ikan \\(=y\\). \\(4x+3y=64.000\\) dan \\(2x+5y=60.000\\). Eliminasi kedua persamaan menghasilkan \\(x=10.000\\) dan \\(y=8.000\\).", "n": 7}, {"tag": "B1 · Kondisi Sejajar", "tagCls": "tag-b1", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Sistem \\(\\begin{cases}ax+3y=6\\\\8x-6y=10\\end{cases}\\) tidak memiliki penyelesaian jika …", "opts": ["a=-4", "a=4", "a=-6", "a=0"], "correct": "A", "exp": "Sistem tidak memiliki penyelesaian (sejajar) jika \\(\\dfrac{a}{8}=\\dfrac{3}{-6}\\), sehingga \\(a=\\dfrac{3\\times8}{-6}=-4\\). Perbandingan konstanta \\(\\dfrac{6}{10}\\) berbeda, jadi memang sejajar (bukan berimpit).", "n": 8}, {"tag": "B4 · Variabel Bantu", "tagCls": "tag-b4", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{6}{x}+y=7\\\\[4pt]\\dfrac{4}{x}-y=-2\\end{cases}\\) adalah …", "opts": ["\\(x=2,\\;y=4\\)", "\\(x=4,\\;y=2\\)", "\\(x=2,\\;y=-4\\)", "\\(x=3,\\;y=3\\)"], "correct": "A", "exp": "Jumlahkan kedua persamaan: \\(\\dfrac{10}{x}=5\\Rightarrow x=2\\). Substitusi ke pers. 1: \\(y=7-\\dfrac{6}{2}=4\\).", "n": 9}, {"tag": "B3 · Aplikasi Parkir", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Di tempat parkir terdapat 60 kendaraan roda dua dan roda empat. Total roda 160 buah. Tarif motor Rp2.500 dan mobil Rp6.000. Total pendapatan adalah …", "opts": ["Rp220.000", "Rp290.000", "Rp270.000", "Rp190.000"], "correct": "A", "exp": "Misalkan motor \\(=x\\), mobil \\(=y\\). \\(x+y=60\\) dan \\(2x+4y=160\\Rightarrow x+2y=80\\). Eliminasi: \\(y=20\\), \\(x=40\\). Pendapatan \\(=2.500(40)+6.000(20)=220.000\\).", "n": 10}, {"tag": "B3 · Aplikasi Kerja Sama", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Keran A dan B bersama-sama mengisi bak dalam 12 menit. Laju keran A adalah \\(\\dfrac{2}{3}\\) laju keran B. Waktu keran A untuk mengisi bak sendirian adalah … menit.", "opts": ["30 menit", "12 menit", "25 menit", "40 menit"], "correct": "A", "exp": "Misalkan laju A \\(=p\\), laju B \\(=q\\). \\(p+q=\\dfrac{1}{12}\\) dan \\(p=\\dfrac{2}{3}q\\). Substitusi: \\(q=\\dfrac{3}{12(2+3)}\\), sehingga waktu A sendirian \\(=\\dfrac{1}{p}=30\\) menit.", "n": 11}, {"tag": "B4 · Variabel Bantu Ganda", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{3}{x}+\\dfrac{2}{y}=11\\\\[4pt]\\dfrac{1}{x}-\\dfrac{1}{y}=2\\end{cases}\\) adalah …", "opts": ["\\(x=\\dfrac{1}{3},\\;y=1\\)", "\\(x=1,\\;y=\\dfrac{1}{3}\\)", "\\(x=\\dfrac{2}{3},\\;y=1\\)", "\\(x=\\dfrac{1}{3},\\;y=2\\)"], "correct": "A", "exp": "Misalkan \\(u=\\dfrac{1}{x},\\,v=\\dfrac{1}{y}\\), sehingga sistem menjadi \\(3u+2v=11\\) dan \\(u-v=2\\). Eliminasi/substitusi memberi \\(u=3\\) dan \\(v=1\\), sehingga \\(x=\\dfrac{1}{u}=\\dfrac{1}{3}\\) dan \\(y=\\dfrac{1}{v}=1\\).", "n": 12}, {"tag": "B3 · HOTS Aplikasi Kantin", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Kantin menjual menu utama Rp13.000 dan menu pendamping Rp8.000. Pada suatu hari, target penjualan adalah Rp130.000 dengan 5 porsi menu utama sudah terjual. Minimal menu pendamping yang harus terjual agar target terpenuhi adalah …", "opts": ["9 paket", "8 paket", "10 paket", "11 paket"], "correct": "A", "exp": "Sisa target \\(=130.000-5(13.000)=65.000\\). Banyak menu pendamping \\(\\geq\\dfrac{65.000}{8.000}\\approx8.12\\). Karena harus bilangan bulat, minimal \\(=9\\) paket.", "n": 13}, {"tag": "B4 · Kondisi Tepat Satu", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Agar sistem \\(\\begin{cases}kx+4y=8\\\\3x+2y=6\\end{cases}\\) memiliki <strong>tepat satu</strong> penyelesaian, syarat nilai \\(k\\) adalah …", "opts": ["\\(k\\neq6\\)", "\\(k=6\\)", "\\(k\\neq4\\)", "\\(k=0\\)"], "correct": "A", "exp": "Sejajar (tidak tepat satu penyelesaian) jika \\(\\dfrac{k}{3}=\\dfrac{4}{2}\\Rightarrow k=6\\). Agar tepat satu penyelesaian, syaratnya \\(k\\neq6\\).", "n": 14}, {"tag": "B3 · HOTS Aplikasi Umur", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "4 tahun lalu jumlah umur ayah dan ibu 52 tahun. Sekarang umur ayah \\(\\dfrac{7}{5}\\) umur ibu. Umur ayah 3 tahun mendatang adalah … tahun.", "opts": ["38 tahun", "35 tahun", "33 tahun", "42 tahun"], "correct": "A", "exp": "Misalkan umur ayah \\(=A\\), ibu \\(=B\\). \\((A-4)+(B-4)=52\\Rightarrow A+B=60\\). Sekarang \\(A=\\dfrac{7}{5}B\\). Substitusi: \\(B=25\\), \\(A=35\\). 3 tahun mendatang: \\(35+3=38\\) tahun.", "n": 15}]}, "B": {"answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A"}, "questions": [{"tag": "B1 · Eliminasi Dasar", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}3x+2y=13\\\\x-y=1\\end{cases}\\) adalah …", "opts": ["(3, 2)", "(2, 3)", "(3, -2)", "(4, 3)"], "correct": "A", "exp": "Kalikan pers. 2 dengan 2: \\(2x-2y=2\\). Jumlahkan dengan pers. 1: \\(5x=15\\Rightarrow x=3\\). Substitusi: \\(y=x-(1)=2\\).", "n": 1}, {"tag": "B2 · Substitusi Dasar", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+2y=8\\\\3x-y=10\\end{cases}\\) adalah …", "opts": ["(4, 2)", "(3, 3)", "(2, 4)", "(4, 4)"], "correct": "A", "exp": "Dari pers. 1: \\(x=8-2y\\). Substitusi ke pers. 2: \\(3(8-2y)-y=10\\Rightarrow 24-7y=10\\Rightarrow y=2\\). Maka \\(x=8-2(2)=4\\).", "n": 2}, {"tag": "B1 · Eliminasi, Tanda Negatif", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}2x-3y=-3\\\\5x+2y=-17\\end{cases}\\) adalah …", "opts": ["(-3, -1)", "(3, 1)", "(-1, -3)", "(-3, -2)"], "correct": "A", "exp": "Kalikan pers. 1 \\(\\times2\\) dan pers. 2 \\(\\times3\\): \\(19x=-57\\Rightarrow x=-3\\). Kalikan pers. 1 \\(\\times5\\) dan pers. 2 \\(\\times2\\): \\(-19y=19\\Rightarrow y=-1\\).", "n": 3}, {"tag": "B2 · Substitusi, Verifikasi", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+3y=2\\\\2x-y=11\\end{cases}\\) adalah …", "opts": ["(5, -1)", "(5, 1)", "(4, -1)", "(-1, 5)"], "correct": "A", "exp": "Dari pers. 1: \\(x=2-3y\\). Substitusi ke pers. 2: \\(2(2-3y)-y=11\\Rightarrow 4-7y=11\\Rightarrow y=-1\\). Maka \\(x=2-3(-1)=5\\).", "n": 4}, {"tag": "B3 · Aplikasi Harga Tiket", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Suatu gedung pertunjukan menampung 250 penonton. Tiket kelas I Rp10.000 dan kelas II Rp6.000. Total penjualan Rp1.860.000. Jumlah penonton kelas I adalah … orang.", "opts": ["90 orang", "160 orang", "110 orang", "150 orang"], "correct": "A", "exp": "Misalkan kelas I \\(=x\\), kelas II \\(=y\\). \\(x+y=250\\) dan \\(10.000x+6.000y=1.860.000\\). Eliminasi: diperoleh \\(x=90\\) dan \\(y=160\\).", "n": 5}, {"tag": "B3 · Aplikasi Umur", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "6 tahun lalu umur Rian sama dengan 3 kali umur Sinta. 6 tahun kemudian umur Rian 2 kali umur Sinta. Umur Rian sekarang adalah … tahun.", "opts": ["42 tahun", "18 tahun", "48 tahun", "36 tahun"], "correct": "A", "exp": "Misalkan umur Rian \\(=A\\), umur Sinta \\(=B\\). \\(A-6=3(B-6)\\) dan \\(A+6=2(B+6)\\). Eliminasi kedua persamaan: diperoleh \\(B=18\\) dan \\(A=42\\).", "n": 6}, {"tag": "B3 · Aplikasi Kombinasi Harga", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Kantin menjual es teh dan es jeruk. Senin: 5 es teh + 2 es jeruk = Rp69.000. Selasa: 3 es teh + 6 es jeruk = Rp75.000. Harga satu es teh adalah …", "opts": ["Rp11.000", "Rp7.000", "Rp12.000", "Rp6.000"], "correct": "A", "exp": "Misalkan harga es teh \\(=x\\) dan es jeruk \\(=y\\). \\(5x+2y=69.000\\) dan \\(3x+6y=75.000\\). Eliminasi kedua persamaan menghasilkan \\(x=11.000\\) dan \\(y=7.000\\).", "n": 7}, {"tag": "B1 · Kondisi Sejajar", "tagCls": "tag-b1", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Sistem \\(\\begin{cases}ax+4y=7\\\\6x-8y=9\\end{cases}\\) tidak memiliki penyelesaian jika …", "opts": ["a=-3", "a=3", "a=-5", "a=0"], "correct": "A", "exp": "Sistem tidak memiliki penyelesaian (sejajar) jika \\(\\dfrac{a}{6}=\\dfrac{4}{-8}\\), sehingga \\(a=\\dfrac{4\\times6}{-8}=-3\\). Perbandingan konstanta \\(\\dfrac{7}{9}\\) berbeda, jadi memang sejajar (bukan berimpit).", "n": 8}, {"tag": "B4 · Variabel Bantu", "tagCls": "tag-b4", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{9}{x}+y=5\\\\[4pt]\\dfrac{3}{x}-y=-1\\end{cases}\\) adalah …", "opts": ["\\(x=3,\\;y=2\\)", "\\(x=2,\\;y=3\\)", "\\(x=3,\\;y=-2\\)", "\\(x=4,\\;y=1\\)"], "correct": "A", "exp": "Jumlahkan kedua persamaan: \\(\\dfrac{12}{x}=4\\Rightarrow x=3\\). Substitusi ke pers. 1: \\(y=5-\\dfrac{9}{3}=2\\).", "n": 9}, {"tag": "B3 · Aplikasi Parkir", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Di tempat parkir terdapat 50 kendaraan roda dua dan roda empat. Total roda 140 buah. Tarif motor Rp2.000 dan mobil Rp5.000. Total pendapatan adalah …", "opts": ["Rp160.000", "Rp190.000", "Rp210.000", "Rp130.000"], "correct": "A", "exp": "Misalkan motor \\(=x\\), mobil \\(=y\\). \\(x+y=50\\) dan \\(2x+4y=140\\Rightarrow x+2y=70\\). Eliminasi: \\(y=20\\), \\(x=30\\). Pendapatan \\(=2.000(30)+5.000(20)=160.000\\).", "n": 10}, {"tag": "B3 · Aplikasi Kerja Sama", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Keran A dan B bersama-sama mengisi bak dalam 15 menit. Laju keran A adalah \\(\\dfrac{3}{4}\\) laju keran B. Waktu keran A untuk mengisi bak sendirian adalah … menit.", "opts": ["35 menit", "15 menit", "30 menit", "45 menit"], "correct": "A", "exp": "Misalkan laju A \\(=p\\), laju B \\(=q\\). \\(p+q=\\dfrac{1}{15}\\) dan \\(p=\\dfrac{3}{4}q\\). Substitusi: \\(q=\\dfrac{4}{15(3+4)}\\), sehingga waktu A sendirian \\(=\\dfrac{1}{p}=35\\) menit.", "n": 11}, {"tag": "B4 · Variabel Bantu Ganda", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{2}{x}+\\dfrac{1}{y}=10\\\\[4pt]\\dfrac{3}{x}-\\dfrac{2}{y}=8\\end{cases}\\) adalah …", "opts": ["\\(x=\\dfrac{1}{4},\\;y=\\dfrac{1}{2}\\)", "\\(x=\\dfrac{1}{2},\\;y=\\dfrac{1}{4}\\)", "\\(x=\\dfrac{1}{2},\\;y=\\dfrac{1}{2}\\)", "\\(x=\\dfrac{1}{4},\\;y=1\\)"], "correct": "A", "exp": "Misalkan \\(u=\\dfrac{1}{x},\\,v=\\dfrac{1}{y}\\), sehingga sistem menjadi \\(2u+v=10\\) dan \\(3u-2v=8\\). Eliminasi/substitusi memberi \\(u=4\\) dan \\(v=2\\), sehingga \\(x=\\dfrac{1}{u}=\\dfrac{1}{4}\\) dan \\(y=\\dfrac{1}{v}=\\dfrac{1}{2}\\).", "n": 12}, {"tag": "B3 · HOTS Aplikasi Kantin", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Kantin menjual menu utama Rp14.000 dan menu pendamping Rp9.000. Pada suatu hari, target penjualan adalah Rp125.000 dengan 4 porsi menu utama sudah terjual. Minimal menu pendamping yang harus terjual agar target terpenuhi adalah …", "opts": ["8 paket", "7 paket", "9 paket", "10 paket"], "correct": "A", "exp": "Sisa target \\(=125.000-4(14.000)=69.000\\). Banyak menu pendamping \\(\\geq\\dfrac{69.000}{9.000}\\approx7.67\\). Karena harus bilangan bulat, minimal \\(=8\\) paket.", "n": 13}, {"tag": "B4 · Kondisi Tepat Satu", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Agar sistem \\(\\begin{cases}kx+6y=9\\\\4x+3y=5\\end{cases}\\) memiliki <strong>tepat satu</strong> penyelesaian, syarat nilai \\(k\\) adalah …", "opts": ["\\(k\\neq8\\)", "\\(k=8\\)", "\\(k\\neq6\\)", "\\(k=0\\)"], "correct": "A", "exp": "Sejajar (tidak tepat satu penyelesaian) jika \\(\\dfrac{k}{4}=\\dfrac{6}{3}\\Rightarrow k=8\\). Agar tepat satu penyelesaian, syaratnya \\(k\\neq8\\).", "n": 14}, {"tag": "B3 · HOTS Aplikasi Umur", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "5 tahun lalu jumlah umur ayah dan ibu 62 tahun. Sekarang umur ayah \\(\\dfrac{5}{4}\\) umur ibu. Umur ayah 4 tahun mendatang adalah … tahun.", "opts": ["44 tahun", "40 tahun", "39 tahun", "48 tahun"], "correct": "A", "exp": "Misalkan umur ayah \\(=A\\), ibu \\(=B\\). \\((A-5)+(B-5)=62\\Rightarrow A+B=72\\). Sekarang \\(A=\\dfrac{5}{4}B\\). Substitusi: \\(B=32\\), \\(A=40\\). 4 tahun mendatang: \\(40+4=44\\) tahun.", "n": 15}]}, "C": {"answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A"}, "questions": [{"tag": "B1 · Eliminasi Dasar", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}3x+2y=21\\\\x-y=2\\end{cases}\\) adalah …", "opts": ["(5, 3)", "(3, 5)", "(5, -3)", "(6, 4)"], "correct": "A", "exp": "Kalikan pers. 2 dengan 2: \\(2x-2y=4\\). Jumlahkan dengan pers. 1: \\(5x=25\\Rightarrow x=5\\). Substitusi: \\(y=x-(2)=3\\).", "n": 1}, {"tag": "B2 · Substitusi Dasar", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+2y=11\\\\3x-y=5\\end{cases}\\) adalah …", "opts": ["(3, 4)", "(2, 5)", "(4, 3)", "(3, 6)"], "correct": "A", "exp": "Dari pers. 1: \\(x=11-2y\\). Substitusi ke pers. 2: \\(3(11-2y)-y=5\\Rightarrow 33-7y=5\\Rightarrow y=4\\). Maka \\(x=11-2(4)=3\\).", "n": 2}, {"tag": "B1 · Eliminasi, Tanda Negatif", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}2x-3y=5\\\\5x+2y=-16\\end{cases}\\) adalah …", "opts": ["(-2, -3)", "(2, 3)", "(-3, -2)", "(-2, -4)"], "correct": "A", "exp": "Kalikan pers. 1 \\(\\times2\\) dan pers. 2 \\(\\times3\\): \\(19x=-38\\Rightarrow x=-2\\). Kalikan pers. 1 \\(\\times5\\) dan pers. 2 \\(\\times2\\): \\(-19y=57\\Rightarrow y=-3\\).", "n": 3}, {"tag": "B2 · Substitusi, Verifikasi", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+3y=-9\\\\2x-y=10\\end{cases}\\) adalah …", "opts": ["(3, -4)", "(3, 4)", "(2, -4)", "(-4, 3)"], "correct": "A", "exp": "Dari pers. 1: \\(x=-9-3y\\). Substitusi ke pers. 2: \\(2(-9-3y)-y=10\\Rightarrow -18-7y=10\\Rightarrow y=-4\\). Maka \\(x=-9-3(-4)=3\\).", "n": 4}, {"tag": "B3 · Aplikasi Harga Tiket", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Suatu gedung pertunjukan menampung 500 penonton. Tiket kelas I Rp6.000 dan kelas II Rp4.000. Total penjualan Rp2.360.000. Jumlah penonton kelas I adalah … orang.", "opts": ["180 orang", "320 orang", "200 orang", "310 orang"], "correct": "A", "exp": "Misalkan kelas I \\(=x\\), kelas II \\(=y\\). \\(x+y=500\\) dan \\(6.000x+4.000y=2.360.000\\). Eliminasi: diperoleh \\(x=180\\) dan \\(y=320\\).", "n": 5}, {"tag": "B3 · Aplikasi Umur", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "5 tahun lalu umur Dedi sama dengan 4 kali umur Fina. 5 tahun kemudian umur Dedi 2 kali umur Fina. Umur Dedi sekarang adalah … tahun.", "opts": ["25 tahun", "10 tahun", "30 tahun", "20 tahun"], "correct": "A", "exp": "Misalkan umur Dedi \\(=A\\), umur Fina \\(=B\\). \\(A-5=4(B-5)\\) dan \\(A+5=2(B+5)\\). Eliminasi kedua persamaan: diperoleh \\(B=10\\) dan \\(A=25\\).", "n": 6}, {"tag": "B3 · Aplikasi Kombinasi Harga", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Kantin menjual roti coklat dan roti keju. Senin: 6 roti coklat + 4 roti keju = Rp78.000. Selasa: 3 roti coklat + 5 roti keju = Rp57.000. Harga satu roti coklat adalah …", "opts": ["Rp9.000", "Rp6.000", "Rp10.000", "Rp5.000"], "correct": "A", "exp": "Misalkan harga roti coklat \\(=x\\) dan roti keju \\(=y\\). \\(6x+4y=78.000\\) dan \\(3x+5y=57.000\\). Eliminasi kedua persamaan menghasilkan \\(x=9.000\\) dan \\(y=6.000\\).", "n": 7}, {"tag": "B1 · Kondisi Sejajar", "tagCls": "tag-b1", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Sistem \\(\\begin{cases}ax+5y=9\\\\4x-10y=6\\end{cases}\\) tidak memiliki penyelesaian jika …", "opts": ["a=-2", "a=2", "a=-4", "a=0"], "correct": "A", "exp": "Sistem tidak memiliki penyelesaian (sejajar) jika \\(\\dfrac{a}{4}=\\dfrac{5}{-10}\\), sehingga \\(a=\\dfrac{5\\times4}{-10}=-2\\). Perbandingan konstanta \\(\\dfrac{9}{6}\\) berbeda, jadi memang sejajar (bukan berimpit).", "n": 8}, {"tag": "B4 · Variabel Bantu", "tagCls": "tag-b4", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{8}{x}+y=5\\\\[4pt]\\dfrac{4}{x}-y=-2\\end{cases}\\) adalah …", "opts": ["\\(x=4,\\;y=3\\)", "\\(x=3,\\;y=4\\)", "\\(x=4,\\;y=-3\\)", "\\(x=5,\\;y=2\\)"], "correct": "A", "exp": "Jumlahkan kedua persamaan: \\(\\dfrac{12}{x}=3\\Rightarrow x=4\\). Substitusi ke pers. 1: \\(y=5-\\dfrac{8}{4}=3\\).", "n": 9}, {"tag": "B3 · Aplikasi Parkir", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Di tempat parkir terdapat 45 kendaraan roda dua dan roda empat. Total roda 130 buah. Tarif motor Rp3.000 dan mobil Rp8.000. Total pendapatan adalah …", "opts": ["Rp235.000", "Rp260.000", "Rp285.000", "Rp205.000"], "correct": "A", "exp": "Misalkan motor \\(=x\\), mobil \\(=y\\). \\(x+y=45\\) dan \\(2x+4y=130\\Rightarrow x+2y=65\\). Eliminasi: \\(y=20\\), \\(x=25\\). Pendapatan \\(=3.000(25)+8.000(20)=235.000\\).", "n": 10}, {"tag": "B3 · Aplikasi Kerja Sama", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Keran A dan B bersama-sama mengisi bak dalam 8 menit. Laju keran A adalah \\(\\dfrac{1}{2}\\) laju keran B. Waktu keran A untuk mengisi bak sendirian adalah … menit.", "opts": ["24 menit", "8 menit", "19 menit", "34 menit"], "correct": "A", "exp": "Misalkan laju A \\(=p\\), laju B \\(=q\\). \\(p+q=\\dfrac{1}{8}\\) dan \\(p=\\dfrac{1}{2}q\\). Substitusi: \\(q=\\dfrac{2}{8(1+2)}\\), sehingga waktu A sendirian \\(=\\dfrac{1}{p}=24\\) menit.", "n": 11}, {"tag": "B4 · Variabel Bantu Ganda", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{1}{x}+\\dfrac{2}{y}=9\\\\[4pt]\\dfrac{3}{x}-\\dfrac{1}{y}=13\\end{cases}\\) adalah …", "opts": ["\\(x=\\dfrac{1}{5},\\;y=\\dfrac{1}{2}\\)", "\\(x=\\dfrac{1}{2},\\;y=\\dfrac{1}{5}\\)", "\\(x=\\dfrac{2}{5},\\;y=\\dfrac{1}{2}\\)", "\\(x=\\dfrac{1}{5},\\;y=1\\)"], "correct": "A", "exp": "Misalkan \\(u=\\dfrac{1}{x},\\,v=\\dfrac{1}{y}\\), sehingga sistem menjadi \\(u+2v=9\\) dan \\(3u-v=13\\). Eliminasi/substitusi memberi \\(u=5\\) dan \\(v=2\\), sehingga \\(x=\\dfrac{1}{u}=\\dfrac{1}{5}\\) dan \\(y=\\dfrac{1}{v}=\\dfrac{1}{2}\\).", "n": 12}, {"tag": "B3 · HOTS Aplikasi Kantin", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Kantin menjual menu utama Rp12.000 dan menu pendamping Rp7.000. Pada suatu hari, target penjualan adalah Rp140.000 dengan 7 porsi menu utama sudah terjual. Minimal menu pendamping yang harus terjual agar target terpenuhi adalah …", "opts": ["8 paket", "7 paket", "9 paket", "10 paket"], "correct": "A", "exp": "Sisa target \\(=140.000-7(12.000)=56.000\\). Banyak menu pendamping \\(\\geq\\dfrac{56.000}{7.000}\\approx8.00\\). Karena harus bilangan bulat, minimal \\(=8\\) paket.", "n": 13}, {"tag": "B4 · Kondisi Tepat Satu", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Agar sistem \\(\\begin{cases}kx+2y=5\\\\6x+4y=11\\end{cases}\\) memiliki <strong>tepat satu</strong> penyelesaian, syarat nilai \\(k\\) adalah …", "opts": ["\\(k\\neq3\\)", "\\(k=3\\)", "\\(k\\neq2\\)", "\\(k=0\\)"], "correct": "A", "exp": "Sejajar (tidak tepat satu penyelesaian) jika \\(\\dfrac{k}{6}=\\dfrac{2}{4}\\Rightarrow k=3\\). Agar tepat satu penyelesaian, syaratnya \\(k\\neq3\\).", "n": 14}, {"tag": "B3 · HOTS Aplikasi Umur", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "3 tahun lalu jumlah umur ayah dan ibu 43 tahun. Sekarang umur ayah \\(\\dfrac{4}{3}\\) umur ibu. Umur ayah 6 tahun mendatang adalah … tahun.", "opts": ["34 tahun", "28 tahun", "29 tahun", "38 tahun"], "correct": "A", "exp": "Misalkan umur ayah \\(=A\\), ibu \\(=B\\). \\((A-3)+(B-3)=43\\Rightarrow A+B=49\\). Sekarang \\(A=\\dfrac{4}{3}B\\). Substitusi: \\(B=21\\), \\(A=28\\). 6 tahun mendatang: \\(28+6=34\\) tahun.", "n": 15}]}, "D": {"answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A"}, "questions": [{"tag": "B1 · Eliminasi Dasar", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}3x+2y=14\\\\x-y=-2\\end{cases}\\) adalah …", "opts": ["(2, 4)", "(4, 2)", "(2, -4)", "(3, 5)"], "correct": "A", "exp": "Kalikan pers. 2 dengan 2: \\(2x-2y=-4\\). Jumlahkan dengan pers. 1: \\(5x=10\\Rightarrow x=2\\). Substitusi: \\(y=x-(-2)=4\\).", "n": 1}, {"tag": "B2 · Substitusi Dasar", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+2y=10\\\\3x-y=16\\end{cases}\\) adalah …", "opts": ["(6, 2)", "(5, 3)", "(2, 6)", "(6, 4)"], "correct": "A", "exp": "Dari pers. 1: \\(x=10-2y\\). Substitusi ke pers. 2: \\(3(10-2y)-y=16\\Rightarrow 30-7y=16\\Rightarrow y=2\\). Maka \\(x=10-2(2)=6\\).", "n": 2}, {"tag": "B1 · Eliminasi, Tanda Negatif", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}2x-3y=-2\\\\5x+2y=-24\\end{cases}\\) adalah …", "opts": ["(-4, -2)", "(4, 2)", "(-2, -4)", "(-4, -3)"], "correct": "A", "exp": "Kalikan pers. 1 \\(\\times2\\) dan pers. 2 \\(\\times3\\): \\(19x=-76\\Rightarrow x=-4\\). Kalikan pers. 1 \\(\\times5\\) dan pers. 2 \\(\\times2\\): \\(-19y=38\\Rightarrow y=-2\\).", "n": 3}, {"tag": "B2 · Substitusi, Verifikasi", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+3y=-3\\\\2x-y=15\\end{cases}\\) adalah …", "opts": ["(6, -3)", "(6, 3)", "(5, -3)", "(-3, 6)"], "correct": "A", "exp": "Dari pers. 1: \\(x=-3-3y\\). Substitusi ke pers. 2: \\(2(-3-3y)-y=15\\Rightarrow -6-7y=15\\Rightarrow y=-3\\). Maka \\(x=-3-3(-3)=6\\).", "n": 4}, {"tag": "B3 · Aplikasi Harga Tiket", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Suatu gedung pertunjukan menampung 350 penonton. Tiket kelas I Rp9.000 dan kelas II Rp5.000. Total penjualan Rp2.230.000. Jumlah penonton kelas I adalah … orang.", "opts": ["120 orang", "230 orang", "140 orang", "220 orang"], "correct": "A", "exp": "Misalkan kelas I \\(=x\\), kelas II \\(=y\\). \\(x+y=350\\) dan \\(9.000x+5.000y=2.230.000\\). Eliminasi: diperoleh \\(x=120\\) dan \\(y=230\\).", "n": 5}, {"tag": "B3 · Aplikasi Umur", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "3 tahun lalu umur Bayu sama dengan 3 kali umur Cinta. 3 tahun kemudian umur Bayu 2 kali umur Cinta. Umur Bayu sekarang adalah … tahun.", "opts": ["21 tahun", "9 tahun", "24 tahun", "18 tahun"], "correct": "A", "exp": "Misalkan umur Bayu \\(=A\\), umur Cinta \\(=B\\). \\(A-3=3(B-3)\\) dan \\(A+3=2(B+3)\\). Eliminasi kedua persamaan: diperoleh \\(B=9\\) dan \\(A=21\\).", "n": 6}, {"tag": "B3 · Aplikasi Kombinasi Harga", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Kantin menjual mie ayam dan mie goreng. Senin: 4 mie ayam + 5 mie goreng = Rp92.000. Selasa: 6 mie ayam + 2 mie goreng = Rp94.000. Harga satu mie ayam adalah …", "opts": ["Rp13.000", "Rp8.000", "Rp14.000", "Rp7.000"], "correct": "A", "exp": "Misalkan harga mie ayam \\(=x\\) dan mie goreng \\(=y\\). \\(4x+5y=92.000\\) dan \\(6x+2y=94.000\\). Eliminasi kedua persamaan menghasilkan \\(x=13.000\\) dan \\(y=8.000\\).", "n": 7}, {"tag": "B1 · Kondisi Sejajar", "tagCls": "tag-b1", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Sistem \\(\\begin{cases}ax+3y=8\\\\10x-6y=5\\end{cases}\\) tidak memiliki penyelesaian jika …", "opts": ["a=-5", "a=5", "a=-7", "a=0"], "correct": "A", "exp": "Sistem tidak memiliki penyelesaian (sejajar) jika \\(\\dfrac{a}{10}=\\dfrac{3}{-6}\\), sehingga \\(a=\\dfrac{3\\times10}{-6}=-5\\). Perbandingan konstanta \\(\\dfrac{8}{5}\\) berbeda, jadi memang sejajar (bukan berimpit).", "n": 8}, {"tag": "B4 · Variabel Bantu", "tagCls": "tag-b4", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{10}{x}+y=3\\\\[4pt]\\dfrac{15}{x}-y=2\\end{cases}\\) adalah …", "opts": ["\\(x=5,\\;y=1\\)", "\\(x=1,\\;y=5\\)", "\\(x=5,\\;y=-1\\)", "\\(x=6,\\;y=0\\)"], "correct": "A", "exp": "Jumlahkan kedua persamaan: \\(\\dfrac{25}{x}=5\\Rightarrow x=5\\). Substitusi ke pers. 1: \\(y=3-\\dfrac{10}{5}=1\\).", "n": 9}, {"tag": "B3 · Aplikasi Parkir", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Di tempat parkir terdapat 70 kendaraan roda dua dan roda empat. Total roda 190 buah. Tarif motor Rp2.000 dan mobil Rp6.000. Total pendapatan adalah …", "opts": ["Rp240.000", "Rp320.000", "Rp290.000", "Rp210.000"], "correct": "A", "exp": "Misalkan motor \\(=x\\), mobil \\(=y\\). \\(x+y=70\\) dan \\(2x+4y=190\\Rightarrow x+2y=95\\). Eliminasi: \\(y=25\\), \\(x=45\\). Pendapatan \\(=2.000(45)+6.000(25)=240.000\\).", "n": 10}, {"tag": "B3 · Aplikasi Kerja Sama", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Keran A dan B bersama-sama mengisi bak dalam 12 menit. Laju keran A adalah \\(\\dfrac{3}{5}\\) laju keran B. Waktu keran A untuk mengisi bak sendirian adalah … menit.", "opts": ["32 menit", "12 menit", "27 menit", "42 menit"], "correct": "A", "exp": "Misalkan laju A \\(=p\\), laju B \\(=q\\). \\(p+q=\\dfrac{1}{12}\\) dan \\(p=\\dfrac{3}{5}q\\). Substitusi: \\(q=\\dfrac{5}{12(3+5)}\\), sehingga waktu A sendirian \\(=\\dfrac{1}{p}=32\\) menit.", "n": 11}, {"tag": "B4 · Variabel Bantu Ganda", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{3}{x}+\\dfrac{1}{y}=10\\\\[4pt]\\dfrac{1}{x}-\\dfrac{2}{y}=-6\\end{cases}\\) adalah …", "opts": ["\\(x=\\dfrac{1}{2},\\;y=\\dfrac{1}{4}\\)", "\\(x=\\dfrac{1}{4},\\;y=\\dfrac{1}{2}\\)", "\\(x=1,\\;y=\\dfrac{1}{4}\\)", "\\(x=\\dfrac{1}{2},\\;y=\\dfrac{1}{2}\\)"], "correct": "A", "exp": "Misalkan \\(u=\\dfrac{1}{x},\\,v=\\dfrac{1}{y}\\), sehingga sistem menjadi \\(3u+v=10\\) dan \\(u-2v=-6\\). Eliminasi/substitusi memberi \\(u=2\\) dan \\(v=4\\), sehingga \\(x=\\dfrac{1}{u}=\\dfrac{1}{2}\\) dan \\(y=\\dfrac{1}{v}=\\dfrac{1}{4}\\).", "n": 12}, {"tag": "B3 · HOTS Aplikasi Kantin", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Kantin menjual menu utama Rp15.000 dan menu pendamping Rp10.000. Pada suatu hari, target penjualan adalah Rp115.000 dengan 3 porsi menu utama sudah terjual. Minimal menu pendamping yang harus terjual agar target terpenuhi adalah …", "opts": ["7 paket", "6 paket", "8 paket", "9 paket"], "correct": "A", "exp": "Sisa target \\(=115.000-3(15.000)=70.000\\). Banyak menu pendamping \\(\\geq\\dfrac{70.000}{10.000}\\approx7.00\\). Karena harus bilangan bulat, minimal \\(=7\\) paket.", "n": 13}, {"tag": "B4 · Kondisi Tepat Satu", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Agar sistem \\(\\begin{cases}kx+3y=7\\\\8x+6y=13\\end{cases}\\) memiliki <strong>tepat satu</strong> penyelesaian, syarat nilai \\(k\\) adalah …", "opts": ["\\(k\\neq4\\)", "\\(k=4\\)", "\\(k\\neq3\\)", "\\(k=0\\)"], "correct": "A", "exp": "Sejajar (tidak tepat satu penyelesaian) jika \\(\\dfrac{k}{8}=\\dfrac{3}{6}\\Rightarrow k=4\\). Agar tepat satu penyelesaian, syaratnya \\(k\\neq4\\).", "n": 14}, {"tag": "B3 · HOTS Aplikasi Umur", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "7 tahun lalu jumlah umur ayah dan ibu 36 tahun. Sekarang umur ayah \\(\\dfrac{3}{2}\\) umur ibu. Umur ayah 2 tahun mendatang adalah … tahun.", "opts": ["32 tahun", "30 tahun", "27 tahun", "36 tahun"], "correct": "A", "exp": "Misalkan umur ayah \\(=A\\), ibu \\(=B\\). \\((A-7)+(B-7)=36\\Rightarrow A+B=50\\). Sekarang \\(A=\\dfrac{3}{2}B\\). Substitusi: \\(B=20\\), \\(A=30\\). 2 tahun mendatang: \\(30+2=32\\) tahun.", "n": 15}]}, "E": {"answers": {"1": "A", "2": "A", "3": "A", "4": "A", "5": "A", "6": "A", "7": "A", "8": "A", "9": "A", "10": "A", "11": "A", "12": "A", "13": "A", "14": "A", "15": "A"}, "questions": [{"tag": "B1 · Eliminasi Dasar", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}3x+2y=20\\\\x-y=5\\end{cases}\\) adalah …", "opts": ["(6, 1)", "(1, 6)", "(6, -1)", "(7, 2)"], "correct": "A", "exp": "Kalikan pers. 2 dengan 2: \\(2x-2y=10\\). Jumlahkan dengan pers. 1: \\(5x=30\\Rightarrow x=6\\). Substitusi: \\(y=x-(5)=1\\).", "n": 1}, {"tag": "B2 · Substitusi Dasar", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+2y=12\\\\3x-y=1\\end{cases}\\) adalah …", "opts": ["(2, 5)", "(1, 6)", "(5, 2)", "(2, 7)"], "correct": "A", "exp": "Dari pers. 1: \\(x=12-2y\\). Substitusi ke pers. 2: \\(3(12-2y)-y=1\\Rightarrow 36-7y=1\\Rightarrow y=5\\). Maka \\(x=12-2(5)=2\\).", "n": 2}, {"tag": "B1 · Eliminasi, Tanda Negatif", "tagCls": "tag-b1", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}2x-3y=4\\\\5x+2y=-9\\end{cases}\\) adalah …", "opts": ["(-1, -2)", "(1, 2)", "(-2, -1)", "(-1, -3)"], "correct": "A", "exp": "Kalikan pers. 1 \\(\\times2\\) dan pers. 2 \\(\\times3\\): \\(19x=-19\\Rightarrow x=-1\\). Kalikan pers. 1 \\(\\times5\\) dan pers. 2 \\(\\times2\\): \\(-19y=38\\Rightarrow y=-2\\).", "n": 3}, {"tag": "B2 · Substitusi, Verifikasi", "tagCls": "tag-b2", "level": "mudah", "diffCls": "diff-mudah", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}x+3y=-13\\\\2x-y=9\\end{cases}\\) adalah …", "opts": ["(2, -5)", "(2, 5)", "(1, -5)", "(-5, 2)"], "correct": "A", "exp": "Dari pers. 1: \\(x=-13-3y\\). Substitusi ke pers. 2: \\(2(-13-3y)-y=9\\Rightarrow -26-7y=9\\Rightarrow y=-5\\). Maka \\(x=-13-3(-5)=2\\).", "n": 4}, {"tag": "B3 · Aplikasi Harga Tiket", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Suatu gedung pertunjukan menampung 200 penonton. Tiket kelas I Rp12.000 dan kelas II Rp8.000. Total penjualan Rp1.840.000. Jumlah penonton kelas I adalah … orang.", "opts": ["60 orang", "140 orang", "80 orang", "130 orang"], "correct": "A", "exp": "Misalkan kelas I \\(=x\\), kelas II \\(=y\\). \\(x+y=200\\) dan \\(12.000x+8.000y=1.840.000\\). Eliminasi: diperoleh \\(x=60\\) dan \\(y=140\\).", "n": 5}, {"tag": "B3 · Aplikasi Umur", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "7 tahun lalu umur Guntur sama dengan 3 kali umur Hilda. 7 tahun kemudian umur Guntur 2 kali umur Hilda. Umur Guntur sekarang adalah … tahun.", "opts": ["49 tahun", "21 tahun", "56 tahun", "42 tahun"], "correct": "A", "exp": "Misalkan umur Guntur \\(=A\\), umur Hilda \\(=B\\). \\(A-7=3(B-7)\\) dan \\(A+7=2(B+7)\\). Eliminasi kedua persamaan: diperoleh \\(B=21\\) dan \\(A=49\\).", "n": 6}, {"tag": "B3 · Aplikasi Kombinasi Harga", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Kantin menjual jus alpukat dan jus mangga. Senin: 5 jus alpukat + 4 jus mangga = Rp64.000. Selasa: 2 jus alpukat + 7 jus mangga = Rp58.000. Harga satu jus alpukat adalah …", "opts": ["Rp8.000", "Rp6.000", "Rp9.000", "Rp5.000"], "correct": "A", "exp": "Misalkan harga jus alpukat \\(=x\\) dan jus mangga \\(=y\\). \\(5x+4y=64.000\\) dan \\(2x+7y=58.000\\). Eliminasi kedua persamaan menghasilkan \\(x=8.000\\) dan \\(y=6.000\\).", "n": 7}, {"tag": "B1 · Kondisi Sejajar", "tagCls": "tag-b1", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Sistem \\(\\begin{cases}ax+9y=11\\\\4x-6y=8\\end{cases}\\) tidak memiliki penyelesaian jika …", "opts": ["a=-6", "a=6", "a=-8", "a=0"], "correct": "A", "exp": "Sistem tidak memiliki penyelesaian (sejajar) jika \\(\\dfrac{a}{4}=\\dfrac{9}{-6}\\), sehingga \\(a=\\dfrac{9\\times4}{-6}=-6\\). Perbandingan konstanta \\(\\dfrac{11}{8}\\) berbeda, jadi memang sejajar (bukan berimpit).", "n": 8}, {"tag": "B4 · Variabel Bantu", "tagCls": "tag-b4", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{12}{x}+y=4\\\\[4pt]\\dfrac{6}{x}-y=-1\\end{cases}\\) adalah …", "opts": ["\\(x=6,\\;y=2\\)", "\\(x=2,\\;y=6\\)", "\\(x=6,\\;y=-2\\)", "\\(x=7,\\;y=1\\)"], "correct": "A", "exp": "Jumlahkan kedua persamaan: \\(\\dfrac{18}{x}=3\\Rightarrow x=6\\). Substitusi ke pers. 1: \\(y=4-\\dfrac{12}{6}=2\\).", "n": 9}, {"tag": "B3 · Aplikasi Parkir", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Di tempat parkir terdapat 55 kendaraan roda dua dan roda empat. Total roda 150 buah. Tarif motor Rp3.000 dan mobil Rp8.000. Total pendapatan adalah …", "opts": ["Rp265.000", "Rp340.000", "Rp315.000", "Rp235.000"], "correct": "A", "exp": "Misalkan motor \\(=x\\), mobil \\(=y\\). \\(x+y=55\\) dan \\(2x+4y=150\\Rightarrow x+2y=75\\). Eliminasi: \\(y=20\\), \\(x=35\\). Pendapatan \\(=3.000(35)+8.000(20)=265.000\\).", "n": 10}, {"tag": "B3 · Aplikasi Kerja Sama", "tagCls": "tag-b3", "level": "sedang", "diffCls": "diff-sedang", "hots": false, "text": "Keran A dan B bersama-sama mengisi bak dalam 20 menit. Laju keran A adalah \\(\\dfrac{4}{5}\\) laju keran B. Waktu keran A untuk mengisi bak sendirian adalah … menit.", "opts": ["45 menit", "20 menit", "40 menit", "55 menit"], "correct": "A", "exp": "Misalkan laju A \\(=p\\), laju B \\(=q\\). \\(p+q=\\dfrac{1}{20}\\) dan \\(p=\\dfrac{4}{5}q\\). Substitusi: \\(q=\\dfrac{5}{20(4+5)}\\), sehingga waktu A sendirian \\(=\\dfrac{1}{p}=45\\) menit.", "n": 11}, {"tag": "B4 · Variabel Bantu Ganda", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Penyelesaian dari sistem \\(\\begin{cases}\\dfrac{2}{x}+\\dfrac{3}{y}=21\\\\[4pt]\\dfrac{1}{x}-\\dfrac{1}{y}=3\\end{cases}\\) adalah …", "opts": ["\\(x=\\dfrac{1}{6},\\;y=\\dfrac{1}{3}\\)", "\\(x=\\dfrac{1}{3},\\;y=\\dfrac{1}{6}\\)", "\\(x=\\dfrac{1}{3},\\;y=\\dfrac{1}{3}\\)", "\\(x=\\dfrac{1}{6},\\;y=\\dfrac{2}{3}\\)"], "correct": "A", "exp": "Misalkan \\(u=\\dfrac{1}{x},\\,v=\\dfrac{1}{y}\\), sehingga sistem menjadi \\(2u+3v=21\\) dan \\(u-v=3\\). Eliminasi/substitusi memberi \\(u=6\\) dan \\(v=3\\), sehingga \\(x=\\dfrac{1}{u}=\\dfrac{1}{6}\\) dan \\(y=\\dfrac{1}{v}=\\dfrac{1}{3}\\).", "n": 12}, {"tag": "B3 · HOTS Aplikasi Kantin", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Kantin menjual menu utama Rp11.000 dan menu pendamping Rp8.000. Pada suatu hari, target penjualan adalah Rp135.000 dengan 6 porsi menu utama sudah terjual. Minimal menu pendamping yang harus terjual agar target terpenuhi adalah …", "opts": ["9 paket", "8 paket", "10 paket", "11 paket"], "correct": "A", "exp": "Sisa target \\(=135.000-6(11.000)=69.000\\). Banyak menu pendamping \\(\\geq\\dfrac{69.000}{8.000}\\approx8.62\\). Karena harus bilangan bulat, minimal \\(=9\\) paket.", "n": 13}, {"tag": "B4 · Kondisi Tepat Satu", "tagCls": "tag-b4", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "Agar sistem \\(\\begin{cases}kx+4y=10\\\\9x+2y=13\\end{cases}\\) memiliki <strong>tepat satu</strong> penyelesaian, syarat nilai \\(k\\) adalah …", "opts": ["\\(k\\neq18\\)", "\\(k=18\\)", "\\(k\\neq4\\)", "\\(k=0\\)"], "correct": "A", "exp": "Sejajar (tidak tepat satu penyelesaian) jika \\(\\dfrac{k}{9}=\\dfrac{4}{2}\\Rightarrow k=18\\). Agar tepat satu penyelesaian, syaratnya \\(k\\neq18\\).", "n": 14}, {"tag": "B3 · HOTS Aplikasi Umur", "tagCls": "tag-b3", "level": "sukar", "diffCls": "diff-sukar", "hots": true, "text": "8 tahun lalu jumlah umur ayah dan ibu 48 tahun. Sekarang umur ayah \\(\\dfrac{9}{7}\\) umur ibu. Umur ayah 10 tahun mendatang adalah … tahun.", "opts": ["46 tahun", "36 tahun", "41 tahun", "50 tahun"], "correct": "A", "exp": "Misalkan umur ayah \\(=A\\), ibu \\(=B\\). \\((A-8)+(B-8)=48\\Rightarrow A+B=64\\). Sekarang \\(A=\\dfrac{9}{7}B\\). Substitusi: \\(B=28\\), \\(A=36\\). 10 tahun mendatang: \\(36+10=46\\) tahun.", "n": 15}]}};
+
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+const state = { answered:0, correct:0, wrong:0, map:{} };
+let studentName='', studentKelas='', selectedPacket='';
+let startTime=null, timerInterval=null, secondsLeft=DURATION;
+let examDone=false;
+let currentPacketData=null;
+
+const SS_STARTED = 'spldv_quiz_started';
+const SS_DONE    = 'spldv_quiz_done';
+
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem(SS_STARTED)==='1' && sessionStorage.getItem(SS_DONE)!=='1') {
+    document.getElementById('identityScreen').style.display = 'none';
+    document.getElementById('invalidScreen').style.display  = 'flex';
+  }
+});
+
+window.addEventListener('beforeunload', e => {
+  if (startTime && !examDone) { e.preventDefault(); e.returnValue=''; }
+});
+
+function selectPacket(p) {
+  selectedPacket = p;
+  PAKET_KEYS.forEach(x => {
+    document.getElementById('pkt'+x).classList.toggle('active', x===p);
+  });
+}
+
+function startExam() {
+  const nama  = document.getElementById('inputNama').value.trim();
+  const kelas = document.getElementById('inputKelas').value;
+  let valid = true;
+
+  if (!selectedPacket) { document.getElementById('errPaket').style.display='block'; valid=false; }
+  else                   document.getElementById('errPaket').style.display='none';
+  if (!nama)  { document.getElementById('errNama').style.display='block'; valid=false; }
+  else          document.getElementById('errNama').style.display='none';
+  if (!kelas) { document.getElementById('errKelas').style.display='block'; valid=false; }
+  else          document.getElementById('errKelas').style.display='none';
+  if (!valid) return;
+
+  studentName  = nama;
+  studentKelas = kelas;
+  startTime    = new Date();
+  currentPacketData = PACKETS[selectedPacket];
+
+  sessionStorage.setItem(SS_STARTED, '1');
+  sessionStorage.removeItem(SS_DONE);
+
+  document.getElementById('chipName').textContent        = nama.split(' ')[0] + ' · ' + kelas;
+  document.getElementById('avatarInitial').textContent   = nama.charAt(0).toUpperCase();
+  document.getElementById('headerPacket').textContent    = 'PAKET ' + selectedPacket;
+  document.getElementById('headerSub').textContent       = EXAM_TITLE_JS + ' · Paket ' + selectedPacket;
+
+  renderQuestions();
+
+  document.getElementById('identityScreen').style.display = 'none';
+  document.getElementById('examScreen').style.display     = 'block';
+  window.scrollTo(0,0);
+  startTimer();
+}
+
+// ──────────────────────────────────────────────────────────────
+// RENDER
+// ──────────────────────────────────────────────────────────────
+function renderQuestions() {
+  const main   = document.getElementById('mainContent');
+  const result = document.getElementById('resultPanel');
+  const pk = currentPacketData;
+
+  pk.questions.forEach(qq => {
+    const card = document.createElement('div');
+    card.className = 'q-card' + (qq.hots ? ' hots-card' : '');
+    card.id = 'qc' + qq.n;
+
+    const optsHtml = qq.opts.map((o, i) => {
+      const lbl = ['A','B','C','D'][i];
+      return `<div class="option" onclick="answer(${qq.n},'${lbl}')"><span class="opt-label">${lbl}</span><span class="opt-text">${o}</span></div>`;
+    }).join('');
+
+    const diffLabel = {mudah:'Mudah', sedang:'Sedang', sukar:'Sukar'}[qq.level] || qq.level;
+
+    card.innerHTML = `
+      <div class="q-top">
+        <div class="q-num" id="qn${qq.n}">${qq.n}</div>
+        <div class="q-text">
+          <span class="topic-tag ${qq.tagCls}">${qq.tag}</span><span class="diff-badge ${qq.diffCls}">${diffLabel}</span><br>
+          ${qq.text}
+        </div>
+      </div>
+      <div class="options">${optsHtml}</div>
+      <div class="explanation" id="exp${qq.n}"></div>
+    `;
+    main.insertBefore(card, result);
+  });
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([main]).catch(err => console.warn('MathJax error:', err));
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// TIMER
+// ──────────────────────────────────────────────────────────────
+function startTimer() {
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    const m = String(Math.floor(secondsLeft/60)).padStart(2,'0');
+    const s = String(secondsLeft%60).padStart(2,'0');
+    const el = document.getElementById('timerVal');
+    el.textContent = m + ':' + s;
+    if      (secondsLeft <= 60)  el.className = 'timer-val danger';
+    else if (secondsLeft <= 180) el.className = 'timer-val warn';
+    else                          el.className = 'timer-val';
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      if (!examDone) document.getElementById('timeModal').classList.add('show');
+    }
+  }, 1000);
+}
+
+function forceSubmit() {
+  document.getElementById('timeModal').classList.remove('show');
+  showResult();
+}
+
+// ──────────────────────────────────────────────────────────────
+// ANSWER
+// ──────────────────────────────────────────────────────────────
+function answer(qNum, opt) {
+  if (state.map[qNum]) return;
+  state.map[qNum] = opt;
+
+  const correct   = currentPacketData.answers[qNum];
+  const isCorrect = opt === correct;
+
+  if (isCorrect) state.correct++; else state.wrong++;
+  state.answered++;
+
+  const numEl = document.getElementById('qn' + qNum);
+  numEl.classList.add(isCorrect ? 'answered-correct' : 'answered-wrong');
+  numEl.textContent = isCorrect ? '✓' : '✗';
+
+  const qObj = currentPacketData.questions.find(x => x.n === qNum);
+  const expText = qObj ? qObj.exp : '';
+
+  const card   = document.getElementById('qc' + qNum);
+  const opts   = card.querySelectorAll('.option');
+  const labels = ['A','B','C','D'];
+  opts.forEach((el, i) => {
+    el.onclick = null;
+    if (labels[i] === opt && !isCorrect) el.classList.add('wrong');
+    if (labels[i] === correct)           el.classList.add(isCorrect ? 'correct' : 'show-correct');
+  });
+
+  const exp = document.getElementById('exp' + qNum);
+  exp.className = 'explanation show ' + (isCorrect ? 'correct' : 'wrong');
+  exp.innerHTML = '<span class="exp-label">' + (isCorrect ? '✓ Benar!' : '✗ Kurang tepat.') + '</span>' + expText;
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([exp]).catch(err => console.warn('MathJax error:', err));
+  }
+
+  updateStats();
+
+  if (state.answered === TOTAL_Q) {
+    document.getElementById('finishBtn').style.display = 'inline-block';
+  }
+}
+
+function updateStats() {
+  document.getElementById('hCorrect').textContent    = state.correct;
+  document.getElementById('hWrong').textContent      = state.wrong;
+  document.getElementById('navAnswered').textContent = state.answered;
+  const pct = Math.round(state.answered / TOTAL_Q * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent    = state.answered + ' dari ' + TOTAL_Q + ' soal dijawab';
+  document.getElementById('progPct').textContent      = pct + '%';
+}
+
+function scrollToNext() {
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) {
+      const el = document.getElementById('qc' + i);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+  }
+}
+
+// ──────────────────────────────────────────────────────────────
+// MODAL KONFIRMASI SUBMIT
+// ──────────────────────────────────────────────────────────────
+function showConfirmModal() {
+  const unanswered = [];
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) unanswered.push(i);
+  }
+
+  document.getElementById('csBengar').textContent = state.correct;
+  document.getElementById('csSalah').textContent  = state.wrong;
+  document.getElementById('csSkip').textContent   = unanswered.length;
+
+  const warnEl = document.getElementById('unansweredWarning');
+  if (unanswered.length > 0) {
+    const listStr = unanswered.slice(0, 15).join(', ') + (unanswered.length > 15 ? ', ...' : '');
+    warnEl.innerHTML = `<strong>⚠ Soal belum dijawab (${unanswered.length} soal):</strong> No. ${listStr}`;
+    warnEl.style.display = 'block';
+  } else {
+    warnEl.style.display = 'none';
+  }
+
+  document.getElementById('confirmModal').classList.add('show');
+}
+
+function closeConfirmModal() {
+  document.getElementById('confirmModal').classList.remove('show');
+}
+
+function confirmSubmit() {
+  document.getElementById('confirmModal').classList.remove('show');
+  showResult();
+}
+
+// ──────────────────────────────────────────────────────────────
+// RESULT
+// ──────────────────────────────────────────────────────────────
+function showResult() {
+  if (examDone) return;
+  examDone = true;
+  clearInterval(timerInterval);
+  sessionStorage.setItem(SS_DONE, '1');
+
+  const endTime  = new Date();
+  const duration = Math.round((endTime - startTime) / 60000);
+  const pct      = Math.round(state.correct / TOTAL_Q * 100);
+
+  document.getElementById('rCorrect').textContent      = state.correct;
+  document.getElementById('rWrong').textContent        = state.wrong;
+  document.getElementById('rPct').textContent          = pct + '%';
+  document.getElementById('resultScore').textContent   = state.correct + '/' + TOTAL_Q;
+  document.getElementById('studentResultInfo').textContent = '👤 ' + studentName + ' · Kelas ' + studentKelas;
+  document.getElementById('packetResultBadge').textContent = '📦 Paket ' + selectedPacket;
+  document.getElementById('durationBadge').textContent = '⏱ Durasi: ' + duration + ' menit';
+  document.getElementById('finishBtn').style.display   = 'none';
+
+  let emoji='😊', label='';
+  if (pct>=90)      { emoji='🏆'; label='Luar biasa! Nilai sempurna!'; }
+  else if (pct>=75) { emoji='🎉'; label='Bagus sekali! Pertahankan prestasimu!'; }
+  else if (pct>=60) { emoji='👍'; label='Cukup baik, terus berlatih!'; }
+  else              { emoji='💪'; label='Jangan menyerah! Yuk pelajari lagi!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultLabel').textContent  = label;
+
+  let wrongList = '', wrongCount = 0;
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (state.map[i] && state.map[i] !== currentPacketData.answers[i]) {
+      wrongCount++;
+      if (wrongCount <= 10) {
+        wrongList += `\n  Soal ${i}: Jawab ${state.map[i]}, Kunci ${currentPacketData.answers[i]}`;
+      }
+    }
+  }
+  if (wrongCount > 10) wrongList += `\n  ...dan ${wrongCount-10} soal lainnya`;
+
+  let skipList = '', skipCount = 0;
+  for (let i = 1; i <= TOTAL_Q; i++) {
+    if (!state.map[i]) {
+      skipCount++;
+      if (skipCount <= 5) skipList += `\n  Soal ${i}: Tidak dijawab`;
+    }
+  }
+  if (skipCount > 5) skipList += `\n  ...dan ${skipCount-5} soal lainnya`;
+
+  const tanggal = endTime.toLocaleDateString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  const jam     = endTime.toLocaleTimeString('id-ID', { hour:'2-digit', minute:'2-digit' });
+
+  let msg = `📊 *HASIL QUIZ SPLDV*\n`;
+  msg += `🏫 SMA IT Insan Sejahtera\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `👤 *Nama:* ${studentName}\n`;
+  msg += `🏫 *Kelas:* ${studentKelas}\n`;
+  msg += `📦 *Paket Soal:* Paket ${selectedPacket}\n`;
+  msg += `📅 *Tanggal:* ${tanggal}\n`;
+  msg += `⏰ *Jam:* ${jam} (durasi ${duration} menit)\n`;
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `✅ *Benar:* ${state.correct} soal\n`;
+  msg += `❌ *Salah:* ${state.wrong} soal\n`;
+  if (skipCount > 0) msg += `➖ *Tidak dijawab:* ${skipCount} soal\n`;
+  msg += `📝 *Dijawab:* ${state.answered}/${TOTAL_Q} soal\n`;
+  msg += `🎯 *Nilai:* *${pct}%* ${emoji}\n`;
+  if (wrongList) {
+    msg += `━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `❌ *Soal yang salah:*${wrongList}\n`;
+  }
+  if (skipList) {
+    msg += `━━━━━━━━━━━━━━━━━━━\n`;
+    msg += `➖ *Soal tidak dijawab:*${skipList}\n`;
+  }
+  msg += `━━━━━━━━━━━━━━━━━━━\n`;
+  msg += `_Dikirim otomatis dari ${EXAM_TITLE_JS} — ${TOTAL_Q} Soal — Paket ${selectedPacket}_`;
+
+  document.getElementById('waBtn').href = 'https://wa.me/' + GURU_WA + '?text=' + encodeURIComponent(msg);
+
+  const panel = document.getElementById('resultPanel');
+  panel.classList.add('show');
+  setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'start' }), 200);
+}
+
+function markSent() {
+  setTimeout(() => { document.getElementById('sentBadge').style.display = 'block'; }, 1000);
+}
+</script>
+</body>
+</html>
