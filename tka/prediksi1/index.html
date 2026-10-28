@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Prediksi TKA Matematika dan Numerasi — Prediksi 1 · SMA IT Insan Sejahtera</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#f5f4f0; --surface:#fff; --surface2:#f0efe9; --border:#e2e0d8; --border2:#c9c7bc;
+  --text:#1a1916; --text2:#6b6962; --text3:#9e9b94;
+  --blue:#2563eb; --blue-bg:#eff6ff; --blue-border:#bfdbfe;
+  --green:#16a34a; --green-bg:#f0fdf4; --green-border:#bbf7d0;
+  --red:#dc2626; --red-bg:#fef2f2; --red-border:#fecaca;
+  --amber:#d97706; --amber-bg:#fffbeb; --amber-border:#fde68a;
+  --purple:#7c3aed; --purple-bg:#f5f3ff; --purple-border:#ddd6fe;
+  --teal:#0d9488; --teal-bg:#f0fdfa; --teal-border:#99f6e4;
+  --slate:#475569; --slate-bg:#f1f5f9; --slate-border:#cbd5e1;
+}
+body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+.katex { font-size:1.05em; }
+.katex-display { margin:.7em 0; overflow-x:auto; overflow-y:hidden; }
+
+/* IDENTITY */
+#identityScreen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px; position:relative; overflow:hidden; }
+#identityScreen::before { content:''; position:absolute; top:-120px; right:-120px; width:400px; height:400px; background:radial-gradient(circle,#bfdbfe 0%,transparent 70%); pointer-events:none; }
+#identityScreen::after { content:''; position:absolute; bottom:-80px; left:-80px; width:300px; height:300px; background:radial-gradient(circle,#bbf7d0 0%,transparent 70%); pointer-events:none; }
+.identity-card { background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:44px 38px; width:100%; max-width:520px; box-shadow:0 8px 40px rgba(0,0,0,.08); position:relative; z-index:1; animation:slideUp .5s cubic-bezier(.4,0,.2,1); }
+@keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+.school-badge { display:flex; align-items:center; gap:12px; margin-bottom:28px; padding-bottom:22px; border-bottom:1px solid var(--border); }
+.school-logo { width:52px; height:52px; border-radius:12px; background:var(--blue-bg); border:1px solid var(--blue-border); display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0; overflow:hidden; }
+.school-logo img { width:100%; height:100%; object-fit:cover; display:block; }
+.school-info h1 { font-size:15px; font-weight:700; line-height:1.3; }
+.school-info p { font-size:12px; color:var(--text2); margin-top:2px; }
+.form-title { font-size:25px; font-weight:800; line-height:1.2; margin-bottom:6px; }
+.form-subtitle { font-size:13px; color:var(--text2); margin-bottom:24px; line-height:1.55; }
+.form-group { margin-bottom:18px; }
+.form-label { display:block; font-size:12px; font-weight:700; color:var(--text2); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px; }
+.form-input, .form-select { width:100%; padding:12px 16px; border:1.5px solid var(--border); border-radius:10px; font-family:inherit; font-size:14px; color:var(--text); background:var(--surface2); transition:all .15s; outline:none; }
+.form-input:focus, .form-select:focus { border-color:var(--blue); background:var(--surface); box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+.form-select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6962' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; cursor:pointer; }
+.exam-info-box { background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:10px; padding:14px 16px; margin-bottom:12px; display:flex; gap:10px; align-items:flex-start; }
+.exam-info-box p { font-size:12px; color:var(--blue); line-height:1.6; }
+.legend-box { background:var(--surface2); border:1px solid var(--border); border-radius:10px; padding:12px 16px; margin-bottom:12px; }
+.legend-box p { font-size:11.5px; color:var(--text2); line-height:1.8; }
+.legend-box strong { color:var(--text); }
+.warn-box { background:var(--red-bg); border:1px solid var(--red-border); border-radius:10px; padding:12px 16px; margin-bottom:24px; display:flex; gap:10px; align-items:flex-start; }
+.warn-box p { font-size:12px; color:var(--red); line-height:1.6; }
+.btn-start { width:100%; padding:14px; background:var(--blue); color:#fff; border:none; border-radius:12px; font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; transition:all .15s; }
+.btn-start:hover { background:#1d4ed8; transform:translateY(-1px); box-shadow:0 6px 20px rgba(37,99,235,.35); }
+.form-error { font-size:12px; color:var(--red); margin-top:5px; display:none; }
+
+/* INVALID */
+#invalidScreen { display:none; min-height:100vh; align-items:center; justify-content:center; padding:24px; }
+.invalid-card { background:var(--surface); border:1px solid var(--red-border); border-radius:24px; padding:56px 40px; max-width:440px; width:100%; text-align:center; box-shadow:0 8px 40px rgba(220,38,38,.1); }
+.invalid-icon { font-size:56px; margin-bottom:16px; }
+.invalid-title { font-size:22px; font-weight:800; color:var(--red); margin-bottom:10px; }
+.invalid-msg { font-size:13px; color:var(--text2); line-height:1.7; }
+
+/* MODAL */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.55); backdrop-filter:blur(4px); z-index:500; display:none; align-items:center; justify-content:center; }
+.modal-overlay.show { display:flex; }
+.modal-box { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:40px 34px; max-width:420px; width:90%; text-align:center; box-shadow:0 24px 60px rgba(0,0,0,.2); animation:slideUp .35s ease; max-height:86vh; overflow-y:auto; }
+.modal-icon { font-size:48px; margin-bottom:14px; }
+.modal-title { font-size:22px; font-weight:800; margin-bottom:8px; }
+.modal-title.red { color:var(--red); } .modal-title.amber { color:var(--amber); }
+.modal-msg { font-size:13px; color:var(--text2); margin-bottom:22px; line-height:1.6; text-align:left; }
+.modal-msg strong { color:var(--text); }
+.confirm-stats { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:20px; }
+.cs-box { background:var(--surface2); border-radius:10px; padding:12px 8px; }
+.cs-val { font-size:22px; font-weight:800; } .cs-lbl { font-size:11px; color:var(--text2); margin-top:2px; }
+.cs-green{color:var(--green)} .cs-red{color:var(--red)} .cs-amber{color:var(--amber)}
+.modal-btns { display:flex; gap:10px; justify-content:center; }
+.btn-modal { padding:12px 22px; border-radius:10px; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer; border:none; transition:all .15s; }
+.btn-modal-primary { background:var(--green); color:#fff; } .btn-modal-primary:hover { background:#15803d; }
+.btn-modal-secondary { background:var(--surface2); color:var(--text); border:1px solid var(--border2); }
+.btn-modal-danger { background:var(--blue); color:#fff; } .btn-modal-danger:hover { background:#1d4ed8; }
+.unanswered-list { background:var(--amber-bg); border:1px solid var(--amber-border); border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:12px; color:var(--amber); text-align:left; line-height:1.7; }
+
+/* EXAM */
+#examScreen { display:none; }
+.site-header { background:var(--surface); border-bottom:1px solid var(--border); padding:0 24px; position:sticky; top:0; z-index:100; }
+.header-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; min-height:56px; gap:12px; flex-wrap:wrap; padding:6px 0; }
+.logo-text { font-size:14px; font-weight:700; line-height:1.2; } .logo-sub { font-size:11px; color:var(--text2); }
+.header-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.fs-btn { width:32px; height:32px; border-radius:999px; border:1px solid var(--border); background:var(--surface2); color:var(--text2); font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.fs-btn:hover { background:var(--blue-bg); border-color:var(--blue-border); color:var(--blue); }
+.timer-wrap { display:flex; align-items:center; gap:6px; background:var(--surface2); border:1px solid var(--border); border-radius:999px; padding:5px 14px; }
+.timer-val { font-family:'DM Mono',monospace; font-size:15px; font-weight:500; min-width:48px; text-align:center; }
+.timer-val.warn { color:var(--amber); } .timer-val.danger { color:var(--red); animation:blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.4} }
+.student-chip { display:flex; align-items:center; gap:8px; background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:999px; padding:4px 12px 4px 6px; font-size:12px; color:var(--blue); font-weight:600; }
+.student-chip-avatar { width:24px; height:24px; background:var(--blue); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; }
+.progress-wrap { background:var(--surface); border-bottom:1px solid var(--border); padding:0 24px 10px; position:sticky; top:56px; z-index:99; }
+.progress-inner { max-width:960px; margin:0 auto; }
+.progress-meta { display:flex; justify-content:space-between; font-size:12px; color:var(--text2); margin:8px 0 6px; }
+.progress-track { height:6px; background:var(--surface2); border-radius:999px; overflow:hidden; border:1px solid var(--border); }
+.progress-fill { height:100%; background:var(--blue); border-radius:999px; transition:width .4s; }
+.main { max-width:960px; margin:0 auto; padding:24px 24px 100px; }
+
+.q-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px; margin-bottom:12px; }
+.q-card:hover { box-shadow:0 2px 12px rgba(0,0,0,.06); }
+.q-top { display:flex; gap:10px; align-items:flex-start; margin-bottom:14px; }
+.q-num { min-width:28px; height:28px; background:var(--surface2); border:1px solid var(--border); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--text2); flex-shrink:0; margin-top:1px; }
+.q-num.answered-neutral { background:var(--slate-bg); border-color:var(--slate-border); color:var(--slate); }
+.q-text { font-size:14px; line-height:1.7; flex:1; min-width:0; }
+.type-tag { display:inline-block; font-size:10px; font-weight:800; padding:2px 8px; border-radius:999px; letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px; }
+.tt-pg { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
+.tt-pgk { background:var(--amber-bg); color:var(--amber); border:1px solid var(--amber-border); }
+.tt-kat { background:var(--teal-bg); color:var(--teal); border:1px solid var(--teal-border); }
+.instr { display:block; font-size:12px; font-weight:700; color:var(--text2); margin-top:6px; }
+.fig { text-align:center; margin:10px 0 4px; } .fig svg { max-width:100%; height:auto; }
+.options { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.options.single { grid-template-columns:1fr; }
+@media (max-width:480px){ .options{grid-template-columns:1fr} }
+.option { display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--border); border-radius:10px; cursor:pointer; background:var(--surface2); transition:all .12s; font-size:13px; user-select:none; }
+.option:hover { background:var(--blue-bg); border-color:var(--blue-border); }
+.option.selected { background:var(--blue-bg); border-color:var(--blue); }
+.option.locked { cursor:default; }
+.opt-label { width:24px; height:24px; border-radius:6px; border:1px solid var(--border2); display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; background:var(--surface); color:var(--text2); }
+.opt-label.pgk-box { border-radius:5px; }
+.option.selected .opt-label { background:var(--blue); border-color:var(--blue); color:#fff; }
+.opt-text { font-size:13px; min-width:0; }
+.pgk-actions { margin-top:12px; display:flex; justify-content:flex-end; }
+.btn-jawab { padding:9px 18px; background:var(--blue); color:#fff; border:none; border-radius:9px; font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer; }
+.btn-jawab:hover { background:#1d4ed8; } .btn-jawab:disabled { background:var(--border2); cursor:not-allowed; }
+.kat-statement { border:1px solid var(--border); border-radius:10px; padding:12px 14px; margin-bottom:8px; background:var(--surface2); }
+.kat-statement-text { font-size:13px; line-height:1.6; margin-bottom:10px; }
+.kat-toggle { display:flex; gap:8px; }
+.kat-btn { flex:1; text-align:center; padding:8px 10px; border:1px solid var(--border2); border-radius:8px; background:var(--surface); font-size:12.5px; font-weight:700; cursor:pointer; color:var(--text2); }
+.kat-btn:hover { border-color:var(--blue); color:var(--blue); }
+.kat-btn.selected { background:var(--blue-bg); border-color:var(--blue); color:var(--blue); }
+.kat-btn.locked { cursor:default; }
+
+.bottom-nav { position:fixed; bottom:0; left:0; right:0; background:rgba(255,255,255,.95); backdrop-filter:blur(8px); border-top:1px solid var(--border); padding:12px 24px; z-index:200; }
+.bottom-nav-inner { max-width:960px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.nav-info { font-size:12px; color:var(--text2); } .nav-info strong { color:var(--text); }
+.btn-row { display:flex; gap:10px; align-items:center; }
+.btn { padding:10px 20px; border-radius:10px; border:1px solid var(--border2); background:var(--surface2); font-family:inherit; font-size:13px; font-weight:600; cursor:pointer; color:var(--text); }
+.btn:hover { background:var(--surface); box-shadow:0 2px 8px rgba(0,0,0,.08); }
+.btn-primary { background:var(--blue); color:#fff; border-color:var(--blue); } .btn-primary:hover { background:#1d4ed8; }
+
+/* ANALYSIS + RESULT */
+.panel { display:none; animation:slideUp .5s ease; }
+.panel.show { display:block; }
+.panel-head { text-align:center; margin-bottom:20px; }
+.panel-head .emoji { font-size:48px; margin-bottom:8px; }
+.panel-head h2 { font-size:24px; font-weight:800; margin-bottom:6px; }
+.panel-head p { font-size:13px; color:var(--text2); line-height:1.6; }
+.chips { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+.chip { display:inline-flex; align-items:center; gap:6px; background:var(--surface2); border:1px solid var(--border); border-radius:999px; padding:6px 14px; font-size:12px; color:var(--text2); font-weight:600; }
+.focus-box { border-radius:14px; padding:16px 18px; margin-bottom:18px; font-size:13.5px; line-height:1.7; }
+.focus-box.bad { background:var(--red-bg); border:1px solid var(--red-border); color:#991b1b; }
+.focus-box.ok { background:var(--green-bg); border:1px solid var(--green-border); color:#166534; }
+.focus-box strong { font-weight:800; }
+.topic-card { background:var(--surface); border:1px solid var(--border); border-left-width:5px; border-radius:14px; padding:16px 18px; margin-bottom:10px; }
+.topic-card.lv-red { border-left-color:var(--red); } .topic-card.lv-amber { border-left-color:var(--amber); }
+.topic-card.lv-blue { border-left-color:var(--blue); } .topic-card.lv-green { border-left-color:var(--green); }
+.tc-top { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+.tc-name { font-size:14.5px; font-weight:700; }
+.tc-badge { font-size:11px; font-weight:800; padding:3px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:.4px; }
+.lv-red .tc-badge { background:var(--red-bg); color:var(--red); border:1px solid var(--red-border); }
+.lv-amber .tc-badge { background:var(--amber-bg); color:var(--amber); border:1px solid var(--amber-border); }
+.lv-blue .tc-badge { background:var(--blue-bg); color:var(--blue); border:1px solid var(--blue-border); }
+.lv-green .tc-badge { background:var(--green-bg); color:var(--green); border:1px solid var(--green-border); }
+.tc-bar { height:10px; background:var(--surface2); border-radius:999px; overflow:hidden; border:1px solid var(--border); }
+.tc-fill { height:100%; border-radius:999px; }
+.lv-red .tc-fill { background:var(--red); } .lv-amber .tc-fill { background:var(--amber); }
+.lv-blue .tc-fill { background:var(--blue); } .lv-green .tc-fill { background:var(--green); }
+.tc-meta { display:flex; justify-content:space-between; font-size:12px; color:var(--text2); margin-top:6px; gap:8px; flex-wrap:wrap; }
+.tc-tip { margin-top:10px; font-size:12.5px; line-height:1.6; background:var(--surface2); border-radius:8px; padding:9px 12px; color:var(--text); }
+.panel-actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:22px; }
+.btn-big { padding:14px 28px; border-radius:12px; background:var(--blue); color:#fff; border:none; font-family:inherit; font-size:15px; font-weight:700; cursor:pointer; }
+.btn-big:hover { background:#1d4ed8; transform:translateY(-1px); box-shadow:0 6px 20px rgba(37,99,235,.35); }
+.score-card { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:36px 28px; text-align:center; margin-bottom:18px; }
+.score-big { font-size:64px; font-weight:800; line-height:1; margin:6px 0; }
+.score-label { font-size:14px; color:var(--text2); margin-bottom:16px; }
+.result-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0 20px; }
+.r-stat { background:var(--surface2); border-radius:12px; padding:14px 10px; }
+.r-stat-val { font-size:26px; font-weight:800; } .r-stat-lbl { font-size:12px; color:var(--text2); margin-top:4px; }
+.green-val{color:var(--green)} .red-val{color:var(--red)} .blue-val{color:var(--blue)}
+.viol { font-size:12px; color:var(--red); background:var(--red-bg); border:1px solid var(--red-border); border-radius:10px; padding:8px 12px; display:inline-block; margin-bottom:12px; }
+.wa-btn { display:inline-flex; align-items:center; gap:10px; padding:14px 28px; background:#25d366; color:#fff; border:none; border-radius:12px; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer; text-decoration:none; transition:all .15s; }
+.wa-btn:hover { background:#1ebe5c; transform:translateY(-1px); box-shadow:0 6px 20px rgba(37,211,102,.35); }
+.wa-icon { width:22px; height:22px; }
+.sent-badge { display:inline-flex; align-items:center; gap:6px; background:var(--green-bg); border:1px solid var(--green-border); border-radius:999px; padding:6px 14px; font-size:12px; color:var(--green); font-weight:600; margin-top:10px; }
+.send-note { font-size:12px; color:var(--amber); background:var(--amber-bg); border:1px solid var(--amber-border); border-radius:10px; padding:10px 14px; margin:0 auto 16px; max-width:460px; line-height:1.6; }
+.review-title { font-size:16px; font-weight:800; margin:26px 0 12px; }
+.rv { background:var(--surface); border:1px solid var(--border); border-radius:12px; margin-bottom:8px; overflow:hidden; }
+.rv summary { list-style:none; cursor:pointer; padding:12px 14px; display:flex; align-items:center; gap:10px; font-size:13px; }
+.rv summary::-webkit-details-marker { display:none; }
+.rv-no { min-width:28px; height:28px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
+.rv.ok .rv-no { background:var(--green-bg); color:var(--green); border:1px solid var(--green-border); }
+.rv.mid .rv-no { background:var(--amber-bg); color:var(--amber); border:1px solid var(--amber-border); }
+.rv.bad .rv-no { background:var(--red-bg); color:var(--red); border:1px solid var(--red-border); }
+.rv-topic { flex:1; font-weight:600; } .rv-score { font-weight:800; font-size:12px; color:var(--text2); }
+.rv-body { padding:0 16px 16px; font-size:13px; line-height:1.7; border-top:1px dashed var(--border2); }
+.rv-body .qtext { margin:12px 0; padding:10px 12px; background:var(--surface2); border-radius:8px; }
+.rv-body .ans { margin:6px 0; } .rv-body .ans b { font-weight:800; }
+.rv-body .exp { margin-top:10px; padding:10px 12px; background:var(--blue-bg); border:1px solid var(--blue-border); border-radius:8px; }
+</style>
+</head>
+<body>
+
+<!-- IDENTITY -->
+<div id="identityScreen">
+  <div class="identity-card">
+    <div class="school-badge">
+      <div class="school-logo"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPUEtv08WqZEeiRoi0cMj-216n-GveWPa3fCq-EnyR_kTw9JqZp8zeAUEMfwVFjDZm9LOdRlncDQfI_w6CnpXHlDPSsLtj8XiktLkl2j4FIg6Zv9uWS4-aZMR5hgmKdWmE2X45A3_wBXO_8F2qAvoxxqqudEDbzd-OwyuP3LjqEXXxdnGTxA6DeW1s40yu/s2111/logo_clean.png" alt="Logo SMA IT Insan Sejahtera"></div>
+      <div class="school-info"><h1>SMA IT Insan Sejahtera</h1><p>Mata Pelajaran Matematika</p></div>
+    </div>
+    <h2 class="form-title">Prediksi TKA<br>Matematika dan Numerasi · Prediksi 1</h2>
+    <p class="form-subtitle">Simulasi TKA kelas 12 dengan materi campuran. Setelah selesai, kamu akan langsung melihat analisis materi yang sudah dan belum kamu kuasai, lalu nilai dan pembahasan. Isi identitasmu dan pastikan data sudah benar.</p>
+    <div class="exam-info-box">
+      <span>📋</span>
+      <p><strong>25 soal</strong>: 15 Pilihan Ganda + 5 Pilihan Ganda Kompleks + 5 Soal Benar/Salah · Waktu: <strong>70 menit</strong> · Hasil dikirim ke guru via WhatsApp.</p>
+    </div>
+    <div class="legend-box">
+      <p><strong>Alur setelah selesai:</strong> ① Analisis penguasaan materi → ② Nilai &amp; pembahasan → ③ Kirim hasil ke guru lewat WhatsApp.</p>
+    </div>
+    <div class="warn-box">
+      <span>⚠️</span>
+      <p>Jika kamu me-<strong>refresh</strong> atau menutup halaman setelah ujian dimulai, ujianmu akan dinyatakan <strong>TIDAK VALID</strong>.</p>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputNama">Nama Lengkap</label>
+      <input type="text" id="inputNama" class="form-input" placeholder="Contoh: Ahmad Fauzan" autocomplete="off">
+      <div class="form-error" id="errNama">Nama tidak boleh kosong.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="inputKelas">Kelas</label>
+      <select id="inputKelas" class="form-select">
+        <option value="">— Pilih Kelas —</option>
+        <option value="12.1">12.1</option>
+        <option value="12.2">12.2</option>
+        <option value="12.3">12.3</option>
+      </select>
+      <div class="form-error" id="errKelas">Kelas harus dipilih.</div>
+    </div>
+    <button class="btn-start" onclick="startExam()">Mulai Ujian →</button>
+  </div>
+</div>
+
+<!-- INVALID -->
+<div id="invalidScreen">
+  <div class="invalid-card">
+    <div class="invalid-icon">🚫</div>
+    <div class="invalid-title">Ujian Tidak Valid</div>
+    <p class="invalid-msg">Halaman di-refresh atau dibuka ulang setelah ujian dimulai.<br><br>Ujianmu <strong style="color:var(--red)">dinyatakan tidak valid</strong> dan tidak dapat dilanjutkan.<br><br>Hubungi gurumu untuk mendapatkan sesi ujian baru.</p>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="timeModal"><div class="modal-box">
+  <div class="modal-icon">⏰</div><div class="modal-title red">Waktu Habis!</div>
+  <p class="modal-msg" style="text-align:center">Waktu 70 menit telah habis. Jawaban yang sudah masuk akan dinilai. Lanjut untuk melihat analisis materimu.</p>
+  <div class="modal-btns"><button class="btn-modal btn-modal-danger" onclick="forceSubmit()">Lihat Analisis →</button></div>
+</div></div>
+
+<div class="modal-overlay" id="tabSwitchModal"><div class="modal-box">
+  <div class="modal-icon">🚨</div><div class="modal-title red">Terdeteksi Membuka Halaman/Tab Lain!</div>
+  <p class="modal-msg" style="text-align:center">Sistem mendeteksi kamu meninggalkan halaman ujian ini. Pelanggaran ini <strong>tercatat otomatis</strong> dan akan dilaporkan ke guru bersama hasil ujianmu.</p>
+  <div class="confirm-stats" style="grid-template-columns:1fr"><div class="cs-box"><div class="cs-val cs-red" id="csTabSwitch">0</div><div class="cs-lbl">🚨 Jumlah Pelanggaran</div></div></div>
+  <div class="modal-btns"><button class="btn-modal btn-modal-danger" onclick="closeTabSwitchModal()">Saya Mengerti, Lanjutkan Ujian</button></div>
+</div></div>
+
+<div class="modal-overlay" id="confirmModal"><div class="modal-box">
+  <div class="modal-icon">📋</div><div class="modal-title amber">Selesaikan Ujian?</div>
+  <p class="modal-msg">Pastikan semua jawabanmu sudah benar. <strong>Jawaban tidak bisa diubah setelah selesai.</strong> Setelah ini kamu langsung melihat analisis materi, nilai, dan pembahasan.</p>
+  <div class="confirm-stats">
+    <div class="cs-box"><div class="cs-val cs-green" id="csTerjawab">0</div><div class="cs-lbl">📝 Terjawab</div></div>
+    <div class="cs-box"><div class="cs-val cs-amber" id="csSkip">0</div><div class="cs-lbl">— Belum Dijawab</div></div>
+  </div>
+  <div class="unanswered-list" id="unansweredWarning" style="display:none"></div>
+  <div class="modal-btns">
+    <button class="btn-modal btn-modal-secondary" onclick="closeConfirmModal()">Kembali ke Soal</button>
+    <button class="btn-modal btn-modal-primary" onclick="confirmSubmit()">Ya, Selesaikan →</button>
+  </div>
+</div></div>
+
+<!-- EXAM -->
+<div id="examScreen">
+  <header class="site-header"><div class="header-inner">
+    <div><div class="logo-text">SMA IT Insan Sejahtera</div><div class="logo-sub">Prediksi TKA Matematika dan Numerasi · Prediksi 1</div></div>
+    <div class="header-right">
+      <div class="timer-wrap"><span>⏱</span><span class="timer-val" id="timerVal">70:00</span></div>
+      <div class="student-chip"><div class="student-chip-avatar" id="avatarInitial">?</div><span id="chipName">Siswa</span></div>
+    </div>
+  </div></header>
+
+  <div class="progress-wrap" id="progressWrap"><div class="progress-inner">
+    <div class="progress-meta"><span id="progLabel">0 dari 25 soal dijawab</span><span id="progPct">0%</span></div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div></div>
+
+  <main class="main" id="mainContent">
+    <div id="questionsWrap"></div>
+
+    <!-- LANGKAH 1: ANALISIS -->
+    <div class="panel" id="analysisPanel">
+      <div class="panel-head">
+        <div class="emoji">📊</div>
+        <h2>Analisis Penguasaan Materi</h2>
+        <p>Ini peta kekuatan dan kelemahanmu berdasarkan jawaban tadi. Materi diurutkan dari yang <strong>paling lemah</strong>.</p>
+        <div class="chips"><span class="chip" id="anInfo">👤 —</span></div>
+      </div>
+      <div id="focusBox"></div>
+      <div id="topicList"></div>
+      <div class="panel-actions"><button class="btn-big" onclick="showScore()">Lihat Nilai &amp; Pembahasan →</button></div>
+    </div>
+
+    <!-- LANGKAH 2: NILAI -->
+    <div class="panel" id="scorePanel">
+      <div class="score-card">
+        <div style="font-size:52px" id="scEmoji">🎉</div>
+        <div class="score-big" id="scScore">0</div>
+        <div class="score-label" id="scLabel">—</div>
+        <div class="chips" style="margin-bottom:4px">
+          <span class="chip" id="scInfo">👤 —</span>
+          <span class="chip" id="scDur">⏱ —</span>
+        </div>
+        <div class="result-grid">
+          <div class="r-stat"><div class="r-stat-val green-val" id="scBenar">0</div><div class="r-stat-lbl">Poin Benar</div></div>
+          <div class="r-stat"><div class="r-stat-val red-val" id="scSalah">0</div><div class="r-stat-lbl">Poin Salah/Kosong</div></div>
+          <div class="r-stat"><div class="r-stat-val blue-val" id="scJawab">0</div><div class="r-stat-lbl">Soal Dijawab</div></div>
+        </div>
+        <div id="scViol"></div>
+        <div class="send-note">📤 <strong>Terakhir, kirim hasilmu ke gurumu</strong> lewat tombol WhatsApp di bawah ini (nilai + analisis materi ikut terkirim).</div>
+        <a id="waBtn" href="#" class="wa-btn" target="_blank" onclick="markSent()">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.108.549 4.084 1.504 5.806L.058 23.5a.5.5 0 0 0 .615.611l5.796-1.517A11.955 11.955 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.52-5.158-1.422l-.369-.222-3.838 1.005 1.023-3.74-.242-.384A9.955 9.955 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Kirim Hasil ke Guru via WhatsApp
+        </a>
+        <div id="sentBadge" style="display:none"><span class="sent-badge">✅ Hasil sudah dikirim ke guru!</span></div>
+      </div>
+      <div class="review-title">📖 Pembahasan per Soal</div>
+      <div id="reviewList"></div>
+      <div class="panel-actions">
+        <button class="btn" onclick="showAnalysisAgain()">← Kembali ke Analisis</button>
+        <button class="btn" onclick="location.reload()">Ulangi dari Awal</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="bottom-nav" id="bottomNav"><div class="bottom-nav-inner">
+    <div class="nav-info">Dijawab: <strong id="navAnswered">0</strong>/25</div>
+    <div class="btn-row">
+      <button class="btn" onclick="scrollToNext()">Soal berikutnya ↓</button>
+      <button class="btn btn-primary" onclick="showConfirmModal()" id="finishBtn" style="display:none">Selesai →</button>
+    </div>
+  </div></div>
+</div>
+
+<script>
+const GURU_WA  = '6281770618414';
+const DURATION = 70 * 60;
+const EXAM_TITLE = 'Prediksi TKA Matematika dan Numerasi — Prediksi 1';
+const R = String.raw;
+
+// ══════════ MATERI (untuk analisis) ══════════
+const TOPICS = [
+  { id:'T1',  name:'Himpunan, Eksponen & Perbandingan', tip:'Ulangi operasi himpunan (gabungan, irisan), sifat-sifat eksponen (ubah ke basis sama), dan perbandingan senilai/berubah.' },
+  { id:'T2',  name:'Fungsi & Komposisi Fungsi',         tip:'Latih menghitung nilai fungsi rasional dan menyusun fungsi komposisi (g∘f): substitusikan f(t) ke dalam g.' },
+  { id:'T3',  name:'Barisan & Deret',                   tip:'Hafalkan Un dan Sn untuk aritmetika & geometri; cari a, b / r dari dua suku yang diketahui, dan ingat suku tengah.' },
+  { id:'T4',  name:'Sistem Pertidaksamaan & Program Linear', tip:'Latih uji titik pada setiap pertidaksamaan (semua harus terpenuhi) dan metode titik pojok untuk nilai optimum.' },
+  { id:'T5',  name:'Bangun Ruang & Dimensi Tiga',       tip:'Pelajari kedudukan bidang pada kubus (sejajar, berpotongan), garis potong dua bidang, serta luas permukaan dan volume bola.' },
+  { id:'T6',  name:'Geometri Bidang & Kongruensi',      tip:'Ulangi syarat kekongruenan segitiga (titik-titik sudut yang bersesuaian), segitiga sama sisi, serta luas segitiga dan perubahannya.' },
+  { id:'T7',  name:'Koordinat, Transformasi & Jarak',   tip:'Latih jarak dua titik (Pythagoras), translasi, dan rumus jarak antara dua garis sejajar.' },
+  { id:'T8',  name:'Trigonometri',                      tip:'Ulangi perbandingan trigonometri sudut lancip dan menyelesaikan persamaan kuadrat dalam cos α (bentuk kuadrat sempurna).' },
+  { id:'T9',  name:'Statistika & Analisis Data',        tip:'Latih membaca diagram garis dengan batas nilai, serta menghitung dan membandingkan modus, median, dan rata-rata.' },
+  { id:'T10', name:'Peluang & Kombinatorika',           tip:'Bedakan permutasi dan kombinasi, dan ingat: kejadian saling bebas → peluang dikalikan.' }
+];
+
+// ══════════ GAMBAR (SVG) ══════════
+function figKoord() {
+  const u=34, x0=-3.5, x1=8.5, y0=-3.5, y1=7.5, W=(x1-x0)*u, H=(y1-y0)*u;
+  const px=x=>(x-x0)*u, py=y=>(y1-y)*u;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" font-family="Plus Jakarta Sans,sans-serif">`;
+  s+=`<rect width="${W}" height="${H}" fill="#fff"/>`;
+  for(let x=-3;x<=8;x++) s+=`<line x1="${px(x)}" y1="0" x2="${px(x)}" y2="${H}" stroke="#d4d4d8" stroke-width="1"/>`;
+  for(let y=-3;y<=7;y++) s+=`<line x1="0" y1="${py(y)}" x2="${W}" y2="${py(y)}" stroke="#d4d4d8" stroke-width="1"/>`;
+  s+=`<line x1="0" y1="${py(0)}" x2="${W}" y2="${py(0)}" stroke="#111" stroke-width="1.6"/>`;
+  s+=`<line x1="${px(0)}" y1="0" x2="${px(0)}" y2="${H}" stroke="#111" stroke-width="1.6"/>`;
+  for(let x=-3;x<=8;x++) if(x!==0) s+=`<text x="${px(x)}" y="${py(0)+13}" font-size="10" text-anchor="middle" fill="#333">${x}</text>`;
+  for(let y=-3;y<=7;y++) if(y!==0) s+=`<text x="${px(0)-6}" y="${py(y)+3.5}" font-size="10" text-anchor="end" fill="#333">${y}</text>`;
+  s+=`<text x="${W-8}" y="${py(0)-8}" font-size="13" font-style="italic" fill="#111">X</text>`;
+  s+=`<text x="${px(0)+8}" y="12" font-size="13" font-style="italic" fill="#111">Y</text>`;
+  [['A',1,2,-10,-8],['B',4,6,0,-10],['C',7,2,0,-10],['D',-2,-2,10,-8]].forEach(p=>{
+    s+=`<circle cx="${px(p[1])}" cy="${py(p[2])}" r="4.5" fill="#111"/>`;
+    s+=`<text x="${px(p[1])+p[3]}" y="${py(p[2])+p[4]}" font-size="14" font-weight="700" text-anchor="middle" fill="#111">${p[0]}</text>`;
+  });
+  return s+`</svg>`;
+}
+function figTaman() {
+  const u=40, W=8*u+40, H=4.8*u+60, ox=20, oy=4.8*u+14;
+  const X=x=>ox+x*u, Y=y=>oy-y*u;
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" font-family="Plus Jakarta Sans,sans-serif">`;
+  s+=`<polygon points="${X(0)},${Y(0)} ${X(8)},${Y(0)} ${X(4)},${Y(4.8)}" fill="#bbf7d0" stroke="#111" stroke-width="2"/>`;
+  s+=`<polygon points="${X(.55)},${Y(.3)} ${X(7.45)},${Y(.3)} ${X(4)},${Y(4.15)}" fill="none" stroke="#166534" stroke-width="1.4" stroke-dasharray="5,4"/>`;
+  [[3.1,2.9],[1.6,.9],[6.6,1.0]].forEach(p=>{ s+=`<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="9" fill="#15803d"/><line x1="${X(p[0])}" y1="${Y(p[1])+9}" x2="${X(p[0])}" y2="${Y(p[1])+20}" stroke="#78350f" stroke-width="2"/>`; });
+  [[5.0,3.1],[2.3,.5],[6.0,.55]].forEach(p=>{ s+=`<ellipse cx="${X(p[0])}" cy="${Y(p[1])}" rx="12" ry="7" fill="#a21caf" opacity=".55"/>`; });
+  s+=`<line x1="${X(4)}" y1="${Y(4.8)}" x2="${X(4)}" y2="${Y(0)}" stroke="#111" stroke-width="1.5" stroke-dasharray="6,4"/>`;
+  s+=`<polyline points="${X(4)},${Y(.3)} ${X(4.3)},${Y(.3)} ${X(4.3)},${Y(0)}" fill="none" stroke="#111" stroke-width="1.2"/>`;
+  s+=`<text x="${X(2.4)}" y="${Y(1.9)}" font-size="13" font-weight="700" text-anchor="middle" fill="#111">TAMAN</text>`;
+  s+=`<text x="${X(2.4)}" y="${Y(1.9)+15}" font-size="12" font-weight="700" text-anchor="middle" fill="#111">Segitiga</text>`;
+  s+=`<text x="${X(4.25)}" y="${Y(1.7)}" font-size="12" fill="#111">Tinggi taman</text><text x="${X(4.25)}" y="${Y(1.7)+15}" font-size="12" fill="#111">= 24 m</text>`;
+  s+=`<line x1="${X(0)}" y1="${Y(0)+26}" x2="${X(8)}" y2="${Y(0)+26}" stroke="#111" stroke-width="1.3"/>`;
+  s+=`<polygon points="${X(0)},${Y(0)+26} ${X(0)+8},${Y(0)+22} ${X(0)+8},${Y(0)+30}" fill="#111"/><polygon points="${X(8)},${Y(0)+26} ${X(8)-8},${Y(0)+22} ${X(8)-8},${Y(0)+30}" fill="#111"/>`;
+  s+=`<rect x="${X(4)-68}" y="${Y(0)+17}" width="136" height="18" fill="#fff"/><text x="${X(4)}" y="${Y(0)+30}" font-size="12.5" text-anchor="middle" fill="#111">Panjang alas = 40 m</text>`;
+  return s+`</svg>`;
+}
+function figGaris() {
+  const W=480, H=300, L=62, Rr=16, T=16, B=44, pw=W-L-Rr, ph=H-T-B;
+  const cats=['Januari','Februari','Maret','April','Mei'], vals=[50,80,64,108,88];
+  const X=i=>L+pw*(i+0.5)/5, Y=v=>T+ph*(1-v/120);
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" font-family="Plus Jakarta Sans,sans-serif"><rect width="${W}" height="${H}" fill="#fff"/>`;
+  for(let v=0;v<=120;v+=10){ s+=`<line x1="${L}" y1="${Y(v)}" x2="${W-Rr}" y2="${Y(v)}" stroke="${v%20===0?'#c9c9cf':'#ececf0'}" stroke-width="1"/>`; if(v%20===0) s+=`<text x="${L-8}" y="${Y(v)+4}" font-size="11" text-anchor="end" fill="#333">${v}</text>`; }
+  s+=`<line x1="${L}" y1="${T}" x2="${L}" y2="${T+ph}" stroke="#111" stroke-width="1.5"/><line x1="${L}" y1="${T+ph}" x2="${W-Rr}" y2="${T+ph}" stroke="#111" stroke-width="1.5"/>`;
+  s+=`<polyline fill="none" stroke="#111" stroke-width="2.2" points="${vals.map((v,i)=>X(i)+','+Y(v)).join(' ')}"/>`;
+  vals.forEach((v,i)=>{ s+=`<circle cx="${X(i)}" cy="${Y(v)}" r="4.5" fill="#111"/>`; s+=`<text x="${X(i)}" y="${T+ph+16}" font-size="11" text-anchor="middle" fill="#333">${cats[i]}</text>`; });
+  s+=`<text x="${L+pw/2}" y="${H-6}" font-size="12" text-anchor="middle" fill="#111">Bulan</text>`;
+  s+=`<text transform="translate(14,${T+ph/2}) rotate(-90)" font-size="12" text-anchor="middle" fill="#111">Volume Sampah (m³)</text>`;
+  return s+`</svg>`;
+}
+
+// ══════════ BANK SOAL ══════════
+// type: pg | pgk | kat ; HTML + LaTeX ($..$ inline, $$..$$ tampil)
+const QUESTIONS = [
+{ n:1, topic:'T1', type:'pg',
+  text:R`Diketahui tiga himpunan bilangan sebagai berikut.<br>$A=\{x \mid -3&lt;x\le 2,\ x \text{ bilangan bulat}\}$<br>$B=\{x \mid 0\le x&lt;5,\ x \text{ bilangan bulat}\}$<br>$C=\{x \text{ bilangan bulat negatif lebih dari } -4\}$<br>Jika $D=A\cup B\cup C$, banyak anggota $D$ adalah ....`,
+  opts:[R`$8$`,R`$7$`,R`$6$`,R`$5$`,R`$4$`], correct:'A',
+  exp:R`$A=\{-2,-1,0,1,2\}$, $B=\{0,1,2,3,4\}$, $C=\{-3,-2,-1\}$. Maka $D=\{-3,-2,-1,0,1,2,3,4\}$, sehingga $n(D)=8$.` },
+{ n:2, topic:'T1', type:'pg',
+  text:R`Seorang peneliti menyederhanakan bentuk berikut untuk menghitung rasio pertumbuhan suatu populasi.$$\frac{27^{x+2}\times 9^{x-1}}{3^{5x}}$$Hasil penyederhanaan bentuk tersebut adalah ....`,
+  opts:[R`$3^{4-x}$`,R`$3^{3-x}$`,R`$3^{x+4}$`,R`$3^{x-4}$`,R`$3^{4}$`], correct:'E',
+  exp:R`$27^{x+2}=3^{3x+6}$ dan $9^{x-1}=3^{2x-2}$. Pembilang $=3^{5x+4}$. Hasil $=\dfrac{3^{5x+4}}{3^{5x}}=3^{4}$.` },
+{ n:3, topic:'T1', type:'pg',
+  text:R`Dalam sebuah kegiatan literasi, perbandingan banyak peserta kelompok A dan kelompok B adalah $3:5$. Setelah kelompok A mendapat tambahan 10 peserta, perbandingan banyak peserta kedua kelompok menjadi $4:5$. Banyak peserta kelompok A sebelum mendapat tambahan adalah ....`,
+  opts:['48 orang','40 orang','30 orang','24 orang','10 orang'], correct:'C',
+  exp:R`Misalkan $A=3k$, $B=5k$. $\dfrac{3k+10}{5k}=\dfrac45\Rightarrow 15k+50=20k\Rightarrow k=10$. Kelompok A semula $=3(10)=30$ orang.` },
+{ n:4, topic:'T2', type:'pg',
+  text:R`Sebuah perusahaan teknologi merilis perangkat gim baru. Tim analis pasar menyatakan ada hubungan antara harga perangkat gim dan jumlah barang yang beredar. Harga perangkat ($f(x)$, dalam jutaan rupiah) dan jumlah barang yang beredar ($x$, dalam ribu unit) dinyatakan dengan $f(x)=\dfrac{2x+24}{x+3}$. Manajemen menargetkan pasar yang lebih luas dengan menurunkan harga jual menjadi Rp3.000.000,00. Berapa banyak perangkat gim yang harus dilepas ke pasar?`,
+  opts:['14','15','14.000','15.000','150.000'], correct:'D',
+  exp:R`$f(x)=3\Rightarrow 2x+24=3(x+3)\Rightarrow x=15$. Satuan $x$ adalah ribu unit, sehingga 15.000 unit.` },
+{ n:5, topic:'T2', type:'kat',
+  text:R`Sebelum memulai pembangunan jalan, sebuah tim membuat perkiraan penurunan struktur tanah akibat penambahan material di atas bidang tanah tersebut. Pemberian material menyebabkan peregangan struktur tanah. Besar regangan struktur tanah dinyatakan dengan $y=f(t)=2t+1$ dengan $t$ menyatakan waktu dalam minggu.<br><br>Peregangan tanah mengakibatkan penurunan struktur tanah dan dinyatakan dengan $g(y)=\dfrac{y}{2+3y}$.<br><br>Selanjutnya, tim tersebut membuat fungsi $h$ yang menyatakan penurunan struktur tanah setelah $t$ minggu.`,
+  statements:[
+    {text:R`Rumus fungsi $h$ adalah $h(t)=\dfrac{2t+1}{6t+5}$.`, correct:'Benar'},
+    {text:R`Rumus fungsi $h$ adalah $h(t)=\dfrac{2t+1}{3t+5}$.`, correct:'Salah'},
+    {text:R`Setelah 4 minggu, penurunan struktur tanah adalah $\dfrac{9}{29}$.`, correct:'Benar'}],
+  exp:R`$h(t)=g(f(t))=\dfrac{2t+1}{2+3(2t+1)}=\dfrac{2t+1}{6t+5}$. Pernyataan 1 benar, 2 salah. $h(4)=\dfrac{9}{29}$, pernyataan 3 benar.` },
+{ n:6, topic:'T3', type:'pg',
+  text:R`Untuk persiapan lomba lari antarsekolah, anggota klub lari menjalani program latihan terjadwal. Jarak tempuh latihan tiap minggu membentuk barisan aritmetika. Pelatih menjadwalkan pada minggu kedua peserta berlari sejauh 5 km dan pada minggu akhir (minggu ke-15) sejauh 18 km. Pelatih ingin menjadikan jarak latihan minggu tepat di urutan tengah program sebagai acuan penyusunan menu latihan tambahan.<br><br>Jarak latihan pada minggu urutan tengah program adalah ....`,
+  opts:['10 km','11 km','12 km','13 km','14 km'], correct:'B',
+  exp:R`$U_2=a+b=5$ dan $U_{15}=a+14b=18$, sehingga $13b=13$, $b=1$, $a=4$. Program 15 minggu, suku tengah $U_8=4+7(1)=11$ km.` },
+{ n:7, topic:'T3', type:'pg',
+  text:R`Sebuah aplikasi pembelajaran memberikan poin kepada murid yang aktif menyelesaikan tantangan mingguan. Banyak poin yang diperoleh tiap minggu membentuk barisan geometri. Data aplikasi menunjukkan bahwa minggu ke-4 Andi memperoleh 320 poin dan minggu ke-7 Andi memperoleh 2.560 poin. Andi akan mendapatkan lencana khusus jika jumlah poin yang diperoleh selama 7 minggu pertama melebihi 5.000 poin.<br><br>Berdasarkan data tersebut, pernyataan yang benar adalah ....`,
+  opts:['Andi tidak memperoleh lencana karena total poinnya 4.480.','Andi tidak memperoleh lencana karena total poinnya 4.960.','Andi memperoleh lencana karena total poinnya 5.080.','Andi memperoleh lencana karena total poinnya 5.120.','Andi memperoleh lencana karena total poinnya 5.760.'], correct:'C',
+  exp:R`$r^3=\dfrac{U_7}{U_4}=\dfrac{2560}{320}=8\Rightarrow r=2$, $a=\dfrac{320}{2^3}=40$. $S_7=\dfrac{40(2^7-1)}{2-1}=5.080>5.000$.` },
+{ n:8, topic:'T4', type:'pgk',
+  text:R`Diberikan sistem pertidaksamaan berikut.$$\begin{cases}x+y+z\ge 15\\2x+y-z\le 12\\x-y+z&gt;4\\x,y,z\ge 0\end{cases}$$Daerah solusi sistem pertidaksamaan tersebut adalah himpunan semua titik $(x,y,z)$ yang memenuhi sistem pertidaksamaan linear tiga variabel (SPtLTV).<br><br>Manakah pasangan titik $(x,y,z)$ berikut yang memenuhi SPtLTV?`,
+  opts:[R`Titik $(4,5,7)$`,R`Titik $(3,6,6)$`,R`Titik $(2,8,5)$`,R`Titik $(5,4,6)$`,R`Titik $(1,7,7)$`], correct:['A','D'],
+  exp:R`Uji tiap titik pada ketiga pertidaksamaan. $(4,5,7)$: $16\ge15$, $6\le12$, $6&gt;4$ → memenuhi. $(5,4,6)$: $15\ge15$, $8\le12$, $7&gt;4$ → memenuhi. $(3,6,6)$: $x-y+z=3$ (tidak $&gt;4$). $(2,8,5)$: $x-y+z=-1$. $(1,7,7)$: $x-y+z=1$. Ketiganya tidak memenuhi.` },
+{ n:9, topic:'T4', type:'pg',
+  text:R`Daerah penyelesaian suatu sistem pertidaksamaan linear dua variabel (SPtLDV) ditentukan oleh pertidaksamaan berikut.$$\begin{cases}x+y\le 14\\2x+3y\le 30\\x+2y\le 18\\x\ge 0,\ y\ge 0\end{cases}$$Nilai fungsi objektif yang akan dioptimalkan adalah $f(x,y)=5x+8y$. Nilai maksimum dari fungsi objektif tersebut adalah ....`,
+  opts:['70','72','74','76','78'], correct:'E',
+  exp:R`Titik pojok: $(0,0)$, $(14,0)$, $(12,2)$, $(6,6)$, $(0,9)$. Nilai $f=5x+8y$: $0,\ 70,\ 76,\ 78,\ 72$. Maksimum $=78$.` },
+{ n:10, topic:'T5', type:'kat',
+  text:R`Diketahui kubus $ABCD.EFGH$ dengan $ABCD$ sebagai alas. Rusuk-rusuk vertikalnya $AE$, $BF$, $CG$, dan $DH$.`,
+  statements:[
+    {text:R`Bidang $ABFE$ sejajar dengan bidang $DCGH$.`, correct:'Benar'},
+    {text:R`Bidang $ABE$ sejajar dengan bidang $BCG$.`, correct:'Salah'},
+    {text:R`Bidang $ACD$ sejajar dengan bidang $EFG$.`, correct:'Benar'}],
+  exp:R`$ABFE$ dan $DCGH$ adalah sisi berhadapan, sehingga sejajar (benar). $ABE$ terletak pada bidang depan $ABFE$ dan $BCG$ pada bidang sisi kanan $BCGF$; keduanya berpotongan tegak lurus (salah). $ACD$ adalah bidang alas $ABCD$ dan $EFG$ adalah bidang atas $EFGH$, sehingga sejajar (benar).` },
+{ n:11, topic:'T5', type:'pg',
+  text:R`Diketahui kubus $ABCD.EFGH$ dengan $ABCD$ sebagai alas. Rusuk-rusuk vertikalnya $AE$, $BF$, $CG$, dan $DH$. Garis hasil perpotongan bidang $ABFE$ dan $BCGF$ adalah ....`,
+  opts:['garis $BF$','garis $BC$','garis $FG$','garis $EF$','garis $CG$'], correct:'A',
+  exp:R`Bidang $ABFE$ dan $BCGF$ bertemu pada rusuk persekutuan $BF$.` },
+{ n:12, topic:'T6', type:'pg',
+  text:R`Diketahui $\triangle ABC$ dan $\triangle DEF$ kongruen. Jika $m\angle A=m\angle E$, dan $m\angle C=m\angle D$, pasangan sisi yang sama panjang adalah ....`,
+  opts:[R`$AC=FD$`,R`$BC=ED$`,R`$AB=DF$`,R`$AB=EF$`,R`$BC=DE$`], correct:'D',
+  exp:R`Kongruen dengan $\angle A=\angle E$ dan $\angle C=\angle D$ berarti $A\leftrightarrow E$, $C\leftrightarrow D$, sehingga $B\leftrightarrow F$. Maka $AB=EF$, $BC=FD$, $AC=ED$.` },
+{ n:13, topic:'T7', type:'pgk',
+  text:R`Perhatikan gambar berikut.`, fig:figKoord,
+  after:R`Manakah pernyataan berikut yang benar?`,
+  opts:[R`Jarak titik $A$ ke titik $B$ adalah 5 satuan.`,R`Jarak titik $A$ ke titik $C$ adalah 6 satuan.`,R`Jarak titik $B$ ke titik $C$ adalah 5 satuan.`,R`Jarak titik $A$ ke titik $D$ adalah 4 satuan.`,R`Jarak titik $C$ ke titik $D$ adalah 9 satuan.`], correct:['A','B','C'],
+  exp:R`Dari gambar: $A(1,2)$, $B(4,6)$, $C(7,2)$, $D(-2,-2)$. $AB=\sqrt{3^2+4^2}=5$; $AC=6$; $BC=\sqrt{3^2+4^2}=5$; $AD=\sqrt{3^2+4^2}=5\ (\ne4)$; $CD=\sqrt{9^2+4^2}=\sqrt{97}\ (\ne9)$. Pernyataan benar: pertama, kedua, dan ketiga.` },
+{ n:14, topic:'T7', type:'pg',
+  text:R`Sebuah titik $P$ pada bidang koordinat ditranslasikan 5 satuan ke kanan dan 3 satuan ke bawah sehingga berpindah ke titik $P'(8,4)$. Koordinat titik $P$ sebelum ditranslasikan adalah ....`,
+  opts:[R`$(3,7)$`,R`$(13,1)$`,R`$(3,1)$`,R`$(13,7)$`,R`$(5,3)$`], correct:'A',
+  exp:R`$P=(8-5,\ 4+3)=(3,7)$.` },
+{ n:15, topic:'T7', type:'kat',
+  text:R`Diketahui dua garis sejajar pada bidang koordinat:<br>$g_1: 3x-4y+12=0$ dan $g_2: 3x-4y-13=0$<br><br>Jarak antara dua garis sejajar dapat ditentukan dengan rumus:$$d=\frac{|c_1-c_2|}{\sqrt{a^2+b^2}}$$untuk dua garis sejajar yang berbentuk $ax+by+c_1=0$ dan $ax+by+c_2=0$.`,
+  statements:[
+    {text:R`Jarak garis $g_1$ dan garis $g_2$ adalah 5 satuan.`, correct:'Benar'},
+    {text:R`Jika konstanta $g_1$ diubah menjadi $-3$, jarak kedua garis menjadi 3 satuan.`, correct:'Salah'},
+    {text:R`Jika konstanta $g_2$ diubah menjadi $-18$, jarak kedua garis menjadi 6 satuan.`, correct:'Benar'}],
+  exp:R`$c_1=12$, $c_2=-13$, $\sqrt{a^2+b^2}=5$. (1) $d=\dfrac{|12+13|}{5}=5$ (benar). (2) $c_1=-3$: $d=\dfrac{|-3+13|}{5}=2\ne3$ (salah). (3) $c_2=-18$: $d=\dfrac{|12+18|}{5}=6$ (benar).` },
+{ n:16, topic:'T6', type:'pg',
+  text:R`Sebuah lahan penelitian berbentuk segitiga sama sisi akan dipagari di sekelilingnya. Dari hasil pengukuran, diketahui bahwa tinggi dari bentuk lahan tersebut adalah $12\sqrt{3}$ meter. Seorang peneliti ingin mengetahui panjang pagar yang harus disiapkan untuk mengelilingi seluruh lahan.<br><br>Panjang pagar yang harus disiapkan adalah ....`,
+  opts:['24 m','36 m','48 m','72 m',R`$36\sqrt{3}$ m`], correct:'D',
+  exp:R`Tinggi segitiga sama sisi $t=\dfrac{s}{2}\sqrt3=12\sqrt3\Rightarrow s=24$. Keliling $=3(24)=72$ m.` },
+{ n:17, topic:'T6', type:'pgk',
+  text:R`Pemerintah sebuah desa akan membuat taman berbentuk segitiga seperti pada gambar berikut.`, fig:figTaman,
+  after:R`Pemerintah desa akan menanami rumput pada taman tersebut. Biaya penanaman rumput adalah Rp30.000,00 per meter persegi.<br><br>Manakah pernyataan berikut yang benar?`,
+  opts:[R`Luas taman adalah $480\ \text{m}^2$.`,R`Total biaya yang diperlukan adalah Rp14.600.000,00.`,R`Jika luas taman diperbesar $25\%$, luas taman menjadi $600\ \text{m}^2$.`,R`Jika alas taman diperbesar menjadi 50 m dan tinggi tetap, luas taman menjadi $800\ \text{m}^2$.`,R`Jika biaya penanaman rumput naik Rp10.000,00, total biaya yang diperlukan kurang dari Rp20.000.000,00.`], correct:['A','C','E'],
+  exp:R`Luas $=\dfrac12\cdot40\cdot24=480\ \text{m}^2$. Biaya $=480\times30.000=\text{Rp}14.400.000$ (bukan 14.600.000). Luas diperbesar $25\%$: $480\times1{,}25=600\ \text{m}^2$. Alas 50 m: $\dfrac12\cdot50\cdot24=600\ \text{m}^2$ (bukan 800). Biaya Rp40.000/m$^2$: $480\times40.000=\text{Rp}19.200.000&lt;\text{Rp}20.000.000$. Pernyataan benar: pertama, ketiga, dan kelima.` },
+{ n:18, topic:'T5', type:'pg',
+  text:R`Desa Asri merupakan desa yang rawan dengan bencana kekeringan saat musim panas. Untuk itu, Desa Asri berencana untuk membuat tangki air berbentuk bola untuk menampung cadangan air bersih. Tangki yang direncanakan memiliki jari-jari 7 meter. Karena adanya keterbatasan anggaran, kapasitas tangki yang dapat dibangun hanya $\dfrac{8}{27}$ dari kapasitas tangki semula. Jika kapasitas tangki menjadi $\dfrac{8}{27}$ kali dari kapasitas semula, jari-jari tangki baru juga menjadi $\dfrac{8}{27}$ kali jari-jari tangki semula. Jari-jari tangki air baru yang dibuat adalah ....`,
+  opts:[R`$\dfrac{56}{27}$ meter`,R`$\dfrac{14}{3}$ meter`,R`$\dfrac{16}{3}$ meter`,R`$\dfrac{21}{4}$ meter`,R`$\dfrac{27}{8}$ meter`], correct:'B',
+  exp:R`Volume bola sebanding dengan $r^3$. $\left(\dfrac{r'}{r}\right)^3=\dfrac{8}{27}\Rightarrow\dfrac{r'}{r}=\dfrac23$. $r'=\dfrac23\times7=\dfrac{14}{3}$ meter.` },
+{ n:19, topic:'T5', type:'kat',
+  text:R`Sebuah tangki air berbentuk bola untuk menampung cadangan air bersih akan dicat ulang. Tangki tersebut memiliki jari-jari 7 meter. Cat yang akan digunakan dijual dengan harga Rp45.000,00 per kaleng. Satu kaleng cat dapat digunakan untuk mengecat seluas 10 meter persegi.<br><br>Tentukan <b>Benar</b> atau <b>Salah</b> untuk setiap pernyataan berikut berdasarkan informasi di atas!`,
+  statements:[
+    {text:R`Luas permukaan tangki air yang akan dicat $616\ \text{m}^2$.`, correct:'Benar'},
+    {text:R`Kaleng cat yang harus dibeli sebanyak 61 kaleng.`, correct:'Salah'},
+    {text:R`Biaya untuk membeli cat sebesar Rp27.900.000,00.`, correct:'Salah'}],
+  exp:R`$L=4\pi r^2=4\cdot\dfrac{22}{7}\cdot49=616\ \text{m}^2$ (benar). Kaleng $=\dfrac{616}{10}=61{,}6\to62$ kaleng (pernyataan 61 salah). Biaya $=62\times45.000=\text{Rp}2.790.000$ (bukan 27.900.000, salah).` },
+{ n:20, topic:'T8', type:'pg',
+  text:R`Diketahui sudut lancip $\alpha$ memenuhi persamaan kuadrat trigonometri $\cos^2\alpha-\dfrac{2}{p}\cos\alpha+\dfrac{1}{p^2}=0$, dengan $p&gt;1$. Nilai $\sec\alpha$ adalah ....`,
+  opts:[R`$p$`,R`$p^2$`,R`$\dfrac{1}{p}$`,R`$\dfrac{p}{\sqrt{p^2-1}}$`,R`$\sqrt{p^2-1}$`], correct:'A',
+  exp:R`$\left(\cos\alpha-\dfrac1p\right)^2=0\Rightarrow\cos\alpha=\dfrac1p\Rightarrow\sec\alpha=p$.` },
+{ n:21, topic:'T9', type:'pgk',
+  text:R`Dalam upaya menjaga kebersihan lingkungan perairan, sebuah tim pemantau lingkungan melakukan pengukuran volume sampah plastik yang menumpuk di muara sungai selama lima bulan pertama pada 2026. Hasil pengamatan tersebut disajikan dalam bentuk diagram garis berikut.`, fig:figGaris,
+  after:R`Berdasarkan hasil pemantauan tersebut, pemerintah daerah menetapkan dua tingkat kondisi lingkungan sebagai berikut.<ul style="margin:6px 0 6px 22px"><li>Kondisi waspada, jika volume sampah plastik lebih dari $60\ \text{m}^3$.</li><li>Kondisi siaga utama, jika volume sampah plastik lebih dari $85\ \text{m}^3$.</li></ul>Pada bulan apa saja volume sampah plastik di muara sungai sudah berada dalam kondisi waspada, tetapi belum mencapai kondisi siaga utama?`,
+  opts:['Januari','Februari','Maret','April','Mei'], correct:['B','C'],
+  exp:R`Kondisi waspada tetapi belum siaga utama berarti $60&lt;V\le85$. Januari ($50$) belum waspada; Februari ($80$) dan Maret ($\approx64$) memenuhi; April ($\approx108$) dan Mei ($\approx88$) sudah di atas 85.` },
+{ n:22, topic:'T10', type:'pg',
+  text:R`Dalam rangka menyambut perayaan Hari Kemerdekaan, sebuah SMA akan memilih tiga murid untuk bertugas dalam tim dokumentasi acara. Tim tersebut terdiri atas tiga posisi berbeda, yaitu 1 orang koordinator dokumentasi, 1 orang fotografer utama, dan 1 orang operator media sosial.<br><br>Panitia telah menyeleksi 7 murid yang memenuhi syarat untuk mengisi ketiga posisi tersebut. Setiap murid hanya boleh menempati satu jabatan karena setiap jabatan memiliki tugas yang berbeda.<br><br>Banyak susunan tim dokumentasi berbeda yang dapat dibentuk oleh panitia adalah ....`,
+  opts:['21 susunan','35 susunan','210 susunan','343 susunan','252 susunan'], correct:'C',
+  exp:R`Banyak susunan $=P(7,3)=7\times6\times5=210$.` },
+{ n:23, topic:'T9', type:'kat',
+  text:R`Dalam rangka mengevaluasi efektivitas program pendampingan belajar, guru matematika membandingkan skor akhir dua kelompok murid kelas XI yang mengikuti program berbeda. Kelompok A mengikuti program pendampingan belajar secara tatap muka, sedangkan kelompok B mengikuti program pendampingan belajar secara daring. Skor matematika dari setiap kelompok sebagai berikut.<br><br>Kelompok A: 65, 80, 75, 88, 70, 84, 80, 92, 80, 86<br>Kelompok B: 72, 75, 60, 78, 70, 85, 75, 65, 80, 76<br><br>Berdasarkan data tersebut, tentukan <b>Benar</b> atau <b>Salah</b> untuk setiap pernyataan berikut!`,
+  statements:[
+    {text:'Skor yang paling sering diperoleh oleh murid pada kelompok B lebih tinggi daripada nilai yang paling sering diperoleh oleh murid pada kelompok A.', correct:'Salah'},
+    {text:'Secara umum, skor murid pada kelompok A cenderung lebih tinggi dibandingkan kelompok B.', correct:'Benar'},
+    {text:'Rata-rata skor kelompok A lebih tinggi daripada rata-rata skor kelompok B.', correct:'Benar'}],
+  exp:R`Modus A $=80$, modus B $=75$, sehingga pernyataan 1 salah. Rata-rata A $=\dfrac{800}{10}=80$; rata-rata B $=\dfrac{736}{10}=73{,}6$. Median A $=80$, median B $=75$. Pernyataan 2 dan 3 benar.` },
+{ n:24, topic:'T10', type:'pg',
+  text:R`Sebuah wadah berisi 4 bola merah, 2 bola biru, 3 bola hijau, dan 1 bola kuning. Dua buah bola diambil secara acak tanpa melihat ke dalam wadah. Peluang terambil dua bola merah adalah ....`,
+  opts:[R`$\dfrac{1}{2}$`,R`$\dfrac{2}{5}$`,R`$\dfrac{1}{5}$`,R`$\dfrac{2}{15}$`,R`$\dfrac{4}{45}$`], correct:'D',
+  exp:R`Total bola $=10$. $P=\dfrac{C(4,2)}{C(10,2)}=\dfrac{6}{45}=\dfrac{2}{15}$.` },
+{ n:25, topic:'T10', type:'pgk',
+  text:R`Sekelompok anak mengadakan permainan keberuntungan. Setiap peserta diminta melakukan dua kegiatan berikut secara berurutan.<ol style="margin:6px 0 6px 24px;list-style:lower-roman"><li>Melempar sebuah koin seimbang satu kali.</li><li>Mengambil satu bola dari sebuah kotak yang berisi 4 bola merah, 3 bola biru, dan 3 bola hijau.</li></ol>Manakah pernyataan berikut yang benar terkait peluang kejadian majemuk yang dapat terjadi pada permainan tersebut?`,
+  opts:[R`Peluang muncul gambar dan terambil bola merah adalah $\dfrac{1}{5}$.`,R`Peluang muncul angka dan terambil bola biru adalah $\dfrac{3}{20}$.`,R`Peluang muncul gambar dan terambil bola hijau adalah $\dfrac{3}{10}$.`,R`Peluang muncul angka dan terambil bola merah adalah $\dfrac{1}{4}$.`,R`Peluang muncul gambar dan terambil bola biru adalah $\dfrac{3}{20}$.`], correct:['A','B','E'],
+  exp:R`Koin dan pengambilan bola saling bebas, sehingga peluangnya dikalikan. Gambar &amp; merah: $\frac12\cdot\frac{4}{10}=\frac15$ (benar). Angka &amp; biru: $\frac12\cdot\frac{3}{10}=\frac{3}{20}$ (benar). Gambar &amp; hijau: $\frac{3}{20}\ne\frac{3}{10}$ (salah). Angka &amp; merah: $\frac15\ne\frac14$ (salah). Gambar &amp; biru: $\frac{3}{20}$ (benar).` }
+];
+
+// ══════════ STATE ══════════
+const state = { answeredQ:0, totalQ:QUESTIONS.length, map:{} };
+let studentName='', studentKelas='';
+let startTime=null, timerInterval=null, secondsLeft=DURATION;
+let examDone=false, tabSwitchViolations=0, durationMin=0, endTime=null, RES=null;
+
+const SS_STARTED='tka12_prediksi1_started', SS_DONE='tka12_prediksi1_done';
+
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem(SS_STARTED)==='1' && sessionStorage.getItem(SS_DONE)!=='1') {
+    document.getElementById('identityScreen').style.display='none';
+    document.getElementById('invalidScreen').style.display='flex';
+  }
+});
+window.addEventListener('beforeunload', e => { if (startTime && !examDone) { e.preventDefault(); e.returnValue=''; } });
+
+function typeset(el) {
+  if (window.renderMathInElement) {
+    try { renderMathInElement(el, { delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}], throwOnError:false }); } catch(e) {}
+  }
+}
+
+function startExam() {
+  const nama=document.getElementById('inputNama').value.trim();
+  const kelas=document.getElementById('inputKelas').value;
+  let valid=true;
+  if(!nama){ document.getElementById('errNama').style.display='block'; valid=false; } else document.getElementById('errNama').style.display='none';
+  if(!kelas){ document.getElementById('errKelas').style.display='block'; valid=false; } else document.getElementById('errKelas').style.display='none';
+  if(!valid) return;
+
+  unlockAlarmAudio();
+  studentName=nama; studentKelas=kelas; startTime=new Date();
+  sessionStorage.setItem(SS_STARTED,'1'); sessionStorage.removeItem(SS_DONE);
+
+  document.getElementById('chipName').textContent=nama.split(' ')[0]+' · '+kelas;
+  document.getElementById('avatarInitial').textContent=nama.charAt(0).toUpperCase();
+
+  renderQuestions();
+  document.getElementById('identityScreen').style.display='none';
+  document.getElementById('examScreen').style.display='block';
+  window.scrollTo(0,0);
+  startTimer();
+}
+
+// ── ALARM PINDAH TAB ──
+let alarmAudioCtx=null;
+function unlockAlarmAudio(){ try{ if(!alarmAudioCtx){ const C=window.AudioContext||window.webkitAudioContext; alarmAudioCtx=new C(); } if(alarmAudioCtx.state==='suspended') alarmAudioCtx.resume(); const o=alarmAudioCtx.createOscillator(), g=alarmAudioCtx.createGain(); g.gain.value=0.00001; o.connect(g); g.connect(alarmAudioCtx.destination); o.start(); o.stop(alarmAudioCtx.currentTime+0.05);}catch(e){} }
+function playAlarmSound(){ try{ if(!alarmAudioCtx) unlockAlarmAudio(); if(alarmAudioCtx.state==='suspended') alarmAudioCtx.resume(); const ctx=alarmAudioCtx; [0,.35,.7].forEach(t=>{ const o=ctx.createOscillator(), g=ctx.createGain(); o.type='square'; o.frequency.value=880; g.gain.setValueAtTime(.0001,ctx.currentTime+t); g.gain.exponentialRampToValueAtTime(.35,ctx.currentTime+t+.02); g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+t+.28); o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime+t); o.stop(ctx.currentTime+t+.3); }); }catch(e){} }
+function closeTabSwitchModal(){ document.getElementById('tabSwitchModal').classList.remove('show'); }
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){
+    if(!startTime||examDone) return;
+    if(document.getElementById('tabSwitchModal').classList.contains('show')) return;
+    tabSwitchViolations++; playAlarmSound();
+  } else if(tabSwitchViolations>0&&startTime&&!examDone){
+    document.getElementById('csTabSwitch').textContent=tabSwitchViolations;
+    document.getElementById('tabSwitchModal').classList.add('show');
+    playAlarmSound();
+  }
+});
+
+// ── RENDER SOAL ──
+const TYPE_TAG = { pg:['tt-pg','Pilihan Ganda'], pgk:['tt-pgk','Pilihan Ganda Kompleks'], kat:['tt-kat','Benar / Salah'] };
+function topicName(id){ return TOPICS.find(t=>t.id===id).name; }
+
+function qHeader(q){
+  const tg=TYPE_TAG[q.type];
+  let instr='';
+  if(q.type==='pgk') instr='<span class="instr">Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</span>';
+  const fig=q.fig?`<div class="fig">${q.fig()}</div>`:'';
+  const after=q.after?`<div>${q.after}</div>`:'';
+  return `<div class="q-top"><div class="q-num" id="qn${q.n}">${q.n}</div>
+    <div class="q-text"><span class="type-tag ${tg[0]}">${tg[1]}</span><br>${q.text}${fig}${after}${instr}</div></div>`;
+}
+function renderQuestions(){
+  const wrap=document.getElementById('questionsWrap'); wrap.innerHTML='';
+  QUESTIONS.forEach(q=>{
+    const card=document.createElement('div'); card.className='q-card'; card.id='qc'+q.n;
+    if(q.type==='pg'){
+      const L=['A','B','C','D','E'];
+      card.innerHTML=qHeader(q)+`<div class="options">`+q.opts.map((o,i)=>`<div class="option" onclick="answerPG(${q.n},'${L[i]}')"><span class="opt-label">${L[i]}</span><span class="opt-text">${o}</span></div>`).join('')+`</div>`;
+    } else if(q.type==='pgk'){
+      const L=['A','B','C','D','E'];
+      card.innerHTML=qHeader(q)+`<div class="options single">`+q.opts.map((o,i)=>`<div class="option" id="pgkopt${q.n}_${L[i]}" onclick="togglePGK(${q.n},'${L[i]}')"><span class="opt-label pgk-box">${L[i]}</span><span class="opt-text">${o}</span></div>`).join('')+`</div><div class="pgk-actions"><button class="btn-jawab" id="btnjawab${q.n}" onclick="submitPGK(${q.n})">Jawab</button></div>`;
+    } else {
+      card.innerHTML=qHeader(q)+`<div>`+q.statements.map((s,i)=>`<div class="kat-statement"><div class="kat-statement-text"><strong>${i+1}.</strong> ${s.text}</div><div class="kat-toggle"><div class="kat-btn" id="katbtn${q.n}_${i}_Benar" onclick="answerKat(${q.n},${i},'Benar')">Benar</div><div class="kat-btn" id="katbtn${q.n}_${i}_Salah" onclick="answerKat(${q.n},${i},'Salah')">Salah</div></div></div>`).join('')+`</div>`;
+    }
+    wrap.appendChild(card);
+  });
+  typeset(wrap);
+  updateStats();
+}
+
+// ── TIMER ──
+function startTimer(){
+  timerInterval=setInterval(()=>{
+    secondsLeft--;
+    const m=String(Math.floor(secondsLeft/60)).padStart(2,'0'), s=String(secondsLeft%60).padStart(2,'0');
+    const el=document.getElementById('timerVal'); el.textContent=m+':'+s;
+    el.className = secondsLeft<=60?'timer-val danger':(secondsLeft<=300?'timer-val warn':'timer-val');
+    if(secondsLeft<=0){ clearInterval(timerInterval); if(!examDone) document.getElementById('timeModal').classList.add('show'); }
+  },1000);
+}
+function forceSubmit(){ document.getElementById('timeModal').classList.remove('show'); finishExam(); }
+
+// ── JAWAB ──
+function setNumDone(n){ const el=document.getElementById('qn'+n); el.classList.add('answered-neutral'); el.textContent='✓'; }
+function answerPG(n,opt){
+  if(state.map[n]) return;
+  state.map[n]={type:'pg',opt}; state.answeredQ++; setNumDone(n);
+  const L=['A','B','C','D','E'];
+  document.getElementById('qc'+n).querySelectorAll('.option').forEach((el,i)=>{ el.onclick=null; el.classList.add('locked'); if(L[i]===opt) el.classList.add('selected'); });
+  updateStats();
+}
+const pgkSel={};
+function togglePGK(n,l){
+  if(state.map[n]) return;
+  if(!pgkSel[n]) pgkSel[n]=new Set();
+  const el=document.getElementById('pgkopt'+n+'_'+l);
+  if(pgkSel[n].has(l)){ pgkSel[n].delete(l); el.classList.remove('selected'); } else { pgkSel[n].add(l); el.classList.add('selected'); }
+}
+function submitPGK(n){
+  if(state.map[n]) return;
+  const sel=pgkSel[n]?Array.from(pgkSel[n]).sort():[];
+  if(!sel.length) return;
+  state.map[n]={type:'pgk',opts:sel}; state.answeredQ++; setNumDone(n);
+  document.getElementById('qc'+n).querySelectorAll('.option').forEach(el=>{ el.onclick=null; el.classList.add('locked'); });
+  const b=document.getElementById('btnjawab'+n); if(b){ b.disabled=true; b.textContent='Terkunci'; }
+  updateStats();
+}
+function answerKat(n,idx,lbl){
+  const q=QUESTIONS.find(x=>x.n===n);
+  if(!state.map[n]) state.map[n]={type:'kat',answers:{}};
+  const rec=state.map[n];
+  if(rec.answers[idx]!==undefined) return;
+  rec.answers[idx]=lbl;
+  ['Benar','Salah'].forEach(l=>{ const el=document.getElementById('katbtn'+n+'_'+idx+'_'+l); el.onclick=null; el.classList.add('locked'); if(l===lbl) el.classList.add('selected'); });
+  if(Object.keys(rec.answers).length===q.statements.length){ state.answeredQ++; setNumDone(n); updateStats(); }
+}
+
+function updateStats(){
+  document.getElementById('navAnswered').textContent=state.answeredQ;
+  const pct=Math.round(state.answeredQ/state.totalQ*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progLabel').textContent=state.answeredQ+' dari '+state.totalQ+' soal dijawab';
+  document.getElementById('progPct').textContent=pct+'%';
+  if(state.answeredQ===state.totalQ) document.getElementById('finishBtn').style.display='inline-block';
+}
+function isDone(q){
+  const rec=state.map[q.n]; if(!rec) return false;
+  if(rec.type==='kat') return Object.keys(rec.answers).length===q.statements.length;
+  return true;
+}
+function scrollToNext(){
+  for(const q of QUESTIONS){ if(!isDone(q)){ const el=document.getElementById('qc'+q.n); if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); return; } } }
+}
+
+// ── KONFIRMASI ──
+function showConfirmModal(){
+  const un=QUESTIONS.filter(q=>!isDone(q)).map(q=>q.n);
+  document.getElementById('csTerjawab').textContent=state.answeredQ;
+  document.getElementById('csSkip').textContent=un.length;
+  const w=document.getElementById('unansweredWarning');
+  if(un.length){ w.innerHTML='<strong>⚠ Soal belum lengkap dijawab ('+un.length+' soal):</strong> No. '+un.slice(0,15).join(', ')+(un.length>15?', ...':''); w.style.display='block'; } else w.style.display='none';
+  document.getElementById('confirmModal').classList.add('show');
+}
+function closeConfirmModal(){ document.getElementById('confirmModal').classList.remove('show'); }
+function confirmSubmit(){ document.getElementById('confirmModal').classList.remove('show'); finishExam(); }
+
+// ══════════ PENILAIAN & ANALISIS ══════════
+function gradeAll(){
+  const res={byQ:{},byTopic:{},earned:0,max:0};
+  TOPICS.forEach(t=>res.byTopic[t.id]={earned:0,max:0,wrong:[]});
+  QUESTIONS.forEach(q=>{
+    const rec=state.map[q.n]; let e=0,m=0;
+    if(q.type==='pg'){ m=1; e=(rec&&rec.opt===q.correct)?1:0; }
+    else if(q.type==='pgk'){ m=1; if(rec){ e=([...rec.opts].sort().join()===[...q.correct].sort().join())?1:0; } }
+    else { m=q.statements.length; q.statements.forEach((s,i)=>{ if(rec&&rec.answers[i]===s.correct) e++; }); }
+    res.byQ[q.n]={e,m};
+    const t=res.byTopic[q.topic]; t.earned+=e; t.max+=m; if(e<m) t.wrong.push(q.n);
+    res.earned+=e; res.max+=m;
+  });
+  return res;
+}
+function level(p){
+  if(p>=80) return {cls:'lv-green',lbl:'Sudah Menguasai',short:'Menguasai',ico:'✅'};
+  if(p>=60) return {cls:'lv-blue',lbl:'Cukup Baik',short:'Cukup',ico:'🔵'};
+  if(p>=40) return {cls:'lv-amber',lbl:'Perlu Diperkuat',short:'Perlu Diperkuat',ico:'🟠'};
+  return {cls:'lv-red',lbl:'Belum Menguasai',short:'Belum Menguasai',ico:'🔴'};
+}
+
+function finishExam(){
+  if(examDone) return;
+  examDone=true; clearInterval(timerInterval);
+  sessionStorage.setItem(SS_DONE,'1');
+  endTime=new Date(); durationMin=Math.max(1,Math.round((endTime-startTime)/60000));
+  RES=gradeAll();
+
+  document.getElementById('questionsWrap').style.display='none';
+  document.getElementById('progressWrap').style.display='none';
+  document.getElementById('bottomNav').style.display='none';
+
+  buildAnalysis(); buildScore(); buildWA();
+  document.getElementById('analysisPanel').classList.add('show');
+  typeset(document.getElementById('mainContent'));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function topicRows(){
+  return TOPICS.map(t=>{
+    const r=RES.byTopic[t.id]; const pct=r.max?Math.round(r.earned/r.max*100):0;
+    return {t,r,pct,lv:level(pct)};
+  }).sort((a,b)=>a.pct-b.pct || a.t.name.localeCompare(b.t.name));
+}
+
+function buildAnalysis(){
+  document.getElementById('anInfo').textContent='👤 '+studentName+' · Kelas '+studentKelas;
+  const rows=topicRows();
+  const weak=rows.filter(x=>x.pct<60);
+  const fb=document.getElementById('focusBox');
+  if(weak.length){
+    fb.className='focus-box bad';
+    fb.innerHTML='🎯 <strong>Fokus belajarmu:</strong> '+weak.map(x=>x.t.name+' ('+x.pct+'%)').join(', ')+'.<br>Materi di atas paling perlu kamu ulangi sebelum TKA. Mulailah dari yang persentasenya paling rendah.';
+  } else {
+    fb.className='focus-box ok';
+    fb.innerHTML='🎉 <strong>Semua materi berada di level cukup baik atau menguasai!</strong> Pertahankan, dan latih lagi materi yang belum 80% agar semakin mantap.';
+  }
+  document.getElementById('topicList').innerHTML=rows.map(x=>{
+    const wrongTxt=x.r.wrong.length?'Soal perlu dicek: No. '+x.r.wrong.join(', '):'Semua soal materi ini benar';
+    const tip=x.pct<80?`<div class="tc-tip">💡 <strong>Yang perlu diulang:</strong> ${x.t.tip}</div>`:'';
+    return `<div class="topic-card ${x.lv.cls}">
+      <div class="tc-top"><span class="tc-name">${x.t.name}</span><span class="tc-badge">${x.lv.lbl}</span></div>
+      <div class="tc-bar"><div class="tc-fill" style="width:${x.pct}%"></div></div>
+      <div class="tc-meta"><span><strong>${x.pct}%</strong> · ${x.r.earned}/${x.r.max} poin</span><span>${wrongTxt}</span></div>
+      ${tip}</div>`;
+  }).join('');
+}
+
+function fmtAns(q,rec){
+  if(q.type==='pg') return rec?rec.opt:'—';
+  if(q.type==='pgk') return rec?rec.opts.join(', '):'—';
+  return q.statements.map((s,i)=>(rec&&rec.answers[i])||'—').join(' – ');
+}
+function fmtKey(q){
+  if(q.type==='pg') return q.correct;
+  if(q.type==='pgk') return q.correct.join(', ');
+  return q.statements.map(s=>s.correct).join(' – ');
+}
+
+function buildScore(){
+  const pct=Math.round(RES.earned/RES.max*100);
+  let emoji='💪', label='Jangan menyerah! Yuk pelajari materi yang masih lemah.';
+  if(pct>=90){ emoji='🏆'; label='Luar biasa! Pertahankan!'; }
+  else if(pct>=75){ emoji='🎉'; label='Bagus sekali! Tinggal sedikit lagi.'; }
+  else if(pct>=60){ emoji='👍'; label='Cukup baik, terus berlatih!'; }
+  document.getElementById('scEmoji').textContent=emoji;
+  document.getElementById('scScore').textContent=pct;
+  document.getElementById('scLabel').textContent=label+' (Nilai dari 100)';
+  document.getElementById('scInfo').textContent='👤 '+studentName+' · Kelas '+studentKelas;
+  document.getElementById('scDur').textContent='⏱ Durasi: '+durationMin+' menit';
+  document.getElementById('scBenar').textContent=RES.earned;
+  document.getElementById('scSalah').textContent=RES.max-RES.earned;
+  document.getElementById('scJawab').textContent=state.answeredQ+'/'+state.totalQ;
+  document.getElementById('scViol').innerHTML=tabSwitchViolations>0?`<div class="viol">🚨 Pelanggaran pindah tab/halaman tercatat: ${tabSwitchViolations} kali (ikut dilaporkan ke guru)</div>`:'';
+
+  document.getElementById('reviewList').innerHTML=QUESTIONS.map(q=>{
+    const r=RES.byQ[q.n], rec=state.map[q.n];
+    const st=r.e===r.m?'ok':(r.e>0?'mid':'bad');
+    const ico=st==='ok'?'✅':(st==='mid'?'🟡':'❌');
+    const fig=q.fig?`<div class="fig">${q.fig()}</div>`:'';
+    const after=q.after?`<div>${q.after}</div>`:'';
+    const opts=(q.opts&&q.type!=='kat')?`<div style="margin-top:8px">`+q.opts.map((o,i)=>`<div><b>${'ABCDE'[i]}.</b> ${o}</div>`).join('')+`</div>`:'';
+    const stm=q.statements?`<div style="margin-top:8px">`+q.statements.map((s,i)=>`<div><b>${i+1}.</b> ${s.text}</div>`).join('')+`</div>`:'';
+    return `<details class="rv ${st}"><summary><span class="rv-no">${q.n}</span><span class="rv-topic">${topicName(q.topic)}</span><span class="rv-score">${ico} ${r.e}/${r.m}</span></summary>
+      <div class="rv-body">
+        <div class="qtext">${q.text}${fig}${after}${opts}${stm}</div>
+        <div class="ans">Jawabanmu: <b>${fmtAns(q,rec)}</b></div>
+        <div class="ans">Kunci: <b>${fmtKey(q)}</b></div>
+        <div class="exp">💡 <b>Pembahasan:</b> ${q.exp}</div>
+      </div></details>`;
+  }).join('');
+}
+
+function buildWA(){
+  const pct=Math.round(RES.earned/RES.max*100);
+  const tanggal=endTime.toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const jam=endTime.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+  const rows=topicRows();
+  const weak=rows.filter(x=>x.pct<60);
+  let pg=[],pgk=[],kat=[];
+  QUESTIONS.forEach(q=>{
+    const a=fmtAns(q,state.map[q.n]);
+    if(q.type==='pg') pg.push(q.n+'.'+a); else if(q.type==='pgk') pgk.push(q.n+'.'+a.replace(/, /g,'')); else kat.push(q.n+'.'+a.replace(/ – /g,'/').replace(/Benar/g,'B').replace(/Salah/g,'S'));
+  });
+  let m=`📊 *HASIL ${EXAM_TITLE.toUpperCase()}*\n🏫 SMA IT Insan Sejahtera\n━━━━━━━━━━━━━━━━━━━\n`;
+  m+=`👤 *Nama:* ${studentName}\n🏫 *Kelas:* ${studentKelas}\n📅 ${tanggal}\n⏰ ${jam} (durasi ${durationMin} menit)\n━━━━━━━━━━━━━━━━━━━\n`;
+  m+=`🎯 *NILAI: ${pct}* (${RES.earned}/${RES.max} poin)\n📝 Dijawab: ${state.answeredQ}/${state.totalQ} soal\n`;
+  if(tabSwitchViolations>0) m+=`🚨 *Pelanggaran pindah tab:* ${tabSwitchViolations} kali\n`;
+  m+=`━━━━━━━━━━━━━━━━━━━\n*ANALISIS MATERI (terlemah → terkuat):*\n`;
+  rows.forEach(x=>{ m+=`${x.lv.ico} ${x.t.name}: ${x.pct}% (${x.r.earned}/${x.r.max}) — ${x.lv.short}\n`; });
+  m+=weak.length?`\n⚠️ *Perlu diperkuat:* ${weak.map(x=>x.t.name).join('; ')}\n`:`\n✅ Tidak ada materi di bawah 60%\n`;
+  m+=`━━━━━━━━━━━━━━━━━━━\n*Jawaban PG:* ${pg.join(' ')}\n*Jawaban PGK:* ${pgk.join(' ')}\n*Jawaban B/S:* ${kat.join(' ')}\n`;
+  m+=`━━━━━━━━━━━━━━━━━━━\n_Dikirim otomatis dari ${EXAM_TITLE}_`;
+  document.getElementById('waBtn').href='https://wa.me/'+GURU_WA+'?text='+encodeURIComponent(m);
+}
+
+function showScore(){
+  document.getElementById('analysisPanel').classList.remove('show');
+  document.getElementById('scorePanel').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showAnalysisAgain(){
+  document.getElementById('scorePanel').classList.remove('show');
+  document.getElementById('analysisPanel').classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function markSent(){ setTimeout(()=>{ document.getElementById('sentBadge').style.display='block'; },1000); }
+</script>
+</body>
+</html>
