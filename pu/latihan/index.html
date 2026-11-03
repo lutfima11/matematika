@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal PU — Penalaran Umum UTBK</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --surface: #fffdf8;
+    --surface2: #f0ebe0;
+    --border: #ddd6c8;
+    --accent: #c05c1a;
+    --accent2: #a04a10;
+    --text: #2a2218;
+    --text-muted: #8a7a66;
+    --correct: #2d8a5e;
+    --wrong: #c0392b;
+    --blue: #2471a3;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -15%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(192,92,26,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .header-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .header-logo span {
+    color: var(--text-muted);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+
+  .header-progress {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .progress-bar {
+    width: 120px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(192,92,26,0.08);
+    border: 1px solid rgba(192,92,26,0.22);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.45rem 1rem;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fffdf8;
+    font-weight: 600;
+  }
+
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .q-card:hover { border-color: rgba(232,201,122,0.3); }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(192,92,26,0.08);
+    border: 1px solid rgba(192,92,26,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .q-type-badge {
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+  }
+  .badge-pg   { background: rgba(36,113,163,0.1); color: var(--blue); border: 1px solid rgba(36,113,163,0.25); }
+  .badge-bs   { background: rgba(45,138,94,0.1); color: var(--correct); border: 1px solid rgba(45,138,94,0.25); }
+  .badge-esai { background: rgba(192,92,26,0.08); color: var(--accent2); border: 1px solid rgba(192,92,26,0.22); }
+
+  .q-topic {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .q-text {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .q-text .math-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+    margin: 0.75rem 0;
+    color: var(--text);
+    overflow-x: auto;
+    text-align: center;
+  }
+
+
+  .q-text .info-box {
+    background: rgba(36,113,163,0.06);
+    border-left: 3px solid var(--blue);
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+    color: #1a4e6e;
+    line-height: 1.6;
+  }
+
+  .svg-figure {
+    display: flex;
+    justify-content: center;
+    margin: 1.2rem 0;
+    padding: 1rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .svg-figure svg {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0.8rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+  }
+
+  .option-item:hover {
+    border-color: var(--accent);
+    background: rgba(192,92,26,0.06);
+  }
+
+  .option-item.selected {
+    border-color: var(--accent);
+    background: rgba(192,92,26,0.09);
+  }
+
+  .option-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--accent);
+    min-width: 1.4rem;
+    padding-top: 1px;
+  }
+
+  .option-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .bs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .bs-table th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bs-table th:not(:first-child) { text-align: center; }
+
+  .bs-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid rgba(46,44,39,0.5);
+    vertical-align: middle;
+  }
+
+  .bs-table tr:last-child td { border-bottom: none; }
+  .bs-table td:not(:first-child) { text-align: center; }
+
+  .bs-toggle {
+    display: inline-flex;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .bs-btn {
+    padding: 0.3rem 0.9rem;
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+
+  .bs-btn:hover { color: var(--text); }
+  .bs-btn.active-b { background: rgba(111,207,151,0.2); color: var(--correct); }
+  .bs-btn.active-s { background: rgba(235,87,87,0.15); color: var(--wrong); }
+
+  .esai-area {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0.2rem;
+    transition: border-color 0.2s;
+  }
+  .esai-area:focus-within { border-color: var(--accent); }
+
+  .esai-area textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    padding: 0.8rem 1rem;
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .esai-area textarea::placeholder { color: var(--text-muted); }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.65rem 1.4rem;
+    border-radius: 9px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .btn-outline:hover { border-color: var(--text-muted); color: var(--text); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fffdf8;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+
+  .page-indicator {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+  .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .empty p { font-size: 0.9rem; }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2.5rem 0 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-title span { color: var(--accent); }
+
+  .sub-q {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+  @media(max-width:600px){
+    .container { padding: 2rem 1rem 5rem; }
+    .q-card { padding: 1.5rem 1.2rem; }
+    header { padding: 0 1rem; }
+    .header-progress .progress-bar { display: none; }
+  }
+  mjx-container { color: inherit; font-size: 88% !important; }
+  .q-text p { margin-bottom: 0.85rem; }
+  .q-text p:last-child { margin-bottom: 0; }
+</style>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], processEscapes: true },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">Latihan<em> PU</em></div>
+  <div class="header-progress">
+    <span id="prog-text">0 / 0 dijawab</span>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-badge">🧠 UTBK Series</div>
+    <h1>Latihan Soal<br><em>Penalaran Umum</em></h1>
+    <p>Kerjakan soal-soal di bawah tanpa penilaian otomatis. Gunakan sebagai bahan latihan mandiri.</p>
+  </div>
+
+  <div class="filter-row" id="filter-row"></div>
+  <div id="questions-container"></div>
+
+</div>
+
+<script>
+const soalData = [
+  // ---- SOAL 1 ----
+  {
+    id: 1,
+    type: 'pg',
+    topic: 'Evaluasi Argumen',
+    text: `<p>Kedai Alfa dan Kedai Beta berada di kawasan perkantoran dengan karakteristik pelanggan yang serupa. Keduanya menggunakan biji kopi dari pemasok yang sama dan menjual minuman dengan kisaran harga yang hampir sama. Survei awal juga menunjukkan bahwa penilaian pelanggan terhadap kualitas minuman kedua kedai tidak jauh berbeda.</p>
+<p>Setelah tiga bulan, tingkat pembelian ulang pelanggan di Kedai Alfa meningkat sebesar 25%, sedangkan di Kedai Beta cenderung tetap. Belakangan, keluhan pelanggan Kedai Alfa mengenai pesanan yang keliru dan pelayanan yang lambat juga semakin sedikit.</p>
+<p>Manakah pernyataan berikut yang PALING TEPAT menjelaskan perbedaan tingkat pembelian ulang di kedua kedai tersebut?</p>`,
+    options: [
+      '(a) Pelanggan Kedai Alfa mendapatkan pelayanan yang lebih baik setelah melakukan pembelian pertama.',
+      '(b) Promosi Kedai Alfa berhasil menarik lebih banyak pekerja kantor yang sebelumnya belum pernah berkunjung.',
+      '(c) Kedai Beta menerima lebih banyak pelanggan pada jam makan siang dibandingkan Kedai Alfa.',
+      '(d) Aroma minuman Kedai Alfa lebih disukai pelanggan dibandingkan aroma minuman Kedai Beta.',
+      '(e) Pelanggan Kedai Alfa melakukan transaksi dengan nilai rata-rata yang lebih besar dibandingkan pelanggan Kedai Beta.'
+    ]
+  },
+
+  // ---- SOAL 2 ----
+  {
+    id: 2,
+    type: 'pg',
+    topic: 'Inferensi Teks',
+    text: `<p>Pemerintah Kota Caraka meluncurkan aplikasi "Sapa Warga" untuk pelaporan kerusakan fasilitas umum. Sejak aplikasi ini aktif selama enam bulan, jumlah laporan harian meningkat 45% dibandingkan metode telepon konvensional. Laporan evaluasi menunjukkan bahwa rata-rata waktu penanganan perbaikan infrastruktur jalan menurun dari 14 hari menjadi 6 hari kerja. Indeks kepuasan masyarakat terhadap pelayanan publik bidang infrastruktur juga naik dari skala 65 menjadi 78. Namun, dinas komunikasi menyebutkan sekitar 15% wilayah pinggiran kota masih mengalami kendala stabilitas sinyal internet sehingga aplikasi belum optimal.</p>
+<p>Berdasarkan informasi tersebut, manakah pernyataan berikut yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Semua warga di wilayah pinggiran kota dipastikan menolak menggunakan aplikasi karena masalah internet.',
+      '(b) Aplikasi "Sapa Warga" berkontribusi positif meningkatkan efisiensi waktu perbaikan fasilitas di Kota Caraka.',
+      '(c) Metode pelaporan konvensional lewat telepon akan dihapus sepenuhnya oleh pemerintah sejak bulan lalu.',
+      '(d) Peningkatan indeks kepuasan masyarakat di Kota Caraka hanya dipengaruhi perbaikan jalan berlubang saja.',
+      '(e) Waktu pengerjaan fasilitas umum di seluruh wilayah Kota Caraka dipastikan selesai dalam 6 hari kerja.'
+    ]
+  },
+
+  // ---- SOAL 3 ----
+  {
+    id: 3,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Koperasi Simpan Pinjam "Sejahtera Mandiri" memberlakukan ketentuan yang tidak dapat diganggu gugat. Permohonan pencairan dana pinjaman seorang anggota baru dapat diproses oleh bagian administrasi dengan syarat seluruh berkas agunan yang ditetapkan telah diserahkan secara lengkap. Tanpa terpenuhinya hal tersebut, proses verifikasi tidak akan dimulai. Pak Rudianto, anggota aktif yang telah bergabung selama delapan tahun, mengajukan permohonan pinjaman untuk modal usaha peternakan ayamnya. Sampai batas akhir penerimaan berkas hari ini, pihak administrasi mengonfirmasi bahwa permohonan Pak Rudianto belum dapat diproses.</p>
+<p>Berdasarkan informasi tersebut, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Pak Rudianto tidak menyerahkan seluruh berkas agunan secara lengkap.',
+      '(b) Berkas agunan Pak Rudianto sudah lengkap tetapi pihak administrasi belum sempat memeriksanya.',
+      '(c) Pak Rudianto bukan merupakan anggota aktif Koperasi Simpan Pinjam "Sejahtera Mandiri".',
+      '(d) Status kelengkapan berkas agunan Pak Rudianto tidak dapat ditentukan dari informasi yang tersedia.',
+      '(e) Proses verifikasi terhadap permohonan Pak Rudianto pasti sudah selesai dilakukan.'
+    ]
+  },
+
+  // ---- SOAL 4 ----
+  {
+    id: 4,
+    type: 'pg',
+    topic: 'Evaluasi Argumen',
+    text: `<p>Sebuah yayasan pendidikan menerapkan program matematika adaptif menggunakan perangkat lunak MathSmart di SMA Nusantara. Sebelum program dimulai, rata-rata nilai ulangan matematika siswa adalah 68. Setelah satu bulan siswa diwajibkan menggunakan perangkat lunak tersebut selama 45 menit setiap hari seusai sekolah, rata-rata nilai ulangan mereka naik menjadi 82. Kepala sekolah menyimpulkan bahwa aplikasi MathSmart menjadi faktor utama lonjakan nilai tersebut. Namun, seorang pengamat menilai kesimpulan ini perlu diuji kembali karena terdapat potensi variabel lain yang memengaruhi hasil belajar siswa selama periode tersebut.</p>
+<p>Informasi yang perlu ditambahkan agar kesimpulan kepala sekolah tersebut TEPAT adalah ...</p>`,
+    options: [
+      '(a) Pendapat guru matematika mengenai kemudahan penggunaan fitur absensi pada MathSmart.',
+      '(b) Total biaya investasi yang dikeluarkan yayasan untuk menerapkan MathSmart.',
+      '(c) Tingkat kepuasan orang tua terhadap desain dan kemudahan penggunaan MathSmart.',
+      '(d) Kelompok siswa sebanding tanpa MathSmart tidak mengalami kenaikan nilai serupa.',
+      '(e) Jenis perangkat yang paling sering digunakan siswa untuk mengakses MathSmart.'
+    ]
+  },
+
+  // ---- SOAL 5 ----
+  {
+    id: 5,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Pak Gunawan, penyuluh pertanian Desa Sukatani, menjelaskan kepada kelompok tani bahwa kunci kesuksesan panen ada pada pengelolaan tanah. Menurut Pak Gunawan, penerapan pemupukan berimbang secara konsisten merupakan satu-satunya cara untuk meningkatkan kesuburan tanah sawah di wilayah mereka. Kesuburan tanah yang meningkat selalu berujung pada pertumbuhan tanaman padi yang optimal. Selanjutnya, tanaman yang tumbuh optimal sudah pasti akan menghasilkan gabah bermutu tinggi sehingga harga jualnya berada di atas rata-rata pasar dan menguntungkan petani.</p>
+<p>Berdasarkan penjelasan Pak Gunawan, manakah pernyataan berikut yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Jika petani tidak menerapkan pemupukan berimbang secara konsisten, maka pertumbuhan tanaman padi tidak akan optimal.',
+      '(b) Jika harga jual gabah tidak berada di atas rata-rata pasar, maka kesuburan tanah sawah tidak mengalami peningkatan.',
+      '(c) Jika tanaman padi menghasilkan gabah bermutu tinggi, maka petani pasti telah menerapkan pemupukan berimbang secara konsisten.',
+      '(d) Pertumbuhan tanaman padi yang optimal disebabkan oleh harga jual gabah yang berada di atas rata-rata pasar.',
+      '(e) Kelompok tani di Desa Sukatani dipastikan akan mengalami peningkatan kesuburan tanah sawah dalam waktu dekat.'
+    ]
+  },
+
+  // ---- SOAL 6 ----
+  {
+    id: 6,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Lembaga Sertifikasi Profesi "Nusantara Teknik" menyelenggarakan uji kompetensi bagi calon teknisi instalasi pendingin ruangan. Sesuai regulasi lembaga, sertifikat kompetensi resmi akan diterbitkan secara otomatis bagi setiap peserta yang berhasil menyelesaikan ujian teori dan ujian praktik secara bersamaan. Dimas, peserta yang telah mengikuti pelatihan intensif selama dua bulan, mengikuti uji kompetensi hari ini. Dari lembar hasil yang baru diumumkan, Dimas dinyatakan lulus ujian teori dengan skor memuaskan dan lolos seluruh tahapan ujian praktik tanpa satu pun catatan kesalahan prosedur.</p>
+<p>Berdasarkan informasi tersebut, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Dimas tidak akan menerima sertifikat kompetensi dari LSP Nusantara Teknik karena persyaratan belum terpenuhi.',
+      '(b) Setiap peserta yang telah menerima sertifikat kompetensi dari LSP tersebut pasti telah lulus ujian teori dan ujian praktik.',
+      '(c) Dimas akan menerima sertifikat kompetensi resmi dari LSP Nusantara Teknik.',
+      '(d) Keberhasilan ujian teori saja sudah cukup bagi Dimas untuk mendapatkan sertifikat kompetensi dari lembaga tersebut.',
+      '(e) Dimas akan mendapat kesempatan mengulang ujian pada periode sertifikasi berikutnya guna memperbaiki nilainya.'
+    ]
+  },
+
+  // ---- SOAL 7 ----
+  {
+    id: 7,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Beberapa anggota Klub Astronomi Arunika menjadi peserta olimpiade sains. Semua peserta olimpiade sains mengikuti pelatihan observasi malam.</p>
+<p>Berdasarkan informasi di atas, manakah simpulan berikut yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Semua anggota Klub Astronomi Arunika mengikuti pelatihan observasi malam.',
+      '(b) Beberapa anggota Klub Astronomi Arunika mengikuti pelatihan observasi malam.',
+      '(c) Semua peserta pelatihan observasi malam merupakan anggota Klub Astronomi Arunika.',
+      '(d) Beberapa peserta olimpiade sains tidak mengikuti pelatihan observasi malam.',
+      '(e) Tidak ada anggota Klub Astronomi Arunika yang mengikuti pelatihan observasi malam.'
+    ]
+  },
+
+  // ---- SOAL 8 ----
+  {
+    id: 8,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Panitia Festival Film Pendek Layar Nusantara mengumumkan dua kategori kompetisi. Setiap film fiksi yang berhasil melewati tahap seleksi awal berhak mendapatkan dana produksi penuh dari sponsor utama acara. Sementara itu, setiap film dokumenter yang lolos seleksi awal akan memperoleh pendampingan kuratorial intensif dari tim ahli yang ditunjuk panitia. Komunitas Sinema Bandung mengajukan dua film sekaligus: film fiksi berjudul "Senja di Pasar" dan film dokumenter bertajuk "Suara Sungai". Pengumuman resmi hari ini menegaskan bahwa paling tidak salah satu dari kedua film tersebut berhasil melewati tahap seleksi awal.</p>
+<p>Berdasarkan pengumuman tersebut, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Film "Senja di Pasar" mendapat dana produksi penuh dan film "Suara Sungai" mendapat pendampingan kuratorial dari tim ahli.',
+      '(b) Tidak ada satu pun film dari Komunitas Sinema Bandung yang mendapatkan fasilitas apa pun dari panitia festival.',
+      '(c) Setidaknya salah satu dari kedua film Komunitas Sinema Bandung berhasil melewati tahap seleksi awal panitia.',
+      '(d) Film "Senja di Pasar" mendapat dana produksi penuh atau film "Suara Sungai" mendapat pendampingan kuratorial dari tim ahli.',
+      '(e) Film dokumenter yang lolos seleksi awal berhak mendapatkan dana produksi penuh dari sponsor utama acara.'
+    ]
+  },
+
+  // ---- SOAL 9 ----
+  {
+    id: 9,
+    type: 'pg',
+    topic: 'Evaluasi Argumen',
+    text: `<p>Perusahaan pemetaan memperkenalkan daftar periksa baru agar pilot pesawat nirawak tidak melewatkan pemeriksaan baterai, baling-baling, sensor, dan komunikasi sebelum penerbangan. Dalam uji coba awal, pilot yang menggunakan daftar baru melewatkan lebih sedikit tahap pemeriksaan daripada pilot yang menggunakan formulir lama. Manajer menyimpulkan bahwa daftar periksa baru lebih efektif mengurangi kelalaian.</p>
+<p>Data yang PALING MEMPERKUAT kesimpulan manajer tersebut adalah ...</p>`,
+    options: [
+      '(a) Daftar baru dicetak pada bahan tahan air agar dapat digunakan di lokasi terbuka.',
+      '(b) Pilot berpengalaman menyelesaikan pemeriksaan lebih cepat daripada pilot yang baru bertugas.',
+      '(c) Pilot dengan pengalaman setara memeriksa pesawat dan misi yang sama menggunakan daftar berbeda.',
+      '(d) Beberapa pilot menilai urutan pemeriksaan pada daftar baru lebih mudah diingat.',
+      '(e) Hasil pemeriksaan kedua kelompok disimpan dalam sistem pencatatan digital yang sama.'
+    ]
+  },
+
+  // ---- SOAL 10 ----
+  {
+    id: 10,
+    type: 'pg',
+    topic: 'Evaluasi Argumen',
+    text: `<p>Ahli 1 menyatakan bahwa kebijakan kerja hibrida membuat pegawai lebih produktif karena mereka dapat memilih lingkungan kerja yang sesuai dengan jenis tugasnya. Ahli 2 menyatakan bahwa kerja hibrida menurunkan tekanan psikologis pegawai karena mereka tidak perlu melakukan perjalanan ke kantor setiap hari.</p>
+<p>Fakta menunjukkan bahwa setelah kebijakan kerja hibrida diterapkan, jumlah pekerjaan yang selesai tepat waktu meningkat, tetapi skor survei stres pegawai tidak berubah secara berarti.</p>
+<p>Manakah penilaian yang PALING TEPAT berdasarkan fakta tersebut?</p>`,
+    options: [
+      '(a) Memperkuat pernyataan Ahli 1 dan memperlemah pernyataan Ahli 2.',
+      '(b) Memperlemah pernyataan Ahli 1 dan memperkuat pernyataan Ahli 2.',
+      '(c) Memperkuat pernyataan Ahli 1 dan Ahli 2 sekaligus.',
+      '(d) Memperlemah pernyataan Ahli 1 dan Ahli 2 sekaligus.',
+      '(e) Tidak relevan dengan pernyataan Ahli 1 maupun Ahli 2.'
+    ]
+  },
+  // ---- SOAL 11 ----
+  {
+    id: 11,
+    type: 'pg',
+    topic: 'Inferensi Teks',
+    text: `<p>Konsep Kemandirian Belajar Digital didefinisikan sebagai kemampuan siswa menetapkan target akademik pribadi, menyusun jadwal belajar mandiri tanpa pengawasan ketat, serta mengevaluasi secara kritis kredibilitas sumber informasi dari internet sebelum menjadikannya rujukan tugas. Seseorang dinilai menerapkan konsep ini secara utuh apabila konsisten menjalankan seluruh unsur tersebut dalam aktivitas harian. Kemandirian ini tidak sekadar menggunakan perangkat digital untuk mengunduh materi pelajaran yang diperintahkan guru secara berkala di kelas. Oleh karena itu, pemahaman terhadap unsur-unsur secara menyeluruh sangat penting untuk mengukur keberhasilan siswa.</p>
+<p>Manakah tindakan siswa berikut yang PALING SESUAI dengan definisi kemandirian belajar digital tersebut?</p>`,
+    options: [
+      '(a) Maya memperoleh nilai tertinggi setelah membeli buku yang direkomendasikan guru di sekolah.',
+      '(b) Siska selalu mengikuti arahan guru untuk mengunduh materi digital sebagai bahan tugas sekolah.',
+      '(c) Dodi menyusun jadwal bermain gim daring agar terkontrol dan dapat lebih fokus belajar.',
+      '(d) Rian membuat jadwal belajar mingguan untuk mencapai target nilai yang telah ia tetapkan sendiri.',
+      '(e) Andi mengumpulkan materi dari internet dengan memilih sumber informasi yang kredibel.'
+    ]
+  },
+
+  // ---- SOAL 12 ----
+  {
+    id: 12,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Pengurus Bank Sampah RW 007 menetapkan dua ketentuan operasional yang berlaku serentak. Pertama, setoran sampah organik yang tepat jadwal dari seluruh warga merupakan satu-satunya faktor yang memastikan komposter komunal berjalan pada kapasitas penuh. Kedua, ketepatan jadwal setoran sampah anorganik secara langsung menentukan terakumulasinya poin tabungan sampah warga hingga batas maksimal. Evaluasi mingguan yang baru selesai dilakukan pengurus menunjukkan bahwa komposter komunal tidak berjalan pada kapasitas penuh, poin tabungan warga tidak terakumulasi hingga batas maksimal, atau bahkan mungkin keduanya.</p>
+<p>Berdasarkan hasil evaluasi tersebut, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Warga menyetorkan sampah organik tepat jadwal atau warga menyetorkan sampah anorganik tepat jadwal pada pekan lalu.',
+      '(b) Warga tidak menyetorkan sampah organik tepat jadwal dan tidak menyetorkan sampah anorganik tepat jadwal pada pekan lalu.',
+      '(c) Komposter komunal tidak berjalan pada kapasitas penuh atau poin tabungan warga tidak terakumulasi hingga batas maksimal.',
+      '(d) Komposter komunal berjalan pada kapasitas penuh atau poin tabungan warga terakumulasi hingga batas maksimal pada pekan lalu.',
+      '(e) Warga tidak menyetorkan sampah organik tepat jadwal atau tidak menyetorkan sampah anorganik tepat jadwal pada pekan lalu.'
+    ]
+  },
+
+  // ---- SOAL 13 ----
+  {
+    id: 13,
+    type: 'pg',
+    topic: 'Inferensi Teks',
+    text: `<p>Integritas profesional dapat dipahami melalui dua sudut pandang berikut.</p>
+<p>Pandangan X: Integritas profesional berarti tetap bertindak sesuai dengan standar yang telah dinyatakan meskipun tidak ada pihak yang mengawasi.<br>Pandangan Y: Integritas profesional berarti menolak keuntungan pribadi yang bertentangan dengan aturan profesi.</p>
+<p>Apa kesamaan mendasar antara Pandangan X dan Pandangan Y?</p>`,
+    options: [
+      '(a) Keduanya menekankan konsistensi terhadap prinsip profesional meskipun terdapat peluang untuk menyimpang.',
+      '(b) Keduanya menekankan kepatuhan pada aturan tertulis hanya ketika tindakan seseorang sedang dinilai pihak lain.',
+      '(c) Keduanya memandang integritas sebagai usaha menjaga reputasi profesi di hadapan publik.',
+      '(d) Keduanya menekankan kemampuan membedakan kepentingan pribadi dan kepentingan lembaga.',
+      '(e) Keduanya membatasi integritas pada tindakan yang menghindarkan seseorang dari sanksi formal.'
+    ]
+  },
+
+  // ---- SOAL 14 ----
+  {
+    id: 14,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Sebuah fasilitas produksi vaksin menerapkan aturan ketat untuk menjaga kebersihan ruang produksi. Hanya petugas yang telah lulus pelatihan biosekuriti yang mendapat izin memasuki ruang steril. Beberapa teknisi pemeliharaan mendapat izin memasuki ruang steril ketika melakukan pemeriksaan mesin. Petugas administrasi bekerja di gedung yang sama, tetapi tidak bertugas di ruang steril.</p>
+<p>Berdasarkan informasi di atas, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Semua petugas yang lulus pelatihan biosekuriti bekerja sebagai teknisi pemeliharaan.',
+      '(b) Beberapa petugas administrasi telah lulus pelatihan biosekuriti.',
+      '(c) Semua teknisi pemeliharaan mendapat izin memasuki ruang steril.',
+      '(d) Beberapa teknisi pemeliharaan telah lulus pelatihan biosekuriti.',
+      '(e) Beberapa teknisi pemeliharaan mendapat izin memasuki ruang steril tanpa lulus pelatihan biosekuriti.'
+    ]
+  },
+
+  // ---- SOAL 15 ----
+  {
+    id: 15,
+    type: 'pg',
+    topic: 'Evaluasi Argumen',
+    text: `<p>Perpustakaan pusat kota mencatat adanya penurunan pengunjung sebesar 30% dalam setahun terakhir. Untuk mengatasi hal ini, pengelola meluncurkan sistem pemesanan tempat duduk dan buku secara daring lewat aplikasi. Tiga bulan setelah aplikasi diterapkan, jumlah kunjungan harian ke perpustakaan kembali meningkat hingga sebesar 20%. Selain itu, survei kepuasan menunjukkan bahwa 85% pengunjung merasa lebih nyaman karena mereka mendapatkan kepastian fasilitas sebelum tiba di lokasi. Pengelola menyimpulkan bahwa digitalisasi layanan berhasil menarik minat masyarakat untuk kembali memanfaatkan fasilitas fisik perpustakaan.</p>
+<p>Berdasarkan informasi tersebut, manakah dari pernyataan berikut yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Penurunan kunjungan fisik setahun lalu disebabkan oleh rusaknya fasilitas utama di perpustakaan kota.',
+      '(b) Semua masyarakat kota dipastikan selalu berkunjung ke perpustakaan setelah sistem pemesanan daring diterapkan.',
+      '(c) Digitalisasi layanan adalah satu-satunya faktor yang dapat meningkatkan kenyamanan seluruh pengunjung perpustakaan pusat.',
+      '(d) Kenyamanan pengunjung meningkat karena pengelola perpustakaan menambah jumlah buku fisik dan ruang belajar.',
+      '(e) Kehadiran sistem pemesanan daring berkaitan dengan peningkatan kembali jumlah kunjungan harian perpustakaan.'
+    ]
+  },
+
+  // ---- SOAL 16 ----
+  {
+    id: 16,
+    type: 'pg',
+    topic: 'Inferensi Teks',
+    text: `<p>Desa Sukamaju menghadapi masalah keterbatasan lahan pertanian akibat alih fungsi menjadi perumahan. Kelompok tani setempat kemudian mengadopsi teknik hidroponik vertikal untuk menanam sayuran di pekarangan rumah warga. Setelah berjalan satu siklus panen, hasil produksi sayuran desa meningkat hingga 40%. Warga kini dapat memenuhi kebutuhan pangan mandiri dan menjual sebagian surplusnya ke pasar terdekat. Evaluasi menunjukkan pengeluaran belanja bulanan rumah tangga untuk sayur menurun secara signifikan. Pengurus desa menyimpulkan metode pertanian vertikal ini sangat efektif memulihkan ketahanan pangan lokal di tengah keterbatasan lahan.</p>
+<p>Pernyataan berikut yang PALING TEPAT didukung oleh informasi tersebut adalah ...</p>`,
+    options: [
+      '(a) Seluruh warga Desa Sukamaju dipastikan tidak akan pernah lagi membeli sayuran dari luar daerah.',
+      '(b) Penerapan hidroponik vertikal berhubungan dengan peningkatan produksi sayur dan penurunan pengeluaran belanja warga.',
+      '(c) Teknik pertanian vertikal selalu menjadi pilihan utama bagi semua desa yang kehilangan lahan tani.',
+      '(d) Penjualan surplus sayuran ke pasar tradisional mendatangkan keuntungan finansial paling besar bagi kelompok tani.',
+      '(e) Masalah keterbatasan lahan di Desa Sukamaju sepenuhnya teratasi hanya karena program pekarangan hidroponik.'
+    ]
+  },
+
+  // ---- SOAL 17 ----
+  {
+    id: 17,
+    type: 'pg',
+    topic: 'Inferensi Teks',
+    text: `<p>Sebuah platform kursus daring mencatat bahwa 60% peserta berhenti mengikuti kelas pada minggu kedua. Hasil survei internal mengungkapkan bahwa sebagian besar peserta merasa kebingungan saat mengoperasikan dasbor pengumpulan tugas mandiri yang rumit. Selain itu, mereka kesulitan menemukan menu bantuan ketika mengalami kendala teknis dalam sistem. Manajemen ingin menurunkan angka putus kursus tersebut agar kepuasan peserta meningkat. Beberapa mentor menyarankan untuk memperbanyak jumlah materi video pembelajaran, namun tim pengembang menilai masalah utama terletak pada alur navigasi aplikasi yang membingungkan bagi pengguna baru.</p>
+<p>Berdasarkan masalah tersebut, manakah langkah atau tindakan yang paling tepat untuk diselesaikan oleh pihak manajemen?</p>`,
+    options: [
+      '(a) Mengganti seluruh materi pengajaran dengan kurikulum baru yang jauh lebih mudah dipahami peserta.',
+      '(b) Menambah durasi dan jumlah video pembelajaran materi dasar pada setiap kelas kursus daring.',
+      '(c) Memberikan diskon biaya pendaftaran sebesar lima puluh persen untuk menarik lebih banyak peserta baru.',
+      '(d) Menghapus semua sistem tugas mandiri agar seluruh peserta tidak perlu mengoperasikan dasbor aplikasi.',
+      '(e) Menyederhanakan tampilan dasbor tugas serta mempermudah akses ke tombol menu bantuan.'
+    ]
+  },
+
+  // ---- SOAL 18 ----
+  {
+    id: 18,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>PT Transportasi Lintas Raya memastikan bahwa salah satu dari dua jalur layanan kereta ringan (LRT) utama mereka, Jalur Timur yang menghubungkan pusat kota dengan kawasan industri atau Jalur Barat yang melayani zona perumahan dan pusat belanja, akan selalu beroperasi normal setiap hari kerja tanpa kecuali. Pagi ini, tim teknis melaporkan bahwa gangguan sinyal parah pada infrastruktur Jalur Timur memaksa seluruh rangkaian kereta di jalur tersebut dihentikan untuk sementara. Di sisi lain, tingkat kepadatan penumpang di kedua terminal utama tercatat melonjak tajam dibandingkan hari-hari sebelumnya karena tahun ajaran baru sekolah dimulai pekan ini.</p>
+<p>Berdasarkan informasi tersebut, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Jalur Barat kereta ringan tersebut beroperasi normal hari ini.',
+      '(b) Jalur Barat kereta ringan tersebut juga mengalami gangguan operasional hari ini.',
+      '(c) Jalur Timur kereta ringan tersebut tetap beroperasi normal meskipun ada gangguan sinyal yang dilaporkan.',
+      '(d) Baik Jalur Timur maupun Jalur Barat kereta ringan tersebut beroperasi normal hari ini.',
+      '(e) Penumpang kereta ringan pada pagi ini lebih ramai dari biasanya karena tahun ajaran baru dimulai pekan ini.'
+    ]
+  },
+
+  // ---- SOAL 19 ----
+  {
+    id: 19,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>Perpustakaan Daerah Cendekia memberlakukan sistem akses berbasis keanggotaan untuk layanan koleksi digitalnya. Setiap pemegang kartu anggota yang masih aktif dan tercatat dalam sistem selalu dapat mengakses seluruh koleksi digital perpustakaan tanpa hambatan. Sistem akses ini berlaku secara konsisten setiap hari tanpa pengecualian. Hari ini, Ibu Dewi yang telah lama menjadi pelanggan setia perpustakaan tersebut mencoba mengakses koleksi digital melalui perangkatnya. Namun, sistem secara otomatis menolak permintaan aksesnya dan menampilkan pesan kegagalan koneksi dengan basis data koleksi.</p>
+<p>Berdasarkan informasi tersebut, manakah simpulan yang PALING TEPAT mengenai kondisi keanggotaan Ibu Dewi?</p>`,
+    options: [
+      '(a) Ibu Dewi berhasil mengakses seluruh koleksi digital perpustakaan pada hari ini juga.',
+      '(b) Kartu keanggotaan Ibu Dewi sudah tidak aktif atau tidak tercatat dalam sistem perpustakaan.',
+      '(c) Apabila sistem menolak akses seseorang, orang tersebut dipastikan memiliki kartu anggota yang masih aktif.',
+      '(d) Kartu keanggotaan Ibu Dewi masih aktif dan tercatat dalam sistem perpustakaan saat ini.',
+      '(e) Seluruh anggota perpustakaan mengalami kegagalan akses yang sama ke koleksi digital hari ini.'
+    ]
+  },
+
+  // ---- SOAL 20 ----
+  {
+    id: 20,
+    type: 'pg',
+    topic: 'Penalaran Deduktif',
+    text: `<p>PDAM Tirta Makmur memakai prosedur penagihan bulanan yang ketat. Pada bulan berjalan, meter pelanggan yang telah dinyatakan aktif selalu masuk daftar penerbitan tagihan. Nama pelanggan juga tidak dapat muncul dalam daftar tagihan apabila meter terkait belum dinyatakan aktif oleh petugas lapangan. Bapak Sartono tercatat sebagai pelanggan resmi PDAM Tirta Makmur. Dalam rekap bulan ini, pihak PDAM mengonfirmasi bahwa tidak ada tagihan air yang diterbitkan atas nama Bapak Sartono.</p>
+<p>Berdasarkan informasi tersebut, manakah simpulan yang PALING TEPAT?</p>`,
+    options: [
+      '(a) Meteran air Bapak Sartono aktif, tetapi tagihannya tertunda karena antrean administrasi.',
+      '(b) Tagihan air Bapak Sartono diterbitkan dan sedang menunggu pembayaran bulan ini.',
+      '(c) Setiap pelanggan resmi PDAM Tirta Makmur pasti menerima tagihan air bulanan.',
+      '(d) Meteran air Bapak Sartono tidak berstatus aktif bulan ini.',
+      '(e) Petugas lapangan belum tentu memeriksa meteran Bapak Sartono bulan ini.'
+    ]
+  },
+  // ---- SOAL 21 ----
+  {
+    id: 21,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Jumlah pengunjung sebuah pameran pada tiga hari pertama berturut-turut adalah 42, 49, dan 46 orang. Pada hari kelima dan keenam, jumlah pengunjungnya berturut-turut adalah 50 dan 57 orang. Jika perubahan jumlah pengunjung tersebut mengikuti pola yang sama, berapa jumlah pengunjung pada hari keempat?</p>`,
+    options: [
+      '(a) 46 orang',
+      '(b) 50 orang',
+      '(c) 53 orang',
+      '(d) 56 orang',
+      '(e) 57 orang'
+    ]
+  },
+
+  // ---- SOAL 22 ----
+  {
+    id: 22,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Sebuah proyek pembangunan jalan dapat diselesaikan oleh 15 pekerja dalam waktu 24 hari. Setelah bekerja selama 10 hari, pekerjaan terhenti selama 4 hari karena kendala cuaca. Jika kontraktor ingin proyek selesai tepat waktu sesuai rencana awal, berapa banyak pekerja tambahan yang dibutuhkan?</p>`,
+    options: [
+      '(a) 4 orang',
+      '(b) 6 orang',
+      '(c) 8 orang',
+      '(d) 10 orang',
+      '(e) 21 orang'
+    ]
+  },
+
+  // ---- SOAL 23 ----
+  {
+    id: 23,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Seorang agen properti ingin menentukan harga sewa per meter persegi dari sepetak tanah kosong berbentuk persegi panjang. Ia memiliki empat informasi berikut.</p>
+<div class="info-box">
+1. Total harga sewa sepetak tanah tersebut adalah Rp120.000.000 per tahun.<br>
+2. Perbandingan panjang dan lebar tanah tersebut adalah 3:2.<br>
+3. Keliling tanah tersebut adalah 50 meter.<br>
+4. Jika harga sewa naik 10%, maka total sewa menjadi Rp132.000.000 per tahun.
+</div>
+<p>Kombinasi pernyataan minimal manakah yang kecukupannya dapat digunakan untuk menentukan harga sewa per meter persegi tanah tersebut?</p>`,
+    options: [
+      '(a) (1) dan (3)',
+      '(b) (1) dan (2)',
+      '(c) (1), (2), dan (3)',
+      '(d) (1), (2), dan (4)',
+      '(e) Opsi A, B, C, dan D tidak cukup'
+    ]
+  },
+
+  // ---- SOAL 24 ----
+  {
+    id: 24,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Seorang pedagang memiliki stok beras. Hari pertama ia menjual 1/3 bagian dari total stoknya. Hari kedua ia menjual 2/5 bagian dari sisa stok hari pertama. Jika sisa beras sekarang adalah 360 kg, berapakah total stok beras pedagang tersebut mula-mula?</p>`,
+    options: [
+      '(a) 720 kg',
+      '(b) 750 kg',
+      '(c) 880 kg',
+      '(d) 900 kg',
+      '(e) 960 kg'
+    ]
+  },
+
+  // ---- SOAL 25 ----
+  {
+    id: 25,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Sebuah pabrik perakitan komponen mikroprosesor mencatat volume produksi harian yang mengalami penyesuaian strategi dari hari ke hari. Jumlah produksi harian mulai dari hari ketiga produksi adalah 26 ribu unit, 21 ribu unit, 29 ribu unit, 24 ribu unit, dan 32 ribu unit. Jika pola penyesuaian produksi ini bersifat konsisten mengikuti dinamika operasional pabrik, total produksi komponen mikroprosesor pada pekan pertama produksi adalah ....</p>`,
+    options: [
+      '(a) 173 ribu unit',
+      '(b) 178 ribu unit',
+      '(c) 182 ribu unit',
+      '(d) 185 ribu unit',
+      '(e) 188 ribu unit'
+    ]
+  },
+
+  // ---- SOAL 26 ----
+  {
+    id: 26,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Jika \\(x^2 - 64 = y^2 - 49\\) dan \\(x + y = \\frac{3}{5}\\), maka selisih nilai dari \\(x\\) dan \\(y\\) adalah ....</p>`,
+    options: [
+      '(a) 1',
+      '(b) 3',
+      '(c) 9',
+      '(d) 16',
+      '(e) 25'
+    ]
+  },
+
+  // ---- SOAL 27 ----
+  {
+    id: 27,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Tabel dan diagram berikut menunjukkan data produksi dan jumlah produk cacat di empat pabrik tekstil berbeda dalam satu bulan.</p>
+<div style=""><svg viewBox="0 0 650 670" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tabel total produksi dan grafik produk cacat tiap pabrik" style="width:100%;max-width:560px;height:auto;display:block;margin:1rem auto;font-family:inherit;color:#000">
+  <g transform="translate(180, 40)">
+    <rect x="0" y="0" width="260" height="200" fill="none" stroke="#000" stroke-width="1.5"/>
+    <line x1="0" y1="50" x2="260" y2="50" stroke="#000" stroke-width="1.5"/>
+    <line x1="0" y1="87.5" x2="260" y2="87.5" stroke="#000" stroke-width="1"/>
+    <line x1="0" y1="125" x2="260" y2="125" stroke="#000" stroke-width="1"/>
+    <line x1="0" y1="162.5" x2="260" y2="162.5" stroke="#000" stroke-width="1"/>
+    <line x1="100" y1="0" x2="100" y2="200" stroke="#000" stroke-width="1.5"/>
+    <text x="50" y="30" font-weight="bold" font-size="14" text-anchor="middle">Pabrik</text>
+    <text x="180" y="22" font-weight="bold" font-size="14" text-anchor="middle">Total Produksi</text>
+    <text x="180" y="40" font-weight="bold" font-size="14" text-anchor="middle">(Unit)</text>
+    <text x="50" y="73" font-size="14" text-anchor="middle">P</text><text x="180" y="73" font-size="14" text-anchor="middle">5.500</text>
+    <text x="50" y="111" font-size="14" text-anchor="middle">Q</text><text x="180" y="111" font-size="14" text-anchor="middle">8.000</text>
+    <text x="50" y="148" font-size="14" text-anchor="middle">R</text><text x="180" y="148" font-size="14" text-anchor="middle">5.000</text>
+    <text x="50" y="186" font-size="14" text-anchor="middle">S</text><text x="180" y="186" font-size="14" text-anchor="middle">6.000</text>
+  </g>
+  <g transform="translate(40, 300)">
+    <text x="300" y="-10" font-weight="bold" font-size="16" text-anchor="middle">Jumlah Produk Cacat Hasil Produksi di Tiap Pabrik</text>
+    <line x1="100" y1="30" x2="520" y2="30" stroke="#000" stroke-width="1.5"/>
+    <line x1="100" y1="57" x2="520" y2="57" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="100" y1="84" x2="520" y2="84" stroke="#000" stroke-width="1.5"/>
+    <line x1="100" y1="111" x2="520" y2="111" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="100" y1="138" x2="520" y2="138" stroke="#000" stroke-width="1.5"/>
+    <line x1="100" y1="165" x2="520" y2="165" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="100" y1="192" x2="520" y2="192" stroke="#000" stroke-width="1.5"/>
+    <line x1="100" y1="219" x2="520" y2="219" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="100" y1="246" x2="520" y2="246" stroke="#000" stroke-width="1.5"/>
+    <line x1="100" y1="273" x2="520" y2="273" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="100" y1="300" x2="520" y2="300" stroke="#000" stroke-width="2"/>
+    <line x1="140" y1="30" x2="140" y2="300" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="250" y1="30" x2="250" y2="300" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="360" y1="30" x2="360" y2="300" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="470" y1="30" x2="470" y2="300" stroke="#888" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="140" y1="300" x2="140" y2="306" stroke="#000" stroke-width="1.5"/>
+    <line x1="250" y1="300" x2="250" y2="306" stroke="#000" stroke-width="1.5"/>
+    <line x1="360" y1="300" x2="360" y2="306" stroke="#000" stroke-width="1.5"/>
+    <line x1="470" y1="300" x2="470" y2="306" stroke="#000" stroke-width="1.5"/>
+    <text x="85" y="34" font-size="12" text-anchor="end">250</text>
+    <text x="85" y="88" font-size="12" text-anchor="end">200</text>
+    <text x="85" y="142" font-size="12" text-anchor="end">150</text>
+    <text x="85" y="196" font-size="12" text-anchor="end">100</text>
+    <text x="85" y="250" font-size="12" text-anchor="end">50</text>
+    <text x="85" y="304" font-size="12" text-anchor="end">0</text>
+    <text x="-165" y="55" font-size="13" text-anchor="middle" transform="rotate(-90)">Produk Cacat (Unit)</text>
+    <text x="140" y="325" font-size="13" text-anchor="middle">Pabrik P</text>
+    <text x="250" y="325" font-size="13" text-anchor="middle">Pabrik Q</text>
+    <text x="360" y="325" font-size="13" text-anchor="middle">Pabrik R</text>
+    <text x="470" y="325" font-size="13" text-anchor="middle">Pabrik S</text>
+    <text x="305" y="352" font-size="13" text-anchor="middle">Pabrik</text>
+    <polyline points="140,138 250,84 360,170.4 470,127.2" fill="none" stroke="#0056b3" stroke-width="2.5"/>
+    <circle cx="140" cy="138" r="4.5" fill="#0056b3"/>
+    <circle cx="250" cy="84" r="4.5" fill="#0056b3"/>
+    <circle cx="360" cy="170.4" r="4.5" fill="#0056b3"/>
+    <circle cx="470" cy="127.2" r="4.5" fill="#0056b3"/>
+  </g>
+</svg></div>
+<p>Berdasarkan data tersebut, pabrik manakah yang memiliki tingkat efisiensi produksi tertinggi jika tingkat efisiensi produksi dinilai dari rasio produk baik terhadap total produksi?</p>`,
+    options: [
+      '(a) Pabrik R',
+      '(b) Pabrik Q',
+      '(c) Pabrik S',
+      '(d) Pabrik P dan R',
+      '(e) Pabrik Q dan S'
+    ]
+  },
+
+  // ---- SOAL 28 ----
+  {
+    id: 28,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Sebuah toko pakaian memberikan diskon 20% untuk semua item. Pada jam promosi 'Flash Sale', toko memberikan diskon tambahan 10% dari harga setelah diskon pertama. Jika seseorang membeli baju dengan harga label Rp250.000 dan dikenakan pajak pertambahan nilai (PPN) sebesar 10% dari harga akhir, berapa total yang harus dibayar?</p>`,
+    options: [
+      '(a) Rp202.000',
+      '(b) Rp201.000',
+      '(c) Rp200.000',
+      '(d) Rp199.000',
+      '(e) Rp198.000'
+    ]
+  },
+
+  // ---- SOAL 29 ----
+  {
+    id: 29,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Sebuah toko elektronik mencatat keuntungan per unit untuk dua jenis produk selama 4 bulan terakhir.</p>
+<div style="margin:1rem 0;"><svg viewBox="0 0 750 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram batang keuntungan smartphone dan laptop per bulan" style="width:100%;max-width:620px;height:auto;display:block;margin:0 auto;font-family:inherit;color:#000">
+  <text x="375" y="40" font-weight="bold" font-size="22" text-anchor="middle" fill="#000">Keuntungan Smartphone dan Laptop per Bulan</text>
+  <g transform="translate(430, 60)">
+    <rect x="0" y="0" width="280" height="60" fill="transparent" stroke="#ccc" stroke-width="1" rx="5" ry="5"/>
+    <rect x="15" y="15" width="25" height="14" fill="#0066ff"/>
+    <text x="50" y="27" font-size="13" fill="#000">Keuntungan Smartphone (Rp)</text>
+    <rect x="15" y="36" width="25" height="14" fill="#ff6600"/>
+    <text x="50" y="48" font-size="13" fill="#000">Keuntungan Laptop (Rp)</text>
+  </g>
+  <g transform="translate(70, 80)">
+    <line x1="20" y1="30" x2="20" y2="340" stroke="#000" stroke-width="2.5"/>
+    <line x1="20" y1="340" x2="630" y2="340" stroke="#000" stroke-width="2.5"/>
+    <text x="-185" y="-5" font-weight="bold" font-size="18" text-anchor="middle" transform="rotate(-90)" fill="#000">Keuntungan (Rp)</text>
+    <text x="325" y="380" font-weight="bold" font-size="16" text-anchor="middle" fill="#000">Bulan</text>
+    <text x="100" y="362" font-weight="bold" font-size="16" text-anchor="middle" fill="#000">Jan</text>
+    <text x="75" y="205" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">500.000</text>
+    <rect x="52" y="215" width="46" height="125" fill="#0066ff"/>
+    <text x="125" y="30" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">1.200.000</text>
+    <rect x="102" y="40" width="46" height="300" fill="#ff6600"/>
+    <text x="250" y="362" font-weight="bold" font-size="16" text-anchor="middle" fill="#000">Feb</text>
+    <text x="225" y="192" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">550.000</text>
+    <rect x="202" y="202.5" width="46" height="137.5" fill="#0066ff"/>
+    <text x="275" y="55" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">1.100.000</text>
+    <rect x="252" y="65" width="46" height="275" fill="#ff6600"/>
+    <text x="400" y="362" font-weight="bold" font-size="16" text-anchor="middle" fill="#000">Mar</text>
+    <text x="375" y="180" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">600.000</text>
+    <rect x="352" y="190" width="46" height="150" fill="#0066ff"/>
+    <text x="425" y="80" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">1.000.000</text>
+    <rect x="402" y="90" width="46" height="250" fill="#ff6600"/>
+    <text x="550" y="362" font-weight="bold" font-size="16" text-anchor="middle" fill="#000">Apr</text>
+    <text x="525" y="167" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">650.000</text>
+    <rect x="502" y="177.5" width="46" height="162.5" fill="#0066ff"/>
+    <text x="575" y="105" font-weight="bold" font-size="13" text-anchor="middle" fill="#000">900.000</text>
+    <rect x="552" y="115" width="46" height="225" fill="#ff6600"/>
+  </g>
+</svg></div>
+<p>Jika tren perubahan keuntungan per unit akan terus berlanjut, pada bulan berapakah keuntungan per unit Smartphone akan mulai melampaui keuntungan per unit Laptop?</p>`,
+    options: [
+      '(a) Mei',
+      '(b) Juni',
+      '(c) Juli',
+      '(d) Agustus'
+    ]
+  },
+
+  // ---- SOAL 30 ----
+  {
+    id: 30,
+    type: 'pg',
+    topic: 'Matematika Dasar',
+    text: `<p>Perhatikan grafik jumlah pengguna transportasi umum di kota X berikut.</p>
+<div style="margin:1rem 0;"><svg viewBox="0 0 750 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grafik garis jumlah pengguna transportasi umum di Kota X" style="width:100%;max-width:620px;height:auto;display:block;margin:0 auto;font-family:inherit;color:#000">
+  <text x="375" y="35" font-weight="bold" font-size="18" text-anchor="middle" fill="#000">Jumlah Pengguna Transportasi Umum di Kota X</text>
+  <g transform="translate(80, 60)" fill="#000">
+    <line x1="40" y1="0" x2="40" y2="360" stroke="#000" stroke-width="2"/>
+    <line x1="40" y1="360" x2="620" y2="360" stroke="#000" stroke-width="2"/>
+    <text x="25" y="5" font-size="12" text-anchor="end">18.000</text>
+    <text x="25" y="45" font-size="12" text-anchor="end">16.000</text>
+    <text x="25" y="85" font-size="12" text-anchor="end">14.000</text>
+    <text x="25" y="125" font-size="12" text-anchor="end">12.000</text>
+    <text x="25" y="165" font-size="12" text-anchor="end">10.000</text>
+    <text x="25" y="205" font-size="12" text-anchor="end">8.000</text>
+    <text x="25" y="245" font-size="12" text-anchor="end">6.000</text>
+    <text x="25" y="285" font-size="12" text-anchor="end">4.000</text>
+    <text x="25" y="325" font-size="12" text-anchor="end">2.000</text>
+    <text x="25" y="365" font-size="12" text-anchor="end">0</text>
+    <text x="-180" y="-35" font-weight="bold" font-size="14" text-anchor="middle" transform="rotate(-90)">Jumlah Pengguna (Orang)</text>
+    <polyline points="100,160 200,120 300,140 400,90 500,66 600,94" fill="none" stroke="#0056b3" stroke-width="2.5"/>
+    <text x="100" y="145" font-weight="bold" font-size="12" text-anchor="middle">10.000</text>
+    <circle cx="100" cy="160" r="4.5" fill="#0056b3"/>
+    <text x="100" y="385" font-size="14" text-anchor="middle">Jan</text>
+    <text x="200" y="105" font-weight="bold" font-size="12" text-anchor="middle">12.000</text>
+    <circle cx="200" cy="120" r="4.5" fill="#0056b3"/>
+    <text x="200" y="385" font-size="14" text-anchor="middle">Feb</text>
+    <text x="300" y="125" font-weight="bold" font-size="12" text-anchor="middle">11.000</text>
+    <circle cx="300" cy="140" r="4.5" fill="#0056b3"/>
+    <text x="300" y="385" font-size="14" text-anchor="middle">Mar</text>
+    <text x="400" y="75" font-weight="bold" font-size="12" text-anchor="middle">13.500</text>
+    <circle cx="400" cy="90" r="4.5" fill="#0056b3"/>
+    <text x="400" y="385" font-size="14" text-anchor="middle">Apr</text>
+    <text x="500" y="51" font-weight="bold" font-size="12" text-anchor="middle">14.700</text>
+    <circle cx="500" cy="66" r="4.5" fill="#0056b3"/>
+    <text x="500" y="385" font-size="14" text-anchor="middle">Mei</text>
+    <text x="600" y="79" font-weight="bold" font-size="12" text-anchor="middle">13.300</text>
+    <circle cx="600" cy="94" r="4.5" fill="#0056b3"/>
+    <text x="600" y="385" font-size="14" text-anchor="middle">Jun</text>
+    <text x="350" y="420" font-weight="bold" font-size="14" text-anchor="middle">Bulan</text>
+  </g>
+</svg></div>
+<p>Berapakah rata-rata kenaikan jumlah pengguna pada bulan-bulan yang mengalami peningkatan dibandingkan bulan sebelumnya?</p>`,
+    options: [
+      '(a) 820',
+      '(b) 1.140',
+      '(c) 1.460',
+      '(d) 1.680',
+      '(e) 1.900'
+    ]
+  },
+];
+
+// ===================== STATE =====================
+let answers = {};
+let activeFilter = 'all';
+
+const TOPICS = ['all', ...new Set(soalData.map(s => s.topic))];
+
+// ===================== RENDER =====================
+function renderFilters() {
+  const row = document.getElementById('filter-row');
+  row.innerHTML = TOPICS.map(t => `
+    <button class="filter-btn ${t === activeFilter ? 'active' : ''}" onclick="setFilter('${t}')">
+      ${t === 'all' ? '✦ Semua Topik' : t}
+    </button>
+  `).join('');
+}
+
+function setFilter(topic) {
+  activeFilter = topic;
+  renderFilters();
+  renderQuestions();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  const filtered = activeFilter === 'all' ? soalData : soalData.filter(s => s.topic === activeFilter);
+
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><p>Tidak ada soal untuk topik ini.</p></div>`;
+    return;
+  }
+
+  const groups = {};
+  filtered.forEach(s => {
+    if (!groups[s.topic]) groups[s.topic] = [];
+    groups[s.topic].push(s);
+  });
+
+  let html = '';
+  let counter = 1;
+  Object.entries(groups).forEach(([topic, soals]) => {
+    html += `<div class="section-title"><span>◆</span> ${topic}</div>`;
+    soals.forEach(s => {
+      html += renderCard(s, counter++);
+    });
+  });
+
+  container.innerHTML = html;
+  typesetMath(container);
+
+  updateProgress(filtered);
+}
+
+function typesetMath(el) {
+  if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+    MathJax.startup.promise.then(() => MathJax.typesetPromise([el])).catch(err => console.error(err));
+  }
+}
+
+function renderCard(s, num) {
+  const typeLabel = s.type === 'pg' ? 'Pilihan Ganda' :
+                    s.type === 'ds' ? 'Pilihan Ganda' :
+                    s.type === 'bs' ? 'Benar / Salah' : 'Esai';
+  const badgeClass = s.type === 'esai' ? 'badge-esai' : s.type === 'bs' ? 'badge-bs' : 'badge-pg';
+
+  let body = '';
+
+  if (s.type === 'pg' || s.type === 'ds') {
+    let stmts = '';
+    if (s.statements) {
+      stmts = `<div class="info-box" style="margin-bottom:1rem">` +
+        s.statements.map(st => `${st.label} ${st.text}`).join('<br>') +
+        `</div>`;
+    }
+
+    const keys = ['a','b','c','d','e'];
+    const optHtml = s.options.map((opt, i) => `
+      <div class="option-item ${(answers[s.id] === i) ? 'selected' : ''}"
+           onclick="selectOption(${s.id}, ${i}, this)">
+        <span class="option-key">${keys[i] || String.fromCharCode(97+i)}.</span>
+        <span class="option-text">${opt.replace(/^\([a-e]\)\s*/,'')}</span>
+      </div>
+    `).join('');
+
+    body = stmts + `<div class="options-list">${optHtml}</div>`;
+
+  } else if (s.type === 'bs') {
+    const rows = s.bsItems.map((item, i) => `
+      <tr>
+        <td>${item.label}. ${item.text}</td>
+        <td>
+          <div class="bs-toggle">
+            <button class="bs-btn ${answers[s.id]?.[i] === 'B' ? 'active-b' : ''}"
+                    onclick="toggleBS(${s.id}, ${i}, 'B', this)">Benar</button>
+            <button class="bs-btn ${answers[s.id]?.[i] === 'S' ? 'active-s' : ''}"
+                    onclick="toggleBS(${s.id}, ${i}, 'S', this)">Salah</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+
+    body = `<table class="bs-table">
+      <thead><tr><th>Pernyataan</th><th>Jawaban</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+
+  } else {
+    body = `<div class="esai-area">
+      <textarea placeholder="Tuliskan jawaban dan langkah penyelesaian kamu di sini…"
+                oninput="saveEsai(${s.id}, this.value)">${answers[s.id] || ''}</textarea>
+    </div>`;
+  }
+
+  return `
+    <div class="q-card" id="card-${s.id}">
+      <div class="q-meta">
+        <span class="q-num">Soal ${num}</span>
+        <span class="q-type-badge ${badgeClass}">${typeLabel}</span>
+        <span class="q-topic">${s.topic}</span>
+      </div>
+      <div class="q-text">${s.text}</div>
+      ${body}
+    </div>
+  `;
+}
+
+// ===================== INTERACTIONS =====================
+function selectOption(id, idx, el) {
+  answers[id] = idx;
+  const card = document.getElementById('card-' + id);
+  card.querySelectorAll('.option-item').forEach((item, i) => {
+    item.classList.toggle('selected', i === idx);
+  });
+  updateProgressAll();
+}
+
+function toggleBS(id, itemIdx, val, btn) {
+  if (!answers[id]) answers[id] = {};
+  const current = answers[id][itemIdx];
+  if (current === val) {
+    answers[id][itemIdx] = null;
+  } else {
+    answers[id][itemIdx] = val;
+  }
+  const toggle = btn.parentElement;
+  const [btnB, btnS] = toggle.querySelectorAll('.bs-btn');
+  btnB.className = 'bs-btn' + (answers[id][itemIdx] === 'B' ? ' active-b' : '');
+  btnS.className = 'bs-btn' + (answers[id][itemIdx] === 'S' ? ' active-s' : '');
+  updateProgressAll();
+}
+
+function saveEsai(id, val) {
+  answers[id] = val;
+  updateProgressAll();
+}
+
+function isAnswered(s) {
+  if (s.type === 'pg' || s.type === 'ds') return answers[s.id] !== undefined;
+  if (s.type === 'bs') {
+    if (!answers[s.id]) return false;
+    return s.bsItems.some((_, i) => answers[s.id][i]);
+  }
+  if (s.type === 'esai') return answers[s.id] && answers[s.id].trim().length > 0;
+  return false;
+}
+
+function updateProgress(filtered) { updateProgressAll(); }
+function updateProgressAll() {
+  const filtered = activeFilter === 'all' ? soalData : soalData.filter(s => s.topic === activeFilter);
+  const done = filtered.filter(isAnswered).length;
+  const total = filtered.length;
+  document.getElementById('prog-text').textContent = `${done} / ${total} dijawab`;
+  document.getElementById('prog-fill').style.width = total ? (done/total*100)+'%' : '0%';
+}
+
+// ===================== INIT =====================
+renderFilters();
+renderQuestions();
+</script>
+</body>
+</html>
