@@ -242,13 +242,20 @@
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 0.9rem 1.2rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 0.75rem 0;
-    color: var(--accent);
+    color: var(--text);
     overflow-x: auto;
-    white-space: pre;
+    text-align: center;
   }
+
+  /* MathJax */
+  mjx-container { color: inherit; font-size: 88% !important; }
+  mjx-container[display="true"] { font-size: 82% !important; }
+  .q-text mjx-container[display="true"] { margin: 0.4rem 0 !important; padding: 0.35em 0 0.45em; overflow-x: auto; overflow-y: visible; max-width: 100%; }
+  .q-text .math-block { padding-top: 1rem; padding-bottom: 1.1rem; overflow-y: visible; }
+  .q-text .math-block mjx-container[display="true"] { margin: 0 !important; }
+  .option-text mjx-container, .bs-table mjx-container, .info-box mjx-container { max-width: 100%; }
 
   .q-text .info-box {
     background: rgba(36,113,163,0.06);
@@ -483,6 +490,17 @@
     .header-progress .progress-bar { display: none; }
   }
 </style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
 <body>
 
@@ -1764,18 +1782,18 @@ const soalData = [
     id: 1,
     type: 'pg',
     topic: 'Barisan & Deret',
-    text: `Barisan bilangan real x₁, x₂, x₃, … memenuhi:
+    text: `Barisan bilangan real \\(x_1, x_2, x_3, \\ldots\\) memenuhi:
 
-<div class="math-block">(xₙ − xₙ₋₂)/2 = (n mod 2) + ((n+1) mod 2)/2,    n > 2</div>
+<div class="math-block">\\[\\frac{x_n - x_{n-2}}{2} = (n \\bmod 2) + \\frac{(n+1) \\bmod 2}{2}, \\quad n \\gt 2\\]</div>
 
 Diketahui rata-rata nilai suku pertama dan kedua adalah 2, dengan perbandingan nilai masing-masing suku secara berturut-turut adalah 3 : 1.
 
 Berapakah banyaknya dari empat pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
 <div class="info-box">
-(1) x₃ + x₄ ≥ x₅<br>
-(2) x₂₀₂₄ − x₂₀₂₂ = 1<br>
-(3) x₂₀₂₅ + x₂₀₂₃ ≤ x₃₂₀₀ + x₃₄₀₀<br>
-(4) Hasil penjumlahan xₙ untuk setiap n genap mulai dari x₂ + ⋯ + x₂₀₀ ≥ 5000
+(1) \\(x_3 + x_4 \\ge x_5\\)<br>
+(2) \\(x_{2024} - x_{2022} = 1\\)<br>
+(3) \\(x_{2025} + x_{2023} \\le x_{3200} + x_{3400}\\)<br>
+(4) Hasil penjumlahan \\(x_n\\) untuk setiap \\(n\\) genap mulai dari \\(x_2 + \\cdots + x_{200} \\ge 5000\\)
 </div>`,
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
@@ -1785,14 +1803,14 @@ Berapakah banyaknya dari empat pernyataan berikut yang bernilai benar berdasarka
     id: 2,
     type: 'ds',
     topic: 'Teori Bilangan',
-    text: `Diberikan suatu FPB(x, y) = p dengan nilai x > y dan x, y ∈ ℕ, serta diberikan juga suatu FPB(x − y, x + y) = q.
+    text: `Diberikan suatu \\(\\text{FPB}(x, y) = p\\) dengan nilai \\(x \\gt y\\) dan \\(x, y \\in \\mathbb{N}\\), serta diberikan juga suatu \\(\\text{FPB}(x - y, x + y) = q\\).
 
-Apakah perkalian x dan y menghasilkan bilangan bulat positif yang genap?
+Apakah perkalian \\(x\\) dan \\(y\\) menghasilkan bilangan bulat positif yang genap?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'q merupakan bilangan genap' },
-      { label: '(2)', text: 'p merupakan bilangan ganjil' },
+      { label: '(1)', text: '\\(q\\) merupakan bilangan genap' },
+      { label: '(2)', text: '\\(p\\) merupakan bilangan ganjil' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -1808,13 +1826,13 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 3,
     type: 'bs',
     topic: 'Barisan & Deret',
-    text: `Terdapat suatu barisan aritmatika dengan 3 suku pertamanya adalah x, y, z. Jika FPB dari setiap 2 bilangan asli x, y, dan z adalah 2, maka didefinisikan x(y−5)/2 = 9 dan z − x = 4 dengan 7 < y < 11.
+    text: `Terdapat suatu barisan aritmatika dengan 3 suku pertamanya adalah \\(x, y, z\\). Jika FPB dari setiap 2 bilangan asli \\(x, y\\), dan \\(z\\) adalah 2, maka didefinisikan \\(\\frac{x(y-5)}{2} = 9\\) dan \\(z - x = 4\\) dengan \\(7 \\lt y \\lt 11\\).
 
 Berdasarkan informasi berikut, manakah pernyataan di bawah ini yang bernilai benar?`,
     bsItems: [
       { label: '1', text: 'Beda dari setiap suku ke-n adalah 3.' },
-      { label: '2', text: 'Jika u₁ + u₂ + u₃ + ⋯ + uₙ = 63.750, maka n = 250.' },
-      { label: '3', text: 'Nilai dari U₅₀₅₀ − U₄₉₉₉ menghasilkan bilangan genap.' },
+      { label: '2', text: 'Jika \\(u_1 + u_2 + u_3 + \\cdots + u_n = 63.750\\), maka \\(n = 250\\).' },
+      { label: '3', text: 'Nilai dari \\(U_{5050} - U_{4999}\\) menghasilkan bilangan genap.' },
     ]
   },
 
@@ -1831,12 +1849,12 @@ Berdasarkan informasi berikut, manakah pernyataan di bawah ini yang bernilai ben
     id: 5,
     type: 'ds',
     topic: 'Teori Bilangan',
-    text: `Diberikan dua buah bilangan m dan n adalah bilangan prima. Apakah (7 − m) · (6 − n) adalah bilangan genap?
+    text: `Diberikan dua buah bilangan \\(m\\) dan \\(n\\) adalah bilangan prima. Apakah \\((7 - m) \\cdot (6 - n)\\) adalah bilangan genap?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pernyataan berikut.`,
     statements: [
-      { label: 'i.', text: 'm < 4' },
-      { label: 'ii.', text: 'n > 20' },
+      { label: 'i.', text: '\\(m \\lt 4\\)' },
+      { label: 'ii.', text: '\\(n \\gt 20\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -1852,9 +1870,9 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pernyataan b
     id: 6,
     type: 'esai',
     topic: 'Kombinatorika',
-    text: `Diberikan tiga buah bilangan a, b, c yang boleh sama antar satu sama lain. Bilangan a, b, c haruslah anggota dari himpunan {1, 2, 3, 4, 5}. Selain itu, jumlah dari bilangan tersebut haruslah 9.
+    text: `Diberikan tiga buah bilangan \\(a, b, c\\) yang boleh sama antar satu sama lain. Bilangan \\(a, b, c\\) haruslah anggota dari himpunan \\(\\{1, 2, 3, 4, 5\\}\\). Selain itu, jumlah dari bilangan tersebut haruslah 9.
 
-Maka, banyaknya kemungkinan pasangan (a, b, c) yang dapat dipilih adalah …`
+Maka, banyaknya kemungkinan pasangan \\((a, b, c)\\) yang dapat dipilih adalah …`
   },
 
   // ---- SOAL 7: Barisan Geometri ----
@@ -1862,9 +1880,9 @@ Maka, banyaknya kemungkinan pasangan (a, b, c) yang dapat dipilih adalah …`
     id: 7,
     type: 'pg',
     topic: 'Barisan & Deret',
-    text: `Diberikan barisan bilangan 2, 4a, 32, −128, … merupakan barisan geometri. Kemudian, diberikan beberapa pernyataan sebagai berikut.
+    text: `Diberikan barisan bilangan \\(2, 4a, 32, -128, \\ldots\\) merupakan barisan geometri. Kemudian, diberikan beberapa pernyataan sebagai berikut.
 <div class="info-box">
-1. Nilai a habis dibagi 4<br>
+1. Nilai \\(a\\) habis dibagi 4<br>
 2. Selisih antara suku-suku ganjilnya selalu genap<br>
 3. Jumlahan dari 10 suku pertamanya habis dibagi 2<br>
 4. Suku ke-2024 habis dibagi 4
@@ -1878,7 +1896,7 @@ Berapa banyaknya dari empat pernyataan berikut yang bernilai benar berdasarkan i
     id: 8,
     type: 'pg',
     topic: 'Fungsi',
-    text: `Diketahui fungsi f(x) = x² − 5x + 6 dan g(c) = √c + 2.
+    text: `Diketahui fungsi \\(f(x) = x^2 - 5x + 6\\) dan \\(g(c) = \\sqrt{c} + 2\\).
 
 <div style="margin:1rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
 <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
@@ -1887,7 +1905,7 @@ Berapa banyaknya dari empat pernyataan berikut yang bernilai benar berdasarkan i
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">B</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center">f(g(c)) untuk c = 4 atau 16</td>
+<td style="padding:0.7rem 1rem;text-align:center">\\(f(g(c))\\) untuk \\(c = 4\\) atau \\(16\\)</td>
 <td style="padding:0.7rem 1rem;text-align:center">5</td>
 </tr>
 </table>
@@ -1902,9 +1920,9 @@ Kesimpulan yang tepat dari soal tersebut adalah …`,
     id: 9,
     type: 'esai',
     topic: 'Aljabar',
-    text: `Diketahui V = 21² + 21² + ⋯ + 21² (hasil penjumlahan bilangan 21² sebanyak n). Jika:
-<div class="math-block">√V = 21²</div>
-Maka nilai n adalah …`
+    text: `Diketahui \\(V = 21^2 + 21^2 + \\cdots + 21^2\\) (hasil penjumlahan bilangan \\(21^2\\) sebanyak \\(n\\)). Jika:
+<div class="math-block">\\[\\sqrt{V} = 21^2\\]</div>
+Maka nilai \\(n\\) adalah …`
   },
 
   // ---- SOAL 10: Tabel fungsi ----
@@ -1947,7 +1965,7 @@ Maka nilai n adalah …`
 </table>
 </div>
 
-Nilai dari f(g(h(f⁻¹(2)))) adalah …`,
+Nilai dari \\(f(g(h(f^{-1}(2))))\\) adalah …`,
     options: ['(a) 3', '(b) 2', '(c) 1', '(d) 0', '(e) −1']
   },
 
@@ -1956,7 +1974,7 @@ Nilai dari f(g(h(f⁻¹(2)))) adalah …`,
     id: 11,
     type: 'pg',
     topic: 'Fungsi',
-    text: `Suatu fungsi kuadrat f(x) = ax² + bx + 2 memiliki titik puncak di (2, p) dan melewati (−1, 0).
+    text: `Suatu fungsi kuadrat \\(f(x) = ax^2 + bx + 2\\) memiliki titik puncak di \\((2, p)\\) dan melewati \\((-1, 0)\\).
 
 <div style="margin:1rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
 <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
@@ -1965,14 +1983,14 @@ Nilai dari f(g(h(f⁻¹(2)))) adalah …`,
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">Q</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">a + b + p</td>
+<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">\\(a + b + p\\)</td>
 <td style="padding:0.7rem 1rem;text-align:center">5</td>
 </tr>
 </table>
 </div>
 
 Manakah hubungan P dan Q yang tepat?`,
-    options: ['(a) P > Q', '(b) P < Q', '(c) P = Q', '(d) Informasi yang diberikan tidak cukup']
+    options: ['(a) \\(P \\gt Q\\)', '(b) \\(P \\lt Q\\)', '(c) \\(P = Q\\)', '(d) Informasi yang diberikan tidak cukup']
   },
 
   // ---- SOAL 12: Fungsi kuadrat — 4 pernyataan ----
@@ -1980,14 +1998,14 @@ Manakah hubungan P dan Q yang tepat?`,
     id: 12,
     type: 'pg',
     topic: 'Fungsi',
-    text: `Suatu fungsi kuadrat f(x) = ax² + bx + 2 memiliki titik puncak di (2, p) dan melewati (−1, 0).
+    text: `Suatu fungsi kuadrat \\(f(x) = ax^2 + bx + 2\\) memiliki titik puncak di \\((2, p)\\) dan melewati \\((-1, 0)\\).
 
 Ada berapakah pernyataan berikut ini yang pasti benar?
 <div class="info-box">
-1. Nilai dari a × b × p < 0<br>
-2. Nilai dari a × b − p < 0<br>
+1. Nilai dari \\(a \\times b \\times p \\lt 0\\)<br>
+2. Nilai dari \\(a \\times b - p \\lt 0\\)<br>
 3. Titik puncak berada di kuadran 1<br>
-4. Salah satu akar persamaan kuadrat ax² + bx + 2 = 0 lebih dari x = 4
+4. Salah satu akar persamaan kuadrat \\(ax^2 + bx + 2 = 0\\) lebih dari \\(x = 4\\)
 </div>`,
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
@@ -1997,14 +2015,14 @@ Ada berapakah pernyataan berikut ini yang pasti benar?
     id: 13,
     type: 'ds',
     topic: 'Geometri',
-    text: `Diberikan △ABC dengan titik D pada segmen BC sehingga AD merupakan garis bagi sudut dalam ∠A. Diketahui juga AB + 2 = AC + 1 = AD + 3.
+    text: `Diberikan \\(\\triangle ABC\\) dengan titik \\(D\\) pada segmen \\(BC\\) sehingga \\(AD\\) merupakan garis bagi sudut dalam \\(\\angle A\\). Diketahui juga \\(AB + 2 = AC + 1 = AD + 3\\).
 
-Berapakah panjang segmen CD?
+Berapakah panjang segmen \\(CD\\)?
 
 Putuskan apakah pernyataan 1 dan 2 berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '1.', text: 'AB = 5' },
-      { label: '2.', text: 'BD = 2' },
+      { label: '1.', text: '\\(AB = 5\\)' },
+      { label: '2.', text: '\\(BD = 2\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2022,10 +2040,10 @@ Putuskan apakah pernyataan 1 dan 2 berikut cukup untuk menjawab pertanyaan terse
     topic: 'Teori Bilangan',
     text: `Terdapat notasi modulo yang merupakan sisa dari suatu pembagian sebuah bilangan dengan bilangan lainnya. Berikut contohnya:
 <div class="info-box">
-• 16 (mod 5) = 1 &nbsp; (16 dibagi 5 menghasilkan 3 dengan sisa 1)<br>
-• 26 (mod 12) = 2 &nbsp; (26 dibagi 12 menghasilkan 2 dengan sisa 2)
+• \\(16 \\pmod{5} = 1\\) &nbsp; (16 dibagi 5 menghasilkan 3 dengan sisa 1)<br>
+• \\(26 \\pmod{12} = 2\\) &nbsp; (26 dibagi 12 menghasilkan 2 dengan sisa 2)
 </div>
-Maka, (1 + 2 + 3 + ⋯ + 2011 + 2012) (mod 2013) = …`,
+Maka, \\((1 + 2 + 3 + \\cdots + 2011 + 2012) \\pmod{2013} = \\ldots\\)`,
     options: ['(a) 0', '(b) 1', '(c) 1006', '(d) 1007', '(e) Tidak ada jawaban yang benar']
   },
 
@@ -2034,13 +2052,13 @@ Maka, (1 + 2 + 3 + ⋯ + 2011 + 2012) (mod 2013) = …`,
     id: 15,
     type: 'bs',
     topic: 'Fungsi',
-    text: `Fungsi h didefinisikan sebagai h(x) = √(a − x/2) dengan h(6) = 2.
+    text: `Fungsi \\(h\\) didefinisikan sebagai \\(h(x) = \\sqrt{a - \\frac{x}{2}}\\) dengan \\(h(6) = 2\\).
 
-Jika h⁻¹(x) adalah fungsi invers dari h(x), maka manakah dari tiga pernyataan berikut yang bernilai benar berdasarkan informasi di atas?`,
+Jika \\(h^{-1}(x)\\) adalah fungsi invers dari \\(h(x)\\), maka manakah dari tiga pernyataan berikut yang bernilai benar berdasarkan informasi di atas?`,
     bsItems: [
-      { label: '1', text: 'h⁻¹(1) = 12' },
-      { label: '2', text: 'h⁻¹(2) = 10' },
-      { label: '3', text: 'h⁻¹(3) = −4' },
+      { label: '1', text: '\\(h^{-1}(1) = 12\\)' },
+      { label: '2', text: '\\(h^{-1}(2) = 10\\)' },
+      { label: '3', text: '\\(h^{-1}(3) = -4\\)' },
     ]
   },
 
@@ -2049,9 +2067,9 @@ Jika h⁻¹(x) adalah fungsi invers dari h(x), maka manakah dari tiga pernyataan
     id: 16,
     type: 'esai',
     topic: 'Kombinatorika',
-    text: `Misalkan bilangan <em>a</em> dipilih dari himpunan bilangan ganjil positif yang kurang dari 10 serta bilangan <em>b</em> dipilih dari himpunan {1, 2, 4, 7, 9}. Peluang <em>ab</em> bernilai ganjil adalah x/y dengan x dan y pasangan bilangan bulat yang saling koprima.
+    text: `Misalkan bilangan <em>a</em> dipilih dari himpunan bilangan ganjil positif yang kurang dari 10 serta bilangan <em>b</em> dipilih dari himpunan \\(\\{1, 2, 4, 7, 9\\}\\). Peluang <em>ab</em> bernilai ganjil adalah \\(\\frac{x}{y}\\) dengan \\(x\\) dan \\(y\\) pasangan bilangan bulat yang saling koprima.
 
-Nilai dari x + y = …`
+Nilai dari \\(x + y = \\ldots\\)`
   },
 
   // ---- SOAL 17: Garis k melalui kuadran II — DS ----
@@ -2059,12 +2077,12 @@ Nilai dari x + y = …`
     id: 17,
     type: 'ds',
     topic: 'Fungsi',
-    text: `Garis <em>k</em> ditentukan oleh persamaan y = f(x) = mx + c dengan m ≠ 0 dan c ≠ 0. Apakah garis <em>k</em> melalui kuadran II?
+    text: `Garis <em>k</em> ditentukan oleh persamaan \\(y = f(x) = mx + c\\) dengan \\(m \\ne 0\\) dan \\(c \\ne 0\\). Apakah garis <em>k</em> melalui kuadran II?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'f(1) = 0' },
-      { label: '(2)', text: 'c = 3' },
+      { label: '(1)', text: '\\(f(1) = 0\\)' },
+      { label: '(2)', text: '\\(c = 3\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2080,12 +2098,12 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 18,
     type: 'pg',
     topic: 'Teori Bilangan',
-    text: `Diketahui r dan s berturut-turut bilangan asli berurutan dengan r &lt; s. Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+    text: `Diketahui \\(r\\) dan \\(s\\) berturut-turut bilangan asli berurutan dengan \\(r \\lt s\\). Berapakah dari pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
 <div class="info-box">
-(1) (r + s)² &gt; r² + s²<br>
-(2) r² + s² adalah bilangan genap<br>
-(3) r² − rs + s² adalah bilangan genap<br>
-(4) r² − s² &lt; 0
+(1) \\((r + s)^2 \\gt r^2 + s^2\\)<br>
+(2) \\(r^2 + s^2\\) adalah bilangan genap<br>
+(3) \\(r^2 - rs + s^2\\) adalah bilangan genap<br>
+(4) \\(r^2 - s^2 \\lt 0\\)
 </div>`,
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
@@ -2095,7 +2113,7 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 19,
     type: 'esai',
     topic: 'Fungsi',
-    text: `Nilai maksimum suatu fungsi kuadrat f adalah 9 dan grafik fungsi tersebut melalui titik (−4, 0) dan titik (2, 0). Jika grafik fungsi f memotong sumbu-y di titik (m, n), nilai m + n = …`
+    text: `Nilai maksimum suatu fungsi kuadrat \\(f\\) adalah 9 dan grafik fungsi tersebut melalui titik \\((-4, 0)\\) dan titik \\((2, 0)\\). Jika grafik fungsi \\(f\\) memotong sumbu-\\(y\\) di titik \\((m, n)\\), nilai \\(m + n = \\ldots\\)`
   },
 
   // ---- SOAL 20: Luas daerah arsiran ADEC (gambar 11pk) ----
@@ -2107,10 +2125,10 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
 
 <div class="svg-figure" id="svg-container-20"></div>
 
-Jika ADEC adalah persegi panjang, berapa luas daerah arsiran? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
+Jika \\(ADEC\\) adalah persegi panjang, berapa luas daerah arsiran? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '1.', text: 'BD = 15' },
-      { label: '2.', text: 'AD = 12' },
+      { label: '1.', text: '\\(BD = 15\\)' },
+      { label: '2.', text: '\\(AD = 12\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2130,7 +2148,7 @@ Jika ADEC adalah persegi panjang, berapa luas daerah arsiran? Putuskan apakah pe
 
 <div class="svg-figure" id="svg-container-21"></div>
 
-Jika x + y + z = 270° dan 2x + z = 360°, maka nilai sudut y adalah …°`,
+Jika \\(x + y + z = 270^\\circ\\) dan \\(2x + z = 360^\\circ\\), maka nilai sudut \\(y\\) adalah \\(\\ldots^\\circ\\)`,
     options: ['(a) 15', '(b) 30', '(c) 45', '(d) 60', '(e) 90']
   },
 
@@ -2139,12 +2157,12 @@ Jika x + y + z = 270° dan 2x + z = 360°, maka nilai sudut y adalah …°`,
     id: 22,
     type: 'ds',
     topic: 'Geometri',
-    text: `Jika sebuah trapesium ABCD merupakan sebuah trapesium yang sama kaki dengan titik sudutnya adalah A(0, 0), B(8, 0), C(2, g), D(6, g). Apakah garis <em>l</em> : y = mx + c memotong trapesium ABCD?
+    text: `Jika sebuah trapesium \\(ABCD\\) merupakan sebuah trapesium yang sama kaki dengan titik sudutnya adalah \\(A(0, 0), B(8, 0), C(2, g), D(6, g)\\). Apakah garis <em>l</em> : \\(y = mx + c\\) memotong trapesium \\(ABCD\\)?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'm > 0 dan c < g' },
-      { label: '(2)', text: 'm < 0 dan c > 0' },
+      { label: '(1)', text: '\\(m \\gt 0\\) dan \\(c \\lt g\\)' },
+      { label: '(2)', text: '\\(m \\lt 0\\) dan \\(c \\gt 0\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2160,15 +2178,13 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 23,
     type: 'pg',
     topic: 'Aljabar',
-    text: `Misalkan p, q, r adalah bilangan real sehingga diberikan persamaan berikut.
+    text: `Misalkan \\(p, q, r\\) adalah bilangan real sehingga diberikan persamaan berikut.
 
-<div class="math-block">(p + q + r)(1/p + 1/q + 1/r) = 1</div>
+<div class="math-block">\\[(p + q + r)\\left(\\frac{1}{p} + \\frac{1}{q} + \\frac{1}{r}\\right) = 1\\]</div>
 
 Maka nilai yang mungkin dari
 
-<div class="math-block">       1                 1              1              1
-─────────────────  −  ───────────  −  ───────────  −  ───────────  = …
-(p + q + r)²⁸⁰⁵²⁰²⁵   p²⁸⁰⁵²⁰²⁵     q²⁸⁰⁵²⁰²⁵     r²⁸⁰⁵²⁰²⁵</div>`,
+<div class="math-block">\\[\\frac{1}{(p+q+r)^{28052025}} - \\frac{1}{p^{28052025}} - \\frac{1}{q^{28052025}} - \\frac{1}{r^{28052025}} = \\ldots\\]</div>`,
     options: ['(a) 0', '(b) 100', '(c) 10.000', '(d) 1.000.000', '(e) 100.000.000']
   },
 
@@ -2177,16 +2193,16 @@ Maka nilai yang mungkin dari
     id: 24,
     type: 'bs',
     topic: 'Teori Bilangan',
-    text: `Misalkan p₁, p₂, p₃, …, pₖ adalah bilangan-bilangan prima berbeda yang membagi habis n untuk bilangan bulat n > 1. Nilai dari φ(n) dapat dihitung sebagai berikut.
+    text: `Misalkan \\(p_1, p_2, p_3, \\ldots, p_k\\) adalah bilangan-bilangan prima berbeda yang membagi habis \\(n\\) untuk bilangan bulat \\(n \\gt 1\\). Nilai dari \\(\\varphi(n)\\) dapat dihitung sebagai berikut.
 
-<div class="math-block">φ(n) = n · (1 − 1/p₁) · (1 − 1/p₂) · (1 − 1/p₃) ··· (1 − 1/pₖ)</div>
+<div class="math-block">\\[\\varphi(n) = n \\cdot \\left(1 - \\frac{1}{p_1}\\right)\\left(1 - \\frac{1}{p_2}\\right)\\left(1 - \\frac{1}{p_3}\\right) \\cdots \\left(1 - \\frac{1}{p_k}\\right)\\]</div>
 
 Tentukan apakah pernyataan-pernyataan berikut bernilai BENAR atau SALAH!`,
     bsItems: [
-      { label: '1', text: 'φ(70) < φ(72)' },
-      { label: '2', text: 'Jika φ(n) = 4/5 · n, maka n tidak habis dibagi 5.' },
-      { label: '3', text: 'Jika n adalah bilangan bulat yang habis dibagi 2, maka φ(n) ≤ 1/2 · n.' },
-      { label: '4', text: 'Jika p dan q adalah dua bilangan prima berbeda, maka φ(pq) = φ(p) · φ(q).' },
+      { label: '1', text: '\\(\\varphi(70) \\lt \\varphi(72)\\)' },
+      { label: '2', text: 'Jika \\(\\varphi(n) = \\frac{4}{5} \\cdot n\\), maka \\(n\\) tidak habis dibagi 5.' },
+      { label: '3', text: 'Jika \\(n\\) adalah bilangan bulat yang habis dibagi 2, maka \\(\\varphi(n) \\le \\frac{1}{2} \\cdot n\\).' },
+      { label: '4', text: 'Jika \\(p\\) dan \\(q\\) adalah dua bilangan prima berbeda, maka \\(\\varphi(pq) = \\varphi(p) \\cdot \\varphi(q)\\).' },
     ]
   },
 
@@ -2199,7 +2215,7 @@ Tentukan apakah pernyataan-pernyataan berikut bernilai BENAR atau SALAH!`,
 
 <div class="svg-figure" id="svg-container-25"></div>
 
-Jika panjang PQ = QR = RS = 6 cm, luas daerah arsir adalah aπ − 18√b cm².
+Jika panjang \\(PQ = QR = RS = 6\\) cm, luas daerah arsir adalah \\(a\\pi - 18\\sqrt{b}\\ \\text{cm}^2\\).
 
 Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q berikut yang benar?
 
@@ -2210,7 +2226,7 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">Q</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">a + b</td>
+<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">\\(a + b\\)</td>
 <td style="padding:0.7rem 1rem;text-align:center">30</td>
 </tr>
 </table>
@@ -2227,18 +2243,18 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
     id: 26,
     type: 'esai',
     topic: 'Fungsi',
-    text: `Sebuah fungsi f(x) dengan x ∈ ℝ didefinisikan sebagai berikut.
+    text: `Sebuah fungsi \\(f(x)\\) dengan \\(x \\in \\mathbb{R}\\) didefinisikan sebagai berikut.
 
 <div class="svg-figure" id="svg-container-26" style="background:transparent;border:none;padding:0.5rem 0"></div>
 
-Nilai dari f(4) − f(1) − f(−1) − f(0) + f(−4) adalah …`
+Nilai dari \\(f(4) - f(1) - f(-1) - f(0) + f(-4)\\) adalah …`
   },
   // ---- SOAL 27: Ketaksamaan a,b — P vs Q ----
   {
     id: 27,
     type: 'pg',
     topic: 'Aljabar',
-    text: `Diketahui a, b ∈ ℤ dengan −1/2 ≤ 1/a ≤ −1/5 dan 1/12 < 1/(b − 3) < 1/7.
+    text: `Diketahui \\(a, b \\in \\mathbb{Z}\\) dengan \\(-\\frac{1}{2} \\le \\frac{1}{a} \\le -\\frac{1}{5}\\) dan \\(\\frac{1}{12} \\lt \\frac{1}{b-3} \\lt \\frac{1}{7}\\).
 
 Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q berikut yang benar?
 
@@ -2249,8 +2265,8 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">Q</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">Nilai maksimum dari (−2a + 11) / b</td>
-<td style="padding:0.7rem 1rem;text-align:center">21/10</td>
+<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">Nilai maksimum dari \\(\\frac{-2a + 11}{b}\\)</td>
+<td style="padding:0.7rem 1rem;text-align:center">\\(\\frac{21}{10}\\)</td>
 </tr>
 </table>
 </div>`,
@@ -2272,11 +2288,11 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
 
 Himpunan berikut yang dinyatakan oleh daerah yang diarsir adalah …`,
     options: [
-      '(a) [C − (A ∩ B)] ∩ [(A ∩ B) − C]',
-      '(b) [C − (A ∪ B)] ∪ [(A ∩ B) − C]',
-      '(c) [C − (A ∩ B)] ∩ [(A ∪ B) − C]',
-      '(d) [C − (A ∪ B)] ∪ [C − (A ∩ B)]',
-      '(e) [C − (A ∩ B)] ∩ [C − (A ∩ B)]'
+      '(a) \\([C \\setminus (A \\cap B)] \\cap [(A \\cap B) \\setminus C]\\)',
+      '(b) \\([C \\setminus (A \\cup B)] \\cup [(A \\cap B) \\setminus C]\\)',
+      '(c) \\([C \\setminus (A \\cap B)] \\cap [(A \\cup B) \\setminus C]\\)',
+      '(d) \\([C \\setminus (A \\cup B)] \\cup [C \\setminus (A \\cap B)]\\)',
+      '(e) \\([C \\setminus (A \\cap B)] \\cap [C \\setminus (A \\cap B)]\\)'
     ]
   },
   // ---- SOAL 29: Data bilangan asli terurut 2,x,8,11,y ----
@@ -2284,12 +2300,12 @@ Himpunan berikut yang dinyatakan oleh daerah yang diarsir adalah …`,
     id: 29,
     type: 'pg',
     topic: 'Statistika',
-    text: `Diberikan data bilangan asli terurut 2, x, 8, 11, y. Berapakah banyaknya dari empat pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
+    text: `Diberikan data bilangan asli terurut \\(2, x, 8, 11, y\\). Berapakah banyaknya dari empat pernyataan berikut yang bernilai benar berdasarkan informasi di atas?
 <div class="info-box">
-(1) Jangkauannya 18 jika y = 20.<br>
-(2) Rata-ratanya 10 jika x + y = 29.<br>
+(1) Jangkauannya 18 jika \\(y = 20\\).<br>
+(2) Rata-ratanya 10 jika \\(x + y = 29\\).<br>
 (3) Mediannya adalah 8.<br>
-(4) Jika x + y = 18 untuk x, y ∈ bilangan prima, maka y − x terkecil bernilai 6.
+(4) Jika \\(x + y = 18\\) untuk \\(x, y \\in\\) bilangan prima, maka \\(y - x\\) terkecil bernilai 6.
 </div>`,
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
@@ -2299,12 +2315,12 @@ Himpunan berikut yang dinyatakan oleh daerah yang diarsir adalah …`,
     id: 30,
     type: 'ds',
     topic: 'Aljabar',
-    text: `Diketahui x dan y merupakan penyelesaian suatu persamaan dengan x + y ≠ 0. Apakah x > y?
+    text: `Diketahui \\(x\\) dan \\(y\\) merupakan penyelesaian suatu persamaan dengan \\(x + y \\ne 0\\). Apakah \\(x \\gt y\\)?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'x² + 2xy + y² = 3x + 3y' },
-      { label: '(2)', text: '2x = 2y + 7' },
+      { label: '(1)', text: '\\(x^2 + 2xy + y^2 = 3x + 3y\\)' },
+      { label: '(2)', text: '\\(2x = 2y + 7\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2320,12 +2336,12 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 31,
     type: 'ds',
     topic: 'Geometri',
-    text: `Diketahui titik A = (2, 3), B = (6, 2), dan C = (p, q) memenuhi |AB| = |BC|. Berapakah koordinat titik C?
+    text: `Diketahui titik \\(A = (2, 3)\\), \\(B = (6, 2)\\), dan \\(C = (p, q)\\) memenuhi \\(|AB| = |BC|\\). Berapakah koordinat titik \\(C\\)?
 
 Putuskan apakah pernyataan berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'Titik A, B, dan C kolinear.' },
-      { label: '(2)', text: 'Titik C terletak di kuadran I.' },
+      { label: '(1)', text: 'Titik \\(A\\), \\(B\\), dan \\(C\\) kolinear.' },
+      { label: '(2)', text: 'Titik \\(C\\) terletak di kuadran I.' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2341,13 +2357,13 @@ Putuskan apakah pernyataan berikut cukup untuk menjawab pertanyaan tersebut.`,
     id: 32,
     type: 'bs',
     topic: 'Aljabar',
-    text: `Diketahui x merupakan bilangan real yang memenuhi persamaan ³log x² = 4.
+    text: `Diketahui \\(x\\) merupakan bilangan real yang memenuhi persamaan \\({}^{3}\\log x^{2} = 4\\).
 
 Berdasarkan informasi di atas, tentukan apakah setiap pernyataan berikut bernilai BENAR atau SALAH.`,
     bsItems: [
-      { label: '1', text: 'Nilai x = 9 memenuhi persamaan yang diberikan pada soal.' },
-      { label: '2', text: 'Nilai x = −9 memenuhi persamaan yang diberikan pada soal.' },
-      { label: '3', text: 'Hasil pembagian nilai x terbesar yang mungkin dengan nilai x terkecil yang mungkin adalah 1.' },
+      { label: '1', text: 'Nilai \\(x = 9\\) memenuhi persamaan yang diberikan pada soal.' },
+      { label: '2', text: 'Nilai \\(x = -9\\) memenuhi persamaan yang diberikan pada soal.' },
+      { label: '3', text: 'Hasil pembagian nilai \\(x\\) terbesar yang mungkin dengan nilai \\(x\\) terkecil yang mungkin adalah 1.' },
     ]
   },
 
@@ -2357,7 +2373,7 @@ Berdasarkan informasi di atas, tentukan apakah setiap pernyataan berikut bernila
     type: 'ds',
     topic: 'Statistika',
     text: `Perhatikan kumpulan data sebagai berikut:
-<div class="math-block">3, 5, 3, 2, a, 2, 4</div>
+<div class="math-block">\\[3, 5, 3, 2, a, 2, 4\\]</div>
 Berapakah median dari data tersebut? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
       { label: '(1)', text: 'Mean data tersebut adalah 3.' },
@@ -2378,8 +2394,8 @@ Berapakah median dari data tersebut? Putuskan apakah pernyataan (1) dan (2) beri
     type: 'pg',
     topic: 'Barisan & Deret',
     text: `Diketahui sebuah barisan yang memenuhi
-<div class="math-block">aₙ + aₙ₊₁ = (n − 1)²</div>
-dengan aₙ adalah suku ke-n pada barisan dan a₁₀ = 50.
+<div class="math-block">\\[a_n + a_{n+1} = (n - 1)^2\\]</div>
+dengan \\(a_n\\) adalah suku ke-\\(n\\) pada barisan dan \\(a_{10} = 50\\).
 
 Jumlah suku ke-8 hingga suku ke-12 barisan tersebut adalah …`,
     options: ['(a) 176', '(b) 185', '(c) 199', '(d) 209', '(e) 234']
@@ -2390,7 +2406,7 @@ Jumlah suku ke-8 hingga suku ke-12 barisan tersebut adalah …`,
     id: 36,
     type: 'pg',
     topic: 'Aljabar',
-    text: `Lambang ⌈a⌉ menyatakan bilangan bulat terkecil yang lebih besar daripada atau sama dengan bilangan real a. Sebagai contoh, ⌈4,2⌉ = 5. Bilangan bulat v merupakan suatu solusi 6 < 2⌈x² − 2x + 1⌉ < 10.
+    text: `Lambang \\(\\lceil a \\rceil\\) menyatakan bilangan bulat terkecil yang lebih besar daripada atau sama dengan bilangan real \\(a\\). Sebagai contoh, \\(\\lceil 4{,}2 \\rceil = 5\\). Bilangan bulat \\(v\\) merupakan suatu solusi \\(6 \\lt 2\\lceil x^2 - 2x + 1 \\rceil \\lt 10\\).
 
 Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q berikut yang benar?
 
@@ -2401,7 +2417,7 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">Q</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">2v</td>
+<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">\\(2v\\)</td>
 <td style="padding:0.7rem 1rem;text-align:center">8</td>
 </tr>
 </table>
@@ -2419,14 +2435,14 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
     id: 37,
     type: 'pg',
     topic: 'Teori Bilangan',
-    text: `FPB dari tiga buah bilangan cacah berbeda k, l, m dengan m > 4 adalah 2. Jika (l + 2) : k = 6 dan km = 32.
+    text: `FPB dari tiga buah bilangan cacah berbeda \\(k, l, m\\) dengan \\(m \\gt 4\\) adalah 2. Jika \\((l + 2) : k = 6\\) dan \\(km = 32\\).
 <div class="info-box">
-(1) Hasil bagi bilangan terbesar dan terkecil dari suatu pasangan k, l, m adalah 5 dan bersisa 2<br>
-(2) Selisih kedua bilangan terkecil dari suatu pasangan k, l, m adalah 2<br>
-(3) Ada 3 pasang k, l, m yang mungkin<br>
+(1) Hasil bagi bilangan terbesar dan terkecil dari suatu pasangan \\(k, l, m\\) adalah 5 dan bersisa 2<br>
+(2) Selisih kedua bilangan terkecil dari suatu pasangan \\(k, l, m\\) adalah 2<br>
+(3) Ada 3 pasang \\(k, l, m\\) yang mungkin<br>
 (4) KPK dari ketiga bilangan tersebut kurang dari 100
 </div>
-Pernyataan yang benar untuk nilai k, l, m yang mungkin ada …`,
+Pernyataan yang benar untuk nilai \\(k, l, m\\) yang mungkin ada …`,
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
 
@@ -2435,13 +2451,13 @@ Pernyataan yang benar untuk nilai k, l, m yang mungkin ada …`,
     id: 38,
     type: 'bs',
     topic: 'Barisan & Deret',
-    text: `Barisan bilangan bulat a₁, a₂, … memenuhi aₙ₊₁ = 2 − 3aₙ untuk setiap bilangan asli n dan a₃ = 14.
+    text: `Barisan bilangan bulat \\(a_1, a_2, \\ldots\\) memenuhi \\(a_{n+1} = 2 - 3a_n\\) untuk setiap bilangan asli \\(n\\) dan \\(a_3 = 14\\).
 
 Berdasarkan informasi di atas, tentukan apakah setiap pernyataan berikut bernilai BENAR atau SALAH.`,
     bsItems: [
-      { label: '1', text: 'a₂ bernilai positif' },
-      { label: '2', text: 'a₄ = 42' },
-      { label: '3', text: 'a₂₀ − a₂₁ habis dibagi 3' },
+      { label: '1', text: '\\(a_2\\) bernilai positif' },
+      { label: '2', text: '\\(a_4 = 42\\)' },
+      { label: '3', text: '\\(a_{20} - a_{21}\\) habis dibagi 3' },
     ]
   },
 
@@ -2450,14 +2466,14 @@ Berdasarkan informasi di atas, tentukan apakah setiap pernyataan berikut bernila
     id: 39,
     type: 'ds',
     topic: 'Barisan & Deret',
-    text: `Barisan bilangan real c₁, c₂, … memenuhi
-<div class="math-block">cₙ₊₁ = ½cₙ − 3 untuk setiap bilangan asli n.</div>
-Apakah cₙ merupakan bilangan ganjil untuk setiap bilangan asli n?
+    text: `Barisan bilangan real \\(c_1, c_2, \\ldots\\) memenuhi
+<div class="math-block">\\[c_{n+1} = \\frac{1}{2}c_n - 3 \\quad \\text{untuk setiap bilangan asli } n.\\]</div>
+Apakah \\(c_n\\) merupakan bilangan ganjil untuk setiap bilangan asli \\(n\\)?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'c₅ = −5' },
-      { label: '(2)', text: 'c₂ = −6' },
+      { label: '(1)', text: '\\(c_5 = -5\\)' },
+      { label: '(2)', text: '\\(c_2 = -6\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2472,10 +2488,10 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 40,
     type: 'pg',
     topic: 'Geometri',
-    text: `Secarik kertas berbentuk segiempat ABCD berukuran 4 cm × 16 cm dilipat disepanjang garis MN sehingga titik C berimpit dengan titik A, seperti pada gambar. Luas ANMD&#8242; adalah …
+    text: `Secarik kertas berbentuk segiempat \\(ABCD\\) berukuran \\(4 \\text{ cm} \\times 16 \\text{ cm}\\) dilipat disepanjang garis \\(MN\\) sehingga titik \\(C\\) berimpit dengan titik \\(A\\), seperti pada gambar. Luas \\(ANMD'\\) adalah …
 
 <div class="svg-figure" id="svg-container-40"></div>`,
-    options: ['(a) 28 cm²', '(b) 30 cm²', '(c) 32 cm²', '(d) 48 cm²', '(e) 56 cm²']
+    options: ['(a) 28 cm\\(^2\\)', '(b) 30 cm\\(^2\\)', '(c) 32 cm\\(^2\\)', '(d) 48 cm\\(^2\\)', '(e) 56 cm\\(^2\\)']
   },
   // ---- SOAL 41: Sistem persamaan linier x+ay=b — DS ----
   {
@@ -2483,14 +2499,13 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     type: 'ds',
     topic: 'Aljabar',
     text: `Apakah sistem persamaan linier :
-<div class="math-block">x + ay = b
-(a + 1)x + 2y = 3</div>
-tidak memiliki solusi untuk x dan y?
+<div class="math-block">\\[\\begin{cases} x + ay = b \\\\ (a + 1)x + 2y = 3 \\end{cases}\\]</div>
+tidak memiliki solusi untuk \\(x\\) dan \\(y\\)?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut.`,
     statements: [
-      { label: '(1)', text: 'a² + a − 2 = 0' },
-      { label: '(2)', text: '|a − b| = 3' },
+      { label: '(1)', text: '\\(a^2 + a - 2 = 0\\)' },
+      { label: '(2)', text: '\\(|a - b| = 3\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2522,7 +2537,7 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
 Susunan kata sandi tersebut memenuhi ketentuan:
 <div class="info-box">
 • angka pertama genap<br>
-• angka kedua berasal dari {0, 1, 2, 3, 4}<br>
+• angka kedua berasal dari \\(\\{0, 1, 2, 3, 4\\}\\)<br>
 • huruf pertama bukan U, dan<br>
 • huruf kedua E
 </div>
@@ -2535,9 +2550,9 @@ Banyaknya semua kata sandi yang dapat disusun adalah …`,
     id: 43,
     type: 'pg',
     topic: 'Fungsi',
-    text: `Misalkan f adalah fungsi yang memenuhi
-<div class="math-block">3x f(3x) − f(1/x) = 6/x</div>
-untuk x ≠ 0, maka f(−1) = …`,
+    text: `Misalkan \\(f\\) adalah fungsi yang memenuhi
+<div class="math-block">\\[3x\\,f(3x) - f\\!\\left(\\frac{1}{x}\\right) = \\frac{6}{x}\\]</div>
+untuk \\(x \\ne 0\\), maka \\(f(-1) = \\ldots\\)`,
     options: ['(a) −5', '(b) −3', '(c) 6', '(d) 12', '(e) 24']
   },
 
@@ -2546,12 +2561,12 @@ untuk x ≠ 0, maka f(−1) = …`,
     id: 44,
     type: 'pg',
     topic: 'Aljabar',
-    text: `Diberikan dua bilangan real a dan b. Diantara 4 pernyataan ini, tentukan banyak pernyataan yang benar.
+    text: `Diberikan dua bilangan real \\(a\\) dan \\(b\\). Diantara 4 pernyataan ini, tentukan banyak pernyataan yang benar.
 <div class="info-box">
-(1) Jika a &lt; b dan a, b ≠ 0, maka 1/b &lt; 1/a<br>
-(2) Jika c adalah suatu bilangan real dan a &lt; b, maka ac &lt; bc<br>
-(3) Jika c adalah suatu bilangan real dan a &lt; b, maka a + c &lt; b + c<br>
-(4) Jika a² &lt; b², maka a &lt; b
+(1) Jika \\(a \\lt b\\) dan \\(a, b \\ne 0\\), maka \\(\\frac{1}{b} \\lt \\frac{1}{a}\\)<br>
+(2) Jika \\(c\\) adalah suatu bilangan real dan \\(a \\lt b\\), maka \\(ac \\lt bc\\)<br>
+(3) Jika \\(c\\) adalah suatu bilangan real dan \\(a \\lt b\\), maka \\(a + c \\lt b + c\\)<br>
+(4) Jika \\(a^2 \\lt b^2\\), maka \\(a \\lt b\\)
 </div>`,
     options: ['(a) 0', '(b) 1', '(c) 2', '(d) 3', '(e) 4']
   },
@@ -2561,13 +2576,13 @@ untuk x ≠ 0, maka f(−1) = …`,
     id: 45,
     type: 'esai',
     topic: 'Fungsi',
-    text: `Diberikan fungsi kuadrat P(x) yang memenuhi ketiga kondisi berikut:
+    text: `Diberikan fungsi kuadrat \\(P(x)\\) yang memenuhi ketiga kondisi berikut:
 <div class="info-box">
-• P(12) = P(16)<br>
-• P(20) = 24<br>
-• P(x) mempunyai solusi tunggal
+• \\(P(12) = P(16)\\)<br>
+• \\(P(20) = 24\\)<br>
+• \\(P(x)\\) mempunyai solusi tunggal
 </div>
-Tentukan nilai dari P(28).`
+Tentukan nilai dari \\(P(28)\\).`
   },
 
   // ---- SOAL 46: Notasi a|b — BS ----
@@ -2575,13 +2590,13 @@ Tentukan nilai dari P(28).`
     id: 46,
     type: 'bs',
     topic: 'Teori Bilangan',
-    text: `Diketahui bahwa notasi a | b berarti a habis membagi b. Contohnya, karena 3 habis membagi 6, maka 3 | 6.
+    text: `Diketahui bahwa notasi \\(a \\mid b\\) berarti \\(a\\) habis membagi \\(b\\). Contohnya, karena 3 habis membagi 6, maka \\(3 \\mid 6\\).
 
-Untuk setiap bilangan bulat a, b, c, d, tentukan apakah pernyataan berikut bernilai BENAR atau SALAH.`,
+Untuk setiap bilangan bulat \\(a, b, c, d\\), tentukan apakah pernyataan berikut bernilai BENAR atau SALAH.`,
     bsItems: [
-      { label: '1', text: 'Jika a | c dan b | d maka ab | cd.' },
-      { label: '2', text: 'Jika ab | bc dan b ≠ 0, maka a | c' },
-      { label: '3', text: 'Jika a | b dan b | c, maka a | c' },
+      { label: '1', text: 'Jika \\(a \\mid c\\) dan \\(b \\mid d\\) maka \\(ab \\mid cd\\).' },
+      { label: '2', text: 'Jika \\(ab \\mid bc\\) dan \\(b \\ne 0\\), maka \\(a \\mid c\\)' },
+      { label: '3', text: 'Jika \\(a \\mid b\\) dan \\(b \\mid c\\), maka \\(a \\mid c\\)' },
     ]
   },
 
@@ -2590,11 +2605,11 @@ Untuk setiap bilangan bulat a, b, c, d, tentukan apakah pernyataan berikut berni
     id: 47,
     type: 'ds',
     topic: 'Statistika',
-    text: `Lima bilangan bulat positif a, b, c, d, dan e memiliki median dan modus sama dengan 5. Berapakah rata-rata kelima bilangan?
+    text: `Lima bilangan bulat positif \\(a, b, c, d\\), dan \\(e\\) memiliki median dan modus sama dengan 5. Berapakah rata-rata kelima bilangan?
 
 Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut!`,
     statements: [
-      { label: '(1)', text: 'a = b dan c = d = e' },
+      { label: '(1)', text: '\\(a = b\\) dan \\(c = d = e\\)' },
       { label: '(2)', text: 'Jangkauan 4' },
     ],
     options: [
@@ -2611,7 +2626,7 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 48,
     type: 'pg',
     topic: 'Trigonometri',
-    text: `Diketahui cos α = −2 sin α, dengan α adalah sudut tumpul. Manakah hubungan yang benar antara kuantitas P dan Q berikut berdasarkan informasi yang diberikan?
+    text: `Diketahui \\(\\cos \\alpha = -2 \\sin \\alpha\\), dengan \\(\\alpha\\) adalah sudut tumpul. Manakah hubungan yang benar antara kuantitas P dan Q berikut berdasarkan informasi yang diberikan?
 
 <div style="margin:1rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
 <table style="width:100%;border-collapse:collapse;font-size:0.88rem;">
@@ -2620,12 +2635,12 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">Q</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">Nilai sin α · cos α</td>
-<td style="padding:0.7rem 1rem;text-align:center">−0,5 ≤ Q ≤ −0,3</td>
+<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">Nilai \\(\\sin \\alpha \\cdot \\cos \\alpha\\)</td>
+<td style="padding:0.7rem 1rem;text-align:center">\\(-0{,}5 \\le Q \\le -0{,}3\\)</td>
 </tr>
 </table>
 </div>`,
-    options: ['(a) P > Q', '(b) P < Q', '(c) P = Q', '(d) Informasi yang diberikan tidak cukup untuk memutuskan salah satu dari tiga pilihan di atas']
+    options: ['(a) \\(P \\gt Q\\)', '(b) \\(P \\lt Q\\)', '(c) \\(P = Q\\)', '(d) Informasi yang diberikan tidak cukup untuk memutuskan salah satu dari tiga pilihan di atas']
   },
 
   // ---- SOAL 49: Garis k memotong parabola y = x² − 6 — DS ----
@@ -2633,10 +2648,10 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 49,
     type: 'ds',
     topic: 'Fungsi',
-    text: `Apakah garis k memotong parabola y = x² − 6? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut?`,
+    text: `Apakah garis \\(k\\) memotong parabola \\(y = x^2 - 6\\)? Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan tersebut?`,
     statements: [
-      { label: '(1)', text: 'Garis k melalui titik asal.' },
-      { label: '(2)', text: 'Gradien garis k sama dengan −1' },
+      { label: '(1)', text: 'Garis \\(k\\) melalui titik asal.' },
+      { label: '(2)', text: 'Gradien garis \\(k\\) sama dengan \\(-1\\)' },
     ],
     options: [
       'Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup',
@@ -2651,17 +2666,17 @@ Putuskan apakah pernyataan (1) dan (2) berikut cukup untuk menjawab pertanyaan t
     id: 50,
     type: 'pg',
     topic: 'Geometri',
-    text: `Segitiga ABC sama kaki dengan AB = AC. Titik E terletak di tengah garis AB. Titik D dan F terletak di ruas garis AC sehingga ED ⊥ AC, BF ⊥ AC. DE = 10, ∠BED = 120°. Luas △ABC = …
+    text: `Segitiga \\(ABC\\) sama kaki dengan \\(AB = AC\\). Titik \\(E\\) terletak di tengah garis \\(AB\\). Titik \\(D\\) dan \\(F\\) terletak di ruas garis \\(AC\\) sehingga \\(ED \\perp AC\\), \\(BF \\perp AC\\). \\(DE = 10\\), \\(\\angle BED = 120^\\circ\\). Luas \\(\\triangle ABC = \\ldots\\)
 
 <div class="svg-figure" id="svg-container-50"></div>`,
-    options: ['(A) 200', '(B) 200√3', '(C) 100√2', '(D) 100', '(E) 50√3']
+    options: ['(A) 200', '(B) \\(200\\sqrt{3}\\)', '(C) \\(100\\sqrt{2}\\)', '(D) 100', '(E) \\(50\\sqrt{3}\\)']
   },
   // ---- SOAL 34: Operasi * tabel — P vs Q ----
   {
     id: 34,
     type: 'pg',
     topic: 'Teori Bilangan',
-    text: `Tabel berikut menyajikan operasi *.
+    text: `Tabel berikut menyajikan operasi \\(*\\).
 
 <div style="margin:1rem 0;background:var(--surface2);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
 <table style="border-collapse:collapse;font-size:0.9rem;margin:0 auto;">
@@ -2725,7 +2740,7 @@ Berdasarkan informasi yang diberikan, manakah hubungan antara kuantitas P dan Q 
 <th style="padding:0.6rem 1rem;text-align:center;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:var(--text-muted)">Q</th>
 </tr>
 <tr>
-<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">(3 * 4) * 7</td>
+<td style="padding:0.7rem 1rem;text-align:center;border-right:1px solid var(--border)">\\((3 * 4) * 7\\)</td>
 <td style="padding:0.7rem 1rem;text-align:center">5</td>
 </tr>
 </table>
@@ -2833,7 +2848,16 @@ function renderQuestions() {
     if (tmpl50) svgContainer50.innerHTML = tmpl50.innerHTML;
   }
 
+  typesetMath(container);
   updateProgress(filtered);
+}
+
+function typesetMath(el) {
+  // Setelah MathJax siap, render ulang konten dinamis. Saat pertama dimuat, MathJax
+  // memproses seluruh halaman sendiri (pageReady), sehingga cukup dilewati.
+  if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+    MathJax.startup.promise.then(() => MathJax.typesetPromise([el])).catch(err => console.error(err));
+  }
 }
 
 function renderCard(s, num) {
