@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Soal PM — Penalaran Matematika</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0e8;
+    --surface: #fffdf8;
+    --surface2: #f0ebe0;
+    --border: #ddd6c8;
+    --accent: #c05c1a;
+    --accent2: #a04a10;
+    --text: #2a2218;
+    --text-muted: #8a7a66;
+    --correct: #2d8a5e;
+    --wrong: #c0392b;
+    --blue: #2471a3;
+    --radius: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -15%;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(192,92,26,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(245,240,232,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .header-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .header-logo span {
+    color: var(--text-muted);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 0.95rem;
+  }
+
+  .header-progress {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .progress-bar {
+    width: 120px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(192,92,26,0.08);
+    border: 1px solid rgba(192,92,26,0.22);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero h1 em {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .hero p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 460px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8rem;
+    padding: 0.45rem 1rem;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fffdf8;
+    font-weight: 600;
+  }
+
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(16px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .q-card:hover { border-color: rgba(232,201,122,0.3); }
+
+  .q-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(192,92,26,0.08);
+    border: 1px solid rgba(192,92,26,0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .q-type-badge {
+    font-size: 0.68rem;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+  }
+  .badge-pg   { background: rgba(36,113,163,0.1); color: var(--blue); border: 1px solid rgba(36,113,163,0.25); }
+  .badge-bs   { background: rgba(45,138,94,0.1); color: var(--correct); border: 1px solid rgba(45,138,94,0.25); }
+  .badge-esai { background: rgba(192,92,26,0.08); color: var(--accent2); border: 1px solid rgba(192,92,26,0.22); }
+
+  .q-topic {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .q-text {
+    font-size: 0.98rem;
+    line-height: 1.75;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .q-text .math-block {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 1rem;
+    margin: 0.75rem 0;
+    color: var(--text);
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  /* MathJax */
+  mjx-container { color: inherit; font-size: 88% !important; }
+  mjx-container[display="true"] { font-size: 82% !important; }
+  .q-text mjx-container[display="true"] { margin: 0.4rem 0 !important; padding: 0.35em 0 0.45em; overflow-x: auto; overflow-y: visible; max-width: 100%; }
+  .q-text .math-block { padding-top: 1rem; padding-bottom: 1.1rem; overflow-y: visible; }
+  .q-text .math-block mjx-container[display="true"] { margin: 0 !important; }
+  .option-text mjx-container, .bs-table mjx-container, .info-box mjx-container { max-width: 100%; }
+
+  .q-text .info-box {
+    background: rgba(36,113,163,0.06);
+    border-left: 3px solid var(--blue);
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+    color: #1a4e6e;
+    line-height: 1.6;
+  }
+
+  .svg-figure {
+    display: flex;
+    justify-content: center;
+    margin: 1.2rem 0;
+    padding: 0.5rem 0;
+    background: none;
+    border: none;
+  }
+
+  .svg-figure svg {
+    max-width: 640px;
+    width: 100%;
+    height: auto;
+  }
+
+
+  .fig-dummy {
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    border: 2px dashed var(--text-muted);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(138,122,102,0.07) 10px, rgba(138,122,102,0.07) 20px);
+  }
+  .fig-dummy.square { aspect-ratio: 1 / 1; max-width: 300px; }
+  .fig-dummy small { font-size: 0.72rem; opacity: 0.8; }
+  .svg-figure img { max-width: 100%; height: auto; }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0.8rem 1.1rem;
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+  }
+
+  .option-item:hover {
+    border-color: var(--accent);
+    background: rgba(192,92,26,0.06);
+  }
+
+  .option-item.selected {
+    border-color: var(--accent);
+    background: rgba(192,92,26,0.09);
+  }
+
+  .option-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--accent);
+    min-width: 1.4rem;
+    padding-top: 1px;
+  }
+
+  .option-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .bs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .bs-table th {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'DM Mono', monospace;
+    color: var(--text-muted);
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .bs-table th:not(:first-child) { text-align: center; }
+
+  .bs-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid rgba(46,44,39,0.5);
+    vertical-align: middle;
+  }
+
+  .bs-table tr:last-child td { border-bottom: none; }
+  .bs-table td:not(:first-child) { text-align: center; }
+
+  .bs-toggle {
+    display: inline-flex;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    gap: 0;
+  }
+
+  .bs-btn {
+    padding: 0.3rem 0.9rem;
+    font-size: 0.78rem;
+    font-family: 'DM Mono', monospace;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    transition: all 0.15s;
+  }
+
+  .bs-btn:hover { color: var(--text); }
+  .bs-btn.active-b { background: rgba(111,207,151,0.2); color: var(--correct); }
+  .bs-btn.active-s { background: rgba(235,87,87,0.15); color: var(--wrong); }
+
+  .esai-area {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0.2rem;
+    transition: border-color 0.2s;
+  }
+  .esai-area:focus-within { border-color: var(--accent); }
+
+  .esai-area textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    padding: 0.8rem 1rem;
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .esai-area textarea::placeholder { color: var(--text-muted); }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 0.65rem 1.4rem;
+    border-radius: 9px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .btn-outline:hover { border-color: var(--text-muted); color: var(--text); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fffdf8;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+
+  .page-indicator {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .empty {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+  .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .empty p { font-size: 0.9rem; }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2.5rem 0 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-title span { color: var(--accent); }
+
+  .sub-q {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--border);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+
+  @media(max-width:600px){
+    .container { padding: 2rem 1rem 5rem; }
+    .q-card { padding: 1.5rem 1.2rem; }
+    header { padding: 0 1rem; }
+    .header-progress .progress-bar { display: none; }
+  }
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)']],
+    displayMath: [['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script async id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">Latihan<em> PM</em></div>
+  <div class="header-progress">
+    <span id="prog-text">0 / 0 dijawab</span>
+    <div class="progress-bar"><div class="progress-fill" id="prog-fill"></div></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-badge">📐 PM Series</div>
+    <h1>Latihan Soal<br><em>Penalaran Matematika</em></h1>
+    <p>Kerjakan soal-soal di bawah tanpa penilaian otomatis. Gunakan sebagai bahan latihan mandiri.</p>
+  </div>
+
+  <div class="filter-row" id="filter-row"></div>
+  <div id="questions-container"></div>
+
+</div>
+
+<script>
+const keretaSvg = (u) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 450" style="width:100%;max-width:640px;height:auto;display:block;margin:0 auto">
+        <!-- Latar Belakang Kuning Pucat -->
+        
+
+        <!-- Gradien untuk Cerobong Asap -->
+        <defs>
+            <linearGradient id="chimGrad${u}" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a1a1a" />
+                <stop offset="100%" stop-color="#e6e6e6" />
+            </linearGradient>
+        </defs>
+
+        <!-- Badan Kereta (Boiler) -->
+        <rect x="280" y="145" width="500" height="105" fill="#e6e6e6" stroke="black" stroke-width="2" />
+
+        <!-- Cerobong Asap -->
+        <polygon points="610,55 710,55 690,145 630,145" fill="url(#chimGrad${u})" stroke="black" stroke-width="2" />
+
+        <!-- Kabin -->
+        <rect x="115" y="55" width="165" height="220" fill="#e6e6e6" stroke="black" stroke-width="2" />
+
+        <!-- Jendela Kabin -->
+        <rect x="147.5" y="85" width="100" height="60" fill="white" stroke="black" stroke-width="2" />
+        <line x1="197.5" y1="85" x2="197.5" y2="145" stroke="black" stroke-width="2" />
+
+        <!-- Lampu/Kotak Depan -->
+        <rect x="780" y="165" width="12" height="35" fill="#e6e6e6" stroke="black" stroke-width="2" />
+        <rect x="792" y="172" width="12" height="21" fill="#e6e6e6" stroke="black" stroke-width="2" />
+
+        <!-- Penyapu Rintangan (Cowcatcher) -->
+        <polygon points="780,250 825,315 780,315" fill="#e6e6e6" stroke="black" stroke-width="2" />
+
+        <!-- Penanda Atas Boiler -->
+        <!-- Garis Tunggal (di atas Roda Besar Kiri) -->
+        <line x1="370" y1="133" x2="370" y2="157" stroke="black" stroke-width="3" />
+        <!-- Garis Ganda (di atas Roda Besar Kanan) -->
+        <line x1="546" y1="133" x2="546" y2="157" stroke="black" stroke-width="3" />
+        <line x1="554" y1="133" x2="554" y2="157" stroke="black" stroke-width="3" />
+
+        <!-- Roda Kereta (Digambar setelah badan kereta agar menindih) -->
+        <!-- Roda R1 (Besar Kiri) -->
+        <circle cx="370" cy="250" r="80" fill="white" stroke="black" stroke-width="2" />
+        <circle cx="370" cy="250" r="74" fill="none" stroke="black" stroke-width="2" />
+        <line x1="370" y1="250" x2="426.5" y2="193.5" stroke="black" stroke-width="2" />
+
+        <!-- Roda R2 (Besar Kanan) -->
+        <circle cx="550" cy="250" r="80" fill="white" stroke="black" stroke-width="2" />
+        <circle cx="550" cy="250" r="74" fill="none" stroke="black" stroke-width="2" />
+        <line x1="550" y1="250" x2="606.5" y2="193.5" stroke="black" stroke-width="2" />
+
+        <!-- Roda r4 (Kecil Kiri) -->
+        <circle cx="170" cy="285" r="45" fill="white" stroke="black" stroke-width="2" />
+        <circle cx="170" cy="285" r="40" fill="none" stroke="black" stroke-width="2" />
+        <line x1="170" y1="285" x2="201.8" y2="253.2" stroke="black" stroke-width="2" />
+
+        <!-- Roda r3 (Kecil Kanan) -->
+        <circle cx="730" cy="285" r="45" fill="white" stroke="black" stroke-width="2" />
+        <circle cx="730" cy="285" r="40" fill="none" stroke="black" stroke-width="2" />
+        <line x1="730" y1="285" x2="761.8" y2="253.2" stroke="black" stroke-width="2" />
+
+        <!-- Garis Tanah (Track) -->
+        <line x1="50" y1="330" x2="900" y2="330" stroke="black" stroke-width="3.5" />
+
+        <!-- Titik Tanda di Tanah -->
+        <line x1="170" y1="330" x2="170" y2="345" stroke="black" stroke-width="4" />
+        <line x1="550" y1="330" x2="550" y2="345" stroke="black" stroke-width="4" />
+        <line x1="730" y1="330" x2="730" y2="345" stroke="black" stroke-width="4" />
+
+        <!-- Label Teks Kereta -->
+        <text x="197" y="215" font-family="sans-serif" font-size="34" text-anchor="middle" fill="black">IV</text>
+        <text x="730" y="215" font-family="sans-serif" font-size="34" text-anchor="middle" fill="black">III</text>
+
+        <!-- Label Huruf di Tanah -->
+        <text x="170" y="380" font-family="sans-serif" font-size="32" text-anchor="middle" fill="black">C</text>
+        <text x="550" y="380" font-family="sans-serif" font-size="32" text-anchor="middle" fill="black">A</text>
+        <text x="730" y="380" font-family="sans-serif" font-size="32" text-anchor="middle" fill="black">B</text>
+
+        <!-- Label Jari-jari Roda -->
+        <text x="393" y="205" font-family="serif" font-style="italic" font-size="22" text-anchor="end" fill="black">R1</text>
+        <text x="573" y="205" font-family="serif" font-style="italic" font-size="22" text-anchor="end" fill="black">R2</text>
+        <text x="177" y="295" font-family="serif" font-style="italic" font-size="22" text-anchor="start" fill="black">r4</text>
+        <text x="737" y="295" font-family="serif" font-style="italic" font-size="22" text-anchor="start" fill="black">r3</text>
+    </svg>`;
+const stemKereta = (u) => `Gambar berikut merupakan kereta api yang memiliki roda dengan jari-jari \\(R_1 = R_2 \\ne R_3 \\ne R_4\\). Terdapat titik \\(A\\), \\(B\\), dan \\(C\\) berturut-turut pada tepi roda dengan jari-jari \\(R_2\\), \\(R_3\\), dan \\(R_4\\).
+
+<div class="svg-figure">${keretaSvg(u)}</div>`;
+const stemKotak = `Terdapat 64 kotak yang diberi nomor mulai dari 1 sampai 64. Kotak-kotak tersebut diisi kelereng warna merah dan putih dengan aturan kotak mulai dari nomor 1 sampai nomor 64 diisi kelereng merah sejumlah ganjil mulai dari 1 kelereng secara berurutan. Sebaliknya, kotak nomor 64 sampai nomor 1 diisi kelereng putih dengan beda 3 dimulai dari 1 kelereng secara berurutan.`;
+const stemStack = `<em>Cecilion</em> adalah hero yang harus mengumpulkan <em>stack</em> dengan menggunakan <em>skill</em>-nya kepada hero, minion, atau monster jungler. Oline adalah seorang <em>user</em> Cecilion, dia selalu bermain Cecilion di setiap pertandingannya, sampai dia sadar bahwa ada pola yang terbentuk saat dia mengumpulkan <em>stack</em>.
+
+Terdapat dua pola yang terbentuk saat mengumpulkan <em>stack</em>, yaitu saat Oline hanya menggunakan <em>skill</em> 1 (pola 1) dan menggunakan <em>skill</em> 1 dan 2 secara bersamaan (pola 2). Saat menggunakan pola 1, Oline berhasil mendapatkan 19 <em>stack</em> di menit ketiga dan 35 <em>stack</em> di menit kelima. Berbeda kondisi ketika Oline menggunakan pola 2, Oline mendapatkan 42 <em>stack</em> di menit keempat dan 78 <em>stack</em> di menit ketujuh.`;
+const soalData = [
+  // ---- SOAL 1 ----
+  {
+    id: 1,
+    type: 'pg',
+    topic: 'Perbandingan Putaran Roda',
+    text: `${stemKereta(1)}
+
+Jika perbandingan antara \\(R_2\\) dan \\(R_3\\) adalah \\(3 : 2\\), maka perbandingan banyaknya putaran antara \\(R_2\\) dan \\(R_3\\) adalah \\(\\ldots\\)`,
+    options: ['(a) \\(2 : 3\\)', '(b) \\(4 : 9\\)', '(c) \\(3 : 2\\)', '(d) \\(9 : 4\\)', '(e) \\(1 : 4\\)']
+  },
+
+  // ---- SOAL 2 ----
+  {
+    id: 2,
+    type: 'pg',
+    topic: 'Perbandingan Putaran Roda',
+    text: `${stemKereta(2)}
+
+Jika perbandingan antara \\(R_2\\) dan \\(R_3\\) adalah \\(9 : 7\\), maka titik \\(A\\) dan \\(B\\) akan bersama kembali saat \\(\\ldots\\)`,
+    options: [
+      '(a) \\(R_2\\) berputar sebanyak 9 kali atau kelipatannya',
+      '(b) \\(R_3\\) berputar sebanyak 28 kali atau kelipatannya',
+      '(c) \\(R_2\\) berputar sebanyak 21 kali atau kelipatannya',
+      '(d) \\(R_2\\) berputar sebanyak 17 kali atau kelipatannya',
+      '(e) \\(R_2\\) berputar sebanyak 7 kali atau kelipatannya'
+    ]
+  },
+
+  // ---- SOAL 3 ----
+  {
+    id: 3,
+    type: 'pg',
+    topic: 'Perbandingan Putaran Roda',
+    text: `${stemKereta(3)}
+
+Jika perbandingan antara \\(R_2 : R_3 : R_4 = 9 : 7 : 3\\), maka titik \\(A, B, C\\) akan bersama kembali saat \\(\\ldots\\)`,
+    options: [
+      '(a) \\(R_2\\) berputar sebanyak 9 kali atau kelipatannya',
+      '(b) \\(R_3\\) berputar sebanyak 28 kali atau kelipatannya',
+      '(c) \\(R_4\\) berputar sebanyak 30 kali atau kelipatannya',
+      '(d) \\(R_2\\) berputar sebanyak 7 kali atau kelipatannya',
+      '(e) \\(R_2\\) berputar sebanyak 17 kali atau kelipatannya'
+    ]
+  },
+
+  // ---- SOAL 4 ----
+  {
+    id: 4,
+    type: 'pg',
+    topic: 'Perbandingan Putaran Roda',
+    text: `${stemKereta(4)}
+
+Perhatikan roda bernomor berikut.
+
+<div class="svg-figure"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" style="width:100%;max-width:300px;height:auto;display:block;margin:0 auto"><circle cx="250" cy="250" r="180" fill="#c4c4c4" stroke="#6b6b6b" stroke-width="8" /><line x1="250" y1="70" x2="250" y2="430" stroke="#6b6b6b" stroke-width="2" /><line x1="340" y1="94.12" x2="160" y2="405.88" stroke="#6b6b6b" stroke-width="2" /><line x1="405.88" y1="160" x2="94.12" y2="340" stroke="#6b6b6b" stroke-width="2" /><line x1="430" y1="250" x2="70" y2="250" stroke="#6b6b6b" stroke-width="2" /><line x1="405.88" y1="340" x2="94.12" y2="160" stroke="#6b6b6b" stroke-width="2" /><line x1="340" y1="405.88" x2="160" y2="94.12" stroke="#6b6b6b" stroke-width="2" /><circle cx="250" cy="250" r="42" fill="#6b6b6b" /><text x="345" y="80" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="28" fill="black">3</text><text x="424" y="163" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="28" fill="black">4</text><text x="348" y="445" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="28" fill="black">5</text><text x="60" y="365" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="28" fill="black">1</text><text x="60" y="155" font-family="'Times New Roman', Times, serif" font-weight="bold" font-size="28" fill="black">2</text></svg></div>
+
+Jika perbandingan antara \\(R_2\\) dan \\(R_3\\) adalah \\(4 : 3\\) dan \\(R_2\\) berputar sebanyak 8 kali searah jarum jam, maka posisi titik \\(B\\) berada pada nomor \\(\\ldots\\)`,
+    options: ['(a) 1', '(b) 2', '(c) 3', '(d) 4', '(e) 5']
+  },
+  // ---- SOAL 5 ----
+  {
+    id: 5,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemKotak}
+
+Jika \\(U_n\\) menyatakan banyak kelereng putih pada kotak nomor \\(n\\), \\(U_n = \\ldots\\)`,
+    options: [
+      '(a) \\(193 - 3n,\\ n = 1, 2, \\ldots, 64\\)',
+      '(b) \\(193 + 3n,\\ n = 1, 2, \\ldots, 64\\)',
+      '(c) \\(193 - n,\\ n = 1, 2, \\ldots, 64\\)',
+      '(d) \\(192 - n,\\ n = 1, 2, \\ldots, 64\\)',
+      '(e) \\(192 + n,\\ n = 1, 2, \\ldots, 64\\)'
+    ]
+  },
+
+  // ---- SOAL 6 ----
+  {
+    id: 6,
+    type: 'bs',
+    topic: 'Barisan dan Deret Aritmetika',
+    bsLabels: ['Ya', 'Tidak'],
+    text: `${stemKotak}
+
+Klik pilihan kolom di sebelah kanan pernyataan yang sesuai dengan jawaban.`,
+    bsItems: [
+      { label: 'a', text: 'Banyak kelereng pada kotak nomor 64 adalah 128' },
+      { label: 'b', text: 'Banyak kelereng putih pada kotak nomor 4 adalah 181' },
+      { label: 'c', text: 'Selisih kelereng merah dan putih pada kotak nomor 11 adalah 141' }
+    ]
+  },
+
+  // ---- SOAL 7 ----
+  {
+    id: 7,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemKotak}
+
+Jumlah kelereng dari kotak nomor 1 sampai kotak nomor 4 adalah \\(\\ldots\\)`,
+    options: ['(a) 731', '(b) 750', '(c) 758', '(d) 819', '(e) 823']
+  },
+
+  // ---- SOAL 8 ----
+  {
+    id: 8,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemKotak}
+
+Setiap kotak mulai dari kotak nomor 1 diisi kelereng hijau sejumlah genap dimulai dari 2 kelereng secara berurutan, jumlah kelereng pada kotak nomor 5 sampai nomor 7 adalah \\(\\ldots\\)`,
+    options: ['(a) 590', '(b) 591', '(c) 592', '(d) 593', '(e) 594']
+  },
+  // ---- SOAL 9 ----
+  {
+    id: 9,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemStack}
+
+Selama pertandingan, Oline hanya menggunakan <em>skill</em> satu saja, berapakah <em>stack</em> yang ia dapat pada menit ke-10?`,
+    options: ['(a) 66', '(b) 75', '(c) 102', '(d) 94', '(e) 85']
+  },
+
+  // ---- SOAL 10 ----
+  {
+    id: 10,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemStack}
+
+Jika pada dua menit pertama Oline hanya menggunakan <em>skill</em> satu saja dan mulai menit ketiga hingga menit ke-12 menggunakan <em>skill</em> satu dan dua dengan asumsi pengumpulan <em>stack</em> masih berlanjut, berapa banyak <em>stack</em> Oline pada menit ke-12?`,
+    options: ['(a) 120', '(b) 136', '(c) 103', '(d) 149', '(e) 123']
+  },
+
+  // ---- SOAL 11 ----
+  {
+    id: 11,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemStack}
+
+Pada tiga menit pertama, Oline hanya menggunakan <em>skill</em> satu saja. Setelah itu, Oline menggunakan <em>skill</em> satu dan <em>skill</em> duanya untuk mengumpulkan <em>stack</em> sampai menit ke-\\(n\\) dalam keadaan <em>stack</em> tidak dilanjut dari tiga menit pertama. Jika suku ke-\\(n\\) menyatakan banyaknya <em>stack</em> yang terkumpul, maka \\(U_n = \\ldots\\)`,
+    options: [
+      '(a) \\(U_n = \\begin{cases} 8n-5, & 1 \\le n \\le 3 \\\\ 12n-6, & 4 \\le n \\end{cases}\\)',
+      '(b) \\(U_n = \\begin{cases} 8n-5, & 2 \\le n \\le 3 \\\\ 12n-6, & 5 \\le n \\end{cases}\\)',
+      '(c) \\(U_n = \\begin{cases} 7n-3, & 1 \\le n \\le 2 \\\\ 12n-2, & 1 \\le n \\end{cases}\\)',
+      '(d) \\(U_n = \\begin{cases} 8n-5, & 0 \\le n \\le 3 \\\\ 12n-6, & 4 \\le n \\end{cases}\\)',
+      '(e) \\(U_n = \\begin{cases} 4n-5, & 1 \\le n \\le 2 \\\\ 2n-6, & 3 \\le n \\end{cases}\\)'
+    ]
+  },
+
+  // ---- SOAL 12 ----
+  {
+    id: 12,
+    type: 'pg',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemStack}
+
+Diketahui bahwa Oline menggunakan pola kedua sejak awal pertandingan. <em>Turtle</em> muncul pada menit kedua, Oline menggunakan <em>ultimate</em> Cecilion untuk membantu tim dalam peperangan yang berlangsung selama satu menit dan mendapat tambahan <em>stack</em> sebanyak 20 ketika pola kedua digabung dengan <em>ultimate</em> Cecilion, berapakah jumlah <em>stack</em> yang terkumpul hingga menit ketiga?`,
+    options: ['(a) 80', '(b) 95', '(c) 74', '(d) 72', '(e) 100']
+  },
+
+  // ---- SOAL 13 ----
+  {
+    id: 13,
+    type: 'bs',
+    topic: 'Barisan dan Deret Aritmetika',
+    text: `${stemStack}
+
+Tentukan apakah pernyataan berikut bernilai benar atau salah!`,
+    bsItems: [
+      { label: 'a', text: 'Jumlah <em>stack</em> yang terkumpul hingga <em>game</em> selesai di menit ke-12 dengan menggunakan pola 2 adalah 834' },
+      { label: 'b', text: 'Berdasarkan \\(U_n\\) di Soal 11, <em>stack</em> yang didapat pada menit ketujuh adalah 74' },
+      { label: 'c', text: 'Menggunakan pola 1, <em>stack</em> yang didapat pada menit kelima adalah 30' }
+    ]
+  },
+];
+
+// ===================== STATE =====================
+let answers = {};
+let activeFilter = 'all';
+
+const TOPICS = ['all', ...new Set(soalData.map(s => s.topic))];
+
+// ===================== RENDER =====================
+function renderFilters() {
+  const row = document.getElementById('filter-row');
+  row.innerHTML = TOPICS.map(t => `
+    <button class="filter-btn ${t === activeFilter ? 'active' : ''}" onclick="setFilter('${t}')">
+      ${t === 'all' ? '✦ Semua Topik' : t}
+    </button>
+  `).join('');
+}
+
+function setFilter(topic) {
+  activeFilter = topic;
+  renderFilters();
+  renderQuestions();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  const filtered = activeFilter === 'all' ? soalData : soalData.filter(s => s.topic === activeFilter);
+
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><p>Tidak ada soal untuk topik ini.</p></div>`;
+    return;
+  }
+
+  const groups = {};
+  filtered.forEach(s => {
+    if (!groups[s.topic]) groups[s.topic] = [];
+    groups[s.topic].push(s);
+  });
+
+  let html = '';
+  let counter = 1;
+  Object.entries(groups).forEach(([topic, soals]) => {
+    html += `<div class="section-title"><span>◆</span> ${topic}</div>`;
+    soals.forEach(s => {
+      html += renderCard(s, counter++);
+    });
+  });
+
+  container.innerHTML = html;
+
+  typesetMath(container);
+  updateProgress(filtered);
+}
+
+function typesetMath(el) {
+  // Setelah MathJax siap, render ulang konten dinamis. Saat pertama dimuat, MathJax
+  // memproses seluruh halaman sendiri (pageReady), sehingga cukup dilewati.
+  if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
+    MathJax.startup.promise.then(() => MathJax.typesetPromise([el])).catch(err => console.error(err));
+  }
+}
+
+function renderCard(s, num) {
+  const typeLabel = s.type === 'pg' ? 'Pilihan Ganda' :
+                    s.type === 'ds' ? 'Pilihan Ganda' :
+                    s.type === 'bs' ? (s.bsLabels ? s.bsLabels.join(' / ') : 'Benar / Salah') : 'Esai';
+  const badgeClass = s.type === 'esai' ? 'badge-esai' : s.type === 'bs' ? 'badge-bs' : 'badge-pg';
+
+  let body = '';
+
+  if (s.type === 'pg' || s.type === 'ds') {
+    let stmts = '';
+    if (s.statements) {
+      stmts = `<div class="info-box" style="margin-bottom:1rem">` +
+        s.statements.map(st => `${st.label} ${st.text}`).join('<br>') +
+        `</div>`;
+    }
+
+    const keys = ['a','b','c','d','e'];
+    const optHtml = s.options.map((opt, i) => `
+      <div class="option-item ${(answers[s.id] === i) ? 'selected' : ''}"
+           onclick="selectOption(${s.id}, ${i}, this)">
+        <span class="option-key">${keys[i] || String.fromCharCode(97+i)}.</span>
+        <span class="option-text">${opt.replace(/^\([a-e]\)\s*/,'')}</span>
+      </div>
+    `).join('');
+
+    body = stmts + `<div class="options-list">${optHtml}</div>`;
+
+  } else if (s.type === 'bs') {
+    const rows = s.bsItems.map((item, i) => `
+      <tr>
+        <td>${item.label}. ${item.text}</td>
+        <td>
+          <div class="bs-toggle">
+            <button class="bs-btn ${answers[s.id]?.[i] === 'B' ? 'active-b' : ''}"
+                    onclick="toggleBS(${s.id}, ${i}, 'B', this)">${(s.bsLabels || [])[0] || 'Benar'}</button>
+            <button class="bs-btn ${answers[s.id]?.[i] === 'S' ? 'active-s' : ''}"
+                    onclick="toggleBS(${s.id}, ${i}, 'S', this)">${(s.bsLabels || [])[1] || 'Salah'}</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+
+    body = `<table class="bs-table">
+      <thead><tr><th>Pernyataan</th><th>Jawaban</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+
+  } else {
+    body = `<div class="esai-area">
+      <textarea placeholder="Tuliskan jawaban dan langkah penyelesaian kamu di sini…"
+                oninput="saveEsai(${s.id}, this.value)">${answers[s.id] || ''}</textarea>
+    </div>`;
+  }
+
+  return `
+    <div class="q-card" id="card-${s.id}">
+      <div class="q-meta">
+        <span class="q-num">Soal ${num}</span>
+        <span class="q-type-badge ${badgeClass}">${typeLabel}</span>
+        <span class="q-topic">${s.topic}</span>
+      </div>
+      <div class="q-text">${s.text}</div>
+      ${body}
+    </div>
+  `;
+}
+
+// ===================== INTERACTIONS =====================
+function selectOption(id, idx, el) {
+  answers[id] = idx;
+  const card = document.getElementById('card-' + id);
+  card.querySelectorAll('.option-item').forEach((item, i) => {
+    item.classList.toggle('selected', i === idx);
+  });
+  updateProgressAll();
+}
+
+function toggleBS(id, itemIdx, val, btn) {
+  if (!answers[id]) answers[id] = {};
+  const current = answers[id][itemIdx];
+  if (current === val) {
+    answers[id][itemIdx] = null;
+  } else {
+    answers[id][itemIdx] = val;
+  }
+  const toggle = btn.parentElement;
+  const [btnB, btnS] = toggle.querySelectorAll('.bs-btn');
+  btnB.className = 'bs-btn' + (answers[id][itemIdx] === 'B' ? ' active-b' : '');
+  btnS.className = 'bs-btn' + (answers[id][itemIdx] === 'S' ? ' active-s' : '');
+  updateProgressAll();
+}
+
+function saveEsai(id, val) {
+  answers[id] = val;
+  updateProgressAll();
+}
+
+function isAnswered(s) {
+  if (s.type === 'pg' || s.type === 'ds') return answers[s.id] !== undefined;
+  if (s.type === 'bs') {
+    if (!answers[s.id]) return false;
+    return s.bsItems.some((_, i) => answers[s.id][i]);
+  }
+  if (s.type === 'esai') return answers[s.id] && answers[s.id].trim().length > 0;
+  return false;
+}
+
+function updateProgress(filtered) { updateProgressAll(); }
+function updateProgressAll() {
+  const filtered = activeFilter === 'all' ? soalData : soalData.filter(s => s.topic === activeFilter);
+  const done = filtered.filter(isAnswered).length;
+  const total = filtered.length;
+  document.getElementById('prog-text').textContent = `${done} / ${total} dijawab`;
+  document.getElementById('prog-fill').style.width = total ? (done/total*100)+'%' : '0%';
+}
+
+// ===================== INIT =====================
+renderFilters();
+renderQuestions();
+</script>
+</body>
+</html>
